@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		633F8E222B9AC37500B92ADC /* KeychainManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 633F8E212B9AC37500B92ADC /* KeychainManager.swift */; };
 		F69B80072B996846002675CE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F69B80062B996846002675CE /* AppDelegate.swift */; };
 		F69B80092B996846002675CE /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F69B80082B996846002675CE /* SceneDelegate.swift */; };
 		F69B800B2B996846002675CE /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F69B800A2B996846002675CE /* ViewController.swift */; };
@@ -38,6 +39,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		633F8E212B9AC37500B92ADC /* KeychainManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainManager.swift; sourceTree = "<group>"; };
 		F69B80032B996846002675CE /* WithPeace.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WithPeace.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F69B80062B996846002675CE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F69B80082B996846002675CE /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -106,6 +108,7 @@
 				F69B80362B996972002675CE /* App */,
 				F69B800A2B996846002675CE /* ViewController.swift */,
 				F69B80462B9A0D1B002675CE /* GoogleSignInManager.swift */,
+				633F8E212B9AC37500B92ADC /* KeychainManager.swift */,
 				F69B80372B996981002675CE /* Resource */,
 				F69B80142B996847002675CE /* Info.plist */,
 			);
@@ -288,6 +291,7 @@
 				F69B800B2B996846002675CE /* ViewController.swift in Sources */,
 				F69B80072B996846002675CE /* AppDelegate.swift in Sources */,
 				F69B80092B996846002675CE /* SceneDelegate.swift in Sources */,
+				633F8E222B9AC37500B92ADC /* KeychainManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
