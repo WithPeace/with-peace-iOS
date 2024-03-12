@@ -11,6 +11,7 @@
 		630EA20D2BA0243800F04ED3 /* SignAuthDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 630EA20C2BA0243800F04ED3 /* SignAuthDTO.swift */; };
 		630EA20F2BA0277800F04ED3 /* SignRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 630EA20E2BA0277800F04ED3 /* SignRepository.swift */; };
 		633F8E222B9AC37500B92ADC /* KeychainManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 633F8E212B9AC37500B92ADC /* KeychainManager.swift */; };
+		6377F69D2BA06324006CAB26 /* SignRepositoryError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6377F69C2BA06324006CAB26 /* SignRepositoryError.swift */; };
 		F671A9B92BA00C28002808DA /* Secrets.plist in Resources */ = {isa = PBXBuildFile; fileRef = F671A9B82BA00C28002808DA /* Secrets.plist */; };
 		F671A9BB2BA00D4A002808DA /* Bundle+.swift in Sources */ = {isa = PBXBuildFile; fileRef = F671A9BA2BA00D4A002808DA /* Bundle+.swift */; };
 		F671A9C42BA00FBA002808DA /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F671A9C32BA00FBA002808DA /* NetworkManager.swift */; };
@@ -52,6 +53,7 @@
 		630EA20C2BA0243800F04ED3 /* SignAuthDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignAuthDTO.swift; sourceTree = "<group>"; };
 		630EA20E2BA0277800F04ED3 /* SignRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignRepository.swift; sourceTree = "<group>"; };
 		633F8E212B9AC37500B92ADC /* KeychainManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainManager.swift; sourceTree = "<group>"; };
+		6377F69C2BA06324006CAB26 /* SignRepositoryError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignRepositoryError.swift; sourceTree = "<group>"; };
 		F671A9B82BA00C28002808DA /* Secrets.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Secrets.plist; path = ../Secrets.plist; sourceTree = "<group>"; };
 		F671A9BA2BA00D4A002808DA /* Bundle+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Bundle+.swift"; sourceTree = "<group>"; };
 		F671A9C32BA00FBA002808DA /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
@@ -105,6 +107,7 @@
 			children = (
 				630EA1FF2BA0039300F04ED3 /* GoogleSignError.swift */,
 				F671A9C92BA0174E002808DA /* NetworkError.swift */,
+				6377F69C2BA06324006CAB26 /* SignRepositoryError.swift */,
 			);
 			path = Error;
 			sourceTree = "<group>";
@@ -400,6 +403,7 @@
 				F671A9CA2BA0174E002808DA /* NetworkError.swift in Sources */,
 				630EA20F2BA0277800F04ED3 /* SignRepository.swift in Sources */,
 				630EA2002BA0039300F04ED3 /* GoogleSignError.swift in Sources */,
+				6377F69D2BA06324006CAB26 /* SignRepositoryError.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

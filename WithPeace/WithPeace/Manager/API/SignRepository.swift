@@ -56,7 +56,7 @@ final class SignRepository {
         }
     }
     
-    //401 을 낼때 다시 리프레쉬 토큰을 다시 발급하여 로그인 진행
+    //TODO: 401 을 낼때 다시 리프레쉬 토큰을 다시 발급하여 로그인 진행
     func performRefresh(refrshToken: String,
                         completion: @escaping (Result<SignAuthDTO, SignRepositoryError>) -> Void) {
         guard let baseURL = Bundle.main.apiKey else {
@@ -99,6 +99,7 @@ final class SignRepository {
         }
     }
     
+    //TODO: 로그인 메서드
     func performRegister(accessToken: String, nickname: String,
                          completion: @escaping (Result<SignAuthDTO, SignRepositoryError>) -> Void) {
         guard let baseURL = Bundle.main.apiKey else {
@@ -147,32 +148,47 @@ final class SignRepository {
             }
         }
     }
+    
+    //TODO: 로그아웃 메서드
+    func performLogout(accessToken: String, completion: @escaping (Result<Void?, SignRepositoryError>) -> Void?) {
+        guard let baseURL = Bundle.main.apiKey else {
+            completion(.failure(.invalidToken))
+            return
+        }
+        
+        let endPoint = EndPoint(baseURL: baseURL,
+                                path: "/api/v1/logout",
+                                headers: ["Authorization": "Bearer \(accessToken)"],
+                                method: .post)
+        
+        NetworkManager.shared.fetchData(endpoint: endPoint) { result in
+            switch result {
+            case .success(let data):
+                do {
+                    let decodedResponse = try JSONDecoder().decode(SignAuthResponse.self, from: data)
+                    if decodedResponse.data == "logout success" {
+                        completion(.success(nil))
+                    } else {
+                        completion(.failure(.decodingError))
+                    }
+                } catch {
+                    completion(.failure(.decodingError))
+                }
+            case .failure:
+                completion(.failure(.bundleError))
+            }
+        }
+    }
 }
 
-struct Nickname: Codable {
+//MARK: 회원가입 RequestBody
+fileprivate struct Nickname: Codable {
     let nickname: String
 }
 
-enum SignRepositoryError: Error {
-    case bundleError
-    case invalidToken
-    case notKeychain
-    case decodingError
-    case googleInvaidToken
-    
-    var errorDescription: String? {
-        switch self {
-        case .bundleError:
-            return "유효하지 않은 bundle입니다."
-        case .invalidToken:
-            return "유효하지 않은 토큰 입니다."
-        case .notKeychain:
-            return "키체인이 없습니다."
-        case .decodingError:
-            return "디코딩에 실패 했습니다."
-        case .googleInvaidToken:
-            return "googleSign 토큰 이슈"
-        }
-    }
+//MARK: Logout Model
+fileprivate struct SignAuthResponse: Codable {
+    let data: String
+    let error: String?
 }
 
