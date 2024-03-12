@@ -39,6 +39,6 @@ final class ViewController: UIViewController {
     
     @objc
     func tabGoogle() {
-        googleManager.aaa(view: self)
+//        googleManager.aaa(view: self)
     }
 }
