@@ -98,6 +98,55 @@ final class SignRepository {
             }
         }
     }
+    
+    func performRegister(accessToken: String, nickname: String,
+                         completion: @escaping (Result<SignAuthDTO, SignRepositoryError>) -> Void) {
+        guard let baseURL = Bundle.main.apiKey else {
+            completion(.failure(.invalidToken))
+            return
+        }
+        
+        let nicknameModel = Nickname(nickname: nickname)
+        let requestBody = try! JSONEncoder().encode(nicknameModel)
+        let endPoint = EndPoint(baseURL: baseURL,
+                                path: "/api/v1/auth/google",
+                                scheme: "http",
+                                queryItems: [],
+                                headers: ["Authorization":"Bearer \(accessToken)"],
+                                method: .post,
+                                body: requestBody)
+        
+        NetworkManager.shared.fetchData(endpoint: endPoint) { result in
+            switch result {
+            case .success(let data):
+                do {
+                    let signDTO = try JSONDecoder().decode(SignAuthDTO.self, from: data)
+                    
+                    guard let accessToken = signDTO.data.accessToken,
+                          let refreshdata = signDTO.data.refreshToken else {
+                        completion(.failure(.googleInvaidToken))
+                        return
+                    }
+                    
+                    guard let refreshdata = refreshdata.data(using: .utf8),
+                          let accdata = accessToken.data(using: .utf8) else {
+                        return
+                    }
+                    
+                    try self.keychainManager.save(account: "accessToken", password: accdata)
+                    try self.keychainManager.save(account: "refreshToken", password: refreshdata)
+                } catch KeychainError.duplicateEntry {
+                    completion(.failure(.invalidToken))
+                    return
+                } catch {
+                    print(error.localizedDescription)
+                    return
+                }
+            case .failure(let error):
+                print(error)
+            }
+        }
+    }
 }
 
 struct Nickname: Codable {
