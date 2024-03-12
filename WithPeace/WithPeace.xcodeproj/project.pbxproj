@@ -11,6 +11,10 @@
 		633F8E222B9AC37500B92ADC /* KeychainManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 633F8E212B9AC37500B92ADC /* KeychainManager.swift */; };
 		F671A9B92BA00C28002808DA /* Secrets.plist in Resources */ = {isa = PBXBuildFile; fileRef = F671A9B82BA00C28002808DA /* Secrets.plist */; };
 		F671A9BB2BA00D4A002808DA /* Bundle+.swift in Sources */ = {isa = PBXBuildFile; fileRef = F671A9BA2BA00D4A002808DA /* Bundle+.swift */; };
+		F671A9C42BA00FBA002808DA /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F671A9C32BA00FBA002808DA /* NetworkManager.swift */; };
+		F671A9C62BA00FD7002808DA /* EndPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = F671A9C52BA00FD7002808DA /* EndPoint.swift */; };
+		F671A9C82BA0173E002808DA /* HTTPMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = F671A9C72BA0173E002808DA /* HTTPMethod.swift */; };
+		F671A9CA2BA0174E002808DA /* NetworkError.swift in Sources */ = {isa = PBXBuildFile; fileRef = F671A9C92BA0174E002808DA /* NetworkError.swift */; };
 		F69B80072B996846002675CE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F69B80062B996846002675CE /* AppDelegate.swift */; };
 		F69B80092B996846002675CE /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F69B80082B996846002675CE /* SceneDelegate.swift */; };
 		F69B800B2B996846002675CE /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F69B800A2B996846002675CE /* ViewController.swift */; };
@@ -46,6 +50,10 @@
 		633F8E212B9AC37500B92ADC /* KeychainManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainManager.swift; sourceTree = "<group>"; };
 		F671A9B82BA00C28002808DA /* Secrets.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Secrets.plist; path = ../Secrets.plist; sourceTree = "<group>"; };
 		F671A9BA2BA00D4A002808DA /* Bundle+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Bundle+.swift"; sourceTree = "<group>"; };
+		F671A9C32BA00FBA002808DA /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
+		F671A9C52BA00FD7002808DA /* EndPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EndPoint.swift; sourceTree = "<group>"; };
+		F671A9C72BA0173E002808DA /* HTTPMethod.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPMethod.swift; sourceTree = "<group>"; };
+		F671A9C92BA0174E002808DA /* NetworkError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkError.swift; sourceTree = "<group>"; };
 		F69B80032B996846002675CE /* WithPeace.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WithPeace.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F69B80062B996846002675CE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F69B80082B996846002675CE /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -92,6 +100,7 @@
 			isa = PBXGroup;
 			children = (
 				630EA1FF2BA0039300F04ED3 /* GoogleSignError.swift */,
+				F671A9C92BA0174E002808DA /* NetworkError.swift */,
 			);
 			path = Error;
 			sourceTree = "<group>";
@@ -117,9 +126,10 @@
 		F671A9BE2BA00D9F002808DA /* Manager */ = {
 			isa = PBXGroup;
 			children = (
-				F671A9C12BA00E35002808DA /* API */,
+				F671A9CB2BA017BA002808DA /* NetworkManager */,
 				F69B80462B9A0D1B002675CE /* GoogleSignInManager.swift */,
 				633F8E212B9AC37500B92ADC /* KeychainManager.swift */,
+				F671A9C12BA00E35002808DA /* API */,
 			);
 			path = Manager;
 			sourceTree = "<group>";
@@ -152,6 +162,16 @@
 			children = (
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		F671A9CB2BA017BA002808DA /* NetworkManager */ = {
+			isa = PBXGroup;
+			children = (
+				F671A9C32BA00FBA002808DA /* NetworkManager.swift */,
+				F671A9C72BA0173E002808DA /* HTTPMethod.swift */,
+				F671A9C52BA00FD7002808DA /* EndPoint.swift */,
+			);
+			path = NetworkManager;
 			sourceTree = "<group>";
 		};
 		F69B7FFA2B996845002675CE = {
@@ -364,9 +384,13 @@
 				F69B80472B9A0D1B002675CE /* GoogleSignInManager.swift in Sources */,
 				F671A9BB2BA00D4A002808DA /* Bundle+.swift in Sources */,
 				F69B800B2B996846002675CE /* ViewController.swift in Sources */,
+				F671A9C62BA00FD7002808DA /* EndPoint.swift in Sources */,
 				F69B80072B996846002675CE /* AppDelegate.swift in Sources */,
+				F671A9C42BA00FBA002808DA /* NetworkManager.swift in Sources */,
 				F69B80092B996846002675CE /* SceneDelegate.swift in Sources */,
 				633F8E222B9AC37500B92ADC /* KeychainManager.swift in Sources */,
+				F671A9C82BA0173E002808DA /* HTTPMethod.swift in Sources */,
+				F671A9CA2BA0174E002808DA /* NetworkError.swift in Sources */,
 				630EA2002BA0039300F04ED3 /* GoogleSignError.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
