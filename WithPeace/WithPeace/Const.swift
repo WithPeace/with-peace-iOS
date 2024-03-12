@@ -5,8 +5,6 @@
 //  Created by Dylan_Y on 3/12/24.
 //
 
-import Foundation
-
 struct Const {
     private init() {}
 }
@@ -43,6 +41,48 @@ extension Const {
             static let gray3 = "Gray3"
             static let error = "Error"
             static let success = "Success"
+        }
+    }
+}
+
+extension Const {
+    struct CustomIcon {
+        private init() {}
+        
+        struct ICBtnPostcreate {
+            private init() {}
+            
+            static let btnPostcreateDoneSelect  = "btn-postcreate-done-select"
+            static let btnPostcreateDone = "btn-postcreate-done"
+        }
+        
+        struct ICCate {
+            private init() {}
+            
+            static let icCateecoSelect = "ic-cate-eco-select"
+            static let icCateeco = "ic-cate-eco"
+            static let icCateFreeSelect = "ic-cate-free-select"
+            static let icCateFree = "ic-cate-free"
+            static let icCateHobbySelect = "ic-cate-hobby-select"
+            static let icCateHobby = "ic-cate-hobby"
+            static let icCateInfoSelect = "ic-cate-info-select"
+            static let icCateInfo = "ic-cate-info"
+            static let icCateLivingSelect = "ic-cate-living-select"
+            static let icCateLiving = "ic-cate-living"
+            static let icCateQuestionSelect = "ic-cate-question-select"
+            static let icCateQuestion = "ic-cate-question"
+        }
+        
+        struct ICNavigationTabbar {
+            private init() {}
+            
+            static let icBoardSelect = "ic-board-select"
+            static let icBoard = "ic-board"
+            static let icHomeSelect = "ic-home-select"
+            static let icHome = "ic-home"
+            static let icMypageSelect = "ic-mypage-select"
+            static let icMypage = "ic-mypage"
+            static let icRegist = "ic-regist"
         }
     }
 }
