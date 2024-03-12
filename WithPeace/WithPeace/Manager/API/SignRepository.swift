@@ -7,7 +7,18 @@
 
 import Foundation
 
-final class SignRepository {
+protocol AuthenticationProvider {
+    func performGoogleSign(idToken: String,
+                           completion: @escaping (Result<SignAuthDTO, SignRepositoryError>) -> Void)
+    func performRefresh(refrshToken: String,
+                        completion: @escaping (Result<SignAuthDTO, SignRepositoryError>) -> Void)
+    func performRegister(accessToken: String, nickname: String,
+                         completion: @escaping (Result<SignAuthDTO, SignRepositoryError>) -> Void)
+    func performLogout(accessToken: String,
+                       completion: @escaping (Result<Void, SignRepositoryError>) -> Void?)
+}
+
+final class SignRepository: AuthenticationProvider {
     let keychainManager = KeychainManager()
     
     func performGoogleSign(idToken: String,
@@ -51,7 +62,7 @@ final class SignRepository {
                     return
                 }
             case .failure(let error):
-                print(error)
+                completion(.failure(.unknownError(error)))
             }
         }
     }
@@ -94,7 +105,7 @@ final class SignRepository {
                     print(error.localizedDescription)
                 }
             case .failure(let error):
-                print(error)
+                completion(.failure(.unknownError(error)))
             }
         }
     }
@@ -108,7 +119,11 @@ final class SignRepository {
         }
         
         let nicknameModel = Nickname(nickname: nickname)
-        let requestBody = try! JSONEncoder().encode(nicknameModel)
+        guard let requestBody = try? JSONEncoder().encode(nicknameModel) else {
+            completion(.failure(.encodingError))
+            return
+        }
+        
         let endPoint = EndPoint(baseURL: baseURL,
                                 path: "/api/v1/auth/google",
                                 scheme: "http",
@@ -121,7 +136,10 @@ final class SignRepository {
             switch result {
             case .success(let data):
                 do {
-                    let signDTO = try JSONDecoder().decode(SignAuthDTO.self, from: data)
+                    guard let signDTO = try? JSONDecoder().decode(SignAuthDTO.self, from: data) else {
+                        completion(.failure(.decodingError))
+                        return
+                    }
                     
                     guard let accessToken = signDTO.data.accessToken,
                           let refreshdata = signDTO.data.refreshToken else {
@@ -144,13 +162,14 @@ final class SignRepository {
                     return
                 }
             case .failure(let error):
-                print(error)
+                completion(.failure(.unknownError(error)))
             }
         }
     }
     
     //TODO: 로그아웃 메서드
-    func performLogout(accessToken: String, completion: @escaping (Result<Void?, SignRepositoryError>) -> Void?) {
+    func performLogout(accessToken: String,
+                       completion: @escaping (Result<Void, SignRepositoryError>) -> Void?) {
         guard let baseURL = Bundle.main.apiKey else {
             completion(.failure(.invalidToken))
             return
@@ -167,7 +186,7 @@ final class SignRepository {
                 do {
                     let decodedResponse = try JSONDecoder().decode(SignAuthResponse.self, from: data)
                     if decodedResponse.data == "logout success" {
-                        completion(.success(nil))
+                        completion(.success(()))
                     } else {
                         completion(.failure(.decodingError))
                     }
@@ -191,4 +210,3 @@ fileprivate struct SignAuthResponse: Codable {
     let data: String
     let error: String?
 }
-

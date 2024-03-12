@@ -11,6 +11,8 @@ enum SignRepositoryError: Error {
     case notKeychain
     case decodingError
     case googleInvaidToken
+    case encodingError
+    case unknownError(Error)
     
     var errorDescription: String? {
         switch self {
@@ -24,6 +26,10 @@ enum SignRepositoryError: Error {
             return "디코딩에 실패 했습니다."
         case .googleInvaidToken:
             return "googleSign 토큰 이슈"
+        case .encodingError:
+            return "인코딩에 실패 했습니다."
+        case .unknownError:
+            return "알수없는 오류 입니다."
         }
     }
 }
