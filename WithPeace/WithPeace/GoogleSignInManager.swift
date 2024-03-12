@@ -14,11 +14,25 @@ final class GoogleSignInManager {
         GIDSignIn.sharedInstance.signOut()
     }
     
-//    func tabGoogle() {
-//        GIDSignIn.sharedInstance.signIn(withPresenting: self) { signInResult, error in
-//          guard error == nil else { return }
-//            //TODO: 로그인 성공적으로 받아지면 실행되는 main View 담아주는 곳.
-//          // If sign in succeeded, display the app's main content View.
-//        }
-//    }
+    func fetchIdToken(view: UIViewController, completion: @escaping (Result<String, GoogleSignError>) -> Void) {
+        GIDSignIn.sharedInstance.signIn(withPresenting: view) { signInResult, error in
+            guard error == nil else {
+                completion(.failure(.googleNetworkError))
+                return
+            }
+            
+            guard let signInResult = signInResult else {
+                completion(.failure(.signInResult))
+                return
+            }
+            
+            let user = signInResult.user
+            guard let idtoken = user.idToken?.tokenString else {
+                completion(.failure(.idtokenError))
+                return
+            }
+            
+            completion(.success(idtoken))
+        }
+    }
 }
