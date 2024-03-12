@@ -36,18 +36,25 @@ struct NetworkManager {
                 break
             case 400:
                 completion(.failure(.badRequest))
+                return
             case 401:
                 completion(.failure(.unauthorized))
+                return
             case 403:
                 completion(.failure(.forbidden))
+                return
             case 404:
                 completion(.failure(.notFound))
+                return
             case 422:
                 completion(.failure(.unprocessableEntity))
+                return
             case 500...599:
                 completion(.failure(.internalServerError))
+                return
             default:
-                break
+                debugPrint("NETWORK 알 수 없는 ERROR")
+                return
             }
             
             guard let data = data else {
