@@ -10,9 +10,10 @@ import Foundation
 final class SignRepository {
     let keychainManager = KeychainManager()
     
-    func googleSign(idToken: String, completion: @escaping (Result<SignAuthDTO, SignRepositoryError>) -> Void) {
+    func performGoogleSign(idToken: String,
+                           completion: @escaping (Result<SignAuthDTO, SignRepositoryError>) -> Void) {
         guard let baseURL = Bundle.main.apiKey else {
-            completion(.failure(.invaidToken))
+            completion(.failure(.invalidToken))
             return
         }
         
@@ -43,7 +44,7 @@ final class SignRepository {
                     try self.keychainManager.save(account: "accessToken", password: accdata)
                     try self.keychainManager.save(account: "refreshToken", password: refreshdata)
                 } catch KeychainError.duplicateEntry {
-                    completion(.failure(.invaidToken))
+                    completion(.failure(.invalidToken))
                     return
                 } catch {
                     print(error.localizedDescription)
@@ -54,11 +55,58 @@ final class SignRepository {
             }
         }
     }
+    
+    //401 을 낼때 다시 리프레쉬 토큰을 다시 발급하여 로그인 진행
+    func performRefresh(refrshToken: String,
+                        completion: @escaping (Result<SignAuthDTO, SignRepositoryError>) -> Void) {
+        guard let baseURL = Bundle.main.apiKey else {
+            completion(.failure(.invalidToken))
+            return
+        }
+        
+        let endPoint = EndPoint(baseURL: baseURL,
+                                path: "/api/v1/auth/google",
+                                scheme: "http",
+                                queryItems: [],
+                                headers: ["Authorization":"Bearer \(refrshToken)"],
+                                method: .post)
+        
+        NetworkManager.shared.fetchData(endpoint: endPoint) { result in
+            switch result {
+            case .success(let data):
+                do {
+                    let signDTO = try JSONDecoder().decode(SignAuthDTO.self, from: data)
+                    
+                    guard let accessToken = signDTO.data.accessToken,
+                          let refreshdata = signDTO.data.refreshToken else {
+                        completion(.failure(.googleInvaidToken))
+                        return
+                    }
+                    
+                    guard let refreshdata = refreshdata.data(using: .utf8),
+                          let accdata = accessToken.data(using: .utf8) else {
+                        return
+                    }
+                    
+                    try self.keychainManager.save(account: "accessToken", password: accdata)
+                    try self.keychainManager.save(account: "refreshToken", password: refreshdata)
+                } catch {
+                    print(error.localizedDescription)
+                }
+            case .failure(let error):
+                print(error)
+            }
+        }
+    }
+}
+
+struct Nickname: Codable {
+    let nickname: String
 }
 
 enum SignRepositoryError: Error {
     case bundleError
-    case invaidToken
+    case invalidToken
     case notKeychain
     case decodingError
     case googleInvaidToken
@@ -67,7 +115,7 @@ enum SignRepositoryError: Error {
         switch self {
         case .bundleError:
             return "유효하지 않은 bundle입니다."
-        case .invaidToken:
+        case .invalidToken:
             return "유효하지 않은 토큰 입니다."
         case .notKeychain:
             return "키체인이 없습니다."
@@ -78,3 +126,4 @@ enum SignRepositoryError: Error {
         }
     }
 }
+

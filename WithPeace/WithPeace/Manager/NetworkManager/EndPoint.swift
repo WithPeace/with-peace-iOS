@@ -14,19 +14,22 @@ final class EndPoint {
     private let queryItems: [URLQueryItem]
     private let headers: [String: String]
     private let method: HTTPMethod
+    private let body: Data?
     
     init(baseURL: String,
          path: String,
          scheme: String = "https",
          queryItems: [URLQueryItem] = [],
          headers: Dictionary<String, String> = [:],
-         method: HTTPMethod) {
+         method: HTTPMethod,
+         body: Data? = nil) {
         self.baseURL = baseURL
         self.path = path
         self.scheme = scheme
         self.queryItems = queryItems
         self.method = method
         self.headers = headers
+        self.body = body
     }
     
     func generateURL() -> URL? {
@@ -47,6 +50,7 @@ final class EndPoint {
         
         var request = URLRequest(url: url)
         request.httpMethod = method.rawValue
+        request.httpBody = body
         
         for headerItem in headers {
             request.addValue(headerItem.value, forHTTPHeaderField: headerItem.key)
