@@ -6,11 +6,39 @@
 //
 
 import UIKit
+import GoogleSignIn
 
-class ViewController: UIViewController {
-
+final class ViewController: UIViewController {
+    private let googleManager = GoogleSignInManager()
+    
+    //TODO: - 이미지 변경
+    let signInButton: GIDSignInButton = {
+        let btn = GIDSignInButton()
+        
+        btn.style = .wide
+        
+        return btn
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
+        
+        view.backgroundColor = .systemMint
+        
+        [signInButton].forEach {
+            $0.translatesAutoresizingMaskIntoConstraints = false
+            view.addSubview($0)
+        }
+        
+        signInButton.addTarget(self, action: #selector(tabGoogle), for: .touchUpInside)
+        
+        NSLayoutConstraint.activate([
+            signInButton.centerYAnchor.constraint(equalTo: view.centerYAnchor),
+        ])
+    }
+    
+    @objc
+    func tabGoogle() {
+        googleManager.aaa(view: self)
     }
 }
