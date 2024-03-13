@@ -20,6 +20,8 @@ protocol AuthenticationProvider {
 
 final class SignRepository: AuthenticationProvider {
     private let keychainManager = KeychainManager()
+    private var isRefreshingToken = false
+    private var refreshCompletionHandlers: [(Result<SignAuthDTO, SignRepositoryError>) -> Void] = []
     
     func performGoogleSign(idToken: String,
                            completion: @escaping (Result<SignAuthDTO, SignRepositoryError>) -> Void) {
@@ -62,13 +64,19 @@ final class SignRepository: AuthenticationProvider {
         }
     }
     
-    //TODO: 401 을 낼때 다시 리프레쉬 토큰을 다시 발급하여 로그인 진행
+    //TODO: 401 을 낼때 다시 리프레쉬 토큰을 다시 발급하여 로그인 진행 // 리프레시 토큰 사용해서 새로운 토큰을 2개 받아오는 역활
     func performRefresh(refrshToken: String,
                         completion: @escaping (Result<SignAuthDTO, SignRepositoryError>) -> Void) {
         guard let baseURL = Bundle.main.apiKey else {
             completion(.failure(.invalidToken))
             return
         }
+        
+        guard !isRefreshingToken else {
+            refreshCompletionHandlers.append(completion)
+            return
+        }
+        isRefreshingToken = true
         
         let endPoint = EndPoint(baseURL: baseURL,
                                 path: "/api/v1/auth/google",
@@ -91,12 +99,14 @@ final class SignRepository: AuthenticationProvider {
                     
                     try self.saveTokens(accessToken: accessToken, refreshToken: refreshdata)
                     completion(.success(signDTO))
+                    self.completeAllHandlers(result: .success(signDTO))
                 } catch {
                     completion(.failure(.unknownError(error)))
                 }
             case .failure(let error):
                 completion(.failure(.unknownError(error)))
             }
+            self.isRefreshingToken = false
         }
     }
     
@@ -192,6 +202,12 @@ final class SignRepository: AuthenticationProvider {
         
         try self.keychainManager.save(account: "accessToken", password: accessToken)
         try self.keychainManager.save(account: "refreshToken", password: refreshdata)
+    }
+    
+    //TODO: 새로 추가 시켜버리기
+    private func completeAllHandlers(result: Result<SignAuthDTO, SignRepositoryError>) {
+        refreshCompletionHandlers.forEach { $0(result) }
+        refreshCompletionHandlers.removeAll()
     }
 }
 
