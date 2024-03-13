@@ -41,12 +41,12 @@ final class SignRepository: AuthenticationProvider {
                     let signDTO = try JSONDecoder().decode(SignAuthDTO.self, from: data)
                     
                     guard let accessToken = signDTO.data.jwtTokenDto?.accessToken,
-                          let refreshdata = signDTO.data.jwtTokenDto?.refreshToken else {
+                          let refreshToken = signDTO.data.jwtTokenDto?.refreshToken else {
                         completion(.failure(.googleInvalidToken))
                         return
                     }
                     
-                    try self.saveTokens(accessToken: accessToken, refreshToken: refreshdata)
+                    try self.saveTokens(accessToken: accessToken, refreshToken: refreshToken)
                     completion(.success(signDTO))
                 } catch {
                     completion(.failure(.notSaveToken))
@@ -87,8 +87,7 @@ final class SignRepository: AuthenticationProvider {
                         completion(.failure(.tokenAbsenceError))
                         return
                     }
-                    print("Access :" ,accessToken)
-                    print("Refresh :" ,refreshToken)
+                    
                     try self.saveTokens(accessToken: accessToken, refreshToken: refreshToken)
                     completion(.success(()))
                 } catch {
@@ -151,8 +150,7 @@ final class SignRepository: AuthenticationProvider {
                         completion(.failure(.tokenAbsenceError))
                         return
                     }
-                    print("Access :" ,accessToken)
-                    print("Refresh :" ,refreshToken)
+                    
                     try self.saveTokens(accessToken: accessToken, refreshToken: refreshToken)
                     completion(.success(()))
                 } catch {
@@ -168,7 +166,7 @@ final class SignRepository: AuthenticationProvider {
                             self.performRegister(nickname: nickname, completion: completion)
                         case .failure(_):
                             //TODO: LogOut
-                            print("PERFORM REGISTER _ REFRESH ERROR : Please LogOut")
+                            debugPrint("PERFORM REGISTER _ REFRESH ERROR : Please LogOut")
                             
                             break
                         }
@@ -220,13 +218,13 @@ final class SignRepository: AuthenticationProvider {
     }
     
     private func saveTokens(accessToken: String, refreshToken: String) throws {
-        guard let refreshdata = refreshToken.data(using: .utf8),
+        guard let refreshToken = refreshToken.data(using: .utf8),
               let accessToken = accessToken.data(using: .utf8) else {
             throw SignRepositoryError.invalidToken
         }
         
         try self.keychainManager.save(account: "accessToken", password: accessToken)
-        try self.keychainManager.save(account: "refreshToken", password: refreshdata)
+        try self.keychainManager.save(account: "refreshToken", password: refreshToken)
     }
 }
 
