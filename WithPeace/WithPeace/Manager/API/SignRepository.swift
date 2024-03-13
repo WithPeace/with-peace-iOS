@@ -19,7 +19,7 @@ protocol AuthenticationProvider {
 }
 
 final class SignRepository: AuthenticationProvider {
-    let keychainManager = KeychainManager()
+    private let keychainManager = KeychainManager()
     
     func performGoogleSign(idToken: String,
                            completion: @escaping (Result<SignAuthDTO, SignRepositoryError>) -> Void) {
@@ -47,18 +47,13 @@ final class SignRepository: AuthenticationProvider {
                         return
                     }
                     
-                    guard let refreshdata = refreshdata.data(using: .utf8),
-                          let accdata = accessToken.data(using: .utf8) else {
-                        return
-                    }
-                    
-                    try self.keychainManager.save(account: "accessToken", password: accdata)
-                    try self.keychainManager.save(account: "refreshToken", password: refreshdata)
+                    try self.saveTokens(accessToken: accessToken, refreshToken: refreshdata)
+                    completion(.success(signDTO))
                 } catch KeychainError.duplicateEntry {
                     completion(.failure(.invalidToken))
                     return
                 } catch {
-                    print(error.localizedDescription)
+                    completion(.failure(.unknownError(error)))
                     return
                 }
             case .failure(let error):
@@ -94,15 +89,10 @@ final class SignRepository: AuthenticationProvider {
                         return
                     }
                     
-                    guard let refreshdata = refreshdata.data(using: .utf8),
-                          let accdata = accessToken.data(using: .utf8) else {
-                        return
-                    }
-                    
-                    try self.keychainManager.save(account: "accessToken", password: accdata)
-                    try self.keychainManager.save(account: "refreshToken", password: refreshdata)
+                    try self.saveTokens(accessToken: accessToken, refreshToken: refreshdata)
+                    completion(.success(signDTO))
                 } catch {
-                    print(error.localizedDescription)
+                    completion(.failure(.unknownError(error)))
                 }
             case .failure(let error):
                 completion(.failure(.unknownError(error)))
@@ -147,18 +137,13 @@ final class SignRepository: AuthenticationProvider {
                         return
                     }
                     
-                    guard let refreshdata = refreshdata.data(using: .utf8),
-                          let accdata = accessToken.data(using: .utf8) else {
-                        return
-                    }
-                    
-                    try self.keychainManager.save(account: "accessToken", password: accdata)
-                    try self.keychainManager.save(account: "refreshToken", password: refreshdata)
+                    try self.saveTokens(accessToken: accessToken, refreshToken: refreshdata)
+                    completion(.success(signDTO))
                 } catch KeychainError.duplicateEntry {
                     completion(.failure(.invalidToken))
                     return
                 } catch {
-                    print(error.localizedDescription)
+                    completion(.failure(.unknownError(error)))
                     return
                 }
             case .failure(let error):
@@ -197,6 +182,16 @@ final class SignRepository: AuthenticationProvider {
                 completion(.failure(.bundleError))
             }
         }
+    }
+    
+    private func saveTokens(accessToken: String, refreshToken: String) throws {
+        guard let refreshdata = refreshToken.data(using: .utf8),
+              let accessToken = accessToken.data(using: .utf8) else {
+            throw SignRepositoryError.invalidToken
+        }
+        
+        try self.keychainManager.save(account: "accessToken", password: accessToken)
+        try self.keychainManager.save(account: "refreshToken", password: refreshdata)
     }
 }
 
