@@ -197,6 +197,7 @@ final class SignRepository: AuthenticationProvider {
     
     //TODO: 401에러시 토큰 재발급 진행
     private func fetchDataToken(refreshToken: String,
+                                accessToken: String,
                                 endPoint: EndPoint,
                                 completion: @escaping (Result<Data, SignRepositoryError>) -> Void) {
         
@@ -205,7 +206,7 @@ final class SignRepository: AuthenticationProvider {
                 switch refresh {
                 case .success:
                     self.isValid = true
-                    self.fetchDataToken(refreshToken: refreshToken, endPoint: endPoint, completion: completion)
+                    self.fetchDataToken(refreshToken: refreshToken, accessToken: "", endPoint: endPoint, completion: completion)
                 case .failure(let error):
                     completion(.failure(error))
                 }
@@ -220,9 +221,17 @@ final class SignRepository: AuthenticationProvider {
             case .failure(let error):
                 if error == .finishedToken401 {
                     self.isValid = false
-                    self.fetchDataToken(refreshToken: refreshToken, endPoint: endPoint, completion: completion)
+                    self.fetchDataToken(refreshToken: refreshToken, accessToken: "", endPoint: endPoint, completion: completion)
                 } else {
                     completion(.failure(.unknownError(error)))
+                    self.performLogout(accessToken: accessToken) { result in
+                        switch result {
+                        case .success(let data):
+                            print("Logout\(data)")
+                        case .failure(let error):
+                            completion(.failure(.unknownError(error)))
+                        }
+                    }
                 }
             }
         }
