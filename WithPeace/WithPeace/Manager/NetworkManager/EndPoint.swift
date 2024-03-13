@@ -8,16 +8,18 @@
 import Foundation
 
 final class EndPoint {
-    private let baseURL: String
+    private let baseURL: String?
     private let path: String
+    private let port: Int?
     private let scheme: String
     private let queryItems: [URLQueryItem]
     private let headers: [String: String]
     private let method: HTTPMethod
     private let body: Data?
     
-    init(baseURL: String,
+    init(baseURL: String?,
          path: String,
+         port: Int? = nil,
          scheme: String = "https",
          queryItems: [URLQueryItem] = [],
          headers: Dictionary<String, String> = [:],
@@ -25,6 +27,7 @@ final class EndPoint {
          body: Data? = nil) {
         self.baseURL = baseURL
         self.path = path
+        self.port = port
         self.scheme = scheme
         self.queryItems = queryItems
         self.method = method
@@ -37,6 +40,7 @@ final class EndPoint {
         
         resultUrlComponents.scheme = scheme
         resultUrlComponents.host = baseURL
+        resultUrlComponents.port = port
         resultUrlComponents.path = path
         resultUrlComponents.queryItems = queryItems
         

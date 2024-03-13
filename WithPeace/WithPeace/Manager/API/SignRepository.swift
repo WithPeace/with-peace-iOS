@@ -29,6 +29,7 @@ final class SignRepository: AuthenticationProvider {
         
         let endPoint = EndPoint(baseURL: baseURL,
                                 path: "/api/v1/auth/google",
+                                port: 8080,
                                 scheme: "http",
                                 headers: ["Authorization":"Bearer \(idToken)"],
                                 method: .post)
@@ -70,6 +71,7 @@ final class SignRepository: AuthenticationProvider {
         
         let endPoint = EndPoint(baseURL: baseURL,
                                 path: "/api/v1/auth/refresh",
+                                port: 8080,
                                 scheme: "http",
                                 headers: ["Authorization":"Bearer \(keychainAccessToken)"],
                                 method: .post)
@@ -85,7 +87,8 @@ final class SignRepository: AuthenticationProvider {
                         completion(.failure(.tokenAbsenceError))
                         return
                     }
-                    
+                    print("Access :" ,accessToken)
+                    print("Refresh :" ,refreshToken)
                     try self.saveTokens(accessToken: accessToken, refreshToken: refreshToken)
                     completion(.success(()))
                 } catch {
@@ -128,6 +131,7 @@ final class SignRepository: AuthenticationProvider {
         
         let endPoint = EndPoint(baseURL: baseURL,
                                 path: "/api/v1/auth/register",
+                                port: 8080,
                                 scheme: "http",
                                 headers: ["Authorization":"Bearer \(keychainAccessToken)"],
                                 method: .post,
@@ -143,12 +147,13 @@ final class SignRepository: AuthenticationProvider {
                     }
                     
                     guard let accessToken = signDTO.data.accessToken,
-                          let refreshdata = signDTO.data.refreshToken else {
+                          let refreshToken = signDTO.data.refreshToken else {
                         completion(.failure(.tokenAbsenceError))
                         return
                     }
-                    
-                    try self.saveTokens(accessToken: accessToken, refreshToken: refreshdata)
+                    print("Access :" ,accessToken)
+                    print("Refresh :" ,refreshToken)
+                    try self.saveTokens(accessToken: accessToken, refreshToken: refreshToken)
                     completion(.success(()))
                 } catch {
                     completion(.failure(.decodingError))
@@ -189,6 +194,7 @@ final class SignRepository: AuthenticationProvider {
         
         let endPoint = EndPoint(baseURL: baseURL,
                                 path: "/api/v1/auth/logout",
+                                port: 8080,
                                 scheme: "http",
                                 headers: ["Authorization": "Bearer \(keychainAccessToken)"],
                                 method: .post)
