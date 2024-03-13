@@ -34,7 +34,7 @@ final class MainTabbarController: UITabBarController {
         myPageViewController.tabBarItem.image = UIImage(named: tabBarConstant.icMypage)
         
         homeViewController.tabBarItem.selectedImage = UIImage(named: tabBarConstant.icHomeSelect)
-        forumViewController.tabBarItem.selectedImage = UIImage(named: tabBarConstant.icBoardSelect)
+//        forumViewController.tabBarItem.selectedImage = UIImage(named: tabBarConstant.icBoardSelect)
         myPageViewController.tabBarItem.selectedImage = UIImage(named: tabBarConstant.icMypageSelect)
         
         homeViewController.tabBarItem.title = "홈"
