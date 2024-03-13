@@ -7,11 +7,12 @@
 
 import Foundation
 
+enum KeychainError: Error {
+    case duplicateEntry
+    case unkown(OSStatus)
+}
+
 final class KeychainManager {
-    enum KeychainError: Error {
-        case duplicateEntry
-        case unkown(OSStatus)
-    }
     
     //TODO: 키체인저장
     func save(account: String, password: Data) throws {
@@ -31,8 +32,6 @@ final class KeychainManager {
         guard status == errSecSuccess else {
             throw KeychainError.unkown(status)
         }
-        
-        print("save")
     }
     
     //TODO: 이미 저장된 계정의 키체인 항목 업데이트를 하려고 할때 사용하면됨
@@ -51,8 +50,6 @@ final class KeychainManager {
         guard status == errSecSuccess else {
             throw KeychainError.unkown(status)
         }
-        
-        print("update")
     }
     
     //TODO: 토큰 검색
@@ -84,10 +81,7 @@ final class KeychainManager {
         let status = SecItemDelete(query as CFDictionary)
         
         guard status == errSecSuccess else {
-            print("delete fail")
             return
         }
-        
-        print("delete success")
     }
 }
