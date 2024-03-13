@@ -9,6 +9,7 @@ enum NetworkError: Error {
     case defaultsError
     case responseError
     case getDataError
+    case finishedToken401
     
     case badRequest
     case unauthorized

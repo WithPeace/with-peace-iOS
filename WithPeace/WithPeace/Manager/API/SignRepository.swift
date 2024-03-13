@@ -20,7 +20,8 @@ protocol AuthenticationProvider {
 
 final class SignRepository: AuthenticationProvider {
     private let keychainManager = KeychainManager()
-    private var isRefreshingToken = false
+    private var isRefreshingToken: Bool = false
+    private var isValid: Bool = true
     private var refreshCompletionHandlers: [(Result<SignAuthDTO, SignRepositoryError>) -> Void] = []
     
     func performGoogleSign(idToken: String,
@@ -194,6 +195,40 @@ final class SignRepository: AuthenticationProvider {
         }
     }
     
+    //TODO: 401에러시 토큰 재발급 진행
+    private func fetchDataToken(refreshToken: String,
+                                endPoint: EndPoint,
+                                completion: @escaping (Result<Data, SignRepositoryError>) -> Void) {
+        
+        guard isValid else {
+            performRefresh(refrshToken: refreshToken) { refresh in
+                switch refresh {
+                case .success:
+                    self.isValid = true
+                    self.fetchDataToken(refreshToken: refreshToken, endPoint: endPoint, completion: completion)
+                case .failure(let error):
+                    completion(.failure(error))
+                }
+            }
+            return
+        }
+        
+        NetworkManager.shared.fetchData(endpoint: endPoint) { result in
+            switch result {
+            case .success(let data):
+                completion(.success(data))
+            case .failure(let error):
+                if error == .finishedToken401 {
+                    self.isValid = false
+                    self.fetchDataToken(refreshToken: refreshToken, endPoint: endPoint, completion: completion)
+                } else {
+                    completion(.failure(.unknownError(error)))
+                }
+            }
+        }
+    }
+    
+    //TODO: 토큰저장
     private func saveTokens(accessToken: String, refreshToken: String) throws {
         guard let refreshdata = refreshToken.data(using: .utf8),
               let accessToken = accessToken.data(using: .utf8) else {
