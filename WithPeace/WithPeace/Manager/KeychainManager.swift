@@ -7,11 +7,12 @@
 
 import Foundation
 
+enum KeychainError: Error {
+    case duplicateEntry
+    case unkown(OSStatus)
+}
+
 final class KeychainManager {
-    enum KeychainError: Error {
-        case duplicateEntry
-        case unkown(OSStatus)
-    }
     
     //TODO: 키체인저장
     func save(account: String, password: Data) throws {
