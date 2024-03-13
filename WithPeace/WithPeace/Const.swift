@@ -35,7 +35,7 @@ extension Const {
         struct SystemColor {
             private init() {}
             
-            static let black = "Black"
+            static let black = "BlackCustom"
             static let gray1 = "Gray1"
             static let gray2 = "Gray2"
             static let gray3 = "Gray3"
