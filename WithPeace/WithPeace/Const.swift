@@ -7,6 +7,8 @@
 
 struct Const {
     private init() {}
+    
+    static let withpeaceLogo = "withpeace_Logo"
 }
 
 //MARK: - Color

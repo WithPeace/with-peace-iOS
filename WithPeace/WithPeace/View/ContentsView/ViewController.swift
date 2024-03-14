@@ -42,3 +42,15 @@ final class ViewController: UIViewController {
 //        googleManager.aaa(view: self)
     }
 }
+
+
+/*
+ View
+    >login
+    >tabbar
+    >contentsview
+        >home
+        >forum
+        >add
+        >profile
+ */
