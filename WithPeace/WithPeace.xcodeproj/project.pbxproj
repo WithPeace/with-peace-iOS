@@ -28,6 +28,7 @@
 		F68C9D222BA2DEAD008CB7E4 /* MyPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F68C9D212BA2DEAD008CB7E4 /* MyPageViewController.swift */; };
 		F68C9D242BA2DEDB008CB7E4 /* SocialLoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F68C9D232BA2DEDB008CB7E4 /* SocialLoginViewController.swift */; };
 		F68C9D262BA2DEEC008CB7E4 /* LoginNickNameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F68C9D252BA2DEEC008CB7E4 /* LoginNickNameViewController.swift */; };
+		F68C9D292BA2FFA0008CB7E4 /* LoginNickNameViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F68C9D282BA2FFA0008CB7E4 /* LoginNickNameViewModel.swift */; };
 		F69B80072B996846002675CE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F69B80062B996846002675CE /* AppDelegate.swift */; };
 		F69B80092B996846002675CE /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F69B80082B996846002675CE /* SceneDelegate.swift */; };
 		F69B800B2B996846002675CE /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F69B800A2B996846002675CE /* ViewController.swift */; };
@@ -78,6 +79,7 @@
 		F68C9D212BA2DEAD008CB7E4 /* MyPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageViewController.swift; sourceTree = "<group>"; };
 		F68C9D232BA2DEDB008CB7E4 /* SocialLoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocialLoginViewController.swift; sourceTree = "<group>"; };
 		F68C9D252BA2DEEC008CB7E4 /* LoginNickNameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginNickNameViewController.swift; sourceTree = "<group>"; };
+		F68C9D282BA2FFA0008CB7E4 /* LoginNickNameViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginNickNameViewModel.swift; sourceTree = "<group>"; };
 		F69B80032B996846002675CE /* WithPeace.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WithPeace.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F69B80062B996846002675CE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F69B80082B996846002675CE /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -213,7 +215,7 @@
 			isa = PBXGroup;
 			children = (
 				F68C9D232BA2DEDB008CB7E4 /* SocialLoginViewController.swift */,
-				F68C9D252BA2DEEC008CB7E4 /* LoginNickNameViewController.swift */,
+				F68C9D272BA2F1DC008CB7E4 /* NickNameView */,
 			);
 			path = Login;
 			sourceTree = "<group>";
@@ -256,6 +258,15 @@
 				F68C9D212BA2DEAD008CB7E4 /* MyPageViewController.swift */,
 			);
 			path = myPageVIew;
+			sourceTree = "<group>";
+		};
+		F68C9D272BA2F1DC008CB7E4 /* NickNameView */ = {
+			isa = PBXGroup;
+			children = (
+				F68C9D252BA2DEEC008CB7E4 /* LoginNickNameViewController.swift */,
+				F68C9D282BA2FFA0008CB7E4 /* LoginNickNameViewModel.swift */,
+			);
+			path = NickNameView;
 			sourceTree = "<group>";
 		};
 		F69B7FFA2B996845002675CE = {
@@ -474,6 +485,7 @@
 				F671A9BB2BA00D4A002808DA /* Bundle+.swift in Sources */,
 				F68C9D1E2BA2DE93008CB7E4 /* ForumViewController.swift in Sources */,
 				F69B800B2B996846002675CE /* ViewController.swift in Sources */,
+				F68C9D292BA2FFA0008CB7E4 /* LoginNickNameViewModel.swift in Sources */,
 				F68C9D1C2BA2DE87008CB7E4 /* HomeViewController.swift in Sources */,
 				F68C9D262BA2DEEC008CB7E4 /* LoginNickNameViewController.swift in Sources */,
 				F671A9C62BA00FD7002808DA /* EndPoint.swift in Sources */,
