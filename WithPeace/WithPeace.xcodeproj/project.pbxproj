@@ -28,6 +28,7 @@
 		F68C9D222BA2DEAD008CB7E4 /* MyPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F68C9D212BA2DEAD008CB7E4 /* MyPageViewController.swift */; };
 		F68C9D242BA2DEDB008CB7E4 /* SocialLoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F68C9D232BA2DEDB008CB7E4 /* SocialLoginViewController.swift */; };
 		F68C9D262BA2DEEC008CB7E4 /* LoginNickNameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F68C9D252BA2DEEC008CB7E4 /* LoginNickNameViewController.swift */; };
+		F68C9D6E2BA5E291008CB7E4 /* ToastMessageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F68C9D6D2BA5E291008CB7E4 /* ToastMessageView.swift */; };
 		F69B80072B996846002675CE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F69B80062B996846002675CE /* AppDelegate.swift */; };
 		F69B80092B996846002675CE /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F69B80082B996846002675CE /* SceneDelegate.swift */; };
 		F69B800B2B996846002675CE /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F69B800A2B996846002675CE /* ViewController.swift */; };
@@ -78,6 +79,7 @@
 		F68C9D212BA2DEAD008CB7E4 /* MyPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageViewController.swift; sourceTree = "<group>"; };
 		F68C9D232BA2DEDB008CB7E4 /* SocialLoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocialLoginViewController.swift; sourceTree = "<group>"; };
 		F68C9D252BA2DEEC008CB7E4 /* LoginNickNameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginNickNameViewController.swift; sourceTree = "<group>"; };
+		F68C9D6D2BA5E291008CB7E4 /* ToastMessageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToastMessageView.swift; sourceTree = "<group>"; };
 		F69B80032B996846002675CE /* WithPeace.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WithPeace.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F69B80062B996846002675CE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F69B80082B996846002675CE /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -167,6 +169,7 @@
 				F68C9D162BA2DC99008CB7E4 /* MainTabBar */,
 				F68C9D152BA2DBB4008CB7E4 /* Login */,
 				F671A9C02BA00DF5002808DA /* ContentsView */,
+				F68C9D6D2BA5E291008CB7E4 /* ToastMessageView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -479,6 +482,7 @@
 				F671A9C62BA00FD7002808DA /* EndPoint.swift in Sources */,
 				F69B80072B996846002675CE /* AppDelegate.swift in Sources */,
 				F671A9CD2BA059DB002808DA /* Const.swift in Sources */,
+				F68C9D6E2BA5E291008CB7E4 /* ToastMessageView.swift in Sources */,
 				F671A9C42BA00FBA002808DA /* NetworkManager.swift in Sources */,
 				630EA20D2BA0243800F04ED3 /* SignAuthDTO.swift in Sources */,
 				F69B80092B996846002675CE /* SceneDelegate.swift in Sources */,
