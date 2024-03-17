@@ -11,6 +11,7 @@
 		630EA20D2BA0243800F04ED3 /* SignAuthDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 630EA20C2BA0243800F04ED3 /* SignAuthDTO.swift */; };
 		630EA20F2BA0277800F04ED3 /* SignRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 630EA20E2BA0277800F04ED3 /* SignRepository.swift */; };
 		633F8E222B9AC37500B92ADC /* KeychainManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 633F8E212B9AC37500B92ADC /* KeychainManager.swift */; };
+		635BCBA92BA3521F00F0DCBC /* SocialLoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 635BCBA82BA3521F00F0DCBC /* SocialLoginViewModel.swift */; };
 		6377F69D2BA06324006CAB26 /* SignRepositoryError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6377F69C2BA06324006CAB26 /* SignRepositoryError.swift */; };
 		F66C98222BA1F5AD001E121C /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F66C98212BA1F5AD001E121C /* MainTabBarController.swift */; };
 		F671A9B92BA00C28002808DA /* Secrets.plist in Resources */ = {isa = PBXBuildFile; fileRef = F671A9B82BA00C28002808DA /* Secrets.plist */; };
@@ -63,6 +64,7 @@
 		630EA20C2BA0243800F04ED3 /* SignAuthDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignAuthDTO.swift; sourceTree = "<group>"; };
 		630EA20E2BA0277800F04ED3 /* SignRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignRepository.swift; sourceTree = "<group>"; };
 		633F8E212B9AC37500B92ADC /* KeychainManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainManager.swift; sourceTree = "<group>"; };
+		635BCBA82BA3521F00F0DCBC /* SocialLoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocialLoginViewModel.swift; sourceTree = "<group>"; };
 		6377F69C2BA06324006CAB26 /* SignRepositoryError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignRepositoryError.swift; sourceTree = "<group>"; };
 		F66C98212BA1F5AD001E121C /* MainTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarController.swift; sourceTree = "<group>"; };
 		F671A9B82BA00C28002808DA /* Secrets.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Secrets.plist; path = ../Secrets.plist; sourceTree = "<group>"; };
@@ -213,6 +215,7 @@
 			isa = PBXGroup;
 			children = (
 				F68C9D232BA2DEDB008CB7E4 /* SocialLoginViewController.swift */,
+				635BCBA82BA3521F00F0DCBC /* SocialLoginViewModel.swift */,
 				F68C9D252BA2DEEC008CB7E4 /* LoginNickNameViewController.swift */,
 			);
 			path = Login;
@@ -471,6 +474,7 @@
 			files = (
 				F68C9D242BA2DEDB008CB7E4 /* SocialLoginViewController.swift in Sources */,
 				F69B80472B9A0D1B002675CE /* GoogleSignInManager.swift in Sources */,
+				635BCBA92BA3521F00F0DCBC /* SocialLoginViewModel.swift in Sources */,
 				F671A9BB2BA00D4A002808DA /* Bundle+.swift in Sources */,
 				F68C9D1E2BA2DE93008CB7E4 /* ForumViewController.swift in Sources */,
 				F69B800B2B996846002675CE /* ViewController.swift in Sources */,

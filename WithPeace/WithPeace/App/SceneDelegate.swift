@@ -15,8 +15,9 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         guard let windowScene = (scene as? UIWindowScene) else { return }
         
         let window = UIWindow(windowScene: windowScene)
+        let goggleSigninManager: AuthenticationProvider = SignRepository()
         
-        let tabBarController = MainTabbarController()
+        let tabBarController = SocialLoginViewController(googleSigninManager: goggleSigninManager)
         let navigationController = UINavigationController(rootViewController: tabBarController)
         window.rootViewController = navigationController
         window.makeKeyAndVisible()
