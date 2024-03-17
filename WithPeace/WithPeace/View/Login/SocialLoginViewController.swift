@@ -81,13 +81,13 @@ final class SocialLoginViewController: UIViewController {
         return button
     }()
     
-    private let googleSigninManager: AuthenticationProvider
-    private var viewModel = SocialLoginViewModel()
+    private var viewModel: SocialLoginViewModel
     private let disposeBag = DisposeBag()
     
-    init(googleSigninManager: AuthenticationProvider) {
-        self.googleSigninManager = googleSigninManager
+    init(viewModel: SocialLoginViewModel) {
+        self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
+        bindViewModel()
     }
     
     required init?(coder: NSCoder) {
@@ -98,7 +98,6 @@ final class SocialLoginViewController: UIViewController {
         super.viewDidLoad()
         
         setupLayout()
-        googleLoginButton.addTarget(self, action: #selector(didTapGoogleSign), for: .touchUpInside)
     }
     
     private func setupLayout() {
@@ -130,23 +129,40 @@ final class SocialLoginViewController: UIViewController {
             appleLoginButton.heightAnchor.constraint(equalToConstant: 55),
         ])
     }
+}
+
+//MARK: bind func
+extension SocialLoginViewController {
     
-    @objc private func didTapGoogleSign() {
-        GIDSignIn.sharedInstance.signIn(withPresenting: self) { signIn, error in
-            guard error == nil else { return }
-            guard let signIn = signIn else { return }
-            
-            let user = signIn.user
-            guard let idtoken = user.idToken?.tokenString else { return }
-            
-            self.googleSigninManager.performGoogleSign(idToken: idtoken) { result in
-                switch result {
-                case .success(let data):
-                    print("\(data) 토큰 주세요")
-                case .failure(let error):
-                    print(error)
-                }
+    private func bindViewModel() {
+        googleLoginButton.rx.tap
+            .flatMapLatest { [weak self] _ -> Observable<String?> in
+                self?.viewModel.signInWithGoogle()
+                    .map { result -> String? in
+                        switch result {
+                        case .success(let idToken):
+                            return idToken
+                        case .failure(_):
+                            return nil
+                        }
+                    } ?? .just(nil)
             }
-        }
+            .compactMap { $0 }
+            .subscribe { [weak self] idToken in
+                self?.viewModel.performGoogleSignIn(idToken: idToken)
+            }
+            .disposed(by: disposeBag)
+        
+        viewModel.signInSuccess
+            .subscribe(onNext: { token in
+                print("SignIn Success: \(token)")
+            })
+            .disposed(by: disposeBag)
+        
+        viewModel.signInFailure
+            .subscribe(onNext: { error in
+                print("SignIn Error: \(error.localizedDescription)")
+            })
+            .disposed(by: disposeBag)
     }
 }
