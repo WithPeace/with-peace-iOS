@@ -50,7 +50,7 @@ final class SocialLoginViewController: UIViewController {
         let button = UIButton(configuration: config)
         button.translatesAutoresizingMaskIntoConstraints = false
         button.setTitle("Google로 로그인하기", for: .normal)
-        button.setImage(UIImage(named: "google-logo"), for: .normal)
+        button.setImage(UIImage(named: Const.googleLogo), for: .normal)
         button.setTitleColor(.black, for: .normal)
         button.titleLabel?.font = UIFont.systemFont(ofSize: 16)
         button.layer.borderColor = UIColor.black.cgColor
@@ -70,7 +70,7 @@ final class SocialLoginViewController: UIViewController {
         let button = UIButton(configuration: config)
         button.translatesAutoresizingMaskIntoConstraints = false
         button.setTitle("Apple로 로그인하기", for: .normal)
-        button.setImage(UIImage(named: "apple-logo"), for: .normal)
+        button.setImage(UIImage(named: Const.appleLogo), for: .normal)
         button.setTitleColor(.black, for: .normal)
         button.titleLabel?.font = UIFont.systemFont(ofSize: 16)
         button.layer.borderColor = UIColor.black.cgColor

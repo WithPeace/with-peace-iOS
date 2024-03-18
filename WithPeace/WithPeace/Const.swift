@@ -9,6 +9,8 @@ struct Const {
     private init() {}
     
     static let withpeaceLogo = "withpeace_Logo"
+    static let googleLogo = "google_Logo"
+    static let appleLogo = "apple_Logo"
 }
 
 //MARK: - Color
