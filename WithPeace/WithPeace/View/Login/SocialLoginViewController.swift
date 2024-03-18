@@ -14,8 +14,7 @@ final class SocialLoginViewController: UIViewController {
     private let mainLogoImage: UIImageView = {
         let image = UIImageView()
         image.translatesAutoresizingMaskIntoConstraints = false
-        image.image = UIImage(named: Const.Logo.MainLogo.withpeaceLogo
-)
+        image.image = UIImage(named: Const.Logo.MainLogo.withpeaceLogo)
         
         return image
     }()
@@ -82,11 +81,10 @@ final class SocialLoginViewController: UIViewController {
         return button
     }()
     
-    private var viewModel: SocialLoginViewModel
+    private var viewModel = SocialLoginViewModel(googleSigninManager: SignRepository())
     private let disposeBag = DisposeBag()
     
-    init(viewModel: SocialLoginViewModel) {
-        self.viewModel = viewModel
+    init() {
         super.init(nibName: nil, bundle: nil)
         bindViewModel()
     }
@@ -137,21 +135,9 @@ extension SocialLoginViewController {
     
     private func bindViewModel() {
         googleLoginButton.rx.tap
-            .flatMapLatest { [weak self] _ -> Observable<String?> in
-                self?.viewModel.signInWithGoogle()
-                    .map { result -> String? in
-                        switch result {
-                        case .success(let idToken):
-                            return idToken
-                        case .failure(_):
-                            return nil
-                        }
-                    } ?? .just(nil)
-            }
-            .compactMap { $0 }
-            .subscribe { [weak self] idToken in
-                self?.viewModel.performGoogleSignIn(idToken: idToken)
-            }
+            .subscribe(onNext: { [weak self] _ in
+                self?.viewModel.performGoogleLogin()
+            })
             .disposed(by: disposeBag)
         
         viewModel.signInSuccess
