@@ -15,6 +15,7 @@ final class CustomAlbumCell: UICollectionViewCell {
         let imageView = UIImageView()
         
         imageView.image = UIImage(named: Const.withpeaceLogo)
+        imageView.clipsToBounds = true
         imageView.contentMode = .scaleAspectFill
         
         return imageView
@@ -32,6 +33,7 @@ final class CustomAlbumCell: UICollectionViewCell {
         let label = UILabel()
         
         label.text = "앨범사진"
+        label.textColor = .white
         
         return label
     }()
@@ -40,6 +42,7 @@ final class CustomAlbumCell: UICollectionViewCell {
         let label = UILabel()
         
         label.text = "12345"
+        label.textColor = .white
         
         return label
     }()

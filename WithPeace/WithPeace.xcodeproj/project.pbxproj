@@ -703,6 +703,7 @@
 				DEVELOPMENT_TEAM = S9SM8UDTPN;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = WithPeace/Info.plist;
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "사진첩사용";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
@@ -731,6 +732,7 @@
 				DEVELOPMENT_TEAM = S9SM8UDTPN;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = WithPeace/Info.plist;
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "사진첩사용";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
