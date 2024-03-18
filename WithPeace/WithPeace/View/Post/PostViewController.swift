@@ -9,77 +9,52 @@ import UIKit
 import RxSwift
 
 final class PostViewController: UIViewController {
- 
-    let customNavBarView = UIView()
-    let customTitleLabel = UILabel()
-    let completeButton = UIButton()
-    let backButton = UIButton()
     
+    private let customNavigationBarView = PostNavigationBarView()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         setupCustomNaviBar()
-        setupNaviBackButton()
-        setupNaviBarLabel()
-        setupNaviBarButton()
+        didTapBack()
+        didTapComplete()
     }
     
     private func setupCustomNaviBar() {
         view.backgroundColor = .systemBackground
         navigationController?.setNavigationBarHidden(true, animated: false)
         
-        customNavBarView.backgroundColor = .systemBackground
-        view.addSubview(customNavBarView)
-        customNavBarView.translatesAutoresizingMaskIntoConstraints = false
+        customNavigationBarView.backgroundColor = .systemBackground
+        view.addSubview(customNavigationBarView)
+        customNavigationBarView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            customNavBarView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-            customNavBarView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            customNavBarView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            customNavBarView.heightAnchor.constraint(equalToConstant: 56)
+            customNavigationBarView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            customNavigationBarView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            customNavigationBarView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            customNavigationBarView.heightAnchor.constraint(equalToConstant: 56)
         ])
     }
-    
-    private func setupNaviBackButton() {
-        customNavBarView.addSubview(backButton)
-        backButton.setImage(UIImage(named: Const.CustomIcon.ICBtnPostcreate.icSignBack), for: .normal)
-        backButton.addTarget(self, action: #selector(didTapBack), for: .touchUpInside)
-        backButton.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([
-            backButton.leadingAnchor.constraint(equalTo: customNavBarView.leadingAnchor, constant: 16),
-            backButton.centerYAnchor.constraint(equalTo: customNavBarView.centerYAnchor)
-        ])
+
+    private func didTapBack() {
+        customNavigationBarView.onBackButtonTapped = { [weak self] in
+            self?.didTapBack()
+        }
     }
     
-    private func setupNaviBarLabel() {
-        customTitleLabel.text = "글 쓰기"
-        customNavBarView.addSubview(customTitleLabel)
-        customTitleLabel.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([
-            customTitleLabel.leadingAnchor.constraint(equalTo: backButton.trailingAnchor, constant: 24),
-            customTitleLabel.centerYAnchor.constraint(equalTo: customNavBarView.centerYAnchor)
-        ])
+    private func didTapComplete() {
+        customNavigationBarView.onCompleteButtonTapped = { [weak self] in
+            self?.didTapCompleteButton()
+        }
     }
-    
-    private func setupNaviBarButton() {
-        customNavBarView.addSubview(completeButton)
-        completeButton.setImage(UIImage(named: Const.CustomIcon.ICBtnPostcreate.btnPostcreateDone), for: .normal)
-        completeButton.addTarget(self, action: #selector(completeButtonTapped), for: .touchUpInside)
-        
-        completeButton.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([
-            completeButton.trailingAnchor.constraint(equalTo: customNavBarView.trailingAnchor, constant: -24),
-            completeButton.centerYAnchor.constraint(equalTo: customNavBarView.centerYAnchor)
-        ])
-    }
-    
-    @objc func completeButtonTapped() {
+   
+    private func didTapCompleteButton() {
         // 버튼 동작
         print("게시글등록")
     }
     
-    @objc func didTapBack() {
+    private func didTapBackButton() {
         print("뒤로")
-        self.dismiss(animated: true)
+        //        navigationController?.popViewController(animated: true)
+        //        self.dismiss(animated: true)
     }
 }

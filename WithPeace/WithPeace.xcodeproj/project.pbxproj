@@ -12,6 +12,7 @@
 		630EA20F2BA0277800F04ED3 /* SignRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 630EA20E2BA0277800F04ED3 /* SignRepository.swift */; };
 		633F8E222B9AC37500B92ADC /* KeychainManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 633F8E212B9AC37500B92ADC /* KeychainManager.swift */; };
 		635BCBAE2BA7E72A00F0DCBC /* PostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 635BCBAD2BA7E72A00F0DCBC /* PostViewController.swift */; };
+		635BCBB02BA80C7300F0DCBC /* PostNavigationBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 635BCBAF2BA80C7300F0DCBC /* PostNavigationBarView.swift */; };
 		6377F69D2BA06324006CAB26 /* SignRepositoryError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6377F69C2BA06324006CAB26 /* SignRepositoryError.swift */; };
 		F66C98222BA1F5AD001E121C /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F66C98212BA1F5AD001E121C /* MainTabBarController.swift */; };
 		F671A9B92BA00C28002808DA /* Secrets.plist in Resources */ = {isa = PBXBuildFile; fileRef = F671A9B82BA00C28002808DA /* Secrets.plist */; };
@@ -66,6 +67,7 @@
 		630EA20E2BA0277800F04ED3 /* SignRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignRepository.swift; sourceTree = "<group>"; };
 		633F8E212B9AC37500B92ADC /* KeychainManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainManager.swift; sourceTree = "<group>"; };
 		635BCBAD2BA7E72A00F0DCBC /* PostViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostViewController.swift; sourceTree = "<group>"; };
+		635BCBAF2BA80C7300F0DCBC /* PostNavigationBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostNavigationBarView.swift; sourceTree = "<group>"; };
 		6377F69C2BA06324006CAB26 /* SignRepositoryError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignRepositoryError.swift; sourceTree = "<group>"; };
 		F66C98212BA1F5AD001E121C /* MainTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarController.swift; sourceTree = "<group>"; };
 		F671A9B82BA00C28002808DA /* Secrets.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Secrets.plist; path = ../Secrets.plist; sourceTree = "<group>"; };
@@ -140,6 +142,7 @@
 			isa = PBXGroup;
 			children = (
 				635BCBAD2BA7E72A00F0DCBC /* PostViewController.swift */,
+				635BCBAF2BA80C7300F0DCBC /* PostNavigationBarView.swift */,
 			);
 			path = Post;
 			sourceTree = "<group>";
@@ -502,6 +505,7 @@
 				F68C9D202BA2DEA3008CB7E4 /* RegistForumViewController.swift in Sources */,
 				F66C98222BA1F5AD001E121C /* MainTabBarController.swift in Sources */,
 				F671A9C82BA0173E002808DA /* HTTPMethod.swift in Sources */,
+				635BCBB02BA80C7300F0DCBC /* PostNavigationBarView.swift in Sources */,
 				F68C9D222BA2DEAD008CB7E4 /* MyPageViewController.swift in Sources */,
 				F671A9CA2BA0174E002808DA /* NetworkError.swift in Sources */,
 				630EA20F2BA0277800F04ED3 /* SignRepository.swift in Sources */,
