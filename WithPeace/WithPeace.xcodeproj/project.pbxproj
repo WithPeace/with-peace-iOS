@@ -11,6 +11,7 @@
 		630EA20D2BA0243800F04ED3 /* SignAuthDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 630EA20C2BA0243800F04ED3 /* SignAuthDTO.swift */; };
 		630EA20F2BA0277800F04ED3 /* SignRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 630EA20E2BA0277800F04ED3 /* SignRepository.swift */; };
 		633F8E222B9AC37500B92ADC /* KeychainManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 633F8E212B9AC37500B92ADC /* KeychainManager.swift */; };
+		635BCBAE2BA7E72A00F0DCBC /* PostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 635BCBAD2BA7E72A00F0DCBC /* PostViewController.swift */; };
 		6377F69D2BA06324006CAB26 /* SignRepositoryError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6377F69C2BA06324006CAB26 /* SignRepositoryError.swift */; };
 		F66C98222BA1F5AD001E121C /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F66C98212BA1F5AD001E121C /* MainTabBarController.swift */; };
 		F671A9B92BA00C28002808DA /* Secrets.plist in Resources */ = {isa = PBXBuildFile; fileRef = F671A9B82BA00C28002808DA /* Secrets.plist */; };
@@ -64,6 +65,7 @@
 		630EA20C2BA0243800F04ED3 /* SignAuthDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignAuthDTO.swift; sourceTree = "<group>"; };
 		630EA20E2BA0277800F04ED3 /* SignRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignRepository.swift; sourceTree = "<group>"; };
 		633F8E212B9AC37500B92ADC /* KeychainManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainManager.swift; sourceTree = "<group>"; };
+		635BCBAD2BA7E72A00F0DCBC /* PostViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostViewController.swift; sourceTree = "<group>"; };
 		6377F69C2BA06324006CAB26 /* SignRepositoryError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignRepositoryError.swift; sourceTree = "<group>"; };
 		F66C98212BA1F5AD001E121C /* MainTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarController.swift; sourceTree = "<group>"; };
 		F671A9B82BA00C28002808DA /* Secrets.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Secrets.plist; path = ../Secrets.plist; sourceTree = "<group>"; };
@@ -134,6 +136,14 @@
 			path = Error;
 			sourceTree = "<group>";
 		};
+		635BCBAA2BA7E6FC00F0DCBC /* Post */ = {
+			isa = PBXGroup;
+			children = (
+				635BCBAD2BA7E72A00F0DCBC /* PostViewController.swift */,
+			);
+			path = Post;
+			sourceTree = "<group>";
+		};
 		F671A9BC2BA00D71002808DA /* Extension */ = {
 			isa = PBXGroup;
 			children = (
@@ -170,6 +180,7 @@
 				F68C9D152BA2DBB4008CB7E4 /* Login */,
 				F671A9C02BA00DF5002808DA /* ContentsView */,
 				F68C9D6D2BA5E291008CB7E4 /* ToastMessageView.swift */,
+				635BCBAA2BA7E6FC00F0DCBC /* Post */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -482,6 +493,7 @@
 				F671A9C62BA00FD7002808DA /* EndPoint.swift in Sources */,
 				F69B80072B996846002675CE /* AppDelegate.swift in Sources */,
 				F671A9CD2BA059DB002808DA /* Const.swift in Sources */,
+				635BCBAE2BA7E72A00F0DCBC /* PostViewController.swift in Sources */,
 				F68C9D6E2BA5E291008CB7E4 /* ToastMessageView.swift in Sources */,
 				F671A9C42BA00FBA002808DA /* NetworkManager.swift in Sources */,
 				630EA20D2BA0243800F04ED3 /* SignAuthDTO.swift in Sources */,

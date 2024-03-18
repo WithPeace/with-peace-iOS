@@ -56,6 +56,8 @@ extension Const {
             
             static let btnPostcreateDoneSelect  = "btn-postcreate-done-select"
             static let btnPostcreateDone = "btn-postcreate-done"
+            static let icSelect = "ic-select"
+            static let icSignBack = "ic-sign-back"
         }
         
         struct ICCate {
