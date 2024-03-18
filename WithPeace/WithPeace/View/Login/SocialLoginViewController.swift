@@ -14,7 +14,8 @@ final class SocialLoginViewController: UIViewController {
     private let mainLogoImage: UIImageView = {
         let image = UIImageView()
         image.translatesAutoresizingMaskIntoConstraints = false
-        image.image = UIImage(named: Const.withpeaceLogo)
+        image.image = UIImage(named: Const.Logo.MainLogo.withpeaceLogo
+)
         
         return image
     }()
@@ -50,7 +51,7 @@ final class SocialLoginViewController: UIViewController {
         let button = UIButton(configuration: config)
         button.translatesAutoresizingMaskIntoConstraints = false
         button.setTitle("Google로 로그인하기", for: .normal)
-        button.setImage(UIImage(named: Const.googleLogo), for: .normal)
+        button.setImage(UIImage(named: Const.Logo.MainLogo.googleLogo), for: .normal)
         button.setTitleColor(.black, for: .normal)
         button.titleLabel?.font = UIFont.systemFont(ofSize: 16)
         button.layer.borderColor = UIColor.black.cgColor
@@ -70,7 +71,7 @@ final class SocialLoginViewController: UIViewController {
         let button = UIButton(configuration: config)
         button.translatesAutoresizingMaskIntoConstraints = false
         button.setTitle("Apple로 로그인하기", for: .normal)
-        button.setImage(UIImage(named: Const.appleLogo), for: .normal)
+        button.setImage(UIImage(named: Const.Logo.MainLogo.appleLogo), for: .normal)
         button.setTitleColor(.black, for: .normal)
         button.titleLabel?.font = UIFont.systemFont(ofSize: 16)
         button.layer.borderColor = UIColor.black.cgColor
