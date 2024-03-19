@@ -82,23 +82,24 @@ extension CustomPhotoAlbumViewController {
             subtype: .albumRegular,
             options: nil)
         
-        var id = Array(repeating: PHCollection(), count: 2)
+        for index in 0..<smartAlbums.count {
+            let data = smartAlbums[index]
+            guard let title = data.localizedTitle else { continue }
+            
+            if title == "Recents" {
+                snapshot.appendItems([data])
+            }
+        }
         
         for index in 0..<smartAlbums.count {
             let data = smartAlbums[index]
             
             guard let title = data.localizedTitle else { continue }
             
-            switch title {
-            case "Recents":
-                id[0] = data
-            case "Favorites":
-                id[1] = data
-            default:
-                continue
+            if title == "Favorites" {
+                snapshot.appendItems([data])
             }
         }
-        snapshot.appendItems(id)
         
         // USER COLLECTIONS
         userCollections = PHAssetCollection.fetchAssetCollections(
