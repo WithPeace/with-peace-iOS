@@ -20,6 +20,7 @@ final class CategorySelectViewController: UIViewController {
     private var categoryButtons: [UIButton] = []
     private let gridStackView = UIStackView()
     var onCategorySelected: ((String) -> Void)?
+    var previouslySelectedCategory: String?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,6 +29,7 @@ final class CategorySelectViewController: UIViewController {
         setupTitleLabel()
         setupViews()
         setupGridStackView()
+        updateSelectedButtonState()
     }
     
     private func setupTitleLabel() {
@@ -92,6 +94,17 @@ final class CategorySelectViewController: UIViewController {
             gridStackView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -42)
             
         ])
+    }
+    
+    private func updateSelectedButtonState() {
+        if let selectedCategory = previouslySelectedCategory {
+            for button in categoryButtons {
+                if button.title(for: .normal) == selectedCategory {
+                    button.isSelected = true
+                    break
+                }
+            }
+        }
     }
     
     @objc private func categoryButtonTapped(_ sender: UIButton) {

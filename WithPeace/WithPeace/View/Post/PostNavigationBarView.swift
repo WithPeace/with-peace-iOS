@@ -54,13 +54,18 @@ final class PostNavigationBarView: UIView {
     
     private func setupNavigationBarButton() {
         addSubview(completeButton)
-        completeButton.setImage(UIImage(named: Const.CustomIcon.ICBtnPostcreate.btnPostcreateDone), for: .normal)
         completeButton.addTarget(self, action: #selector(didTapCompleteButton), for: .touchUpInside)
         completeButton.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             completeButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -24),
             completeButton.centerYAnchor.constraint(equalTo: centerYAnchor)
         ])
+    }
+    
+    func updateCompleteButton(isEnabled: Bool) {
+        let buttonImage = isEnabled ? UIImage(named: Const.CustomIcon.ICBtnPostcreate.btnPostcreateDoneSelect) : UIImage(named: Const.CustomIcon.ICBtnPostcreate.btnPostcreateDone)
+        completeButton.setImage(buttonImage, for: .normal)
+        completeButton.isEnabled = isEnabled
     }
     
     @objc private func didTapBackButton() {

@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import RxSwift
 
 final class DescriptionCell: UITableViewCell {
     private let descriptionTextField: UITextField = {
@@ -16,9 +17,12 @@ final class DescriptionCell: UITableViewCell {
         return textField
     }()
     
+    var textChanged: PublishSubject<String> = PublishSubject()
+    
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         setupTitleCell()
+        descriptionTextField.addTarget(self, action: #selector(textViewDidChange(_:)), for: .editingChanged)
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -32,5 +36,11 @@ final class DescriptionCell: UITableViewCell {
             descriptionTextField.topAnchor.constraint(equalTo: topAnchor, constant: 16),
             descriptionTextField.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 24)
         ])
+    }
+    
+    weak var delegate: PostInputDelegate?
+    
+    @objc func textViewDidChange(_ textField: UITextField) {
+        delegate?.onDescriptionChanged(newDescription: textField.text ?? "")
     }
 }

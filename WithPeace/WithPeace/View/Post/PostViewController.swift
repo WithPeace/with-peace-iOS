@@ -11,7 +11,11 @@ import RxSwift
 final class PostViewController: UIViewController {
     private let customNavigationBarView = PostNavigationBarView()
     private let photoView = PostPhotoView()
+    private var viewModel = PostViewModel()
+    private let disposeBag = DisposeBag()
     private var selectedCategory: String?
+    private var titleText: String = ""
+    private var descriptionText: String = ""
     private let tableView: UITableView = {
         let tableView = UITableView()
         tableView.translatesAutoresizingMaskIntoConstraints = false
@@ -29,6 +33,7 @@ final class PostViewController: UIViewController {
         configureUI()
         setupTableView()
         setupPhotoView()
+        updateCompleteButtonState()
     }
     
     private func setupCustomNaviBar() {
@@ -89,16 +94,20 @@ extension PostViewController: UITableViewDataSource {
             cell.configure(category)
             cell.onButtonTapped = { [weak self] in
                 self?.showCategorySelectViewController()
+                self?.updateCompleteButtonState()
+                self?.tableView.reloadData()
             }
             
             return cell
         case 1:
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "TitleCell",
                                                            for: indexPath) as? TitleCell else { return UITableViewCell() }
+            cell.delegate = self
             return cell
         case 2:
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "DescriptionCell",
                                                            for: indexPath) as? DescriptionCell else { return UITableViewCell() }
+            cell.delegate = self
             return cell
         default:
             return UITableViewCell()
@@ -106,7 +115,12 @@ extension PostViewController: UITableViewDataSource {
     }
 }
 
-extension PostViewController: UITableViewDelegate {
+protocol PostInputDelegate: AnyObject {
+    func onTitleChanged(newTitle: String)
+    func onDescriptionChanged(newDescription: String)
+}
+
+extension PostViewController: UITableViewDelegate, PostInputDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         switch indexPath.row {
         case 0:
@@ -123,6 +137,21 @@ extension PostViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
     }
+    
+    private func updateCompleteButtonState() {
+        let isInputValid = self.selectedCategory != nil && !self.titleText.isEmpty && !self.descriptionText.isEmpty
+        self.customNavigationBarView.updateCompleteButton(isEnabled: isInputValid)
+    }
+    
+    func onTitleChanged(newTitle: String) {
+        self.titleText = newTitle
+        updateCompleteButtonState()
+    }
+    
+    func onDescriptionChanged(newDescription: String) {
+        self.descriptionText = newDescription
+        updateCompleteButtonState()
+    }
 }
 
 extension PostViewController {
@@ -135,34 +164,27 @@ extension PostViewController {
     
     private func didTapComplete() {
         customNavigationBarView.onCompleteButtonTapped = { [weak self] in
-            self?.didTapCompleteButton()
+            self?.dismiss(animated: true)
+            print("게시글등록")
         }
     }
     
     private func didTapPhoto() {
         photoView.onPhotoButtonTapped = { [weak self] in
-            self?.didTapPhotoButton()
+            print("사진")
         }
-    }
-    
-    private func didTapCompleteButton() {
-        // 버튼 동작
-        print("게시글등록")
-    }
-    
-    private func didTapPhotoButton() {
-        print("사진")
     }
     
     private func showCategorySelectViewController() {
         let categorySelectVC = CategorySelectViewController()
-        categorySelectVC.modalPresentationStyle = .custom
         let transitioningDelegate = CategorySelectTransitioningDelegate()
+        categorySelectVC.modalPresentationStyle = .custom
         categorySelectVC.transitioningDelegate = transitioningDelegate
+        categorySelectVC.previouslySelectedCategory = selectedCategory
         
         categorySelectVC.onCategorySelected = { [weak self] selectedCategory in
             self?.selectedCategory = selectedCategory
-                self?.tableView.reloadData()
+            self?.tableView.reloadData()
         }
         
         self.present(categorySelectVC, animated: true)

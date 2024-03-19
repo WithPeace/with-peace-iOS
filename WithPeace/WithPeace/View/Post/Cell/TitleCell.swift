@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import RxSwift
 
 final class TitleCell: UITableViewCell {
     private let titleTextField: UITextField = {
@@ -16,9 +17,12 @@ final class TitleCell: UITableViewCell {
         return textField
     }()
     
+    var textChanged: PublishSubject<String> = PublishSubject()
+    
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         setupTitleCell()
+        titleTextField.addTarget(self, action: #selector(textFieldDidChange(_:)), for: .editingChanged)
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -32,5 +36,11 @@ final class TitleCell: UITableViewCell {
             titleTextField.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 24),
             titleTextField.centerYAnchor.constraint(equalTo: centerYAnchor)
         ])
+    }
+     
+    weak var delegate: PostInputDelegate?
+    
+    @objc func textFieldDidChange(_ textField: UITextField) {
+        delegate?.onTitleChanged(newTitle: textField.text ?? "")
     }
 }
