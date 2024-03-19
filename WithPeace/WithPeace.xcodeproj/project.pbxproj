@@ -178,7 +178,7 @@
 				F68C9D152BA2DBB4008CB7E4 /* Login */,
 				F671A9C02BA00DF5002808DA /* ContentsView */,
 				F68C9D6D2BA5E291008CB7E4 /* ToastMessageView.swift */,
-				F68719B42BA86AAF0049B182 /* New Group */,
+				F68719B42BA86AAF0049B182 /* CustomPhotoPicker */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -221,14 +221,14 @@
 			path = NetworkManager;
 			sourceTree = "<group>";
 		};
-		F68719B42BA86AAF0049B182 /* New Group */ = {
+		F68719B42BA86AAF0049B182 /* CustomPhotoPicker */ = {
 			isa = PBXGroup;
 			children = (
 				F68719B02BA8635C0049B182 /* CustomPhotoAlbumViewController.swift */,
 				F68719B52BA8707D0049B182 /* CustomAlbumCell.swift */,
 				F68719B22BA867FE0049B182 /* UICollectionViewLayout+.swift */,
 			);
-			path = "New Group";
+			path = CustomPhotoPicker;
 			sourceTree = "<group>";
 		};
 		F68C9D152BA2DBB4008CB7E4 /* Login */ = {
