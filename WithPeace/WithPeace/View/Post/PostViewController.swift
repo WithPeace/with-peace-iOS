@@ -9,9 +9,9 @@ import UIKit
 import RxSwift
 
 final class PostViewController: UIViewController {
-    
     private let customNavigationBarView = PostNavigationBarView()
     private let photoView = PostPhotoView()
+    private var selectedCategory: String?
     private let tableView: UITableView = {
         let tableView = UITableView()
         tableView.translatesAutoresizingMaskIntoConstraints = false
@@ -21,7 +21,7 @@ final class PostViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-    
+        
         didTapBack()
         didTapComplete()
         didTapPhoto()
@@ -61,9 +61,9 @@ final class PostViewController: UIViewController {
         photoView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             photoView.topAnchor.constraint(equalTo: tableView.bottomAnchor),
-            photoView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
-            photoView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
-            photoView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor)
+            photoView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            photoView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            photoView.trailingAnchor.constraint(equalTo: view.trailingAnchor)
         ])
     }
     
@@ -84,6 +84,13 @@ extension PostViewController: UITableViewDataSource {
         case 0:
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "CategoryCell",
                                                            for: indexPath) as? CategoryViewCell else { return UITableViewCell() }
+            
+            let category = selectedCategory ?? "카테고리의 주제를 선택하세요"
+            cell.configure(category)
+            cell.onButtonTapped = { [weak self] in
+                self?.showCategorySelectViewController()
+            }
+            
             return cell
         case 1:
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "TitleCell",
@@ -121,7 +128,8 @@ extension PostViewController: UITableViewDelegate {
 extension PostViewController {
     private func didTapBack() {
         customNavigationBarView.onBackButtonTapped = { [weak self] in
-            self?.didTapBackButton()
+            self?.dismiss(animated: true)
+            print("뒤로")
         }
     }
     
@@ -142,13 +150,21 @@ extension PostViewController {
         print("게시글등록")
     }
     
-    private func didTapBackButton() {
-        print("뒤로")
-        //        navigationController?.popViewController(animated: true)
-        //        self.dismiss(animated: true)
-    }
-    
     private func didTapPhotoButton() {
         print("사진")
+    }
+    
+    private func showCategorySelectViewController() {
+        let categorySelectVC = CategorySelectViewController()
+        categorySelectVC.modalPresentationStyle = .custom
+        let transitioningDelegate = CategorySelectTransitioningDelegate()
+        categorySelectVC.transitioningDelegate = transitioningDelegate
+        
+        categorySelectVC.onCategorySelected = { [weak self] selectedCategory in
+            self?.selectedCategory = selectedCategory
+                self?.tableView.reloadData()
+        }
+        
+        self.present(categorySelectVC, animated: true)
     }
 }

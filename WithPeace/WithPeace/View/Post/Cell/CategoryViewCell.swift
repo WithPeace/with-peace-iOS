@@ -11,7 +11,6 @@ final class CategoryViewCell: UITableViewCell {
     private let categoryLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.text = "카테고리의 주제를 선택하세요"
         
         return label
     }()
@@ -23,6 +22,8 @@ final class CategoryViewCell: UITableViewCell {
         
         return button
     }()
+    
+    var onButtonTapped: (() -> Void)?
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -44,9 +45,15 @@ final class CategoryViewCell: UITableViewCell {
             selectButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -24),
             selectButton.centerYAnchor.constraint(equalTo: centerYAnchor)
         ])
+        
+        selectButton.addTarget(self, action: #selector(didTapSelectButton), for: .touchUpInside)
     }
     
     func configure(_ category: String) {
         categoryLabel.text = category
+    }
+    
+    @objc private func didTapSelectButton() {
+        onButtonTapped?()
     }
 }

@@ -18,6 +18,7 @@
 		635BCBB72BA952F000F0DCBC /* DescriptionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 635BCBB62BA952F000F0DCBC /* DescriptionCell.swift */; };
 		6377F69D2BA06324006CAB26 /* SignRepositoryError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6377F69C2BA06324006CAB26 /* SignRepositoryError.swift */; };
 		63C52F972BA962590072DE18 /* PostPhotoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63C52F962BA962590072DE18 /* PostPhotoView.swift */; };
+		63C52F992BA97FB40072DE18 /* CategorySelectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63C52F982BA97FB40072DE18 /* CategorySelectViewController.swift */; };
 		F66C98222BA1F5AD001E121C /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F66C98212BA1F5AD001E121C /* MainTabBarController.swift */; };
 		F671A9B92BA00C28002808DA /* Secrets.plist in Resources */ = {isa = PBXBuildFile; fileRef = F671A9B82BA00C28002808DA /* Secrets.plist */; };
 		F671A9BB2BA00D4A002808DA /* Bundle+.swift in Sources */ = {isa = PBXBuildFile; fileRef = F671A9BA2BA00D4A002808DA /* Bundle+.swift */; };
@@ -77,6 +78,7 @@
 		635BCBB62BA952F000F0DCBC /* DescriptionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DescriptionCell.swift; sourceTree = "<group>"; };
 		6377F69C2BA06324006CAB26 /* SignRepositoryError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignRepositoryError.swift; sourceTree = "<group>"; };
 		63C52F962BA962590072DE18 /* PostPhotoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostPhotoView.swift; sourceTree = "<group>"; };
+		63C52F982BA97FB40072DE18 /* CategorySelectViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategorySelectViewController.swift; sourceTree = "<group>"; };
 		F66C98212BA1F5AD001E121C /* MainTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarController.swift; sourceTree = "<group>"; };
 		F671A9B82BA00C28002808DA /* Secrets.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Secrets.plist; path = ../Secrets.plist; sourceTree = "<group>"; };
 		F671A9BA2BA00D4A002808DA /* Bundle+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Bundle+.swift"; sourceTree = "<group>"; };
@@ -153,6 +155,7 @@
 				635BCBAD2BA7E72A00F0DCBC /* PostViewController.swift */,
 				635BCBAF2BA80C7300F0DCBC /* PostNavigationBarView.swift */,
 				63C52F962BA962590072DE18 /* PostPhotoView.swift */,
+				63C52F982BA97FB40072DE18 /* CategorySelectViewController.swift */,
 			);
 			path = Post;
 			sourceTree = "<group>";
@@ -510,6 +513,7 @@
 				F69B80472B9A0D1B002675CE /* GoogleSignInManager.swift in Sources */,
 				F671A9BB2BA00D4A002808DA /* Bundle+.swift in Sources */,
 				F68C9D1E2BA2DE93008CB7E4 /* ForumViewController.swift in Sources */,
+				63C52F992BA97FB40072DE18 /* CategorySelectViewController.swift in Sources */,
 				F69B800B2B996846002675CE /* ViewController.swift in Sources */,
 				F68C9D1C2BA2DE87008CB7E4 /* HomeViewController.swift in Sources */,
 				635BCBB32BA94F6600F0DCBC /* CategoryViewCell.swift in Sources */,
