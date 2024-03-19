@@ -10,11 +10,8 @@ import Photos
 
 final class CustomPhotoAlbumViewController: UIViewController {
     
-    private var allPhotos = PHFetchResult<PHCollection>()
     private var smartAlbums = PHFetchResult<PHAssetCollection>()
     private var userCollections = PHFetchResult<PHAssetCollection>()
-    
-    
     private var dataSource: UICollectionViewDiffableDataSource<LayoutSection, PHCollection>?
     
     private var collectionView: UICollectionView = {
@@ -28,24 +25,17 @@ final class CustomPhotoAlbumViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        collectionView.delegate = self
+        
         configureLayout()
         registeCollectionViewCell()
         configureDataSource()
         configureDataSourceSnapshot()
     }
-    
-    private func configureLayout() {
-        view.addSubview(collectionView)
-        
-        let safeArea = view.safeAreaLayoutGuide
-        
-        NSLayoutConstraint.activate([
-            collectionView.topAnchor.constraint(equalTo: safeArea.topAnchor),
-            collectionView.leadingAnchor.constraint(equalTo: safeArea.leadingAnchor),
-            collectionView.trailingAnchor.constraint(equalTo: safeArea.trailingAnchor),
-            collectionView.bottomAnchor.constraint(equalTo: safeArea.bottomAnchor)
-        ])
-    }
+}
+
+//MARK: -Configure CollectionView
+extension CustomPhotoAlbumViewController {
     
     private func registeCollectionViewCell() {
         collectionView.register(CustomAlbumCell.self, forCellWithReuseIdentifier: CustomAlbumCell.identifier)
@@ -53,12 +43,22 @@ final class CustomPhotoAlbumViewController: UIViewController {
     
     private func configureDataSource() {
         dataSource = UICollectionViewDiffableDataSource<LayoutSection, PHCollection>(collectionView: collectionView) { collectionView, indexPath, identifier in
-            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CustomAlbumCell.identifier, for: indexPath) as? CustomAlbumCell else {
+            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CustomAlbumCell.identifier,
+                                                                for: indexPath) as? CustomAlbumCell else {
                 return UICollectionViewCell()
             }
             
-            if let asset = PHAsset.fetchAssets(in: identifier as! PHAssetCollection, options: nil).firstObject {
-                PHImageManager.default().requestImage(for: asset, targetSize: CGSize(width: 100, height: 100), contentMode: .aspectFit, options: nil) { image, hash in
+            guard let assetCollection = identifier as? PHAssetCollection else {
+                return UICollectionViewCell()
+            }
+            
+            let targetSize = self.view.frame.width
+            if let asset = PHAsset.fetchAssets(in: assetCollection, options: nil).firstObject {
+                PHImageManager.default().requestImage(for: asset,
+                                                      targetSize: CGSize(width: targetSize,
+                                                                         height: targetSize),
+                                                      contentMode: .aspectFit,
+                                                      options: nil) { image, hash in
                     if let image {
                         cell.setup(image: image)
                     }
@@ -66,7 +66,7 @@ final class CustomPhotoAlbumViewController: UIViewController {
             }
             
             cell.setup(title: identifier.localizedTitle ?? "알 수 없는 앨범")
-            cell.setup(count: PHAsset.fetchAssets(in: identifier as! PHAssetCollection, options: nil).count)
+            cell.setup(count: PHAsset.fetchAssets(in: assetCollection, options: nil).count)
             
             return cell
         }
@@ -113,5 +113,32 @@ final class CustomPhotoAlbumViewController: UIViewController {
         }
         
         dataSource?.apply(snapshot)
+    }
+}
+
+//MARK: - CollectionView Delegate
+extension CustomPhotoAlbumViewController: UICollectionViewDelegate {
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        //TODO: Send PHCollection
+//        self.navigationController?.pushViewController(ViewController(), animated: true)
+        
+    }
+}
+
+//MARK: -Configure Layout
+extension CustomPhotoAlbumViewController {
+    
+    private func configureLayout() {
+        view.addSubview(collectionView)
+        
+        let safeArea = view.safeAreaLayoutGuide
+        
+        NSLayoutConstraint.activate([
+            collectionView.topAnchor.constraint(equalTo: safeArea.topAnchor),
+            collectionView.leadingAnchor.constraint(equalTo: safeArea.leadingAnchor),
+            collectionView.trailingAnchor.constraint(equalTo: safeArea.trailingAnchor),
+            collectionView.bottomAnchor.constraint(equalTo: safeArea.bottomAnchor)
+        ])
     }
 }
