@@ -56,7 +56,6 @@ final class PostNavigationBarView: UIView {
         addSubview(completeButton)
         completeButton.setImage(UIImage(named: Const.CustomIcon.ICBtnPostcreate.btnPostcreateDone), for: .normal)
         completeButton.addTarget(self, action: #selector(didTapCompleteButton), for: .touchUpInside)
-        
         completeButton.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             completeButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -24),
