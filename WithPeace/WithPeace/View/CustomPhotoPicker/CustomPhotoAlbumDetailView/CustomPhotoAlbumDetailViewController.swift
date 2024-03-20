@@ -12,7 +12,10 @@ final class CustomPhotoAlbumDetailViewController: UIViewController {
     
     private var toastMessage: ToastMessageView?
     private var maxSelect: Int
-    private var selectedIndex = [Int]()
+//    private var selectedIndexs = [Int]()
+    private var selectedAssets: [PHAsset]
+    
+    var completionHandler: (([PHAsset]) -> ())?
     
     private var albumCollection = PHCollection()
     private var dataSource: UICollectionViewDiffableDataSource<LayoutSection, PHAsset>?
@@ -38,9 +41,10 @@ final class CustomPhotoAlbumDetailViewController: UIViewController {
         configureDataSourceSnapshot()
     }
     
-    init(albumCollection: PHCollection, totalPhotoCount: Int) {
+    init(albumCollection: PHCollection, totalPhotoCount: Int, selectedAssets: [PHAsset]) {
         self.albumCollection = albumCollection
         self.maxSelect = totalPhotoCount
+        self.selectedAssets = selectedAssets
         super.init(nibName: nil, bundle: nil)
         self.toastMessage = ToastMessageView(superView: self.view)
         
@@ -50,8 +54,24 @@ final class CustomPhotoAlbumDetailViewController: UIViewController {
         fatalError("init(coder:) has not been implemented")
     }
     
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        
+        completionHandler?(selectedAssets)
+    }
+    
     deinit {
         debugPrint("DEINIT - CustomPhotoAlbumDetailViewController")
+        
+//        var assets = [PHAsset]()
+//        
+//        for index in 1...selectedAssets.count {
+//            if let data =  dataSource?.snapshot().itemIdentifiers[index] {
+//                assets.append(data)
+//            }
+//        }
+//        completionHandler?(assets)
+        
     }
 }
 
@@ -63,7 +83,7 @@ extension CustomPhotoAlbumDetailViewController {
     }
     
     private func configureDataSource() {
-        dataSource = UICollectionViewDiffableDataSource<LayoutSection, PHAsset>(collectionView: collectionView) { collectionView, indexPath, identifier in
+        dataSource = UICollectionViewDiffableDataSource<LayoutSection, PHAsset>(collectionView: collectionView) { [weak self] collectionView, indexPath, identifier in
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: AlbumDetailCell.identifier,
                                                                 for: indexPath) as? AlbumDetailCell else {
                 return UICollectionViewCell()
@@ -77,7 +97,13 @@ extension CustomPhotoAlbumDetailViewController {
                 guard let image = image else { return }
                 cell.setup(image: image)
             }
+            guard let assets = self?.selectedAssets else { return UICollectionViewCell() }
             
+            for selectedAsset in assets {
+                if selectedAsset == self?.dataSource?.snapshot().itemIdentifiers[indexPath.row] {
+                    cell.selectCell()
+                }
+            }
             return cell
         }
     }
@@ -106,15 +132,34 @@ extension CustomPhotoAlbumDetailViewController: UICollectionViewDelegate {
         //TODO: Check Cell
         guard let cell = collectionView.cellForItem(at: indexPath) as? AlbumDetailCell else { return }
         
-        if selectedIndex.contains(indexPath.row) {
-            selectedIndex.remove(at: selectedIndex.firstIndex(of: indexPath.row)!)
-            cell.deselectCell()
-        } else if selectedIndex.count >= maxSelect {
+        guard let dataSourceAssets = dataSource?.snapshot().itemIdentifiers else {
+            return
+        }
+        
+        for selectedAssetIndex in 0..<selectedAssets.count {
+            if dataSourceAssets[indexPath.row] == selectedAssets[selectedAssetIndex] {
+                selectedAssets.remove(at: selectedAssetIndex)
+                cell.deselectCell()
+                return
+            }
+        }
+        
+        if selectedAssets.count >= maxSelect {
             toastMessage?.presentStandardToastMessage("더 이상 이미지를 선택할 수 없습니다")
         } else {
-            selectedIndex.append(indexPath.row)
+            selectedAssets.append(dataSourceAssets[indexPath.row])
             cell.selectCell()
         }
+        
+//        if selectedAssets.contains(asset) {
+//            selectedAssets.remove(at: selectedAssets.firstIndex(of: indexPath.row)!)
+//            cell.deselectCell()
+//        } else if selectedAssets.count >= maxSelect {
+//            toastMessage?.presentStandardToastMessage("더 이상 이미지를 선택할 수 없습니다")
+//        } else {
+//            selectedAssets.append(indexPath.row)
+//            cell.selectCell()
+//        }
     }
 }
 

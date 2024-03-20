@@ -10,6 +10,11 @@ import Photos
 
 final class CustomPhotoAlbumViewController: UIViewController {
     
+    // 넘겨주고 받을 것
+    var completionHandler: (([PHAsset]) -> ())?
+    private var maxSelect: Int
+    private var selectedAssets = [PHAsset]()
+    
     private var smartAlbums = PHFetchResult<PHAssetCollection>()
     private var userCollections = PHFetchResult<PHAssetCollection>()
     private var dataSource: UICollectionViewDiffableDataSource<LayoutSection, PHCollection>?
@@ -31,6 +36,14 @@ final class CustomPhotoAlbumViewController: UIViewController {
         registeCollectionViewCell()
         configureDataSource()
         configureDataSourceSnapshot()
+    }
+    init(maxSelect: Int) {
+        self.maxSelect = maxSelect
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
     
     deinit {
@@ -129,8 +142,14 @@ extension CustomPhotoAlbumViewController: UICollectionViewDelegate {
         guard let snapshot = dataSource?.snapshot().itemIdentifiers else {
             fatalError()
         }
-        self.navigationController?.pushViewController(CustomPhotoAlbumDetailViewController(albumCollection: snapshot[indexPath.row], totalPhotoCount: 1), animated: true)
         
+        let customDetailViewController = CustomPhotoAlbumDetailViewController(albumCollection: snapshot[indexPath.row],
+                                                                              totalPhotoCount: maxSelect, 
+                                                                              selectedAssets: selectedAssets)
+        self.navigationController?.pushViewController(customDetailViewController ,animated: true)
+        customDetailViewController.completionHandler = { [weak self] in
+            self?.selectedAssets = $0
+        }
     }
 }
 

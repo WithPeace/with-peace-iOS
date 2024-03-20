@@ -46,8 +46,7 @@ extension UICollectionViewLayout {
         
         
         let section: NSCollectionLayoutSection
-        print(sectionIndex)
-        print("asdfasdf ", sectionKind.description)
+        
         if sectionKind == .DetailPhotos {
             // Item
             let leadingItemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalWidth(1.0))
