@@ -38,9 +38,7 @@ final class TitleCell: UITableViewCell {
         ])
     }
      
-    weak var delegate: PostInputDelegate?
-    
     @objc func textFieldDidChange(_ textField: UITextField) {
-        delegate?.onTitleChanged(newTitle: textField.text ?? "")
+        textChanged.onNext(textField.text ?? "")
     }
 }

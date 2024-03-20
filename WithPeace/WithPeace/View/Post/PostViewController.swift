@@ -13,15 +13,26 @@ final class PostViewController: UIViewController {
     private let photoView = PostPhotoView()
     private var viewModel = PostViewModel()
     private let disposeBag = DisposeBag()
-    private var selectedCategory: String?
-    private var titleText: String = ""
-    private var descriptionText: String = ""
     private let tableView: UITableView = {
         let tableView = UITableView()
         tableView.translatesAutoresizingMaskIntoConstraints = false
         
         return tableView
     }()
+    
+    init() {
+        super.init(nibName: nil, bundle: nil)
+        viewModel.isCompleteButtonEnabled
+            .observe(on: MainScheduler.instance)
+            .subscribe { [weak self] isEnabled in
+                self?.customNavigationBarView.updateCompleteButton(isEnabled: isEnabled)
+            }
+            .disposed(by: disposeBag)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -33,7 +44,6 @@ final class PostViewController: UIViewController {
         configureUI()
         setupTableView()
         setupPhotoView()
-        updateCompleteButtonState()
     }
     
     private func setupCustomNaviBar() {
@@ -90,11 +100,15 @@ extension PostViewController: UITableViewDataSource {
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "CategoryCell",
                                                            for: indexPath) as? CategoryViewCell else { return UITableViewCell() }
             
-            let category = selectedCategory ?? "카테고리의 주제를 선택하세요"
-            cell.configure(category)
+            viewModel.categorySelected
+                .subscribe(onNext: { category in
+                    let category = category ?? "카테고리의 주제를 선택하세요"
+                    cell.configure(category)
+                })
+                .disposed(by: disposeBag)
+            
             cell.onButtonTapped = { [weak self] in
                 self?.showCategorySelectViewController()
-                self?.updateCompleteButtonState()
                 self?.tableView.reloadData()
             }
             
@@ -102,12 +116,20 @@ extension PostViewController: UITableViewDataSource {
         case 1:
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "TitleCell",
                                                            for: indexPath) as? TitleCell else { return UITableViewCell() }
-            cell.delegate = self
+            cell.textChanged
+                .subscribe { [weak self] newTitle in
+                    self?.viewModel.titleTextChanged.onNext(newTitle)
+                }
+                .disposed(by: disposeBag)
             return cell
         case 2:
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "DescriptionCell",
                                                            for: indexPath) as? DescriptionCell else { return UITableViewCell() }
-            cell.delegate = self
+            cell.textChanged
+                .subscribe { [weak self] newDescription in
+                    self?.viewModel.descriptionTextChanged.onNext(newDescription)
+                }
+                .disposed(by: disposeBag)
             return cell
         default:
             return UITableViewCell()
@@ -115,12 +137,7 @@ extension PostViewController: UITableViewDataSource {
     }
 }
 
-protocol PostInputDelegate: AnyObject {
-    func onTitleChanged(newTitle: String)
-    func onDescriptionChanged(newDescription: String)
-}
-
-extension PostViewController: UITableViewDelegate, PostInputDelegate {
+extension PostViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         switch indexPath.row {
         case 0:
@@ -136,21 +153,6 @@ extension PostViewController: UITableViewDelegate, PostInputDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-    }
-    
-    private func updateCompleteButtonState() {
-        let isInputValid = self.selectedCategory != nil && !self.titleText.isEmpty && !self.descriptionText.isEmpty
-        self.customNavigationBarView.updateCompleteButton(isEnabled: isInputValid)
-    }
-    
-    func onTitleChanged(newTitle: String) {
-        self.titleText = newTitle
-        updateCompleteButtonState()
-    }
-    
-    func onDescriptionChanged(newDescription: String) {
-        self.descriptionText = newDescription
-        updateCompleteButtonState()
     }
 }
 
@@ -180,10 +182,15 @@ extension PostViewController {
         let transitioningDelegate = CategorySelectTransitioningDelegate()
         categorySelectVC.modalPresentationStyle = .custom
         categorySelectVC.transitioningDelegate = transitioningDelegate
-        categorySelectVC.previouslySelectedCategory = selectedCategory
+        
+        viewModel.categorySelected
+            .subscribe { [weak categorySelectVC] category in
+                categorySelectVC?.previouslySelectedCategory = category
+            }
+            .disposed(by: disposeBag)
         
         categorySelectVC.onCategorySelected = { [weak self] selectedCategory in
-            self?.selectedCategory = selectedCategory
+            self?.viewModel.categorySelected.onNext(selectedCategory)
             self?.tableView.reloadData()
         }
         

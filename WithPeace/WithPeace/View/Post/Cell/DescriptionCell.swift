@@ -38,9 +38,7 @@ final class DescriptionCell: UITableViewCell {
         ])
     }
     
-    weak var delegate: PostInputDelegate?
-    
     @objc func textViewDidChange(_ textField: UITextField) {
-        delegate?.onDescriptionChanged(newDescription: textField.text ?? "")
+        textChanged.onNext(textField.text ?? "")
     }
 }
