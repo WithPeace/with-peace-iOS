@@ -32,6 +32,10 @@ final class CustomPhotoAlbumViewController: UIViewController {
         configureDataSource()
         configureDataSourceSnapshot()
     }
+    
+    deinit {
+        debugPrint("DEINIT - CustomPhotoAlbumViewController")
+    }
 }
 
 //MARK: -Configure CollectionView
@@ -74,7 +78,7 @@ extension CustomPhotoAlbumViewController {
     
     private func configureDataSourceSnapshot() {
         var snapshot = NSDiffableDataSourceSnapshot<LayoutSection, PHCollection>()
-        snapshot.appendSections([.defualt])
+        snapshot.appendSections([.Album])
         
         //SMART ALBUMS
         smartAlbums = PHAssetCollection.fetchAssetCollections(
@@ -122,7 +126,10 @@ extension CustomPhotoAlbumViewController: UICollectionViewDelegate {
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         //TODO: Send PHCollection
-//        self.navigationController?.pushViewController(ViewController(), animated: true)
+        guard let snapshot = dataSource?.snapshot().itemIdentifiers else {
+            fatalError()
+        }
+        self.navigationController?.pushViewController(CustomPhotoAlbumDetailViewController(albumCollection: snapshot[indexPath.row], totalPhotoCount: 1), animated: true)
         
     }
 }
