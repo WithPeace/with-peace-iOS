@@ -10,13 +10,11 @@ import Photos
 
 final class CustomPhotoAlbumDetailViewController: UIViewController {
     
-    private var toastMessage: ToastMessageView?
-    private var maxSelect: Int
-//    private var selectedIndexs = [Int]()
-    private var selectedAssets: [PHAsset]
-    
     var completionHandler: (([PHAsset]) -> ())?
     
+    private var maxSelect: Int
+    private var selectedAssets: [PHAsset]
+    private var toastMessage: ToastMessageView?
     private var albumCollection = PHCollection()
     private var dataSource: UICollectionViewDiffableDataSource<LayoutSection, PHAsset>?
     
@@ -41,13 +39,13 @@ final class CustomPhotoAlbumDetailViewController: UIViewController {
         configureDataSourceSnapshot()
     }
     
-    init(albumCollection: PHCollection, totalPhotoCount: Int, selectedAssets: [PHAsset]) {
-        self.albumCollection = albumCollection
+    init( totalPhotoCount: Int, albumCollection: PHCollection, selectedAssets: [PHAsset]) {
         self.maxSelect = totalPhotoCount
+        self.albumCollection = albumCollection
         self.selectedAssets = selectedAssets
+        
         super.init(nibName: nil, bundle: nil)
         self.toastMessage = ToastMessageView(superView: self.view)
-        
     }
     
     required init?(coder: NSCoder) {
@@ -62,16 +60,6 @@ final class CustomPhotoAlbumDetailViewController: UIViewController {
     
     deinit {
         debugPrint("DEINIT - CustomPhotoAlbumDetailViewController")
-        
-//        var assets = [PHAsset]()
-//        
-//        for index in 1...selectedAssets.count {
-//            if let data =  dataSource?.snapshot().itemIdentifiers[index] {
-//                assets.append(data)
-//            }
-//        }
-//        completionHandler?(assets)
-        
     }
 }
 
@@ -150,16 +138,6 @@ extension CustomPhotoAlbumDetailViewController: UICollectionViewDelegate {
             selectedAssets.append(dataSourceAssets[indexPath.row])
             cell.selectCell()
         }
-        
-//        if selectedAssets.contains(asset) {
-//            selectedAssets.remove(at: selectedAssets.firstIndex(of: indexPath.row)!)
-//            cell.deselectCell()
-//        } else if selectedAssets.count >= maxSelect {
-//            toastMessage?.presentStandardToastMessage("더 이상 이미지를 선택할 수 없습니다")
-//        } else {
-//            selectedAssets.append(indexPath.row)
-//            cell.selectCell()
-//        }
     }
 }
 

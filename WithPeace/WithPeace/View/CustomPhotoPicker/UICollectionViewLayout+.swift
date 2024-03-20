@@ -44,7 +44,6 @@ extension UICollectionViewLayout {
         
         guard let sectionKind = LayoutSection(rawValue: 1) else { return nil }
         
-        
         let section: NSCollectionLayoutSection
         
         if sectionKind == .DetailPhotos {
@@ -67,7 +66,6 @@ extension UICollectionViewLayout {
             section.orthogonalScrollingBehavior = .none
             section.contentInsets = NSDirectionalEdgeInsets(top: 10, leading: 10, bottom: 10, trailing: 10)
         } else {
-            print("asdfasdf ", sectionKind.description)
             fatalError("Layout ERROR")
         }
         return section
@@ -87,6 +85,3 @@ enum LayoutSection: Int, Hashable, CaseIterable, CustomStringConvertible {
         }
     }
 }
-
-
-

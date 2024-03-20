@@ -143,8 +143,8 @@ extension CustomPhotoAlbumViewController: UICollectionViewDelegate {
             fatalError()
         }
         
-        let customDetailViewController = CustomPhotoAlbumDetailViewController(albumCollection: snapshot[indexPath.row],
-                                                                              totalPhotoCount: maxSelect, 
+        let customDetailViewController = CustomPhotoAlbumDetailViewController(totalPhotoCount: maxSelect,
+                                                                              albumCollection: snapshot[indexPath.row],
                                                                               selectedAssets: selectedAssets)
         self.navigationController?.pushViewController(customDetailViewController ,animated: true)
         customDetailViewController.completionHandler = { [weak self] in

@@ -7,9 +7,10 @@
 
 import UIKit
 
-class AlbumDetailCell: UICollectionViewCell {
+final class AlbumDetailCell: UICollectionViewCell {
     
     static let identifier = "AlbumDetailCell"
+    
     private var isSelectedCell = false
     
     private let albumImageView: UIImageView = {
