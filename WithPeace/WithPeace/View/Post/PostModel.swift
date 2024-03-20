@@ -5,8 +5,11 @@
 //  Created by Hemg on 3/19/24.
 //
 
+import Foundation
+
 struct PostModel {
-    var category: String
     var title: String
-    var description: String
+    var content: String
+    var type: String
+    var image: [URL]
 }

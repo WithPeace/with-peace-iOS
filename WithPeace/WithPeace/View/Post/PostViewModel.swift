@@ -7,25 +7,24 @@
 
 import Foundation
 import RxSwift
-//import RxCocoa
 
 final class PostViewModel {
     let categorySelected = BehaviorSubject<String?>(value: nil)
     let titleTextChanged = PublishSubject<String>()
-    let descriptionTextChanged = PublishSubject<String>()
+    let contentTextChanged = PublishSubject<String>()
     
     var isCompleteButtonEnabled: Observable<Bool>
     private var postModel: [PostModel] = []
     private var selectedCategory: String?
     private var titleText: String = ""
-    private var descriptionText: String = ""
+    private var contentText: String = ""
     
     let disposeBag = DisposeBag()
     
     init() {
-       isCompleteButtonEnabled = Observable
+        isCompleteButtonEnabled = Observable
             .combineLatest(titleTextChanged.startWith(""),
-                           descriptionTextChanged.startWith(""),
+                           contentTextChanged.startWith(""),
                            categorySelected.startWith(nil))
             .map { title, description, category in
                 return !title.isEmpty && !description.isEmpty && category != nil
@@ -37,10 +36,10 @@ final class PostViewModel {
                 self?.titleText = title
             }
             .disposed(by: disposeBag)
-       
-        descriptionTextChanged
+        
+        contentTextChanged
             .subscribe { [weak self] description in
-                self?.descriptionText = description
+                self?.contentText = description
             }
             .disposed(by: disposeBag)
         
@@ -49,11 +48,10 @@ final class PostViewModel {
                 self?.selectedCategory = category
             }
             .disposed(by: disposeBag)
-        
     }
     
     func updatePostModel() {
-        let newPost = PostModel(category: selectedCategory ?? "", title: titleText, description: descriptionText)
+        let newPost = PostModel(title: titleText, content: contentText, type: selectedCategory ?? "", image: [URL(string: "https://dispatch.cdnser.be/cms-content/uploads/2020/04/09/a26f4b7b-9769-49dd-aed3-b7067fbc5a8c.jpg")!])
         postModel.append(newPost)
     }
 }

@@ -127,7 +127,7 @@ extension PostViewController: UITableViewDataSource {
                                                            for: indexPath) as? DescriptionCell else { return UITableViewCell() }
             cell.textChanged
                 .subscribe { [weak self] newDescription in
-                    self?.viewModel.descriptionTextChanged.onNext(newDescription)
+                    self?.viewModel.contentTextChanged.onNext(newDescription)
                 }
                 .disposed(by: disposeBag)
             return cell
