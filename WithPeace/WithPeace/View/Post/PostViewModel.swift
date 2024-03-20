@@ -15,6 +15,7 @@ final class PostViewModel {
     let descriptionTextChanged = PublishSubject<String>()
     
     var isCompleteButtonEnabled: Observable<Bool>
+    private var postModel: [PostModel] = []
     private var selectedCategory: String?
     private var titleText: String = ""
     private var descriptionText: String = ""
@@ -49,5 +50,10 @@ final class PostViewModel {
             }
             .disposed(by: disposeBag)
         
+    }
+    
+    func updatePostModel() {
+        let newPost = PostModel(category: selectedCategory ?? "", title: titleText, description: descriptionText)
+        postModel.append(newPost)
     }
 }

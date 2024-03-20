@@ -166,6 +166,7 @@ extension PostViewController {
     
     private func didTapComplete() {
         customNavigationBarView.onCompleteButtonTapped = { [weak self] in
+            self?.viewModel.updatePostModel()
             self?.dismiss(animated: true)
             print("게시글등록")
         }
