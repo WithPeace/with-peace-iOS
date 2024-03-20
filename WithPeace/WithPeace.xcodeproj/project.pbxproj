@@ -237,9 +237,9 @@
 		F68719B42BA86AAF0049B182 /* CustomPhotoPicker */ = {
 			isa = PBXGroup;
 			children = (
-				F60B844A2BAA9D5E0010565B /* CustomPhotoAlbumDetailView */,
 				F68719B02BA8635C0049B182 /* CustomPhotoAlbumViewController.swift */,
 				F68719B52BA8707D0049B182 /* CustomAlbumCell.swift */,
+				F60B844A2BAA9D5E0010565B /* CustomPhotoAlbumDetailView */,
 				F68719B22BA867FE0049B182 /* UICollectionViewLayout+.swift */,
 			);
 			path = CustomPhotoPicker;

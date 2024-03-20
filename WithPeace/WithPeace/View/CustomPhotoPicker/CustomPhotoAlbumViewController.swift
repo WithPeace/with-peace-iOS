@@ -10,19 +10,34 @@ import Photos
 
 final class CustomPhotoAlbumViewController: UIViewController {
     
-    // 넘겨주고 받을 것
-    var completionHandler: (([PHAsset]) -> ())?
+    var completionHandlerChangePHAssetsToDatas: (([PHAsset]) -> ())?
+    
     private var maxSelect: Int
     private var selectedAssets = [PHAsset]()
-    
     private var smartAlbums = PHFetchResult<PHAssetCollection>()
     private var userCollections = PHFetchResult<PHAssetCollection>()
     private var dataSource: UICollectionViewDiffableDataSource<LayoutSection, PHCollection>?
     
-    private var collectionView: UICollectionView = {
-        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: .defaultLayout)
+    private let backButton: UIButton = {
+        let button = UIButton()
         
-        collectionView.translatesAutoresizingMaskIntoConstraints = false
+        button.setImage(UIImage(systemName: "chevron.backward"), for: .normal)
+        button.tintColor = .black
+        
+        return button
+    }()
+    
+    private let titleLabel: UILabel = {
+        let label = UILabel()
+        
+        label.text = "사진첩"
+        label.font = .preferredFont(forTextStyle: .title3)
+        
+        return label
+    }()
+    
+    private let collectionView: UICollectionView = {
+        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: .defaultLayout)
         
         return collectionView
     }()
@@ -30,13 +45,16 @@ final class CustomPhotoAlbumViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        view.backgroundColor = .systemBackground
         collectionView.delegate = self
         
+        registTarget()
         configureLayout()
         registeCollectionViewCell()
         configureDataSource()
         configureDataSourceSnapshot()
     }
+    
     init(maxSelect: Int) {
         self.maxSelect = maxSelect
         super.init(nibName: nil, bundle: nil)
@@ -59,7 +77,7 @@ extension CustomPhotoAlbumViewController {
     }
     
     private func configureDataSource() {
-        dataSource = UICollectionViewDiffableDataSource<LayoutSection, PHCollection>(collectionView: collectionView) { collectionView, indexPath, identifier in
+        dataSource = UICollectionViewDiffableDataSource<LayoutSection, PHCollection>(collectionView: collectionView) { [weak self] collectionView, indexPath, identifier in
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CustomAlbumCell.identifier,
                                                                 for: indexPath) as? CustomAlbumCell else {
                 return UICollectionViewCell()
@@ -69,7 +87,8 @@ extension CustomPhotoAlbumViewController {
                 return UICollectionViewCell()
             }
             
-            let targetSize = self.view.frame.width
+            guard let targetSize = self?.view.frame.width else { return UICollectionViewCell() }
+            
             if let asset = PHAsset.fetchAssets(in: assetCollection, options: nil).firstObject {
                 PHImageManager.default().requestImage(for: asset,
                                                       targetSize: CGSize(width: targetSize,
@@ -146,9 +165,16 @@ extension CustomPhotoAlbumViewController: UICollectionViewDelegate {
         let customDetailViewController = CustomPhotoAlbumDetailViewController(totalPhotoCount: maxSelect,
                                                                               albumCollection: snapshot[indexPath.row],
                                                                               selectedAssets: selectedAssets)
-        self.navigationController?.pushViewController(customDetailViewController ,animated: true)
-        customDetailViewController.completionHandler = { [weak self] in
+        customDetailViewController.modalPresentationStyle = .fullScreen
+        self.present(customDetailViewController, animated: true)
+        
+        customDetailViewController.backButtonCompletionHandler = { [weak self] in
             self?.selectedAssets = $0
+        }
+        
+        customDetailViewController.completeCompletionHandler = { [weak self] in
+            self?.completionHandlerChangePHAssetsToDatas?($0)
+            self?.dismiss(animated: true)
         }
     }
 }
@@ -157,15 +183,45 @@ extension CustomPhotoAlbumViewController: UICollectionViewDelegate {
 extension CustomPhotoAlbumViewController {
     
     private func configureLayout() {
-        view.addSubview(collectionView)
         
         let safeArea = view.safeAreaLayoutGuide
         
+        [backButton, titleLabel, collectionView].forEach {
+            $0.translatesAutoresizingMaskIntoConstraints = false
+            view.addSubview($0)
+        }
+        
         NSLayoutConstraint.activate([
-            collectionView.topAnchor.constraint(equalTo: safeArea.topAnchor),
+            backButton.topAnchor.constraint(equalTo: safeArea.topAnchor),
+            backButton.leadingAnchor.constraint(equalTo: safeArea.leadingAnchor, constant: 16),
+            
+            titleLabel.topAnchor.constraint(equalTo: backButton.topAnchor),
+            titleLabel.leadingAnchor.constraint(equalTo: backButton.trailingAnchor, constant: 24),
+            
+            backButton.heightAnchor.constraint(equalToConstant: 56),
+            titleLabel.centerYAnchor.constraint(equalTo: backButton.centerYAnchor)
+        ])
+        
+        NSLayoutConstraint.activate([
+            collectionView.topAnchor.constraint(equalTo: backButton.bottomAnchor),
             collectionView.leadingAnchor.constraint(equalTo: safeArea.leadingAnchor),
             collectionView.trailingAnchor.constraint(equalTo: safeArea.trailingAnchor),
             collectionView.bottomAnchor.constraint(equalTo: safeArea.bottomAnchor)
         ])
+    }
+}
+
+//MARK: Target Method
+extension CustomPhotoAlbumViewController {
+    
+    private func registTarget() {
+        backButton.addTarget(self, action: #selector(tabBackButton), for: .touchUpInside)
+    }
+    
+    @objc
+    private func tabBackButton() {
+        dismiss(animated: true) {
+            self.completionHandlerChangePHAssetsToDatas?(self.selectedAssets)
+        }
     }
 }
