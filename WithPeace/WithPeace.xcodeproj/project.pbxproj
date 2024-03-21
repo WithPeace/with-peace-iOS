@@ -23,6 +23,8 @@
 		63C52F9B2BA9B80D0072DE18 /* PostModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63C52F9A2BA9B80D0072DE18 /* PostModel.swift */; };
 		63C52F9D2BA9B83F0072DE18 /* PostViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63C52F9C2BA9B83F0072DE18 /* PostViewModel.swift */; };
 		F65E1ECF2BAC086D00326EF7 /* LoginNickNameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F65E1ECE2BAC086D00326EF7 /* LoginNickNameViewController.swift */; };
+		F667FD882BAC2287005AAAB7 /* CustomPhotoAlbumDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F667FD862BAC2287005AAAB7 /* CustomPhotoAlbumDetailViewController.swift */; };
+		F667FD892BAC2287005AAAB7 /* AlbumDetailCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F667FD872BAC2287005AAAB7 /* AlbumDetailCell.swift */; };
 		F66C98222BA1F5AD001E121C /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F66C98212BA1F5AD001E121C /* MainTabBarController.swift */; };
 		F671A9B92BA00C28002808DA /* Secrets.plist in Resources */ = {isa = PBXBuildFile; fileRef = F671A9B82BA00C28002808DA /* Secrets.plist */; };
 		F671A9BB2BA00D4A002808DA /* Bundle+.swift in Sources */ = {isa = PBXBuildFile; fileRef = F671A9BA2BA00D4A002808DA /* Bundle+.swift */; };
@@ -90,6 +92,8 @@
 		63C52F9A2BA9B80D0072DE18 /* PostModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostModel.swift; sourceTree = "<group>"; };
 		63C52F9C2BA9B83F0072DE18 /* PostViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostViewModel.swift; sourceTree = "<group>"; };
 		F65E1ECE2BAC086D00326EF7 /* LoginNickNameViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginNickNameViewController.swift; sourceTree = "<group>"; };
+		F667FD862BAC2287005AAAB7 /* CustomPhotoAlbumDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomPhotoAlbumDetailViewController.swift; sourceTree = "<group>"; };
+		F667FD872BAC2287005AAAB7 /* AlbumDetailCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlbumDetailCell.swift; sourceTree = "<group>"; };
 		F66C98212BA1F5AD001E121C /* MainTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarController.swift; sourceTree = "<group>"; };
 		F671A9B82BA00C28002808DA /* Secrets.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Secrets.plist; path = ../Secrets.plist; sourceTree = "<group>"; };
 		F671A9BA2BA00D4A002808DA /* Bundle+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Bundle+.swift"; sourceTree = "<group>"; };
@@ -186,6 +190,15 @@
 			path = Cell;
 			sourceTree = "<group>";
 		};
+		F667FD852BAC2287005AAAB7 /* CustomPhotoAlbumDetailView */ = {
+			isa = PBXGroup;
+			children = (
+				F667FD862BAC2287005AAAB7 /* CustomPhotoAlbumDetailViewController.swift */,
+				F667FD872BAC2287005AAAB7 /* AlbumDetailCell.swift */,
+			);
+			path = CustomPhotoAlbumDetailView;
+			sourceTree = "<group>";
+		};
 		F671A9BC2BA00D71002808DA /* Extension */ = {
 			isa = PBXGroup;
 			children = (
@@ -269,9 +282,9 @@
 		F68719B42BA86AAF0049B182 /* CustomPhotoPicker */ = {
 			isa = PBXGroup;
 			children = (
+				F667FD852BAC2287005AAAB7 /* CustomPhotoAlbumDetailView */,
 				F68719B02BA8635C0049B182 /* CustomPhotoAlbumViewController.swift */,
 				F68719B52BA8707D0049B182 /* CustomAlbumCell.swift */,
-				F60B844A2BAA9D5E0010565B /* CustomPhotoAlbumDetailView */,
 				F68719B22BA867FE0049B182 /* UICollectionViewLayout+.swift */,
 			);
 			path = CustomPhotoPicker;
@@ -554,6 +567,7 @@
 				F671A9BB2BA00D4A002808DA /* Bundle+.swift in Sources */,
 				F68C9D1E2BA2DE93008CB7E4 /* ForumViewController.swift in Sources */,
 				F65E1ECF2BAC086D00326EF7 /* LoginNickNameViewController.swift in Sources */,
+				F667FD892BAC2287005AAAB7 /* AlbumDetailCell.swift in Sources */,
 				63C52F992BA97FB40072DE18 /* CategorySelectViewController.swift in Sources */,
 				F69B800B2B996846002675CE /* ViewController.swift in Sources */,
 				F68C9D292BA2FFA0008CB7E4 /* LoginNickNameViewModel.swift in Sources */,
@@ -576,12 +590,12 @@
 				63C52F9B2BA9B80D0072DE18 /* PostModel.swift in Sources */,
 				F66C98222BA1F5AD001E121C /* MainTabBarController.swift in Sources */,
 				F671A9C82BA0173E002808DA /* HTTPMethod.swift in Sources */,
+				F667FD882BAC2287005AAAB7 /* CustomPhotoAlbumDetailViewController.swift in Sources */,
 				635BCBB02BA80C7300F0DCBC /* PostNavigationBarView.swift in Sources */,
 				635BCBB52BA952C600F0DCBC /* TitleCell.swift in Sources */,
 				F68C9D222BA2DEAD008CB7E4 /* MyPageViewController.swift in Sources */,
 				F671A9CA2BA0174E002808DA /* NetworkError.swift in Sources */,
 				630EA20F2BA0277800F04ED3 /* SignRepository.swift in Sources */,
-				F60B844C2BAA9D730010565B /* CustomPhotoAlbumDetailViewController.swift in Sources */,
 				63C52F972BA962590072DE18 /* PostPhotoView.swift in Sources */,
 				630EA2002BA0039300F04ED3 /* GoogleSignError.swift in Sources */,
 				6377F69D2BA06324006CAB26 /* SignRepositoryError.swift in Sources */,
