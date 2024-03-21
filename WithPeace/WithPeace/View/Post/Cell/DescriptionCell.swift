@@ -14,6 +14,8 @@ final class DescriptionCell: UITableViewCell, UITextViewDelegate {
         textView.translatesAutoresizingMaskIntoConstraints = false
         textView.delegate = self
         textView.font = UIFont.systemFont(ofSize: 16)
+        textView.textContainerInset = UIEdgeInsets(top: 2, left: 0, bottom: 4, right: 0)
+        textView.textContainer.lineFragmentPadding = 0
         
         return textView
     }()
@@ -42,8 +44,6 @@ final class DescriptionCell: UITableViewCell, UITextViewDelegate {
         contentView.addSubview(descriptionTextView)
         descriptionTextView.addSubview(placeholderLabel)
         
-        descriptionTextView.textContainerInset = UIEdgeInsets(top: 2, left: 0, bottom: 4, right: 0)
-        descriptionTextView.textContainer.lineFragmentPadding = 0
         NSLayoutConstraint.activate([
             descriptionTextView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 16),
             descriptionTextView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 24),

@@ -8,13 +8,25 @@
 import UIKit
 import RxSwift
 
-final class TitleCell: UITableViewCell {
-    private let titleTextField: UITextField = {
-        let textField = UITextField()
-        textField.translatesAutoresizingMaskIntoConstraints = false
-        textField.placeholder = "제목을 입력하세요"
-        
-        return textField
+final class TitleCell: UITableViewCell, UITextViewDelegate {
+    private lazy var titleTextView: UITextView = {
+        let textView = UITextView()
+        textView.translatesAutoresizingMaskIntoConstraints = false
+        textView.delegate = self
+        textView.font = UIFont.systemFont(ofSize: 18)
+        textView.isScrollEnabled = false
+        textView.textContainerInset = UIEdgeInsets(top: 8, left: 0, bottom: 8, right: 4)
+        textView.textContainer.lineFragmentPadding = 0
+        return textView
+    }()
+    
+    private let placeholderLabel: UILabel = {
+        let label = UILabel()
+        label.text = "제목을 입력하세요"
+        label.textColor = .lightGray
+        label.font = UIFont.systemFont(ofSize: 18)
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
     }()
     
     var textChanged: PublishSubject<String> = PublishSubject()
@@ -22,7 +34,6 @@ final class TitleCell: UITableViewCell {
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         setupTitleCell()
-        titleTextField.addTarget(self, action: #selector(textFieldDidChange(_:)), for: .editingChanged)
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -30,15 +41,65 @@ final class TitleCell: UITableViewCell {
     }
     
     private func setupTitleCell() {
-        contentView.addSubview(titleTextField)
+        contentView.addSubview(titleTextView)
+        titleTextView.addSubview(placeholderLabel)
         
         NSLayoutConstraint.activate([
-            titleTextField.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 24),
-            titleTextField.centerYAnchor.constraint(equalTo: centerYAnchor)
+            titleTextView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 24),
+            titleTextView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -24),
+            titleTextView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 8),
+            titleTextView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -4),
+            
+            placeholderLabel.leadingAnchor.constraint(equalTo: titleTextView.leadingAnchor),
+            placeholderLabel.trailingAnchor.constraint(equalTo: titleTextView.trailingAnchor, constant: -4),
+            placeholderLabel.centerYAnchor.constraint(equalTo: titleTextView.centerYAnchor)
         ])
+        
+        updatePlaceholderVisibility()
     }
      
-    @objc func textFieldDidChange(_ textField: UITextField) {
-        textChanged.onNext(textField.text ?? "")
+    func textViewDidChange(_ textView: UITextView) {
+        textChanged.onNext(textView.text)
+        updatePlaceholderVisibility()
+    }
+    
+    private func updatePlaceholderVisibility() {
+        placeholderLabel.isHidden = !titleTextView.text.isEmpty
+    }
+    
+    deinit {
+        NotificationCenter.default.removeObserver(self)
+    }
+}
+
+//MARK: KeyboardAction
+extension TitleCell {
+    
+    private func setupNotification() {
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(keyboardWillShow),
+                                               name: UIResponder.keyboardWillShowNotification,
+                                               object: nil
+        )
+        
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(keyboardWillHide),
+                                               name: UIResponder.keyboardWillHideNotification,
+                                               object: nil
+        )
+    }
+    
+    @objc private func keyboardWillShow(_ notification: Notification) {
+        guard let keyboardFrame = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey]
+                as? CGRect else { return }
+        
+        let keyboardHeight = keyboardFrame.size.height
+        titleTextView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: keyboardFrame.size.height, right: 0)
+        titleTextView.scrollIndicatorInsets = titleTextView.contentInset
+    }
+    
+    @objc private func keyboardWillHide(_ notification: Notification) {
+        titleTextView.contentInset = .zero
+        titleTextView.scrollIndicatorInsets = .zero
     }
 }
