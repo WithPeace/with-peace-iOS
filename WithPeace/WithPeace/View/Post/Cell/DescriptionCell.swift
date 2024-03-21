@@ -95,7 +95,7 @@ extension DescriptionCell {
                 as? CGRect else { return }
         
         let keyboardHeight = keyboardFrame.size.height
-        descriptionTextView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: keyboardFrame.size.height, right: 0)
+        descriptionTextView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: keyboardHeight, right: 0)
         descriptionTextView.scrollIndicatorInsets = descriptionTextView.contentInset
     }
     

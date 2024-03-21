@@ -181,7 +181,7 @@ extension PostViewController {
     }
     
     private func didTapPhoto() {
-        photoView.onPhotoButtonTapped = { [weak self] in
+        photoView.onPhotoButtonTapped = {
             print("사진")
         }
     }
