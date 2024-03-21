@@ -44,6 +44,24 @@ final class AlbumDetailCell: UICollectionViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
+    func setup(image: UIImage) {
+        self.albumImageView.image = image
+    }
+    
+    func selectCell() {
+        maskedCellView.isHidden = false
+        albumImageView.alpha = 0.5
+    }
+    
+    func deselectCell() {
+        maskedCellView.isHidden = true
+        albumImageView.alpha = 1
+    }
+}
+
+//MARK: Layout
+extension AlbumDetailCell {
+    
     private func configureLayout() {
         
         [albumImageView, maskedCellView].forEach {
@@ -62,19 +80,5 @@ final class AlbumDetailCell: UICollectionViewCell {
             maskedCellView.centerXAnchor.constraint(equalTo: albumImageView.centerXAnchor),
             maskedCellView.centerYAnchor.constraint(equalTo: albumImageView.centerYAnchor)
         ])
-    }
-    
-    func setup(image: UIImage) {
-        self.albumImageView.image = image
-    }
-    
-    func selectCell() {
-        maskedCellView.isHidden = false
-        albumImageView.alpha = 0.5
-    }
-    
-    func deselectCell() {
-        maskedCellView.isHidden = true
-        albumImageView.alpha = 1
     }
 }
