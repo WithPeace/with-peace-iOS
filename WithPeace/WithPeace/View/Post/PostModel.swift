@@ -11,5 +11,5 @@ struct PostModel {
     var title: String
     var content: String
     var type: String
-    var image: [URL]
+    var imageData: [Data]
 }

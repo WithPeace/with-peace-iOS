@@ -114,6 +114,10 @@ final class CategorySelectViewController: UIViewController {
         
         dismiss(animated: true)
     }
+    
+    deinit {
+        print("CategorySelectViewController Deinit")
+    }
 }
 
 //TODO: CustomModalView

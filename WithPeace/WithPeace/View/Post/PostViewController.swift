@@ -89,6 +89,10 @@ final class PostViewController: UIViewController {
         tableView.register(TitleCell.self, forCellReuseIdentifier: "TitleCell")
         tableView.register(DescriptionCell.self, forCellReuseIdentifier: "DescriptionCell")
     }
+    
+    deinit {
+        print("PostViewController Deinit")
+    }
 }
 
 extension PostViewController: UITableViewDataSource {

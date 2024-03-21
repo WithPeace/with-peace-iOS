@@ -51,7 +51,7 @@ final class PostViewModel {
     }
     
     func updatePostModel() {
-        let newPost = PostModel(title: titleText, content: contentText, type: selectedCategory ?? "", image: [URL(string: "https://dispatch.cdnser.be/cms-content/uploads/2020/04/09/a26f4b7b-9769-49dd-aed3-b7067fbc5a8c.jpg")!])
+        let newPost = PostModel(title: titleText, content: contentText, type: selectedCategory ?? "", imageData: [])
         postModel.append(newPost)
     }
 }
