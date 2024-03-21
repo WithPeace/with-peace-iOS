@@ -7,6 +7,7 @@
 
 import UIKit
 import RxSwift
+import Photos
 
 class LoginNickNameViewController: UIViewController {
     
@@ -26,7 +27,10 @@ class LoginNickNameViewController: UIViewController {
     
     private let profileImageView: UIImageView = {
         let imageView = UIImageView()
+        
         #warning("Profile default Image Change")
+        imageView.clipsToBounds = true
+        imageView.layer.cornerRadius = 60
         imageView.image = UIImage(named: Const.Logo.MainLogo.withpeaceLogo)
         
         return imageView
@@ -110,6 +114,14 @@ class LoginNickNameViewController: UIViewController {
                 self?.registButton.isEnabled = $0
             }
             .disposed(by: disposeBag)
+        
+        viewModel.profileImage
+            .subscribe { [weak self] data in
+                guard let data = data else { return }
+                
+                self?.profileImageView.image = UIImage(data: data)
+            }
+            .disposed(by: disposeBag)
     }
     
     private func configureUI(isSuccess: Bool) {
@@ -134,6 +146,27 @@ extension LoginNickNameViewController {
     private func configureTargetAction() {
         registButton.addTarget(self, action: #selector(tapRegistButton), for: .touchUpInside)
         nicknameTextField.addTarget(self, action: #selector(textFieldDidChange), for: .editingChanged)
+        
+        let gesture = UITapGestureRecognizer(target: self, action: #selector(tapImage))
+        profileImageView.addGestureRecognizer(gesture)
+        profileImageView.isUserInteractionEnabled = true
+    }
+    
+    @objc
+    private func tapImage() {
+        let customPhotoAlbumViewController = CustomPhotoAlbumViewController(maxSelect: 1)
+        customPhotoAlbumViewController.modalPresentationStyle = .fullScreen
+        
+        self.present(customPhotoAlbumViewController, animated: true)
+        
+        //TODO: 이미지 변환할 때 까지 Button 비활성화 (비동기에 의한 데이터 변환 딜레이 대비)
+        customPhotoAlbumViewController.completionHandlerChangePHAssetsToDatas = { [weak self] in
+            guard let asset = $0.first else { return }
+            
+            PHImageManager().requestImageDataAndOrientation(for: asset, options: nil) { data, _, _, _ in
+                self?.viewModel.profileImageData.onNext(data)
+            }
+        }
     }
 }
 

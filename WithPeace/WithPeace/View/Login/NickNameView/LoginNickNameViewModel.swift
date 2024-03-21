@@ -12,17 +12,17 @@ final class LoginNickNameViewModel {
     
     //INPUT
     var nicknameField: BehaviorSubject<String?>
-    var profileImage: BehaviorSubject<Data>?
+    var profileImageData: PublishSubject<Data?>
     
     //OUTPUT
     var isNicknameValid: Observable<Bool> //닉네임이 유효한지?
-//    var isNicknameDuplicated: Observable<Bool>
+//    var isNicknameDuplicated: Observable<Bool>?
+    
+    var profileImage: Observable<Data?>
     
     init() {
-        let nicknameField = BehaviorSubject<String?>(value: "")
         
-        self.nicknameField = nicknameField
-        
+        self.nicknameField = BehaviorSubject<String?>(value: "")
         self.isNicknameValid = self.nicknameField
             .map { nickname in
                 guard let nickname = nickname else { return false }
@@ -38,8 +38,15 @@ final class LoginNickNameViewModel {
                 return true
             }
         
-        // 중복은 isnicknameValid 스트림에서 true일 때 가져옴
-//        self.isNicknameDuplicated
+        self.profileImageData = PublishSubject<Data?>()
+        self.profileImage = profileImageData
+            .map { data in
+                if let data = data {
+                    return data
+                }
+                
+                return nil
+            }
     }
 }
 
@@ -56,3 +63,4 @@ extension String {
         return false
     }
 }
+
