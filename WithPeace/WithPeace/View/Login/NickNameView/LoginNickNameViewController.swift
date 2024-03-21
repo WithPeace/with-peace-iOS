@@ -13,15 +13,25 @@ class LoginNickNameViewController: UIViewController {
     private let viewModel = LoginNickNameViewModel()
     private let disposeBag = DisposeBag()
     private let bottomLayer = CALayer()
+    private var toastMessage: ToastMessageView?
     
     private let titleLabel: UILabel = {
         let label = UILabel()
         
-        label.text = "사용할 닉네임을 정해주세요!"
+        label.text = "프로필을 설정해주세요!"
         label.font = .preferredFont(forTextStyle: .title3)
         
         return label
     }()  
+    
+    private let profileImageView: UIImageView = {
+        let imageView = UIImageView()
+        #warning("Profile default Image Change")
+        imageView.image = UIImage(named: Const.Logo.MainLogo.withpeaceLogo)
+        
+        return imageView
+    }()
+    
     
     private let bodyLabel: UILabel = {
         let label = UILabel()
@@ -42,22 +52,33 @@ class LoginNickNameViewController: UIViewController {
         return textField
     }()
     
-    private let logoImageView: UIImageView = {
-        let imageView = UIImageView()
+    private let errorLabel: UILabel = {
+        let label = UILabel()
         
-        imageView.image = UIImage(named: Const.Logo.MainLogo.withpeaceLogo)
+        label.textColor = .red
+        label.font = .preferredFont(forTextStyle: .caption1)
         
-        return imageView
+        return label
     }()
     
     private let registButton: UIButton = {
         let button = UIButton()
-        
+       
+        button.backgroundColor = UIColor(named: Const.CustomColor.BrandColor2.mainPurple)
         button.setTitle("가입 완료", for: .normal)
         button.layer.cornerRadius = 9
         
         return button
     }()
+    
+    init() {
+        super.init(nibName: nil, bundle: nil)
+        self.toastMessage = ToastMessageView(superView: self.view)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -73,22 +94,27 @@ class LoginNickNameViewController: UIViewController {
         super.viewDidLayoutSubviews()
         
         bottomLayer.removeFromSuperlayer()
-        bottomLayer.backgroundColor = UIColor.black.cgColor
-        bottomLayer.frame = CGRect(x: 0, y: nicknameTextField.frame.size.height - 1, width: nicknameTextField.frame.width, height: 1)
+        
+        bottomLayer.frame = CGRect(x: 0, y: nicknameTextField.frame.size.height + 4, width: nicknameTextField.frame.width, height: 1)
         nicknameTextField.layer.addSublayer(bottomLayer)
+    }
+    
+    deinit {
+        debugPrint("DEINIT - LoginNickNameViewController")
     }
     
     private func bind() {
         viewModel.isNicknameValid
-            .subscribe {
-                if $0 {
-                    self.registButton.backgroundColor = UIColor(named: Const.CustomColor.BrandColor2.mainPurple)
-                } else {
-                    self.registButton.backgroundColor = UIColor(named: Const.CustomColor.SystemColor.gray2)
-                }
-                self.registButton.isEnabled = $0
+            .subscribe { [weak self] in
+                self?.configureUI(isSuccess: $0)
+                self?.registButton.isEnabled = $0
             }
             .disposed(by: disposeBag)
+    }
+    
+    private func configureUI(isSuccess: Bool) {
+        self.bottomLayer.backgroundColor = isSuccess ? UIColor.black.cgColor : UIColor.red.cgColor
+        self.errorLabel.text = isSuccess ? "" : "닉네임은 2~10자의 한글, 영문만 가능합니다."
     }
 }
 
@@ -116,7 +142,7 @@ extension LoginNickNameViewController {
     
     private func configureLayout() {
         
-        [titleLabel, bodyLabel, nicknameTextField, logoImageView, registButton].forEach {
+        [titleLabel, profileImageView, bodyLabel, nicknameTextField, errorLabel, registButton].forEach {
             $0.translatesAutoresizingMaskIntoConstraints = false
             view.addSubview($0)
         }
@@ -125,20 +151,23 @@ extension LoginNickNameViewController {
         
         NSLayoutConstraint.activate([
             titleLabel.centerXAnchor.constraint(equalTo: safe.centerXAnchor),
+            profileImageView.centerXAnchor.constraint(equalTo: safe.centerXAnchor),
             bodyLabel.centerXAnchor.constraint(equalTo: safe.centerXAnchor),
             nicknameTextField.centerXAnchor.constraint(equalTo: safe.centerXAnchor),
-            logoImageView.centerXAnchor.constraint(equalTo: safe.centerXAnchor),
+            errorLabel.centerXAnchor.constraint(equalTo: safe.centerXAnchor),
             registButton.centerXAnchor.constraint(equalTo: safe.centerXAnchor),
             
             titleLabel.topAnchor.constraint(equalTo: safe.topAnchor, constant: 121),
             
-            bodyLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 20),
+            profileImageView.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 24),
+            profileImageView.heightAnchor.constraint(equalToConstant: 120),
+            profileImageView.widthAnchor.constraint(equalToConstant: 120),
             
-            nicknameTextField.topAnchor.constraint(equalTo: bodyLabel.bottomAnchor, constant: 20),
-                                                   
-            logoImageView.topAnchor.constraint(equalTo: nicknameTextField.bottomAnchor, constant: 77),
-            logoImageView.heightAnchor.constraint(equalToConstant: 150),
-            logoImageView.widthAnchor.constraint(equalToConstant: 150),
+            bodyLabel.topAnchor.constraint(equalTo: profileImageView.bottomAnchor, constant: 24),
+            
+            nicknameTextField.topAnchor.constraint(equalTo: bodyLabel.bottomAnchor, constant: 16),
+            
+            errorLabel.topAnchor.constraint(equalTo: nicknameTextField.bottomAnchor, constant: 4),
             
             registButton.heightAnchor.constraint(equalToConstant: 55),
             registButton.leadingAnchor.constraint(equalTo: safe.leadingAnchor, constant: 24),
