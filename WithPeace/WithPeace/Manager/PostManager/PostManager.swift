@@ -39,11 +39,10 @@ final class PostManager {
         body.append(convertFormField(name: "description", value: postModel.content, boundary: boundary))
         body.append(convertFormField(name: "category", value: postModel.type, boundary: boundary))
         
-        for imageUrl in postModel.image {
-            let imageData = try Data(contentsOf: imageUrl)
-            body.append(convertFileData(fieldName: "imageFiles[]",
-                                        fileName: imageUrl.lastPathComponent,
-                                        mimeType: "image/jpeg",
+        for imageData in postModel.imageData {
+            body.append(convertFileData(fieldName: "image_Files",
+                                        fileName: "image.png",
+                                        mimeType: "image/png",
                                         fileData: imageData,
                                         boundary: boundary))
         }
