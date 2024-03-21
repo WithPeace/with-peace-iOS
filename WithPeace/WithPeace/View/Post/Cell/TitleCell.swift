@@ -43,6 +43,7 @@ final class TitleCell: UITableViewCell, UITextViewDelegate {
     private func setupTitleCell() {
         contentView.addSubview(titleTextView)
         titleTextView.addSubview(placeholderLabel)
+        selectionStyle = .none
         
         NSLayoutConstraint.activate([
             titleTextView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 24),

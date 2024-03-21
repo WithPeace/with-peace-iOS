@@ -37,6 +37,7 @@ final class CategoryViewCell: UITableViewCell {
     private func setupCategoryCell() {
         contentView.addSubview(categoryLabel)
         contentView.addSubview(selectButton)
+        selectionStyle = .none
         
         NSLayoutConstraint.activate([
             categoryLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 24),

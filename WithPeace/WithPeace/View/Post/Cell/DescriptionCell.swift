@@ -43,6 +43,7 @@ final class DescriptionCell: UITableViewCell, UITextViewDelegate {
     private func setupTitleCell() {
         contentView.addSubview(descriptionTextView)
         descriptionTextView.addSubview(placeholderLabel)
+        selectionStyle = .none
         
         NSLayoutConstraint.activate([
             descriptionTextView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 16),
