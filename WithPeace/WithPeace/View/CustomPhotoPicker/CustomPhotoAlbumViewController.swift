@@ -10,34 +10,14 @@ import Photos
 
 final class CustomPhotoAlbumViewController: UIViewController {
     
-    var completionHandlerChangePHAssetsToDatas: (([PHAsset]) -> ())?
-    
-    private var maxSelect: Int
-    private var selectedAssets = [PHAsset]()
     private var smartAlbums = PHFetchResult<PHAssetCollection>()
     private var userCollections = PHFetchResult<PHAssetCollection>()
     private var dataSource: UICollectionViewDiffableDataSource<LayoutSection, PHCollection>?
     
-    private let backButton: UIButton = {
-        let button = UIButton()
-        
-        button.setImage(UIImage(systemName: "chevron.backward"), for: .normal)
-        button.tintColor = .black
-        
-        return button
-    }()
-    
-    private let titleLabel: UILabel = {
-        let label = UILabel()
-        
-        label.text = "사진첩"
-        label.font = .preferredFont(forTextStyle: .title3)
-        
-        return label
-    }()
-    
-    private let collectionView: UICollectionView = {
+    private var collectionView: UICollectionView = {
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: .defaultLayout)
+        
+        collectionView.translatesAutoresizingMaskIntoConstraints = false
         
         return collectionView
     }()
@@ -45,27 +25,12 @@ final class CustomPhotoAlbumViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        view.backgroundColor = .systemBackground
         collectionView.delegate = self
         
-        registTarget()
         configureLayout()
         registeCollectionViewCell()
         configureDataSource()
         configureDataSourceSnapshot()
-    }
-    
-    init(maxSelect: Int) {
-        self.maxSelect = maxSelect
-        super.init(nibName: nil, bundle: nil)
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
-    deinit {
-        debugPrint("DEINIT - CustomPhotoAlbumViewController")
     }
 }
 
@@ -77,7 +42,7 @@ extension CustomPhotoAlbumViewController {
     }
     
     private func configureDataSource() {
-        dataSource = UICollectionViewDiffableDataSource<LayoutSection, PHCollection>(collectionView: collectionView) { [weak self] collectionView, indexPath, identifier in
+        dataSource = UICollectionViewDiffableDataSource<LayoutSection, PHCollection>(collectionView: collectionView) { collectionView, indexPath, identifier in
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CustomAlbumCell.identifier,
                                                                 for: indexPath) as? CustomAlbumCell else {
                 return UICollectionViewCell()
@@ -87,8 +52,7 @@ extension CustomPhotoAlbumViewController {
                 return UICollectionViewCell()
             }
             
-            guard let targetSize = self?.view.frame.width else { return UICollectionViewCell() }
-            
+            let targetSize = self.view.frame.width
             if let asset = PHAsset.fetchAssets(in: assetCollection, options: nil).firstObject {
                 PHImageManager.default().requestImage(for: asset,
                                                       targetSize: CGSize(width: targetSize,
@@ -110,7 +74,7 @@ extension CustomPhotoAlbumViewController {
     
     private func configureDataSourceSnapshot() {
         var snapshot = NSDiffableDataSourceSnapshot<LayoutSection, PHCollection>()
-        snapshot.appendSections([.Album])
+        snapshot.appendSections([.defualt])
         
         //SMART ALBUMS
         smartAlbums = PHAssetCollection.fetchAssetCollections(
@@ -158,24 +122,8 @@ extension CustomPhotoAlbumViewController: UICollectionViewDelegate {
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         //TODO: Send PHCollection
-        guard let snapshot = dataSource?.snapshot().itemIdentifiers else {
-            fatalError()
-        }
+//        self.navigationController?.pushViewController(ViewController(), animated: true)
         
-        let customDetailViewController = CustomPhotoAlbumDetailViewController(totalPhotoCount: maxSelect,
-                                                                              albumCollection: snapshot[indexPath.row],
-                                                                              selectedAssets: selectedAssets)
-        customDetailViewController.modalPresentationStyle = .fullScreen
-        self.present(customDetailViewController, animated: true)
-        
-        customDetailViewController.backButtonCompletionHandler = { [weak self] in
-            self?.selectedAssets = $0
-        }
-        
-        customDetailViewController.completeCompletionHandler = { [weak self] in
-            self?.completionHandlerChangePHAssetsToDatas?($0)
-            self?.dismiss(animated: true)
-        }
     }
 }
 
@@ -183,45 +131,15 @@ extension CustomPhotoAlbumViewController: UICollectionViewDelegate {
 extension CustomPhotoAlbumViewController {
     
     private func configureLayout() {
+        view.addSubview(collectionView)
         
         let safeArea = view.safeAreaLayoutGuide
         
-        [backButton, titleLabel, collectionView].forEach {
-            $0.translatesAutoresizingMaskIntoConstraints = false
-            view.addSubview($0)
-        }
-        
         NSLayoutConstraint.activate([
-            backButton.topAnchor.constraint(equalTo: safeArea.topAnchor),
-            backButton.leadingAnchor.constraint(equalTo: safeArea.leadingAnchor, constant: 16),
-            
-            titleLabel.topAnchor.constraint(equalTo: backButton.topAnchor),
-            titleLabel.leadingAnchor.constraint(equalTo: backButton.trailingAnchor, constant: 24),
-            
-            backButton.heightAnchor.constraint(equalToConstant: 56),
-            titleLabel.centerYAnchor.constraint(equalTo: backButton.centerYAnchor)
-        ])
-        
-        NSLayoutConstraint.activate([
-            collectionView.topAnchor.constraint(equalTo: backButton.bottomAnchor),
+            collectionView.topAnchor.constraint(equalTo: safeArea.topAnchor),
             collectionView.leadingAnchor.constraint(equalTo: safeArea.leadingAnchor),
             collectionView.trailingAnchor.constraint(equalTo: safeArea.trailingAnchor),
             collectionView.bottomAnchor.constraint(equalTo: safeArea.bottomAnchor)
         ])
-    }
-}
-
-//MARK: Target Method
-extension CustomPhotoAlbumViewController {
-    
-    private func registTarget() {
-        backButton.addTarget(self, action: #selector(tabBackButton), for: .touchUpInside)
-    }
-    
-    @objc
-    private func tabBackButton() {
-        dismiss(animated: true) {
-            self.completionHandlerChangePHAssetsToDatas?(self.selectedAssets)
-        }
     }
 }
