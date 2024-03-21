@@ -95,7 +95,7 @@ extension TitleCell {
                 as? CGRect else { return }
         
         let keyboardHeight = keyboardFrame.size.height
-        titleTextView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: keyboardFrame.size.height, right: 0)
+        titleTextView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: keyboardHeight, right: 0)
         titleTextView.scrollIndicatorInsets = titleTextView.contentInset
     }
     
