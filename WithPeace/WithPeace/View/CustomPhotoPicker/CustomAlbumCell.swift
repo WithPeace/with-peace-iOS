@@ -14,20 +14,12 @@ final class CustomAlbumCell: UICollectionViewCell {
     private let albumImageView: UIImageView = {
         let imageView = UIImageView()
         
-        imageView.image = UIImage(named: Const.withpeaceLogo)
+        imageView.image = UIImage(named: Const.Logo.MainLogo.withpeaceLogo)
         imageView.clipsToBounds = true
         imageView.contentMode = .scaleAspectFill
         
         return imageView
     }()
-    
-//    private let masksView: UIView = {
-//        let view = UIView()
-//
-//
-//
-//        return view
-//    }()
     
     private let albumLabel: UILabel = {
         let label = UILabel()

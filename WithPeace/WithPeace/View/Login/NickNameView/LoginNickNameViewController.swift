@@ -45,7 +45,7 @@ class LoginNickNameViewController: UIViewController {
     private let logoImageView: UIImageView = {
         let imageView = UIImageView()
         
-        imageView.image = UIImage(named: Const.withpeaceLogo)
+        imageView.image = UIImage(named: Const.Logo.MainLogo.withpeaceLogo)
         
         return imageView
     }()
