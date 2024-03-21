@@ -12,12 +12,13 @@ final class MainTabbarController: UITabBarController {
     
     private let homeViewController = UIViewController()
     private let forumViewController = UIViewController()
-    private let registViewController = UIViewController()
+    private let registViewController = PostViewController()
     private let myPageViewController = UIViewController()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        self.delegate = self
         configureTabbarContents()
         configureTabbarAppearance()
     }
@@ -53,5 +54,17 @@ final class MainTabbarController: UITabBarController {
         tabbarAppearance.backgroundColor = .systemBackground
         tabBar.standardAppearance = tabbarAppearance
         tabBar.scrollEdgeAppearance = tabbarAppearance
+    }
+}
+
+extension MainTabbarController: UITabBarControllerDelegate {
+    func tabBarController(_ tabBarController: UITabBarController, didSelect viewController: UIViewController) {
+        if viewController is PostViewController {
+            let postVC = PostViewController()
+            postVC.hidesBottomBarWhenPushed = true
+            postVC.modalPresentationStyle = .fullScreen
+            self.present(postVC, animated: true, completion: nil)
+            self.selectedIndex = 0
+        }
     }
 }
