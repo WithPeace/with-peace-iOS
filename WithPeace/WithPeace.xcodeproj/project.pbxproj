@@ -271,6 +271,7 @@
 			children = (
 				F68719B02BA8635C0049B182 /* CustomPhotoAlbumViewController.swift */,
 				F68719B52BA8707D0049B182 /* CustomAlbumCell.swift */,
+				F60B844A2BAA9D5E0010565B /* CustomPhotoAlbumDetailView */,
 				F68719B22BA867FE0049B182 /* UICollectionViewLayout+.swift */,
 			);
 			path = CustomPhotoPicker;
@@ -580,6 +581,7 @@
 				F68C9D222BA2DEAD008CB7E4 /* MyPageViewController.swift in Sources */,
 				F671A9CA2BA0174E002808DA /* NetworkError.swift in Sources */,
 				630EA20F2BA0277800F04ED3 /* SignRepository.swift in Sources */,
+				F60B844C2BAA9D730010565B /* CustomPhotoAlbumDetailViewController.swift in Sources */,
 				63C52F972BA962590072DE18 /* PostPhotoView.swift in Sources */,
 				630EA2002BA0039300F04ED3 /* GoogleSignError.swift in Sources */,
 				6377F69D2BA06324006CAB26 /* SignRepositoryError.swift in Sources */,

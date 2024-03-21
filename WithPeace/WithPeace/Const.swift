@@ -76,6 +76,13 @@ extension Const {
             static let icCateQuestion = "ic-cate-question"
         }
         
+        struct ICCell {
+            private init() {}
+            
+            static let btnPictureDelete = "btn-picture-delete"
+            static let icPictureSelect = "ic-picture-select"
+        }
+        
         struct ICNavigationTabbar {
             private init() {}
             
