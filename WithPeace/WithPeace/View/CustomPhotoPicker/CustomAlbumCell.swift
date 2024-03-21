@@ -21,6 +21,14 @@ final class CustomAlbumCell: UICollectionViewCell {
         return imageView
     }()
     
+//    private let masksView: UIView = {
+//        let view = UIView()
+//
+//
+//
+//        return view
+//    }()
+    
     private let albumLabel: UILabel = {
         let label = UILabel()
         

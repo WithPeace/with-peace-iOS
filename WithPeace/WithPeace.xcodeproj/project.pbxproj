@@ -18,8 +18,6 @@
 		635BCBB52BA952C600F0DCBC /* TitleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 635BCBB42BA952C600F0DCBC /* TitleCell.swift */; };
 		635BCBB72BA952F000F0DCBC /* DescriptionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 635BCBB62BA952F000F0DCBC /* DescriptionCell.swift */; };
 		6377F69D2BA06324006CAB26 /* SignRepositoryError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6377F69C2BA06324006CAB26 /* SignRepositoryError.swift */; };
-		F60B844C2BAA9D730010565B /* CustomPhotoAlbumDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F60B844B2BAA9D720010565B /* CustomPhotoAlbumDetailViewController.swift */; };
-		F60B844E2BAA9E320010565B /* AlbumDetailCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F60B844D2BAA9E320010565B /* AlbumDetailCell.swift */; };
 		63C52F972BA962590072DE18 /* PostPhotoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63C52F962BA962590072DE18 /* PostPhotoView.swift */; };
 		63C52F992BA97FB40072DE18 /* CategorySelectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63C52F982BA97FB40072DE18 /* CategorySelectViewController.swift */; };
 		63C52F9B2BA9B80D0072DE18 /* PostModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63C52F9A2BA9B80D0072DE18 /* PostModel.swift */; };
@@ -87,8 +85,6 @@
 		635BCBB42BA952C600F0DCBC /* TitleCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleCell.swift; sourceTree = "<group>"; };
 		635BCBB62BA952F000F0DCBC /* DescriptionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DescriptionCell.swift; sourceTree = "<group>"; };
 		6377F69C2BA06324006CAB26 /* SignRepositoryError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignRepositoryError.swift; sourceTree = "<group>"; };
-		F60B844B2BAA9D720010565B /* CustomPhotoAlbumDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomPhotoAlbumDetailViewController.swift; sourceTree = "<group>"; };
-		F60B844D2BAA9E320010565B /* AlbumDetailCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlbumDetailCell.swift; sourceTree = "<group>"; };
 		63C52F962BA962590072DE18 /* PostPhotoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostPhotoView.swift; sourceTree = "<group>"; };
 		63C52F982BA97FB40072DE18 /* CategorySelectViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategorySelectViewController.swift; sourceTree = "<group>"; };
 		63C52F9A2BA9B80D0072DE18 /* PostModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostModel.swift; sourceTree = "<group>"; };
@@ -166,13 +162,6 @@
 			path = Error;
 			sourceTree = "<group>";
 		};
-		F60B844A2BAA9D5E0010565B /* CustomPhotoAlbumDetailView */ = {
-			isa = PBXGroup;
-			children = (
-				F60B844B2BAA9D720010565B /* CustomPhotoAlbumDetailViewController.swift */,
-				F60B844D2BAA9E320010565B /* AlbumDetailCell.swift */,
-			);
-			path = CustomPhotoAlbumDetailView;
 		635BCBAA2BA7E6FC00F0DCBC /* Post */ = {
 			isa = PBXGroup;
 			children = (
@@ -282,7 +271,6 @@
 			children = (
 				F68719B02BA8635C0049B182 /* CustomPhotoAlbumViewController.swift */,
 				F68719B52BA8707D0049B182 /* CustomAlbumCell.swift */,
-				F60B844A2BAA9D5E0010565B /* CustomPhotoAlbumDetailView */,
 				F68719B22BA867FE0049B182 /* UICollectionViewLayout+.swift */,
 			);
 			path = CustomPhotoPicker;
@@ -584,7 +572,6 @@
 				633F8E222B9AC37500B92ADC /* KeychainManager.swift in Sources */,
 				F68719B62BA8707D0049B182 /* CustomAlbumCell.swift in Sources */,
 				F68C9D202BA2DEA3008CB7E4 /* RegistForumViewController.swift in Sources */,
-				F60B844E2BAA9E320010565B /* AlbumDetailCell.swift in Sources */,
 				63C52F9B2BA9B80D0072DE18 /* PostModel.swift in Sources */,
 				F66C98222BA1F5AD001E121C /* MainTabBarController.swift in Sources */,
 				F671A9C82BA0173E002808DA /* HTTPMethod.swift in Sources */,
@@ -593,7 +580,6 @@
 				F68C9D222BA2DEAD008CB7E4 /* MyPageViewController.swift in Sources */,
 				F671A9CA2BA0174E002808DA /* NetworkError.swift in Sources */,
 				630EA20F2BA0277800F04ED3 /* SignRepository.swift in Sources */,
-				F60B844C2BAA9D730010565B /* CustomPhotoAlbumDetailViewController.swift in Sources */,
 				63C52F972BA962590072DE18 /* PostPhotoView.swift in Sources */,
 				630EA2002BA0039300F04ED3 /* GoogleSignError.swift in Sources */,
 				6377F69D2BA06324006CAB26 /* SignRepositoryError.swift in Sources */,
