@@ -7,8 +7,6 @@
 
 struct Const {
     private init() {}
-    
-    static let withpeaceLogo = "withpeace_Logo"
 }
 
 //MARK: - Color
@@ -88,6 +86,20 @@ extension Const {
             static let icMypageSelect = "ic-mypage-select"
             static let icMypage = "ic-mypage"
             static let icRegist = "ic-regist"
+        }
+    }
+}
+
+extension Const {
+    struct Logo {
+        private init() {}
+        
+        struct MainLogo {
+            private init() {}
+            
+            static let withpeaceLogo = "withpeace_Logo"
+            static let googleLogo = "google_Logo"
+            static let appleLogo = "apple_Logo"
         }
     }
 }
