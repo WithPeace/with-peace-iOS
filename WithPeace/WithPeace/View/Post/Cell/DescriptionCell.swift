@@ -34,6 +34,7 @@ final class DescriptionCell: UITableViewCell, UITextViewDelegate {
         collectionView.translatesAutoresizingMaskIntoConstraints = false
         collectionView.register(ImageCollectionViewCell.self, forCellWithReuseIdentifier: "ImageCell")
         collectionView.backgroundColor = .systemBackground
+        
         return collectionView
     }()
     
@@ -133,8 +134,8 @@ extension DescriptionCell {
         NSLayoutConstraint.activate([
             collectionView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 24),
             collectionView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
-            collectionView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -16),
-            collectionView.heightAnchor.constraint(equalToConstant: 120)
+            collectionView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
+            collectionView.heightAnchor.constraint(equalToConstant: 122)
         ])
         
         configureDataSource()
@@ -161,6 +162,9 @@ extension DescriptionCell {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ImageCell",
                                                           for: indexPath) as? ImageCollectionViewCell
             cell?.configure(image: item.image)
+            cell?.onDelete = {
+                self.removeImage(indexPath: indexPath)
+            }
             return cell
         }
         
@@ -184,6 +188,13 @@ extension DescriptionCell {
         snapshot.appendItems(currentItems, toSection: .main)
         dataSource.apply(snapshot, animatingDifferences: true)
     }
+    
+    func removeImage(indexPath: IndexPath) {
+        guard let item = dataSource.itemIdentifier(for: indexPath) else { return }
+        var snapshot = dataSource.snapshot()
+        snapshot.deleteItems([item])
+        dataSource.apply(snapshot, animatingDifferences: true)
+    }
 }
 
 final class ImageCollectionViewCell: UICollectionViewCell {
@@ -196,6 +207,17 @@ final class ImageCollectionViewCell: UICollectionViewCell {
         
         return image
     }()
+    
+    private lazy var deleteButton: UIButton = {
+        let button = UIButton(type: .system)
+        button.setImage(UIImage(named: "btn-picture-delete"), for: .normal)
+        button.addTarget(self, action: #selector(didTapDelete), for: .touchUpInside)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        
+        return button
+    }()
+    
+    var onDelete: (() -> Void)?
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -213,16 +235,26 @@ final class ImageCollectionViewCell: UICollectionViewCell {
     
     private func setupViews() {
         contentView.addSubview(imageView)
+        contentView.addSubview(deleteButton)
         
         NSLayoutConstraint.activate([
-            imageView.topAnchor.constraint(equalTo: contentView.topAnchor),
+            imageView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 4),
             imageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
             imageView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
-            imageView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor)
+            imageView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
+            
+            deleteButton.topAnchor.constraint(equalTo: contentView.topAnchor, constant: -2),
+            deleteButton.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: 8),
+            deleteButton.widthAnchor.constraint(equalToConstant: 24),
+            deleteButton.heightAnchor.constraint(equalToConstant: 24)
         ])
     }
     
     func configure(image: UIImage) {
         imageView.image = image
+    }
+    
+    @objc private func didTapDelete() {
+        onDelete?()
     }
 }
