@@ -28,12 +28,24 @@ final class DescriptionCell: UITableViewCell, UITextViewDelegate {
         return label
     }()
     
+    private lazy var collectionView: UICollectionView = {
+        let layout = createCompositionalLayout()
+        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
+        collectionView.translatesAutoresizingMaskIntoConstraints = false
+        collectionView.register(ImageCollectionViewCell.self, forCellWithReuseIdentifier: "ImageCell")
+        collectionView.backgroundColor = .systemBackground
+        return collectionView
+    }()
+    
+    private var dataSource: UICollectionViewDiffableDataSource<Section, Item>!
+    
     var textChanged: PublishSubject<String> = PublishSubject()
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         setupTitleCell()
         setupNotification()
+        setupCollectionView()
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -102,5 +114,115 @@ extension DescriptionCell {
     @objc private func keyboardWillHide(_ notification: Notification) {
         descriptionTextView.contentInset = .zero
         descriptionTextView.scrollIndicatorInsets = .zero
+    }
+}
+
+extension DescriptionCell {
+    enum Section {
+        case main
+    }
+    
+    struct Item: Hashable {
+        let uuid = UUID()
+        let image: UIImage
+    }
+    
+    private func setupCollectionView() {
+        contentView.addSubview(collectionView)
+        
+        NSLayoutConstraint.activate([
+            collectionView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 24),
+            collectionView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
+            collectionView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -16),
+            collectionView.heightAnchor.constraint(equalToConstant: 120)
+        ])
+        
+        configureDataSource()
+    }
+    
+    private func createCompositionalLayout() -> UICollectionViewLayout {
+        let itemSize = NSCollectionLayoutSize(widthDimension: .absolute(110), heightDimension: .absolute(110))
+        let item = NSCollectionLayoutItem(layoutSize: itemSize)
+        item.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 8)
+        
+        let groupSize = NSCollectionLayoutSize(widthDimension: .estimated(118), heightDimension: .absolute(110))
+        let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
+        
+        let section = NSCollectionLayoutSection(group: group)
+        section.orthogonalScrollingBehavior = .continuous
+        
+        let layout = UICollectionViewCompositionalLayout(section: section)
+        return layout
+    }
+    
+    private func configureDataSource() {
+        dataSource = UICollectionViewDiffableDataSource<Section, Item>(collectionView: collectionView)
+        { (collectionView, indexPath, item) -> UICollectionViewCell? in
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ImageCell",
+                                                          for: indexPath) as? ImageCollectionViewCell
+            cell?.configure(image: item.image)
+            return cell
+        }
+        
+        var initialSnapshot = NSDiffableDataSourceSnapshot<Section, Item>()
+        initialSnapshot.appendSections([.main])
+        initialSnapshot.appendItems([], toSection: .main)
+        dataSource.apply(initialSnapshot, animatingDifferences: false)
+    }
+    
+    func addImages(_ images: [UIImage]) {
+        var currentItems = dataSource.snapshot().itemIdentifiers(inSection: .main)
+        let newItems = images.map { Item(image: $0) }
+        currentItems.append(contentsOf: newItems)
+        
+        if currentItems.count > 5 {
+            currentItems = Array(currentItems.prefix(5))
+        }
+        
+        var snapshot = NSDiffableDataSourceSnapshot<Section, Item>()
+        snapshot.appendSections([.main])
+        snapshot.appendItems(currentItems, toSection: .main)
+        dataSource.apply(snapshot, animatingDifferences: true)
+    }
+}
+
+final class ImageCollectionViewCell: UICollectionViewCell {
+    private let imageView: UIImageView = {
+        let image = UIImageView()
+        image.contentMode = .scaleAspectFill
+        image.clipsToBounds = true
+        image.translatesAutoresizingMaskIntoConstraints = false
+        image.layer.cornerRadius = 10
+        
+        return image
+    }()
+    
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        setupViews()
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        imageView.image = nil
+    }
+    
+    private func setupViews() {
+        contentView.addSubview(imageView)
+        
+        NSLayoutConstraint.activate([
+            imageView.topAnchor.constraint(equalTo: contentView.topAnchor),
+            imageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
+            imageView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
+            imageView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor)
+        ])
+    }
+    
+    func configure(image: UIImage) {
+        imageView.image = image
     }
 }

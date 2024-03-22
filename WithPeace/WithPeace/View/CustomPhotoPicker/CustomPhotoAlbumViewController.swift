@@ -11,6 +11,7 @@ import Photos
 final class CustomPhotoAlbumViewController: UIViewController {
     
     var completionHandlerChangePHAssetsToDatas: (([PHAsset]) -> ())?
+    var completionHandler: (([UIImage]) -> Void)?
     
     private var maxSelect: Int
     private var selectedAssets = [PHAsset]()
@@ -172,8 +173,10 @@ extension CustomPhotoAlbumViewController: UICollectionViewDelegate {
             self?.selectedAssets = $0
         }
         
-        customDetailViewController.completeCompletionHandler = { [weak self] in
-            self?.completionHandlerChangePHAssetsToDatas?($0)
+        customDetailViewController.completeCompletionHandler = { [weak self] selectedAssets in
+            self?.convertAssetsToImages(assets: selectedAssets, completion: { images in
+                self?.completionHandler?(images)
+            })
             self?.dismiss(animated: true)
         }
     }
@@ -224,4 +227,25 @@ extension CustomPhotoAlbumViewController {
             self.completionHandlerChangePHAssetsToDatas?(self.selectedAssets)
         }
     }
+    
+    private func convertAssetsToImages(assets: [PHAsset], completion: @escaping ([UIImage]) -> Void) {
+        var images: [UIImage] = []
+        let imageManager = PHImageManager.default()
+        let options = PHImageRequestOptions()
+        options.isSynchronous = true
+        
+        for asset in assets {
+            let size = CGSize(width: 110, height: 110)
+            imageManager.requestImage(for: asset, targetSize: size, contentMode: .aspectFill, options: options) { image, _ in
+                if let image = image {
+                    images.append(image)
+                }
+                
+                if images.count == assets.count {
+                    completion(images)
+                }
+            }
+        }
+    }
+
 }
