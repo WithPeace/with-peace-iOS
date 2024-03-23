@@ -109,24 +109,33 @@ class LoginNickNameViewController: UIViewController {
     
     private func bind() {
         viewModel.isNicknameValid
-            .subscribe { [weak self] in
-                self?.configureUI(isSuccess: $0)
-                self?.registButton.isEnabled = $0
-            }
+            .subscribe(onNext: { [weak self] emit in
+                self?.errorLabel.text = emit.description
+                self?.configureUI(isError: emit.isError)
+            })
             .disposed(by: disposeBag)
         
-        viewModel.profileImage
+        viewModel.changeProfileImage
             .subscribe { [weak self] data in
                 guard let data = data else { return }
                 
                 self?.profileImageView.image = UIImage(data: data)
             }
             .disposed(by: disposeBag)
+        
+        viewModel.dismissForNext
+            .subscribe { [weak self] in
+                if $0.isError {
+                    self?.toastMessage?.presentStandardToastMessage("닉네임 등록을 완료해주세요")
+                } else {
+                    self?.dismiss(animated: true)
+                }
+            }
+            .disposed(by: disposeBag)
     }
     
-    private func configureUI(isSuccess: Bool) {
-        self.bottomLayer.backgroundColor = isSuccess ? UIColor.black.cgColor : UIColor.red.cgColor
-        self.errorLabel.text = isSuccess ? "" : "닉네임은 2~10자의 한글, 영문만 가능합니다."
+    private func configureUI(isError: Bool) {
+        self.bottomLayer.backgroundColor = isError ? UIColor.red.cgColor : UIColor.black.cgColor
     }
 }
 
@@ -140,7 +149,7 @@ extension LoginNickNameViewController {
     
     @objc
     private func tapRegistButton() {
-        //TODO: 완료버튼 로직수행 -> mainView
+        viewModel.tapRegisterButton.onNext(())
     }
     
     private func configureTargetAction() {
@@ -164,7 +173,7 @@ extension LoginNickNameViewController {
             guard let asset = $0.first else { return }
             
             PHImageManager().requestImageDataAndOrientation(for: asset, options: nil) { data, _, _, _ in
-                self?.viewModel.profileImageData.onNext(data)
+                self?.viewModel.profileImage.onNext(data)
             }
         }
     }

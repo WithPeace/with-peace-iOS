@@ -9,58 +9,95 @@ import Foundation
 import RxSwift
 
 final class LoginNickNameViewModel {
+    enum State {
+        case success
+        case notEnoughCharacters
+        case exceededCharacters
+        case duplication
+        case otherCharacters
+        case unknown
+        
+        var description: String {
+            switch self {
+            case .success:
+                ""
+            case .notEnoughCharacters:
+                "닉네임은 2~10자의 한글, 영문만 가능합니다."
+            case .exceededCharacters:
+                "닉네임은 2~10자의 한글, 영문만 가능합니다."
+            case .duplication:
+                "중복된 닉네임 입니다"
+            case .otherCharacters:
+                "닉네임은 2~10자의 한글, 영문만 가능합니다."
+            case .unknown:
+                ""
+            }
+        }
+        
+        var isError: Bool {
+            switch self {
+            case .success:
+                false
+            case .notEnoughCharacters:
+                true
+            case .exceededCharacters:
+                true
+            case .duplication:
+                true
+            case .otherCharacters:
+                true
+            case .unknown:
+                false
+            }
+        }
+    }
+    
+    let disposeBag = DisposeBag()
     
     //INPUT
     var nicknameField: BehaviorSubject<String?>
-    var profileImageData: PublishSubject<Data?>
+    var profileImage: PublishSubject<Data?>
+    var tapRegisterButton: BehaviorSubject<Void>
     
     //OUTPUT
-    var isNicknameValid: Observable<Bool> //닉네임이 유효한지?
-//    var isNicknameDuplicated: Observable<Bool>?
+    var isNicknameValid: Observable<State> // 닉네임이 유효한지?
     
-    var profileImage: Observable<Data?>
+    var changeProfileImage: Observable<Data?>
+    var dismissForNext: Observable<State>
     
     init() {
         
+        //INPUT
         self.nicknameField = BehaviorSubject<String?>(value: "")
+        self.profileImage = PublishSubject<Data?>()
+        self.tapRegisterButton = BehaviorSubject<Void>(value: Void())
+        
+        //OUTPUT
         self.isNicknameValid = self.nicknameField
             .map { nickname in
-                guard let nickname = nickname else { return false }
+                guard let nickname = nickname else { return .unknown }
                 
-                if nickname.count < 2 || nickname.count > 10 {
-                    return false
+                if nickname.count < 2  {
+                    return .notEnoughCharacters
+                } else if nickname.count > 10 {
+                    return .exceededCharacters
+                } else if !nickname.koreaLangCheck() {
+                    return .otherCharacters
                 }
                 
-                if !nickname.koreaLangCheck() {
-                    return false
-                }
-                // 서버 닉네임 중복 확인.
-                return true
+                //TODO: 서버 닉네임 중복 확인. 임시구현
+                if nickname == "abc" { return .duplication }
+                
+                return .success
             }
         
-        self.profileImageData = PublishSubject<Data?>()
-        self.profileImage = profileImageData
+        self.changeProfileImage = profileImage
             .map { data in
-                if let data = data {
-                    return data
-                }
+                if let data = data { return data }
                 
                 return nil
             }
+        
+        dismissForNext = tapRegisterButton.withLatestFrom(isNicknameValid)
     }
 }
-
-extension String {
-
-    func koreaLangCheck() -> Bool {
-        let pattern = "^[가-힣a-zA-Z\\s]*$"
-        if let regex = try? NSRegularExpression(pattern: pattern, options: .caseInsensitive) {
-            let range = NSRange(location: 0, length: self.utf16.count)
-            if regex.firstMatch(in: self, options: [], range: range) != nil {
-                return true
-            }
-        }
-        return false
-    }
-}
-
