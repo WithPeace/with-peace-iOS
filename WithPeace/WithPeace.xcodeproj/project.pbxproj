@@ -42,11 +42,11 @@
 		F68C9D142BA2DB39008CB7E4 /* RxSwift in Frameworks */ = {isa = PBXBuildFile; productRef = F68C9D132BA2DB39008CB7E4 /* RxSwift */; };
 		F68C9D1C2BA2DE87008CB7E4 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F68C9D1B2BA2DE87008CB7E4 /* HomeViewController.swift */; };
 		F68C9D1E2BA2DE93008CB7E4 /* ForumViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F68C9D1D2BA2DE93008CB7E4 /* ForumViewController.swift */; };
-		F68C9D202BA2DEA3008CB7E4 /* RegistForumViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F68C9D1F2BA2DEA3008CB7E4 /* RegistForumViewController.swift */; };
 		F68C9D222BA2DEAD008CB7E4 /* MyPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F68C9D212BA2DEAD008CB7E4 /* MyPageViewController.swift */; };
 		F68C9D242BA2DEDB008CB7E4 /* SocialLoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F68C9D232BA2DEDB008CB7E4 /* SocialLoginViewController.swift */; };
 		F68C9D292BA2FFA0008CB7E4 /* LoginNickNameViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F68C9D282BA2FFA0008CB7E4 /* LoginNickNameViewModel.swift */; };
 		F68C9D6E2BA5E291008CB7E4 /* ToastMessageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F68C9D6D2BA5E291008CB7E4 /* ToastMessageView.swift */; };
+		F697444F2BB08AD6006683AF /* Data+.swift in Sources */ = {isa = PBXBuildFile; fileRef = F697444E2BB08AD6006683AF /* Data+.swift */; };
 		F69B80072B996846002675CE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F69B80062B996846002675CE /* AppDelegate.swift */; };
 		F69B80092B996846002675CE /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F69B80082B996846002675CE /* SceneDelegate.swift */; };
 		F69B800B2B996846002675CE /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F69B800A2B996846002675CE /* ViewController.swift */; };
@@ -111,11 +111,11 @@
 		F68719B52BA8707D0049B182 /* CustomAlbumCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomAlbumCell.swift; sourceTree = "<group>"; };
 		F68C9D1B2BA2DE87008CB7E4 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		F68C9D1D2BA2DE93008CB7E4 /* ForumViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForumViewController.swift; sourceTree = "<group>"; };
-		F68C9D1F2BA2DEA3008CB7E4 /* RegistForumViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistForumViewController.swift; sourceTree = "<group>"; };
 		F68C9D212BA2DEAD008CB7E4 /* MyPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageViewController.swift; sourceTree = "<group>"; };
 		F68C9D232BA2DEDB008CB7E4 /* SocialLoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocialLoginViewController.swift; sourceTree = "<group>"; };
 		F68C9D282BA2FFA0008CB7E4 /* LoginNickNameViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginNickNameViewModel.swift; sourceTree = "<group>"; };
 		F68C9D6D2BA5E291008CB7E4 /* ToastMessageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToastMessageView.swift; sourceTree = "<group>"; };
+		F697444E2BB08AD6006683AF /* Data+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Data+.swift"; sourceTree = "<group>"; };
 		F69B80032B996846002675CE /* WithPeace.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WithPeace.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F69B80062B996846002675CE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F69B80082B996846002675CE /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -170,7 +170,7 @@
 			path = Error;
 			sourceTree = "<group>";
 		};
-		635BCBAA2BA7E6FC00F0DCBC /* Post */ = {
+		635BCBAA2BA7E6FC00F0DCBC /* PostView */ = {
 			isa = PBXGroup;
 			children = (
 				635BCBB12BA94F4200F0DCBC /* Cell */,
@@ -181,7 +181,7 @@
 				63C52F962BA962590072DE18 /* PostPhotoView.swift */,
 				63C52F982BA97FB40072DE18 /* CategorySelectViewController.swift */,
 			);
-			path = Post;
+			path = PostView;
 			sourceTree = "<group>";
 		};
 		635BCBB12BA94F4200F0DCBC /* Cell */ = {
@@ -208,6 +208,7 @@
 			children = (
 				F671A9BA2BA00D4A002808DA /* Bundle+.swift */,
 				F674DDDE2BADB17A00536AA7 /* String+.swift */,
+				F697444E2BB08AD6006683AF /* Data+.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -237,12 +238,10 @@
 		F671A9BF2BA00DB2002808DA /* View */ = {
 			isa = PBXGroup;
 			children = (
-				F68C9D162BA2DC99008CB7E4 /* MainTabBar */,
 				F68C9D152BA2DBB4008CB7E4 /* Login */,
+				F68C9D162BA2DC99008CB7E4 /* MainTabBar */,
 				F671A9C02BA00DF5002808DA /* ContentsView */,
-				F68C9D6D2BA5E291008CB7E4 /* ToastMessageView.swift */,
-				635BCBAA2BA7E6FC00F0DCBC /* Post */,
-				F68719B42BA86AAF0049B182 /* CustomPhotoPicker */,
+				F697444B2BB07E43006683AF /* Assistant */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -252,7 +251,7 @@
 			children = (
 				F68C9D172BA2DD3D008CB7E4 /* HomeView */,
 				F68C9D182BA2DD3E008CB7E4 /* ForumView */,
-				F68C9D192BA2DE35008CB7E4 /* RegistForumView */,
+				635BCBAA2BA7E6FC00F0DCBC /* PostView */,
 				F68C9D1A2BA2DE4C008CB7E4 /* myPageVIew */,
 				F69B800A2B996846002675CE /* ViewController.swift */,
 			);
@@ -330,14 +329,6 @@
 			path = ForumView;
 			sourceTree = "<group>";
 		};
-		F68C9D192BA2DE35008CB7E4 /* RegistForumView */ = {
-			isa = PBXGroup;
-			children = (
-				F68C9D1F2BA2DEA3008CB7E4 /* RegistForumViewController.swift */,
-			);
-			path = RegistForumView;
-			sourceTree = "<group>";
-		};
 		F68C9D1A2BA2DE4C008CB7E4 /* myPageVIew */ = {
 			isa = PBXGroup;
 			children = (
@@ -353,6 +344,31 @@
 				F68C9D282BA2FFA0008CB7E4 /* LoginNickNameViewModel.swift */,
 			);
 			path = NickNameView;
+			sourceTree = "<group>";
+		};
+		F697444B2BB07E43006683AF /* Assistant */ = {
+			isa = PBXGroup;
+			children = (
+				F697444D2BB07F47006683AF /* CustomActionSheet */,
+				F697444C2BB07F45006683AF /* CustomAlertSheet */,
+				F68C9D6D2BA5E291008CB7E4 /* ToastMessageView.swift */,
+				F68719B42BA86AAF0049B182 /* CustomPhotoPicker */,
+			);
+			path = Assistant;
+			sourceTree = "<group>";
+		};
+		F697444C2BB07F45006683AF /* CustomAlertSheet */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = CustomAlertSheet;
+			sourceTree = "<group>";
+		};
+		F697444D2BB07F47006683AF /* CustomActionSheet */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = CustomActionSheet;
 			sourceTree = "<group>";
 		};
 		F69B7FFA2B996845002675CE = {
@@ -593,7 +609,6 @@
 				F69B80092B996846002675CE /* SceneDelegate.swift in Sources */,
 				633F8E222B9AC37500B92ADC /* KeychainManager.swift in Sources */,
 				F68719B62BA8707D0049B182 /* CustomAlbumCell.swift in Sources */,
-				F68C9D202BA2DEA3008CB7E4 /* RegistForumViewController.swift in Sources */,
 				63C52F9B2BA9B80D0072DE18 /* PostModel.swift in Sources */,
 				F66C98222BA1F5AD001E121C /* MainTabBarController.swift in Sources */,
 				F671A9C82BA0173E002808DA /* HTTPMethod.swift in Sources */,
@@ -606,6 +621,7 @@
 				63C52F972BA962590072DE18 /* PostPhotoView.swift in Sources */,
 				6303235D2BAC636700B16E7C /* PostManager.swift in Sources */,
 				630EA2002BA0039300F04ED3 /* GoogleSignError.swift in Sources */,
+				F697444F2BB08AD6006683AF /* Data+.swift in Sources */,
 				6377F69D2BA06324006CAB26 /* SignRepositoryError.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
