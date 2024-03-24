@@ -34,6 +34,7 @@
 		F671A9C82BA0173E002808DA /* HTTPMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = F671A9C72BA0173E002808DA /* HTTPMethod.swift */; };
 		F671A9CA2BA0174E002808DA /* NetworkError.swift in Sources */ = {isa = PBXBuildFile; fileRef = F671A9C92BA0174E002808DA /* NetworkError.swift */; };
 		F671A9CD2BA059DB002808DA /* Const.swift in Sources */ = {isa = PBXBuildFile; fileRef = F671A9CC2BA059DB002808DA /* Const.swift */; };
+		F674DDDF2BADB17A00536AA7 /* String+.swift in Sources */ = {isa = PBXBuildFile; fileRef = F674DDDE2BADB17A00536AA7 /* String+.swift */; };
 		F68719B12BA8635C0049B182 /* CustomPhotoAlbumViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F68719B02BA8635C0049B182 /* CustomPhotoAlbumViewController.swift */; };
 		F68719B32BA867FE0049B182 /* UICollectionViewLayout+.swift in Sources */ = {isa = PBXBuildFile; fileRef = F68719B22BA867FE0049B182 /* UICollectionViewLayout+.swift */; };
 		F68719B62BA8707D0049B182 /* CustomAlbumCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F68719B52BA8707D0049B182 /* CustomAlbumCell.swift */; };
@@ -104,6 +105,7 @@
 		F671A9C72BA0173E002808DA /* HTTPMethod.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPMethod.swift; sourceTree = "<group>"; };
 		F671A9C92BA0174E002808DA /* NetworkError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkError.swift; sourceTree = "<group>"; };
 		F671A9CC2BA059DB002808DA /* Const.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Const.swift; sourceTree = "<group>"; };
+		F674DDDE2BADB17A00536AA7 /* String+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+.swift"; sourceTree = "<group>"; };
 		F68719B02BA8635C0049B182 /* CustomPhotoAlbumViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomPhotoAlbumViewController.swift; sourceTree = "<group>"; };
 		F68719B22BA867FE0049B182 /* UICollectionViewLayout+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UICollectionViewLayout+.swift"; sourceTree = "<group>"; };
 		F68719B52BA8707D0049B182 /* CustomAlbumCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomAlbumCell.swift; sourceTree = "<group>"; };
@@ -205,6 +207,7 @@
 			isa = PBXGroup;
 			children = (
 				F671A9BA2BA00D4A002808DA /* Bundle+.swift */,
+				F674DDDE2BADB17A00536AA7 /* String+.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -567,6 +570,7 @@
 				F68C9D242BA2DEDB008CB7E4 /* SocialLoginViewController.swift in Sources */,
 				F69B80472B9A0D1B002675CE /* GoogleSignInManager.swift in Sources */,
 				635BCBA92BA3521F00F0DCBC /* SocialLoginViewModel.swift in Sources */,
+				F674DDDF2BADB17A00536AA7 /* String+.swift in Sources */,
 				F671A9BB2BA00D4A002808DA /* Bundle+.swift in Sources */,
 				F68C9D1E2BA2DE93008CB7E4 /* ForumViewController.swift in Sources */,
 				F65E1ECF2BAC086D00326EF7 /* LoginNickNameViewController.swift in Sources */,
