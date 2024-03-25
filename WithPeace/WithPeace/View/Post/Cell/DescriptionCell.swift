@@ -162,7 +162,12 @@ extension DescriptionCell {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ImageCell",
                                                           for: indexPath) as? ImageCollectionViewCell
             cell?.configure(image: item.image)
-            cell?.onDelete = {
+            cell?.onDelete = { [weak self, weak collectionView] cell in
+                guard let self = self,
+                      let collectionView = collectionView,
+                      let indexPath = collectionView.indexPath(for: cell) else {
+                    return
+                }
                 self.removeImage(indexPath: indexPath)
             }
             return cell
@@ -217,7 +222,7 @@ final class ImageCollectionViewCell: UICollectionViewCell {
         return button
     }()
     
-    var onDelete: (() -> Void)?
+    var onDelete: ((UICollectionViewCell) -> Void)?
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -255,6 +260,6 @@ final class ImageCollectionViewCell: UICollectionViewCell {
     }
     
     @objc private func didTapDelete() {
-        onDelete?()
+        onDelete?(self)
     }
 }
