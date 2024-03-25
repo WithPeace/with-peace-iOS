@@ -135,7 +135,7 @@ extension DescriptionCell {
             collectionView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 24),
             collectionView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
             collectionView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
-            collectionView.heightAnchor.constraint(equalToConstant: 122)
+            collectionView.heightAnchor.constraint(equalToConstant: 130)
         ])
         
         configureDataSource()
@@ -151,6 +151,7 @@ extension DescriptionCell {
         
         let section = NSCollectionLayoutSection(group: group)
         section.orthogonalScrollingBehavior = .continuous
+        section.contentInsets = NSDirectionalEdgeInsets(top: 12, leading: 0, bottom: 0, trailing: 0)
         
         let layout = UICollectionViewCompositionalLayout(section: section)
         return layout
@@ -214,7 +215,7 @@ final class ImageCollectionViewCell: UICollectionViewCell {
     }()
     
     private lazy var deleteButton: UIButton = {
-        let button = UIButton(type: .system)
+        let button = UIButton(type: .custom)
         button.setImage(UIImage(named: "btn-picture-delete"), for: .normal)
         button.addTarget(self, action: #selector(didTapDelete), for: .touchUpInside)
         button.translatesAutoresizingMaskIntoConstraints = false
@@ -236,20 +237,24 @@ final class ImageCollectionViewCell: UICollectionViewCell {
     override func prepareForReuse() {
         super.prepareForReuse()
         imageView.image = nil
+        onDelete = nil
     }
     
     private func setupViews() {
         contentView.addSubview(imageView)
-        contentView.addSubview(deleteButton)
+        addSubview(deleteButton)
+        contentView.clipsToBounds = false
         
         NSLayoutConstraint.activate([
             imageView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 4),
             imageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
             imageView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
             imageView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
+            imageView.widthAnchor.constraint(equalToConstant: 110),
+            imageView.heightAnchor.constraint(equalToConstant: 110),
             
-            deleteButton.topAnchor.constraint(equalTo: contentView.topAnchor, constant: -2),
-            deleteButton.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: 8),
+            deleteButton.topAnchor.constraint(equalTo: topAnchor, constant: -2),
+            deleteButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: 8),
             deleteButton.widthAnchor.constraint(equalToConstant: 24),
             deleteButton.heightAnchor.constraint(equalToConstant: 24)
         ])
