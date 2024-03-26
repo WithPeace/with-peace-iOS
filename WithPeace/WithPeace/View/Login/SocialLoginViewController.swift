@@ -143,9 +143,11 @@ extension SocialLoginViewController {
         viewModel.signInSuccess
             .subscribe(onNext: { token in
                 print("SignIn Success: \(token)")
-                //TODO: 성공한거니깐 다음 화면으로 전환코드 작성
-                // let nextVC = NextVC()
-                // self.navi.push(nextVC)
+                
+                DispatchQueue.main.async {
+                    let loginNickNameViewController = LoginNickNameViewController()
+                    self.navigationController?.pushViewController(loginNickNameViewController, animated: true)
+                }
             })
             .disposed(by: disposeBag)
         
