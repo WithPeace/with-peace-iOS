@@ -15,10 +15,23 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         guard let windowScene = (scene as? UIWindowScene) else { return }
         
         let window = UIWindow(windowScene: windowScene)
-        let tabBarController = MainTabbarController()
-        let navigationController = UINavigationController(rootViewController: tabBarController)
-        window.rootViewController = navigationController
+        
+        if hasToken() {
+            //기존 로그인
+            let tabBarController = MainTabbarController()
+            let navigationController = UINavigationController(rootViewController: tabBarController)
+            
+            window.rootViewController = navigationController
+        } else {
+            //최초 로그인
+            let socialLoginViewController = SocialLoginViewController()
+            let navigationController = UINavigationController(rootViewController: socialLoginViewController)
+            
+            window.rootViewController = navigationController
+        }
+        
         window.makeKeyAndVisible()
+        
         self.window = window
     }
     
@@ -35,5 +48,14 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     }
     
     func sceneDidEnterBackground(_ scene: UIScene) {
+    }
+    
+    private func hasToken() -> Bool {
+        let keyChainManager = KeychainManager()
+        guard keyChainManager.get(account: "accessToken") != nil else {
+            return false
+        }
+        
+        return true
     }
 }
