@@ -182,6 +182,13 @@ extension PostViewController {
     
     private func didTapPhoto() {
         photoView.onPhotoButtonTapped = {
+            let vc = CustomPhotoAlbumViewController(maxSelect: 5)
+            vc.completionHandler = { [weak self] selectedImages in
+                if let descriptionCell = self?.tableView.cellForRow(at: IndexPath(row: 2, section: 0)) as? DescriptionCell {
+                    descriptionCell.addImages(selectedImages)
+                }
+            }
+            self.present(vc, animated: true)
             print("사진")
         }
     }
