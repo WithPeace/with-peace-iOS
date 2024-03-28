@@ -12,7 +12,6 @@ final class ForumViewController: UIViewController {
     
     private var posts: [PostModel] = []
     private var allPosts: [PostModel] = []
-//    private var displayedPosts: [PostModel] = []
     private var selectedCategory = BehaviorSubject<Category?>(value: nil)
     private let disposeBag = DisposeBag()
     private lazy var collectionView: UICollectionView = {
@@ -45,7 +44,6 @@ final class ForumViewController: UIViewController {
             })
             .disposed(by: disposeBag)
         
-        // CategoryView의 카테고리 선택 이벤트를 selectedCategory에 바인딩
         categoryView.onCategorySelected = { [weak self] category in
             self?.selectedCategory.onNext(category)
         }
@@ -119,7 +117,7 @@ final class ForumViewController: UIViewController {
     
     private func loadPosts(for category: Category?) {
         posts = allPosts.filter { post in
-            guard let category = category else { return true } // 카테고리가 선택되지 않았으면 모든 게시물을 표시
+            guard let category = category else { return true }
             return post.type == category.rawValue
         }
         collectionView.reloadData()
@@ -231,10 +229,6 @@ final class ForumCategoryView: UIView {
     }
     
     @objc func categoryButtonTapped(_ sender: UIButton) {
-        //        let title = sender.title(for: .normal),
-        //              let category = Category(rawValue: title),
-        guard let index = stackView.arrangedSubviews.firstIndex(of: sender) else { return }
-        
         selectedButtonIndex = sender.tag
         updateSeparatorPosition(index: sender.tag)
         
