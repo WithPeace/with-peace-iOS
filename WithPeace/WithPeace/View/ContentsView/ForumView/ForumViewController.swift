@@ -18,7 +18,6 @@ final class ForumViewController: UIViewController {
         
         return collectionView
     }()
-    
     private lazy var refreshControl: UIRefreshControl = {
         let refreshControl = UIRefreshControl()
         let refreshAction = UIAction { [weak self] _ in
@@ -28,6 +27,7 @@ final class ForumViewController: UIViewController {
         refreshControl.addAction(refreshAction, for: .valueChanged)
         return refreshControl
     }()
+    private let categoryView = ForumCategoryView()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -38,7 +38,9 @@ final class ForumViewController: UIViewController {
     
     private func configureUI() {
         view.backgroundColor = .systemBackground
+        navigationController?.isNavigationBarHidden = true
         view.addSubview(collectionView)
+        view.addSubview(categoryView)
     }
     
     private func setupCollectionView() {
@@ -48,7 +50,11 @@ final class ForumViewController: UIViewController {
         collectionView.refreshControl = refreshControl
         
         NSLayoutConstraint.activate([
-            collectionView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            categoryView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            categoryView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            categoryView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            
+            collectionView.topAnchor.constraint(equalTo: categoryView.bottomAnchor),
             collectionView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
             collectionView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
             collectionView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
@@ -112,6 +118,57 @@ extension ForumViewController: UICollectionViewDelegateFlowLayout {
     //    func numberOfSections(in collectionView: UICollectionView) -> Int { return 2 }
 }
 
-final class ForumCategoryViewCell: UICollectionViewCell {
-    //카테고리 나열
+final class ForumCategoryView: UIView {
+    
+    private let stackView: UIStackView = {
+        let stackView = UIStackView()
+        stackView.axis = .horizontal
+        stackView.distribution = .fillEqually
+        stackView.alignment = .fill
+        stackView.spacing = 10
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        
+        return stackView
+    }()
+    
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        setupViews()
+        setupCategoryButton()
+    }
+    
+    required init?(coder: NSCoder) {
+        super.init(coder: coder)
+    }
+    
+    private func setupViews() {
+        self.backgroundColor = .systemBackground
+        self.translatesAutoresizingMaskIntoConstraints = false
+        self.addSubview(stackView)
+        
+        NSLayoutConstraint.activate([
+            stackView.topAnchor.constraint(equalTo: topAnchor),
+            stackView.leadingAnchor.constraint(equalTo: leadingAnchor),
+            stackView.trailingAnchor.constraint(equalTo: trailingAnchor),
+            stackView.bottomAnchor.constraint(equalTo: bottomAnchor),
+            
+            self.heightAnchor.constraint(equalToConstant: 110)
+        ])
+    }
+    
+    private func setupCategoryButton() {
+        for category in Category.allCases {
+            let button = UIButton()
+            button.setTitle(category.rawValue, for: .normal)
+            button.setImage(UIImage(named: category.imageName), for: .normal)
+            button.setImage(UIImage(named: category.selectedImageName), for: .selected)
+            button.addTarget(self, action: #selector(categoryButtonTapped), for: .touchUpInside)
+            stackView.addArrangedSubview(button)
+        }
+    }
+    
+    @objc func categoryButtonTapped(_ sender: UIButton) {
+        guard let title = sender.title(for: .normal),
+              let category = Category(rawValue: title) else { return }
+    }
 }
