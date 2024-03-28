@@ -6,10 +6,15 @@
 //
 
 import UIKit
+import RxSwift
 
 final class ForumViewController: UIViewController {
     
     private var posts: [PostModel] = []
+    private var allPosts: [PostModel] = []
+//    private var displayedPosts: [PostModel] = []
+    private var selectedCategory = BehaviorSubject<Category?>(value: nil)
+    private let disposeBag = DisposeBag()
     private lazy var collectionView: UICollectionView = {
         let layout = createLayout()
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
@@ -34,6 +39,16 @@ final class ForumViewController: UIViewController {
         
         configureUI()
         setupCollectionView()
+        selectedCategory
+            .subscribe(onNext: { [weak self] category in
+                self?.loadPosts(for: category)
+            })
+            .disposed(by: disposeBag)
+        
+        // CategoryView의 카테고리 선택 이벤트를 selectedCategory에 바인딩
+        categoryView.onCategorySelected = { [weak self] category in
+            self?.selectedCategory.onNext(category)
+        }
     }
     
     private func configureUI() {
@@ -81,9 +96,15 @@ final class ForumViewController: UIViewController {
     }
     
     func addNewPost(_ post: PostModel) {
-        posts.append(post)
+        allPosts.append(post)
         sortPosts()
-        collectionView.reloadData()
+        selectedCategory
+            .asObservable()
+            .take(1)
+            .subscribe(onNext: { [weak self] category in
+                self?.loadPosts(for: category)
+            })
+            .disposed(by: disposeBag)
     }
     
     private func refreshPostData() {
@@ -94,6 +115,14 @@ final class ForumViewController: UIViewController {
     
     private func sortPosts() {
         posts.sort {$0.creationDate > $1.creationDate }
+    }
+    
+    private func loadPosts(for category: Category?) {
+        posts = allPosts.filter { post in
+            guard let category = category else { return true } // 카테고리가 선택되지 않았으면 모든 게시물을 표시
+            return post.type == category.rawValue
+        }
+        collectionView.reloadData()
     }
 }
 
@@ -119,7 +148,6 @@ extension ForumViewController: UICollectionViewDelegateFlowLayout {
 }
 
 final class ForumCategoryView: UIView {
-    
     private let stackView: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .horizontal
@@ -127,14 +155,30 @@ final class ForumCategoryView: UIView {
         stackView.alignment = .fill
         stackView.spacing = 10
         stackView.translatesAutoresizingMaskIntoConstraints = false
-        
         return stackView
     }()
+    private let separatorView: UIView = {
+        let view = UIView()
+        view.backgroundColor = .lightGray
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
+    private let highlightSeparatorView: UIView = {
+        let view = UIView()
+        view.backgroundColor = .systemBlue
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
+    private var separatorWidthConstraint: NSLayoutConstraint?
+    private var separatorLeadingConstraint: NSLayoutConstraint?
+    private var selectedButtonIndex: Int?
+    var onCategorySelected: ((Category) -> Void)?
     
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupViews()
         setupCategoryButton()
+        setupSeparatorView()
     }
     
     required init?(coder: NSCoder) {
@@ -148,27 +192,65 @@ final class ForumCategoryView: UIView {
         
         NSLayoutConstraint.activate([
             stackView.topAnchor.constraint(equalTo: topAnchor),
-            stackView.leadingAnchor.constraint(equalTo: leadingAnchor),
-            stackView.trailingAnchor.constraint(equalTo: trailingAnchor),
-            stackView.bottomAnchor.constraint(equalTo: bottomAnchor),
-            
+            stackView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 4),
+            stackView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -4),
             self.heightAnchor.constraint(equalToConstant: 110)
         ])
     }
     
     private func setupCategoryButton() {
-        for category in Category.allCases {
+        for (index, category) in Category.allCases.enumerated() {
             let button = UIButton()
             button.setTitle(category.rawValue, for: .normal)
             button.setImage(UIImage(named: category.imageName), for: .normal)
             button.setImage(UIImage(named: category.selectedImageName), for: .selected)
+            button.tag = index
             button.addTarget(self, action: #selector(categoryButtonTapped), for: .touchUpInside)
             stackView.addArrangedSubview(button)
         }
     }
     
+    private func setupSeparatorView() {
+        self.addSubview(separatorView)
+        NSLayoutConstraint.activate([
+            separatorView.topAnchor.constraint(equalTo: stackView.bottomAnchor, constant: 2),
+            separatorView.leadingAnchor.constraint(equalTo: leadingAnchor),
+            separatorView.trailingAnchor.constraint(equalTo: trailingAnchor),
+            separatorView.heightAnchor.constraint(equalToConstant: 2),
+        ])
+        
+        self.addSubview(highlightSeparatorView)
+        separatorWidthConstraint = highlightSeparatorView.widthAnchor.constraint(equalToConstant: 0)
+        separatorLeadingConstraint = highlightSeparatorView.leadingAnchor.constraint(equalTo: self.leadingAnchor)
+        NSLayoutConstraint.activate([
+            highlightSeparatorView.topAnchor.constraint(equalTo: separatorView.topAnchor),
+            separatorLeadingConstraint!,
+            separatorWidthConstraint!,
+            highlightSeparatorView.heightAnchor.constraint(equalTo: separatorView.heightAnchor),
+        ])
+    }
+    
     @objc func categoryButtonTapped(_ sender: UIButton) {
-        guard let title = sender.title(for: .normal),
-              let category = Category(rawValue: title) else { return }
+        //        let title = sender.title(for: .normal),
+        //              let category = Category(rawValue: title),
+        guard let index = stackView.arrangedSubviews.firstIndex(of: sender) else { return }
+        
+        selectedButtonIndex = sender.tag
+        updateSeparatorPosition(index: sender.tag)
+        
+        if let category = Category(rawValue: sender.title(for: .normal) ?? "") {
+            onCategorySelected?(category)
+        }
+    }
+    
+    private func updateSeparatorPosition(index: Int) {
+        let button = stackView.arrangedSubviews[index]
+        
+        separatorLeadingConstraint?.constant = button.frame.minX + stackView.frame.minX
+        separatorWidthConstraint?.constant = button.frame.width
+        
+        UIView.animate(withDuration: 0.25) {
+            self.layoutIfNeeded()
+        }
     }
 }
