@@ -11,7 +11,7 @@ final class MainTabbarController: UITabBarController {
     private let tabBarConstant = Const.CustomIcon.ICNavigationTabbar.self
     
     private let homeViewController = UIViewController()
-    private let forumViewController = UIViewController()
+    private let forumViewController = ForumViewController()
     private let registViewController = PostViewController()
     private let myPageViewController = UIViewController()
     
@@ -61,10 +61,16 @@ extension MainTabbarController: UITabBarControllerDelegate {
     func tabBarController(_ tabBarController: UITabBarController, didSelect viewController: UIViewController) {
         if viewController is PostViewController {
             let postVC = PostViewController()
+            postVC.viewModel.postCreated
+                .subscribe(onNext: { [weak self] newPost in
+                    self?.forumViewController.addNewPost(newPost)
+                })
+                .disposed(by: postVC.disposeBag)
+            
             postVC.hidesBottomBarWhenPushed = true
             postVC.modalPresentationStyle = .fullScreen
             self.present(postVC, animated: true, completion: nil)
-            self.selectedIndex = 0
+            self.selectedIndex = 1
         }
     }
 }

@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		6303235D2BAC636700B16E7C /* PostManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6303235C2BAC636700B16E7C /* PostManager.swift */; };
 		6303235F2BB143CE00B16E7C /* CustomActionSheetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6303235E2BB143CD00B16E7C /* CustomActionSheetViewController.swift */; };
+		630323632BB5590000B16E7C /* ForumPostViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 630323622BB5590000B16E7C /* ForumPostViewCell.swift */; };
 		630EA2002BA0039300F04ED3 /* GoogleSignError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 630EA1FF2BA0039300F04ED3 /* GoogleSignError.swift */; };
 		630EA20D2BA0243800F04ED3 /* SignAuthDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 630EA20C2BA0243800F04ED3 /* SignAuthDTO.swift */; };
 		630EA20F2BA0277800F04ED3 /* SignRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 630EA20E2BA0277800F04ED3 /* SignRepository.swift */; };
@@ -83,6 +84,7 @@
 /* Begin PBXFileReference section */
 		6303235C2BAC636700B16E7C /* PostManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostManager.swift; sourceTree = "<group>"; };
 		6303235E2BB143CD00B16E7C /* CustomActionSheetViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = CustomActionSheetViewController.swift; path = WithPeace/Manager/CustomActionSheetViewController.swift; sourceTree = SOURCE_ROOT; };
+		630323622BB5590000B16E7C /* ForumPostViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForumPostViewCell.swift; sourceTree = "<group>"; };
 		630EA1FF2BA0039300F04ED3 /* GoogleSignError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleSignError.swift; sourceTree = "<group>"; };
 		630EA20C2BA0243800F04ED3 /* SignAuthDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignAuthDTO.swift; sourceTree = "<group>"; };
 		630EA20E2BA0277800F04ED3 /* SignRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignRepository.swift; sourceTree = "<group>"; };
@@ -331,6 +333,7 @@
 			isa = PBXGroup;
 			children = (
 				F68C9D1D2BA2DE93008CB7E4 /* ForumViewController.swift */,
+				630323622BB5590000B16E7C /* ForumPostViewCell.swift */,
 			);
 			path = ForumView;
 			sourceTree = "<group>";
@@ -591,6 +594,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				630323632BB5590000B16E7C /* ForumPostViewCell.swift in Sources */,
 				63C52F9D2BA9B83F0072DE18 /* PostViewModel.swift in Sources */,
 				F68C9D242BA2DEDB008CB7E4 /* SocialLoginViewController.swift in Sources */,
 				F69B80472B9A0D1B002675CE /* GoogleSignInManager.swift in Sources */,
