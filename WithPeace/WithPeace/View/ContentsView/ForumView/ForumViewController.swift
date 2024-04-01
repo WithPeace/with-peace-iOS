@@ -38,9 +38,14 @@ final class ForumViewController: UIViewController {
         
         configureUI()
         setupCollectionView()
+        bind()
+    }
+    
+    private func bind() {
         selectedCategory
             .subscribe(onNext: { [weak self] category in
                 self?.loadPosts(for: category)
+                self?.categoryView.previouslySelectedCategory = category?.rawValue
             })
             .disposed(by: disposeBag)
         
@@ -141,9 +146,7 @@ extension ForumViewController: UICollectionViewDataSource {
     }
 }
 
-extension ForumViewController: UICollectionViewDelegateFlowLayout {
-    //    func numberOfSections(in collectionView: UICollectionView) -> Int { return 2 }
-}
+extension ForumViewController: UICollectionViewDelegateFlowLayout {}
 
 final class ForumCategoryView: UIView {
     private let stackView: UIStackView = {
@@ -171,6 +174,11 @@ final class ForumCategoryView: UIView {
     private var separatorLeadingConstraint: NSLayoutConstraint?
     private var selectedButtonIndex: Int?
     var onCategorySelected: ((Category) -> Void)?
+    var previouslySelectedCategory: String? {
+        didSet {
+            updateCategoryButtonsSelection()
+        }
+    }
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -234,6 +242,16 @@ final class ForumCategoryView: UIView {
         
         if let category = Category(rawValue: sender.title(for: .normal) ?? "") {
             onCategorySelected?(category)
+        }
+    }
+    
+    private func updateCategoryButtonsSelection() {
+        for button in stackView.arrangedSubviews as? [UIButton] ?? [] {
+            if let title = button.title(for: .normal), 
+                let category = Category(rawValue: title) {
+                let isSelected = category.rawValue == previouslySelectedCategory
+                button.isSelected = isSelected
+            }
         }
     }
     
