@@ -50,6 +50,8 @@
 		F68C9D292BA2FFA0008CB7E4 /* LoginNickNameViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F68C9D282BA2FFA0008CB7E4 /* LoginNickNameViewModel.swift */; };
 		F68C9D6E2BA5E291008CB7E4 /* ToastMessageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F68C9D6D2BA5E291008CB7E4 /* ToastMessageView.swift */; };
 		F69011E32BB6D91E009A8087 /* MyPageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F69011E22BB6D91E009A8087 /* MyPageViewModel.swift */; };
+		F69011DD2BB4685C009A8087 /* CustomAlertSheetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F69011DC2BB4685C009A8087 /* CustomAlertSheetViewController.swift */; };
+		F69011DF2BB5A9B2009A8087 /* CustomAlertSheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F69011DE2BB5A9B2009A8087 /* CustomAlertSheetView.swift */; };
 		F697444F2BB08AD6006683AF /* Data+.swift in Sources */ = {isa = PBXBuildFile; fileRef = F697444E2BB08AD6006683AF /* Data+.swift */; };
 		F69B80072B996846002675CE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F69B80062B996846002675CE /* AppDelegate.swift */; };
 		F69B80092B996846002675CE /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F69B80082B996846002675CE /* SceneDelegate.swift */; };
@@ -127,6 +129,8 @@
 		F68C9D282BA2FFA0008CB7E4 /* LoginNickNameViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginNickNameViewModel.swift; sourceTree = "<group>"; };
 		F68C9D6D2BA5E291008CB7E4 /* ToastMessageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToastMessageView.swift; sourceTree = "<group>"; };
 		F69011E22BB6D91E009A8087 /* MyPageViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageViewModel.swift; sourceTree = "<group>"; };
+		F69011DC2BB4685C009A8087 /* CustomAlertSheetViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomAlertSheetViewController.swift; sourceTree = "<group>"; };
+		F69011DE2BB5A9B2009A8087 /* CustomAlertSheetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomAlertSheetView.swift; sourceTree = "<group>"; };
 		F697444E2BB08AD6006683AF /* Data+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Data+.swift"; sourceTree = "<group>"; };
 		F69B80032B996846002675CE /* WithPeace.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WithPeace.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F69B80062B996846002675CE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -381,6 +385,8 @@
 		F697444C2BB07F45006683AF /* CustomAlertSheet */ = {
 			isa = PBXGroup;
 			children = (
+				F69011DC2BB4685C009A8087 /* CustomAlertSheetViewController.swift */,
+				F69011DE2BB5A9B2009A8087 /* CustomAlertSheetView.swift */,
 			);
 			path = CustomAlertSheet;
 			sourceTree = "<group>";
@@ -641,6 +647,7 @@
 				63C52F9B2BA9B80D0072DE18 /* PostModel.swift in Sources */,
 				F66C98222BA1F5AD001E121C /* MainTabBarController.swift in Sources */,
 				F671A9C82BA0173E002808DA /* HTTPMethod.swift in Sources */,
+				F69011DF2BB5A9B2009A8087 /* CustomAlertSheetView.swift in Sources */,
 				F667FD882BAC2287005AAAB7 /* CustomPhotoAlbumDetailViewController.swift in Sources */,
 				6303235F2BB143CE00B16E7C /* CustomActionSheetViewController.swift in Sources */,
 				635BCBB02BA80C7300F0DCBC /* PostNavigationBarView.swift in Sources */,
@@ -649,6 +656,7 @@
 				F6B5B4082BBBFDA2000C8494 /* ProfileETCView.swift in Sources */,
 				F671A9CA2BA0174E002808DA /* NetworkError.swift in Sources */,
 				630EA20F2BA0277800F04ED3 /* SignRepository.swift in Sources */,
+				F69011DD2BB4685C009A8087 /* CustomAlertSheetViewController.swift in Sources */,
 				63C52F972BA962590072DE18 /* PostPhotoView.swift in Sources */,
 				6303235D2BAC636700B16E7C /* PostManager.swift in Sources */,
 				F6B5B40A2BBBFDC3000C8494 /* ProfileAccountView.swift in Sources */,
