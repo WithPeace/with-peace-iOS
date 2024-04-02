@@ -72,6 +72,7 @@ final class MyPageViewController: UIViewController {
         ])
     }
     
+    //TODO: Button Action 추가
     private func setupButtonAction() {
         // profileView
 //        profileView.setup { [weak self] in
