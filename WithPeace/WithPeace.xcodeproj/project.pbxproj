@@ -49,6 +49,7 @@
 		F68C9D242BA2DEDB008CB7E4 /* SocialLoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F68C9D232BA2DEDB008CB7E4 /* SocialLoginViewController.swift */; };
 		F68C9D292BA2FFA0008CB7E4 /* LoginNickNameViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F68C9D282BA2FFA0008CB7E4 /* LoginNickNameViewModel.swift */; };
 		F68C9D6E2BA5E291008CB7E4 /* ToastMessageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F68C9D6D2BA5E291008CB7E4 /* ToastMessageView.swift */; };
+		F69011E32BB6D91E009A8087 /* MyPageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F69011E22BB6D91E009A8087 /* MyPageViewModel.swift */; };
 		F69011E12BB6D352009A8087 /* MultipartFormData.swift in Sources */ = {isa = PBXBuildFile; fileRef = F69011E02BB6D352009A8087 /* MultipartFormData.swift */; };
 		F69011DD2BB4685C009A8087 /* CustomAlertSheetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F69011DC2BB4685C009A8087 /* CustomAlertSheetViewController.swift */; };
 		F69011DF2BB5A9B2009A8087 /* CustomAlertSheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F69011DE2BB5A9B2009A8087 /* CustomAlertSheetView.swift */; };
@@ -64,6 +65,10 @@
 		F69B80432B9A09FB002675CE /* GoogleSignIn in Frameworks */ = {isa = PBXBuildFile; productRef = F69B80422B9A09FB002675CE /* GoogleSignIn */; };
 		F69B80452B9A09FB002675CE /* GoogleSignInSwift in Frameworks */ = {isa = PBXBuildFile; productRef = F69B80442B9A09FB002675CE /* GoogleSignInSwift */; };
 		F69B80472B9A0D1B002675CE /* GoogleSignInManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F69B80462B9A0D1B002675CE /* GoogleSignInManager.swift */; };
+		F6B5B4062BBBFD90000C8494 /* CustomProfileSeparatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6B5B4052BBBFD90000C8494 /* CustomProfileSeparatorView.swift */; };
+		F6B5B4082BBBFDA2000C8494 /* ProfileETCView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6B5B4072BBBFDA2000C8494 /* ProfileETCView.swift */; };
+		F6B5B40A2BBBFDC3000C8494 /* ProfileAccountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6B5B4092BBBFDC3000C8494 /* ProfileAccountView.swift */; };
+		F6B5B40C2BBBFDDA000C8494 /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6B5B40B2BBBFDDA000C8494 /* ProfileView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -124,6 +129,7 @@
 		F68C9D232BA2DEDB008CB7E4 /* SocialLoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocialLoginViewController.swift; sourceTree = "<group>"; };
 		F68C9D282BA2FFA0008CB7E4 /* LoginNickNameViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginNickNameViewModel.swift; sourceTree = "<group>"; };
 		F68C9D6D2BA5E291008CB7E4 /* ToastMessageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToastMessageView.swift; sourceTree = "<group>"; };
+		F69011E22BB6D91E009A8087 /* MyPageViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageViewModel.swift; sourceTree = "<group>"; };
 		F69011E02BB6D352009A8087 /* MultipartFormData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultipartFormData.swift; sourceTree = "<group>"; };
 		F69011DC2BB4685C009A8087 /* CustomAlertSheetViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomAlertSheetViewController.swift; sourceTree = "<group>"; };
 		F69011DE2BB5A9B2009A8087 /* CustomAlertSheetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomAlertSheetView.swift; sourceTree = "<group>"; };
@@ -141,6 +147,10 @@
 		F69B80272B996847002675CE /* WithPeaceUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WithPeaceUITests.swift; sourceTree = "<group>"; };
 		F69B80292B996847002675CE /* WithPeaceUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WithPeaceUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		F69B80462B9A0D1B002675CE /* GoogleSignInManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleSignInManager.swift; sourceTree = "<group>"; };
+		F6B5B4052BBBFD90000C8494 /* CustomProfileSeparatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomProfileSeparatorView.swift; sourceTree = "<group>"; };
+		F6B5B4072BBBFDA2000C8494 /* ProfileETCView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileETCView.swift; sourceTree = "<group>"; };
+		F6B5B4092BBBFDC3000C8494 /* ProfileAccountView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileAccountView.swift; sourceTree = "<group>"; };
+		F6B5B40B2BBBFDDA000C8494 /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -264,7 +274,7 @@
 				F68C9D172BA2DD3D008CB7E4 /* HomeView */,
 				F68C9D182BA2DD3E008CB7E4 /* ForumView */,
 				635BCBAA2BA7E6FC00F0DCBC /* PostView */,
-				F68C9D1A2BA2DE4C008CB7E4 /* myPageVIew */,
+				F68C9D1A2BA2DE4C008CB7E4 /* MyPageVIew */,
 				F69B800A2B996846002675CE /* ViewController.swift */,
 			);
 			path = ContentsView;
@@ -342,12 +352,17 @@
 			path = ForumView;
 			sourceTree = "<group>";
 		};
-		F68C9D1A2BA2DE4C008CB7E4 /* myPageVIew */ = {
+		F68C9D1A2BA2DE4C008CB7E4 /* MyPageVIew */ = {
 			isa = PBXGroup;
 			children = (
 				F68C9D212BA2DEAD008CB7E4 /* MyPageViewController.swift */,
+				F6B5B40B2BBBFDDA000C8494 /* ProfileView.swift */,
+				F6B5B4092BBBFDC3000C8494 /* ProfileAccountView.swift */,
+				F6B5B4072BBBFDA2000C8494 /* ProfileETCView.swift */,
+				F6B5B4052BBBFD90000C8494 /* CustomProfileSeparatorView.swift */,
+				F69011E22BB6D91E009A8087 /* MyPageViewModel.swift */,
 			);
-			path = myPageVIew;
+			path = MyPageVIew;
 			sourceTree = "<group>";
 		};
 		F68C9D272BA2F1DC008CB7E4 /* NickNameView */ = {
@@ -602,6 +617,7 @@
 			files = (
 				63C52F9D2BA9B83F0072DE18 /* PostViewModel.swift in Sources */,
 				F68C9D242BA2DEDB008CB7E4 /* SocialLoginViewController.swift in Sources */,
+				F69011E32BB6D91E009A8087 /* MyPageViewModel.swift in Sources */,
 				F69B80472B9A0D1B002675CE /* GoogleSignInManager.swift in Sources */,
 				635BCBA92BA3521F00F0DCBC /* SocialLoginViewModel.swift in Sources */,
 				F674DDDF2BADB17A00536AA7 /* String+.swift in Sources */,
@@ -613,6 +629,7 @@
 				63C52F992BA97FB40072DE18 /* CategorySelectViewController.swift in Sources */,
 				F69B800B2B996846002675CE /* ViewController.swift in Sources */,
 				F68C9D292BA2FFA0008CB7E4 /* LoginNickNameViewModel.swift in Sources */,
+				F6B5B4062BBBFD90000C8494 /* CustomProfileSeparatorView.swift in Sources */,
 				F68C9D1C2BA2DE87008CB7E4 /* HomeViewController.swift in Sources */,
 				635BCBB32BA94F6600F0DCBC /* CategoryViewCell.swift in Sources */,
 				635BCBB72BA952F000F0DCBC /* DescriptionCell.swift in Sources */,
@@ -624,6 +641,7 @@
 				F68C9D6E2BA5E291008CB7E4 /* ToastMessageView.swift in Sources */,
 				F671A9C42BA00FBA002808DA /* NetworkManager.swift in Sources */,
 				F68719B12BA8635C0049B182 /* CustomPhotoAlbumViewController.swift in Sources */,
+				F6B5B40C2BBBFDDA000C8494 /* ProfileView.swift in Sources */,
 				630EA20D2BA0243800F04ED3 /* SignAuthDTO.swift in Sources */,
 				F69011E12BB6D352009A8087 /* MultipartFormData.swift in Sources */,
 				F69B80092B996846002675CE /* SceneDelegate.swift in Sources */,
@@ -639,11 +657,13 @@
 				635BCBB02BA80C7300F0DCBC /* PostNavigationBarView.swift in Sources */,
 				635BCBB52BA952C600F0DCBC /* TitleCell.swift in Sources */,
 				F68C9D222BA2DEAD008CB7E4 /* MyPageViewController.swift in Sources */,
+				F6B5B4082BBBFDA2000C8494 /* ProfileETCView.swift in Sources */,
 				F671A9CA2BA0174E002808DA /* NetworkError.swift in Sources */,
 				630EA20F2BA0277800F04ED3 /* SignRepository.swift in Sources */,
 				F69011DD2BB4685C009A8087 /* CustomAlertSheetViewController.swift in Sources */,
 				63C52F972BA962590072DE18 /* PostPhotoView.swift in Sources */,
 				6303235D2BAC636700B16E7C /* PostManager.swift in Sources */,
+				F6B5B40A2BBBFDC3000C8494 /* ProfileAccountView.swift in Sources */,
 				630EA2002BA0039300F04ED3 /* GoogleSignError.swift in Sources */,
 				F697444F2BB08AD6006683AF /* Data+.swift in Sources */,
 				6377F69D2BA06324006CAB26 /* SignRepositoryError.swift in Sources */,
