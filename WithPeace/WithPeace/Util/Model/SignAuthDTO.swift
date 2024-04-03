@@ -9,7 +9,7 @@ import Foundation
 
 struct SignAuthDTO: Codable {
     let data: DataClass
-    let error: String?
+    let error: Errors?
 }
 
 struct DataClass: Codable {
@@ -26,4 +26,9 @@ struct JwtTokenDto: Codable {
 enum Role: String, Codable {
     case guest = "GUEST"
     case user = "USER"
+}
+
+struct Errors: Codable {
+    var code: Int?
+    var message: String?
 }

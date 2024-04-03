@@ -64,6 +64,7 @@
 		F69B80432B9A09FB002675CE /* GoogleSignIn in Frameworks */ = {isa = PBXBuildFile; productRef = F69B80422B9A09FB002675CE /* GoogleSignIn */; };
 		F69B80452B9A09FB002675CE /* GoogleSignInSwift in Frameworks */ = {isa = PBXBuildFile; productRef = F69B80442B9A09FB002675CE /* GoogleSignInSwift */; };
 		F69B80472B9A0D1B002675CE /* GoogleSignInManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F69B80462B9A0D1B002675CE /* GoogleSignInManager.swift */; };
+		F6B94ABF2BAEFC95005FDEE6 /* ProfileRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6B94ABE2BAEFC95005FDEE6 /* ProfileRepository.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -141,6 +142,7 @@
 		F69B80272B996847002675CE /* WithPeaceUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WithPeaceUITests.swift; sourceTree = "<group>"; };
 		F69B80292B996847002675CE /* WithPeaceUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WithPeaceUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		F69B80462B9A0D1B002675CE /* GoogleSignInManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleSignInManager.swift; sourceTree = "<group>"; };
+		F6B94ABE2BAEFC95005FDEE6 /* ProfileRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileRepository.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -241,6 +243,7 @@
 				F671A9CB2BA017BA002808DA /* NetworkManager */,
 				F69B80462B9A0D1B002675CE /* GoogleSignInManager.swift */,
 				633F8E212B9AC37500B92ADC /* KeychainManager.swift */,
+				F6B94ABE2BAEFC95005FDEE6 /* ProfileRepository.swift */,
 				F671A9C12BA00E35002808DA /* API */,
 				6303235C2BAC636700B16E7C /* PostManager.swift */,
 			);
@@ -611,6 +614,7 @@
 				F65E1ECF2BAC086D00326EF7 /* LoginNickNameViewController.swift in Sources */,
 				F667FD892BAC2287005AAAB7 /* AlbumDetailCell.swift in Sources */,
 				63C52F992BA97FB40072DE18 /* CategorySelectViewController.swift in Sources */,
+				F6B94ABF2BAEFC95005FDEE6 /* ProfileRepository.swift in Sources */,
 				F69B800B2B996846002675CE /* ViewController.swift in Sources */,
 				F68C9D292BA2FFA0008CB7E4 /* LoginNickNameViewModel.swift in Sources */,
 				F68C9D1C2BA2DE87008CB7E4 /* HomeViewController.swift in Sources */,
