@@ -12,7 +12,7 @@ import Foundation
 /// 데이터 메서드 사용후 generateData -> endpoint Body에 주입
 struct MultipartFormData {
     private let boundary = "Boundary-\(UUID().uuidString)"
-    private var data: Data
+    private var data = Data()
     
     /// 데이터 생성
     func generateData() -> Data {

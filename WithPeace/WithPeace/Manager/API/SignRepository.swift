@@ -39,7 +39,6 @@ final class SignRepository: AuthenticationProvider {
             case .success(let data):
                 do {
                     let signDTO = try JSONDecoder().decode(SignAuthDTO.self, from: data)
-                    
                     guard let accessToken = signDTO.data.jwtTokenDto?.accessToken,
                           let refreshToken = signDTO.data.jwtTokenDto?.refreshToken else {
                         completion(.failure(.googleInvalidToken))
@@ -73,7 +72,7 @@ final class SignRepository: AuthenticationProvider {
                                 path: "/api/v1/auth/refresh",
                                 port: 8080,
                                 scheme: "http",
-                                headers: ["Authorization":"Bearer \(keychainAccessToken)"],
+                                headers: ["Reauthorization":"Bearer \(keychainAccessToken)"],
                                 method: .post)
         
         NetworkManager.shared.fetchData(endpoint: endPoint) { result in
