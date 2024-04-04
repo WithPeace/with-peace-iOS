@@ -129,10 +129,8 @@ class LoginNickNameViewController: UIViewController {
                     self?.toastMessage?.presentStandardToastMessage("닉네임 등록을 완료해주세요")
                 } else {
                     DispatchQueue.main.async {
-                        let tabBarController = MainTabbarController()
-                        
-                        self?.navigationController?.isNavigationBarHidden = true
-                        self?.navigationController?.pushViewController(tabBarController, animated: true)
+                        guard let app = UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate else { return }
+                        app.changeViewController()
                     }
                 }
             }

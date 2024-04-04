@@ -13,7 +13,7 @@ final class MainTabbarController: UITabBarController {
     private let homeViewController = UIViewController()
     private let forumViewController = UIViewController()
     private let registViewController = PostViewController()
-    private let myPageViewController = UIViewController()
+    private let myPageViewController =  MyPageViewController()
     
     override func viewDidLoad() {
         super.viewDidLoad()

@@ -13,7 +13,7 @@ final class SocialLoginViewModel {
     private let googleSigninManager: AuthenticationProvider
     private let disposeBag = DisposeBag()
     private var isSign = false
-    let signInSuccess: PublishSubject<String> = PublishSubject()
+    let signInSuccess: PublishSubject<(token: String, role: Role)> = PublishSubject()
     let signInFailure: PublishSubject<Error> = PublishSubject()
     
     init(googleSigninManager: AuthenticationProvider) {
@@ -41,7 +41,15 @@ final class SocialLoginViewModel {
         googleSigninManager.performGoogleSign(idToken: idToken) { [weak self] result in
             switch result {
             case .success(let data):
-                self?.signInSuccess.onNext("Token: \(data)")
+                guard let role = data.data.role else { return }
+                
+                switch role {
+                case .guest:
+                    self?.signInSuccess.onNext(("Token: \(data)", Role.guest))
+                case .user:
+                    self?.signInSuccess.onNext(("Token: \(data)", Role.user))
+                }
+                
             case .failure(let error):
                 self?.signInFailure.onNext(error)
             }
