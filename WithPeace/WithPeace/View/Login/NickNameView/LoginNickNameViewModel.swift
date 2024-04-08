@@ -11,6 +11,7 @@ import RxSwift
 final class LoginNickNameViewModel {
     enum State {
         case success
+        case empty
         case notEnoughCharacters
         case exceededCharacters
         case duplication
@@ -20,6 +21,8 @@ final class LoginNickNameViewModel {
         var description: String {
             switch self {
             case .success:
+                ""
+            case .empty:
                 ""
             case .notEnoughCharacters:
                 "닉네임은 2~10자의 한글, 영문만 가능합니다."
@@ -38,6 +41,8 @@ final class LoginNickNameViewModel {
             switch self {
             case .success:
                 false
+            case .empty:
+                true
             case .notEnoughCharacters:
                 true
             case .exceededCharacters:
@@ -77,7 +82,9 @@ final class LoginNickNameViewModel {
             .map { nickname in
                 guard let nickname = nickname else { return .unknown }
                 
-                if nickname.count < 2  {
+                if nickname.count == 0 {
+                    return .empty
+                } else if nickname.count < 2  {
                     return .notEnoughCharacters
                 } else if nickname.count > 10 {
                     return .exceededCharacters

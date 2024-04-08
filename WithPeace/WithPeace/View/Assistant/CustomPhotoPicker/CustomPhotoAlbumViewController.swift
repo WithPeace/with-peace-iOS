@@ -10,7 +10,9 @@ import Photos
 
 final class CustomPhotoAlbumViewController: UIViewController {
     
-    var completionHandlerChangePHAssetsToDatas: (([PHAsset]) -> ())?
+    var completionHandlerPHAssets: (([PHAsset]) -> Void)?
+    var completionHandlerChangePHAssetsToDatas: (([Data]) -> Void)?
+    //TODO: completionHandlerChangePHAssetsToUIImage 네이밍 변경
     var completionHandler: (([UIImage]) -> Void)?
     
     private var maxSelect: Int
@@ -174,6 +176,7 @@ extension CustomPhotoAlbumViewController: UICollectionViewDelegate {
         }
         
         customDetailViewController.completeCompletionHandler = { [weak self] selectedAssets in
+            self?.completionHandlerPHAssets?(selectedAssets)
             self?.convertAssetsToImages(assets: selectedAssets, completion: { images in
                 self?.completionHandler?(images)
             })
@@ -224,10 +227,11 @@ extension CustomPhotoAlbumViewController {
     @objc
     private func tabBackButton() {
         dismiss(animated: true) {
-            self.completionHandlerChangePHAssetsToDatas?(self.selectedAssets)
+            self.completionHandlerPHAssets?(self.selectedAssets)
         }
     }
     
+    //???: 선택한 사진 순서대로 images에 append 된다는 것을 보장할 수 없지 않은가?
     private func convertAssetsToImages(assets: [PHAsset], completion: @escaping ([UIImage]) -> Void) {
         var images: [UIImage] = []
         let imageManager = PHImageManager.default()
@@ -236,7 +240,10 @@ extension CustomPhotoAlbumViewController {
         
         for asset in assets {
             let size = CGSize(width: 110, height: 110)
-            imageManager.requestImage(for: asset, targetSize: size, contentMode: .aspectFill, options: options) { image, _ in
+            imageManager.requestImage(for: asset, 
+                                      targetSize: size,
+                                      contentMode: .aspectFill,
+                                      options: options) { image, _ in
                 if let image = image {
                     images.append(image)
                 }
