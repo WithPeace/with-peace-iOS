@@ -7,6 +7,7 @@
 
 import Foundation
 import RxSwift
+import UIKit
 
 final class LoginNickNameViewModel {
     enum State {
@@ -14,8 +15,9 @@ final class LoginNickNameViewModel {
         case empty
         case notEnoughCharacters
         case exceededCharacters
-        case duplication
         case otherCharacters
+        case textSuccess
+        case duplication
         case unknown
         
         var description: String {
@@ -28,10 +30,12 @@ final class LoginNickNameViewModel {
                 "닉네임은 2~10자의 한글, 영문만 가능합니다."
             case .exceededCharacters:
                 "닉네임은 2~10자의 한글, 영문만 가능합니다."
-            case .duplication:
-                "중복된 닉네임 입니다"
             case .otherCharacters:
                 "닉네임은 2~10자의 한글, 영문만 가능합니다."
+            case .textSuccess:
+                ""
+            case .duplication:
+                "중복된 닉네임입니다."
             case .unknown:
                 ""
             }
@@ -51,24 +55,28 @@ final class LoginNickNameViewModel {
                 true
             case .otherCharacters:
                 true
+            case .textSuccess:
+                false
             case .unknown:
                 false
+            
             }
         }
     }
     
+    let profileRepository = ProfileRepository()
     let disposeBag = DisposeBag()
     
     //INPUT
-    var nicknameField: BehaviorSubject<String?>
+    var nicknameField: BehaviorSubject<String?> //?굳이? 옵셔널? 어차피 init에서 하는데..?
     var profileImage: PublishSubject<Data?>
     var tapRegisterButton: BehaviorSubject<Void>
     
     //OUTPUT
     var isNicknameValid: Observable<State> // 닉네임이 유효한지?
-    
     var changeProfileImage: Observable<Data?>
     var dismissForNext: Observable<State>
+    var checkingDuplication: PublishSubject<State>
     
     init() {
         
@@ -78,6 +86,15 @@ final class LoginNickNameViewModel {
         self.tapRegisterButton = BehaviorSubject<Void>(value: Void())
         
         //OUTPUT
+        self.isNicknameValid = BehaviorSubject(value: .empty)
+        
+        self.changeProfileImage = profileImage
+            .map { data in
+                if let data = data { return data }
+                
+                return nil
+            }
+        
         self.isNicknameValid = self.nicknameField
             .map { nickname in
                 guard let nickname = nickname else { return .unknown }
@@ -92,19 +109,35 @@ final class LoginNickNameViewModel {
                     return .otherCharacters
                 }
                 
-                //TODO: 서버 닉네임 중복 확인. 임시구현
-                if nickname == "abc" { return .duplication }
-                
-                return .success
+                return .textSuccess
             }
         
-        self.changeProfileImage = profileImage
-            .map { data in
-                if let data = data { return data }
-                
-                return nil
-            }
+        checkingDuplication = PublishSubject()
         
-        dismissForNext = tapRegisterButton.withLatestFrom(isNicknameValid)
+        dismissForNext = tapRegisterButton.withLatestFrom(checkingDuplication)
+        
+        self.isNicknameValid
+            .debounce(.milliseconds(500), scheduler: MainScheduler.asyncInstance)
+            .filter({
+                $0 == .textSuccess
+            })
+            .withLatestFrom(nicknameField)
+            .subscribe(onNext: { nickname in
+                guard let nickname = nickname else { return }
+                self.checkDuplication(nickname: nickname)
+            })
+            .disposed(by: disposeBag)
+    }
+    
+    private func checkDuplication(nickname: String) {
+        profileRepository.checkNickname(nickname: nickname) { result in
+            switch result {
+            case .success(let bool):
+                print(bool)
+                bool ? self.checkingDuplication.onNext(.duplication) : self.checkingDuplication.onNext(.success)
+            case .failure(let error):
+                print(error)
+            }
+        }
     }
 }

@@ -116,9 +116,20 @@ final class LoginNickNameViewController: UIViewController {
     }
     
     private func bind() {
+        viewModel.checkingDuplication
+            .subscribe(onNext: { [weak self] emit in
+                DispatchQueue.main.async {
+                    self?.errorLabel.text = emit.description
+                }
+                self?.configureUI(isError: emit.isError)
+            })
+            .disposed(by: disposeBag)
+        
         viewModel.isNicknameValid
             .subscribe(onNext: { [weak self] emit in
-                self?.errorLabel.text = emit.description
+                DispatchQueue.main.async {
+                    self?.errorLabel.text = emit.description
+                }
                 
                 if emit == .empty {
                     self?.configureUI(isError: false)
@@ -168,7 +179,6 @@ extension LoginNickNameViewController {
     private func tapRegistButton() {
         viewModel.tapRegisterButton.onNext(())
     }
-    
     private func configureTargetAction() {
         registButton.addTarget(self, action: #selector(tapRegistButton), for: .touchUpInside)
         nicknameTextField.addTarget(self, action: #selector(textFieldDidChange), for: .editingChanged)
