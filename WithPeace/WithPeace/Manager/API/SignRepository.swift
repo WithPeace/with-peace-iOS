@@ -57,56 +57,6 @@ final class SignRepository: AuthenticationProvider {
         }
     }
     
-    func performRefresh(completion: @escaping (Result<Void, SignRepositoryError>) -> Void) {
-        guard let baseURL = Bundle.main.apiKey else {
-            completion(.failure(.bundleError))
-            return
-        }
-        
-        guard let keychainAccessToken = keychainManager.get(account: "refreshToken") else {
-            completion(.failure(.notKeychain))
-            return
-        }
-        
-        let endPoint = EndPoint(baseURL: baseURL,
-                                path: "/api/v1/auth/refresh",
-                                port: 8080,
-                                scheme: "http",
-                                headers: ["Reauthorization":"Bearer \(keychainAccessToken)"],
-                                method: .post)
-        
-        NetworkManager.shared.fetchData(endpoint: endPoint) { result in
-            switch result {
-            case .success(let data):
-                do {
-                    let signDTO = try JSONDecoder().decode(SignAuthDTO.self, from: data)
-                    
-                    guard let accessToken = signDTO.data.accessToken,
-                          let refreshToken = signDTO.data.refreshToken else {
-                        completion(.failure(.tokenAbsenceError))
-                        return
-                    }
-                    
-                    try self.saveTokens(accessToken: accessToken, refreshToken: refreshToken)
-                    completion(.success(()))
-                } catch {
-                    completion(.failure(.decodingError))
-                }
-            case .failure(let error):
-                if error == .unauthorized {
-                    //TODO: - Logout 진행시 Access token 필요함. 만료되었는데 로그아웃을 어떻게 진행할 것인가?
-                    // 리프레쉬도 만료 되었으니, 재로그인
-                    // 그렇다면 재로그인? 로그아웃을 한 뒤 로그인을 해야하는 것 아닌가?
-                    // 서버에서 우리가 로그아웃 하지 않았는데, 로그인이 되었다면 어떻게 되는것인가?
-                    //      만약 서버에서 로그인시도가 있을 때 자동 로그아웃 처리되면 우리는 그냥 로그인다시하면됨.
-                    // 하지만 서버에서 로그아웃 -> 로그인 을 원하면? 그건 다시생각야함.
-                } else {
-                    completion(.failure(.networkError))
-                }
-            }
-        }
-    }
-    
     //TODO: 회원가입 메서드 (회원가입 완료 시 : role: guest -> user)
     func performRegister(nickname: String,
                          completion: @escaping (Result<Void, SignRepositoryError>) -> Void) {
@@ -170,6 +120,56 @@ final class SignRepository: AuthenticationProvider {
                             break
                         }
                     }
+                } else {
+                    completion(.failure(.networkError))
+                }
+            }
+        }
+    }
+    
+    func performRefresh(completion: @escaping (Result<Void, SignRepositoryError>) -> Void) {
+        guard let baseURL = Bundle.main.apiKey else {
+            completion(.failure(.bundleError))
+            return
+        }
+        
+        guard let keychainAccessToken = keychainManager.get(account: "refreshToken") else {
+            completion(.failure(.notKeychain))
+            return
+        }
+        
+        let endPoint = EndPoint(baseURL: baseURL,
+                                path: "/api/v1/auth/refresh",
+                                port: 8080,
+                                scheme: "http",
+                                headers: ["Authorization":"Bearer \(keychainAccessToken)"],
+                                method: .post)
+        
+        NetworkManager.shared.fetchData(endpoint: endPoint) { result in
+            switch result {
+            case .success(let data):
+                do {
+                    let signDTO = try JSONDecoder().decode(SignAuthDTO.self, from: data)
+                    
+                    guard let accessToken = signDTO.data.accessToken,
+                          let refreshToken = signDTO.data.refreshToken else {
+                        completion(.failure(.tokenAbsenceError))
+                        return
+                    }
+                    
+                    try self.saveTokens(accessToken: accessToken, refreshToken: refreshToken)
+                    completion(.success(()))
+                } catch {
+                    completion(.failure(.decodingError))
+                }
+            case .failure(let error):
+                if error == .unauthorized {
+                    //TODO: - Logout 진행시 Access token 필요함. 만료되었는데 로그아웃을 어떻게 진행할 것인가?
+                    // 리프레쉬도 만료 되었으니, 재로그인
+                    // 그렇다면 재로그인? 로그아웃을 한 뒤 로그인을 해야하는 것 아닌가?
+                    // 서버에서 우리가 로그아웃 하지 않았는데, 로그인이 되었다면 어떻게 되는것인가?
+                    //      만약 서버에서 로그인시도가 있을 때 자동 로그아웃 처리되면 우리는 그냥 로그인다시하면됨.
+                    // 하지만 서버에서 로그아웃 -> 로그인 을 원하면? 그건 다시생각야함.
                 } else {
                     completion(.failure(.networkError))
                 }
