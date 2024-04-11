@@ -235,7 +235,7 @@ extension CustomPhotoAlbumViewController {
         options.isSynchronous = true
         
         for asset in assets {
-            let size = CGSize(width: 110, height: 110)
+            let size = PHImageManagerMaximumSize
             imageManager.requestImage(for: asset, targetSize: size, contentMode: .aspectFill, options: options) { image, _ in
                 if let image = image {
                     images.append(image)
