@@ -37,10 +37,18 @@ final class ForumDetailViewController: UIViewController {
     }
     
     @objc private func didTapMoreButton() {
+//        if postModel.?? == ??? {
+            presentMyPostActionSheet()
+//        } else {
+//            presentOtherPostActionSheet()
+//        }
+    }
+    
+    private func presentMyPostActionSheet() {
         guard let editImage = UIImage(systemName: "pencil"),
               let deleteImage = UIImage(systemName: "trash") else { return }
         
-        let topActionContents = (editImage, "수정하기", { [weak self] in
+        let topActionContents = (editImage, "수정하기", {
 //            if let postModel = self?.postModel {
 //                let editVC = PostViewController()
 //                self?.navigationController?.pushViewController(editVC, animated: true)
@@ -50,6 +58,22 @@ final class ForumDetailViewController: UIViewController {
         
         let bottomActionContents = (deleteImage, "삭제하기", {
             print("삭제")
+        })
+        
+        let action = CustomActionSheetViewController(top: topActionContents, bottom: bottomActionContents)
+        action.presentAsActionSheet(from: self)
+    }
+    
+    private func presentOtherPostActionSheet() {
+        guard let reportImage = UIImage(systemName: "exclamationmark.bubble"),
+              let hideImage = UIImage(systemName: "eye.slash") else { return }
+        
+        let topActionContents = (reportImage, "신고하기", {
+            print("신고하기")
+        })
+        
+        let bottomActionContents = (hideImage, "이 글 보이지 않게하기", {
+            print("글 안보이기")
         })
         
         let action = CustomActionSheetViewController(top: topActionContents, bottom: bottomActionContents)
