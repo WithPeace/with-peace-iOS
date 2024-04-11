@@ -21,7 +21,17 @@ final class CustomPhotoAlbumDetailViewController: UIViewController {
         didSet {
             let const = Const.CustomIcon.ICBtnPostcreate.self
             let count = selectedAssets.count
-            if count > 0 {
+            if maxSelect == 1 {
+                if count == 0 {
+                    completeButton.setImage(UIImage(named: const.btnPostcreateDone), for: .normal)
+                    completeButton.isEnabled = false
+                    titleLabel.text = ""
+                } else {
+                    completeButton.setImage(UIImage(named: const.btnPostcreateDoneSelect), for: .normal)
+                    completeButton.isEnabled = true
+                    titleLabel.text = "1개 선택됨"
+                }
+            } else if count > 0 {
                 completeButton.setImage(UIImage(named: const.btnPostcreateDoneSelect), for: .normal)
                 completeButton.isEnabled = true
                 titleLabel.text = "\(count)/\(maxSelect)개 선택됨"
@@ -81,7 +91,7 @@ final class CustomPhotoAlbumDetailViewController: UIViewController {
         configureDataSourceSnapshot()
     }
     
-    init( totalPhotoCount: Int, albumCollection: PHCollection, selectedAssets: [PHAsset]) {
+    init(totalPhotoCount: Int, albumCollection: PHCollection, selectedAssets: [PHAsset]) {
         self.maxSelect = totalPhotoCount
         self.albumCollection = albumCollection
         self.selectedAssets = selectedAssets
@@ -90,7 +100,10 @@ final class CustomPhotoAlbumDetailViewController: UIViewController {
             completeButton.isEnabled = true
             completeButton.setImage(UIImage(named: Const.CustomIcon.ICBtnPostcreate.btnPostcreateDoneSelect), for: .normal)
             titleLabel.text = "\(selectedAssets.count)/\(maxSelect)개 선택됨"
+        } else if selectedAssets.count == 0 && maxSelect > 1 {
+            titleLabel.text = "0/\(maxSelect)개 선택됨"
         }
+        
         
         super.init(nibName: nil, bundle: nil)
         self.toastMessage = ToastMessageView(superView: self.view)
