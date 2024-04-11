@@ -64,6 +64,11 @@ final class TitleCell: UITableViewCell, UITextViewDelegate {
         updatePlaceholderVisibility()
     }
     
+    func configureWithPostModel(_ model: PostModel) {
+        titleTextView.text = model.title
+        updatePlaceholderVisibility()
+    }
+    
     private func updatePlaceholderVisibility() {
         placeholderLabel.isHidden = !titleTextView.text.isEmpty
     }

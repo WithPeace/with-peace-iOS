@@ -19,6 +19,13 @@ final class PostViewController: UIViewController {
         
         return tableView
     }()
+    var postModel: PostModel?
+    
+    init(postModel: PostModel) {
+        self.postModel = postModel
+        super.init(nibName: nil, bundle: nil)
+        setupForEditMode(postModel)
+    }
     
     init() {
         super.init(nibName: nil, bundle: nil)
@@ -37,13 +44,18 @@ final class PostViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        didTapBack()
-        didTapComplete()
-        didTapPhoto()
         setupCustomNaviBar()
         configureUI()
         setupTableView()
         setupPhotoView()
+    }
+    
+    override func viewIsAppearing(_ animated: Bool) {
+        super.viewIsAppearing(animated)
+        configureMode()
+        didTapBack()
+        didTapComplete()
+        didTapPhoto()
     }
     
     private func setupCustomNaviBar() {
@@ -58,6 +70,29 @@ final class PostViewController: UIViewController {
             customNavigationBarView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             customNavigationBarView.heightAnchor.constraint(equalToConstant: 56)
         ])
+    }
+    
+    private func configureMode() {
+        if let model = postModel {
+            setupForEditMode(model)
+        } else {
+            setupForCreateMode()
+        }
+    }
+    
+    private func setupForEditMode(_ model: PostModel) {
+        print("Setup for Edit Mode")
+        // 네비게이션 바 버튼 설정
+        customNavigationBarView.onBackButtonTapped = { [weak self] in
+            self?.navigationController?.popViewController(animated: true)
+        }
+//        customNavigationBarView.onCompleteButtonTapped = { [weak self] in
+//            print("뭐야???")
+//        }
+    }
+    
+    private func setupForCreateMode() {
+        print("Setup for Create Mode")
     }
     
     private func configureUI() {
@@ -104,6 +139,10 @@ extension PostViewController: UITableViewDataSource {
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "CategoryCell",
                                                            for: indexPath) as? CategoryViewCell else { return UITableViewCell() }
             
+            if let postModel = postModel {
+                cell.configureWithPostModel(postModel)
+            }
+
             viewModel.categorySelected
                 .subscribe(onNext: { category in
                     let category = category ?? "카테고리의 주제를 선택하세요"
@@ -120,6 +159,11 @@ extension PostViewController: UITableViewDataSource {
         case 1:
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "TitleCell",
                                                            for: indexPath) as? TitleCell else { return UITableViewCell() }
+            
+            if let postModel = postModel {
+                cell.configureWithPostModel(postModel)
+            }
+            
             cell.textChanged
                 .subscribe { [weak self] newTitle in
                     self?.viewModel.titleTextChanged.onNext(newTitle)
@@ -129,11 +173,19 @@ extension PostViewController: UITableViewDataSource {
         case 2:
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "DescriptionCell",
                                                            for: indexPath) as? DescriptionCell else { return UITableViewCell() }
+            
+            if let postModel = postModel {
+                cell.configureWithPostModel(postModel)
+            }
+            
             cell.textChanged
                 .subscribe { [weak self] newDescription in
                     self?.viewModel.contentTextChanged.onNext(newDescription)
                 }
                 .disposed(by: disposeBag)
+            cell.onImageDeleted = { [weak self] deletedImage in
+                self?.viewModel.removeSelectedImage(deletedImage)
+            }
             return cell
         default:
             return UITableViewCell()
