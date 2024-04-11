@@ -11,8 +11,8 @@ import RxSwift
 final class PostViewController: UIViewController {
     private let customNavigationBarView = PostNavigationBarView()
     private let photoView = PostPhotoView()
-    private var viewModel = PostViewModel()
-    private let disposeBag = DisposeBag()
+    var viewModel = PostViewModel()
+    let disposeBag = DisposeBag()
     private let tableView: UITableView = {
         let tableView = UITableView()
         tableView.translatesAutoresizingMaskIntoConstraints = false
@@ -185,6 +185,9 @@ extension PostViewController {
             let vc = CustomPhotoAlbumViewController(maxSelect: 5)
             vc.completionHandler = { [weak self] selectedImages in
                 if let descriptionCell = self?.tableView.cellForRow(at: IndexPath(row: 2, section: 0)) as? DescriptionCell {
+                    for image in selectedImages {
+                        self?.viewModel.selectImage(image)
+                    }
                     descriptionCell.addImages(selectedImages)
                 }
             }
