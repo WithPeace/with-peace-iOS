@@ -41,6 +41,12 @@ final class ForumViewController: UIViewController {
         bind()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        configureUI()
+    }
+    
     private func bind() {
         selectedCategory
             .subscribe(onNext: { [weak self] category in
@@ -71,6 +77,7 @@ final class ForumViewController: UIViewController {
             categoryView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
             categoryView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             categoryView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            categoryView.heightAnchor.constraint(equalToConstant: 90),
             
             collectionView.topAnchor.constraint(equalTo: categoryView.bottomAnchor),
             collectionView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
@@ -146,4 +153,21 @@ extension ForumViewController: UICollectionViewDataSource {
     }
 }
 
-extension ForumViewController: UICollectionViewDelegateFlowLayout {}
+extension ForumViewController: UICollectionViewDelegateFlowLayout {
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let post = posts[indexPath.row]
+        let detailVC = ForumDetailViewController()
+        detailVC.postModel = post
+        detailVC.onPostUpdated = { [weak self] updatedPost in
+            self?.updatePost(updatedPost)
+        }
+        navigationController?.pushViewController(detailVC, animated: true)
+    }
+    
+    func updatePost(_ updatedPost: PostModel) {
+        if let index = posts.firstIndex(where: { $0.uuid == updatedPost.uuid }) {
+            posts[index] = updatedPost
+            collectionView.reloadData()
+        }
+    }
+}
