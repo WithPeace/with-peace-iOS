@@ -10,9 +10,10 @@ import Foundation
 protocol AuthenticationProvider {
     func performGoogleSign(idToken: String,
                            completion: @escaping (Result<SignAuthDTO, SignRepositoryError>) -> Void)
-    func performRefresh(completion: @escaping (Result<Void, SignRepositoryError>) -> Void)
     func performRegister(nickname: String,
+                         imageData: Data?,
                          completion: @escaping (Result<Void, SignRepositoryError>) -> Void)
+    func performRefresh(completion: @escaping (Result<Void, SignRepositoryError>) -> Void)
     func performLogout(completion: @escaping (Result<Void, SignRepositoryError>) -> Void)
 }
 
@@ -59,29 +60,42 @@ final class SignRepository: AuthenticationProvider {
     
     //TODO: 회원가입 메서드 (회원가입 완료 시 : role: guest -> user)
     func performRegister(nickname: String,
+                         imageData: Data? = nil,
                          completion: @escaping (Result<Void, SignRepositoryError>) -> Void) {
         guard let baseURL = Bundle.main.apiKey else {
             completion(.failure(.bundleError))
             return
         }
         
-        guard let keychainAccessToken = keychainManager.get(account: "accessToken") else {
+        guard let keychainAccessToken = keychainManager.get(account: "accessToken"),
+              let keychainAccessToken = String(data: keychainAccessToken, encoding: .utf8) else {
             completion(.failure(.notKeychain))
             return
         }
         
-        let nicknameModel = Nickname(nickname: nickname)
+        var formData = MultipartFormData()
+        formData.createFormFiled(contents: ["nickname":nickname])
         
-        guard let requestBody = try? JSONEncoder().encode(nicknameModel) else {
-            completion(.failure(.encodingError))
-            return
+        if let imageData = imageData {
+            formData.addFilesBodyData(fieldName: "imageFile",
+                                      fileName: "image.jpeg",
+                                      mimeType: "image/jpeg",
+                                      fileData: imageData)
         }
+        
+        let requestBody = formData.generateData()
+        
+        var contentsTypeHeader = formData.generateHeader()
+        contentsTypeHeader["Authorization"] = "Bearer \(keychainAccessToken)"
+//        var contentsTypeHeader = ["Authorization":"Bearer \(keychainAccessToken)"]
+//        contentsTypeHeader["Content-Type"] = "multipart/form-data; boundary=\(formData.getBoundary())"
+        
         
         let endPoint = EndPoint(baseURL: baseURL,
                                 path: "/api/v1/auth/register",
                                 port: 8080,
                                 scheme: "http",
-                                headers: ["Authorization":"Bearer \(keychainAccessToken)"],
+                                headers: contentsTypeHeader,
                                 method: .post,
                                 body: requestBody)
         
@@ -108,11 +122,11 @@ final class SignRepository: AuthenticationProvider {
                 }
             case .failure(let error):
                 if error == .unauthorized {
-                    //401 일 때 리프레쉬로 엑세스 먼저 발급
+                    //TODO: 401 일 때 리프레쉬로 엑세스 먼저 발급 40101일 경우만 refresh실행
                     self.performRefresh { result in
                         switch result {
                         case .success(_):
-                            self.performRegister(nickname: nickname, completion: completion)
+                            break
                         case .failure(_):
                             //TODO: LogOut
                             debugPrint("PERFORM REGISTER _ REFRESH ERROR : Please LogOut")
@@ -133,8 +147,12 @@ final class SignRepository: AuthenticationProvider {
             return
         }
         
-        guard let keychainAccessToken = keychainManager.get(account: "refreshToken") else {
+        guard let keychainRefreshToken = keychainManager.get(account: "refreshToken") else {
             completion(.failure(.notKeychain))
+            return
+        }
+        
+        guard let keychainRefreshToken = String(data: keychainRefreshToken, encoding: .utf8) else {
             return
         }
         
@@ -142,7 +160,7 @@ final class SignRepository: AuthenticationProvider {
                                 path: "/api/v1/auth/refresh",
                                 port: 8080,
                                 scheme: "http",
-                                headers: ["Authorization":"Bearer \(keychainAccessToken)"],
+                                headers: ["Authorization":"Bearer \(keychainRefreshToken)"],
                                 method: .post)
         
         NetworkManager.shared.fetchData(endpoint: endPoint) { result in
@@ -215,7 +233,10 @@ final class SignRepository: AuthenticationProvider {
             }
         }
     }
-    
+}
+
+//MARK: - Private Function
+extension SignRepository {
     private func saveTokens(accessToken: String, refreshToken: String) throws {
         guard let refreshToken = refreshToken.data(using: .utf8),
               let accessToken = accessToken.data(using: .utf8) else {
