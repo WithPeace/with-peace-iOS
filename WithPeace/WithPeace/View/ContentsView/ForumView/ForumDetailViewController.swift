@@ -41,10 +41,10 @@ final class ForumDetailViewController: UIViewController {
               let deleteImage = UIImage(systemName: "trash") else { return }
         
         let topActionContents = (editImage, "수정하기", { [weak self] in
-            if let postModel = self?.postModel {
-                let editVC = PostViewController(postModel: postModel)
-                self?.navigationController?.pushViewController(editVC, animated: true)
-            }
+//            if let postModel = self?.postModel {
+//                let editVC = PostViewController()
+//                self?.navigationController?.pushViewController(editVC, animated: true)
+//            }
             print("수정")
         })
         

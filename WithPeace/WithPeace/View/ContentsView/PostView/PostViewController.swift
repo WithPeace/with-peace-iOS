@@ -21,11 +21,11 @@ final class PostViewController: UIViewController {
     }()
     var postModel: PostModel?
     
-    init(postModel: PostModel) {
-        self.postModel = postModel
-        super.init(nibName: nil, bundle: nil)
-        setupForEditMode(postModel)
-    }
+//    init(postModel: PostModel) {
+//        self.postModel = postModel
+//        super.init(nibName: nil, bundle: nil)
+//        setupForEditMode(postModel)
+//    }
     
     init() {
         super.init(nibName: nil, bundle: nil)
@@ -82,13 +82,9 @@ final class PostViewController: UIViewController {
     
     private func setupForEditMode(_ model: PostModel) {
         print("Setup for Edit Mode")
-        // 네비게이션 바 버튼 설정
         customNavigationBarView.onBackButtonTapped = { [weak self] in
             self?.navigationController?.popViewController(animated: true)
         }
-//        customNavigationBarView.onCompleteButtonTapped = { [weak self] in
-//            print("뭐야???")
-//        }
     }
     
     private func setupForCreateMode() {
@@ -139,9 +135,9 @@ extension PostViewController: UITableViewDataSource {
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "CategoryCell",
                                                            for: indexPath) as? CategoryViewCell else { return UITableViewCell() }
             
-            if let postModel = postModel {
-                cell.configureWithPostModel(postModel)
-            }
+//            if let postModel = postModel {
+//                cell.configureWithPostModel(postModel)
+//            }
 
             viewModel.categorySelected
                 .subscribe(onNext: { category in
@@ -160,9 +156,9 @@ extension PostViewController: UITableViewDataSource {
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "TitleCell",
                                                            for: indexPath) as? TitleCell else { return UITableViewCell() }
             
-            if let postModel = postModel {
-                cell.configureWithPostModel(postModel)
-            }
+//            if let postModel = postModel {
+//                cell.configureWithPostModel(postModel)
+//            }
             
             cell.textChanged
                 .subscribe { [weak self] newTitle in
@@ -174,9 +170,9 @@ extension PostViewController: UITableViewDataSource {
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "DescriptionCell",
                                                            for: indexPath) as? DescriptionCell else { return UITableViewCell() }
             
-            if let postModel = postModel {
-                cell.configureWithPostModel(postModel)
-            }
+//            if let postModel = postModel {
+//                cell.configureWithPostModel(postModel)
+//            }
             
             cell.textChanged
                 .subscribe { [weak self] newDescription in
