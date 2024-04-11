@@ -14,6 +14,11 @@ struct MultipartFormData {
     private let boundary = "Boundary-\(UUID().uuidString)"
     private var data = Data()
     
+    /// header 반환
+    func generateHeader() -> Dictionary<String, String> {
+        ["Content-Type":"multipart/form-data; boundary=\(boundary)"]
+    }
+    
     /// 데이터 생성
     func generateData() -> Data {
         var combineData = self.data

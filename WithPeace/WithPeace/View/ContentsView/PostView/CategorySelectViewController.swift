@@ -7,6 +7,30 @@
 
 import UIKit
 
+enum Category: String, CaseIterable {
+    case free = "자유"
+    case information = "정보"
+    case question = "질문"
+    case life = "생활"
+    case hobby = "취미"
+    case economy = "경제"
+
+    var imageName: String {
+        switch self {
+        case .free: return "ic-cate-free"
+        case .information: return "ic-cate-info"
+        case .question: return "ic-cate-question"
+        case .life: return "ic-cate-living"
+        case .hobby: return "ic-cate-hobby"
+        case .economy: return "ic-cate-eco"
+        }
+    }
+
+    var selectedImageName: String {
+        return "\(self.imageName)-select"
+    }
+}
+
 final class CategorySelectViewController: UIViewController {
     private let titleLabel: UILabel = {
         let label = UILabel()
@@ -42,17 +66,11 @@ final class CategorySelectViewController: UIViewController {
     }
     
     private func setupViews() {
-        let titles = ["자유", "정보", "질문", "생활", "취미", "경제"]
-        let images = ["ic-cate-free", "ic-cate-info", "ic-cate-question",
-                      "ic-cate-living", "ic-cate-hobby", "ic-cate-eco"]
-        let selectedImages = ["ic-cate-free-select", "ic-cate-info-select", "ic-cate-question-select",
-                              "ic-cate-living-select", "ic-cate-hobby-select", "ic-cate-eco-select"]
-        
-        for i in 0..<titles.count {
+        Category.allCases.forEach { category in
             let button = UIButton()
-            button.setTitle(titles[i], for: .normal)
-            button.setImage(UIImage(named: images[i]), for: .normal)
-            button.setImage(UIImage(named: selectedImages[i]), for: .selected)
+            button.setTitle(category.rawValue, for: .normal)
+            button.setImage(UIImage(named: category.imageName), for: .normal)
+            button.setImage(UIImage(named: category.selectedImageName), for: .selected)
             button.translatesAutoresizingMaskIntoConstraints = false
             button.addTarget(self, action: #selector(categoryButtonTapped), for: .touchUpInside)
             categoryButtons.append(button)
@@ -108,10 +126,10 @@ final class CategorySelectViewController: UIViewController {
     }
     
     @objc private func categoryButtonTapped(_ sender: UIButton) {
-        if let categoryTitle = sender.title(for: .normal) {
-            onCategorySelected?(categoryTitle)
-        }
+        guard let title = sender.title(for: .normal),
+              let category = Category(rawValue: title) else { return }
         
+        onCategorySelected?(category.rawValue)
         dismiss(animated: true)
     }
     
