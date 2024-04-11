@@ -56,10 +56,10 @@ final class ForumCategoryView: UIView {
         self.addSubview(stackView)
         
         NSLayoutConstraint.activate([
-            stackView.topAnchor.constraint(equalTo: topAnchor),
-            stackView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 4),
-            stackView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -4),
-            self.heightAnchor.constraint(equalToConstant: 110)
+            stackView.topAnchor.constraint(equalTo: self.topAnchor),
+            stackView.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 4),
+            stackView.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -4),
+            stackView.heightAnchor.constraint(equalToConstant: 80)
         ])
     }
     
