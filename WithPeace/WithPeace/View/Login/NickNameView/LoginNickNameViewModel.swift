@@ -65,24 +65,26 @@ final class LoginNickNameViewModel {
     }
     
     let profileRepository = ProfileRepository()
+    let signRepository = SignRepository()
     let disposeBag = DisposeBag()
     
     //INPUT
-    var nicknameField: BehaviorSubject<String?> //?굳이? 옵셔널? 어차피 init에서 하는데..?
-    var profileImage: PublishSubject<Data?>
+    var nicknameField: BehaviorSubject<String?>
+    var profileImage: BehaviorSubject<Data?>
     var tapRegisterButton: BehaviorSubject<Void>
     
     //OUTPUT
-    var isNicknameValid: Observable<State> // 닉네임이 유효한지?
+    var isNicknameValid: Observable<State>
     var changeProfileImage: Observable<Data?>
     var dismissForNext: Observable<State>
-    var checkingDuplication: PublishSubject<State>
+    var checkingDuplication: BehaviorSubject<State>
+    var allSuccess = BehaviorSubject(value: false)
     
     init() {
         
         //INPUT
         self.nicknameField = BehaviorSubject<String?>(value: "")
-        self.profileImage = PublishSubject<Data?>()
+        self.profileImage = BehaviorSubject<Data?>(value: nil)
         self.tapRegisterButton = BehaviorSubject<Void>(value: Void())
         
         //OUTPUT
@@ -112,11 +114,14 @@ final class LoginNickNameViewModel {
                 return .textSuccess
             }
         
-        checkingDuplication = PublishSubject()
+        checkingDuplication = BehaviorSubject(value: .empty)
         
         dismissForNext = tapRegisterButton.withLatestFrom(checkingDuplication)
         
         self.isNicknameValid
+            .do(onNext: { _ in
+                self.checkingDuplication.onNext(.unknown)
+            })
             .debounce(.milliseconds(500), scheduler: MainScheduler.asyncInstance)
             .filter({
                 $0 == .textSuccess
@@ -126,6 +131,38 @@ final class LoginNickNameViewModel {
                 guard let nickname = nickname else { return }
                 self.checkDuplication(nickname: nickname)
             })
+            .disposed(by: disposeBag)
+        
+        dismissForNext
+            .filter({
+                $0 == .success
+            }).withLatestFrom(Observable.combineLatest(nicknameField, profileImage))
+            .subscribe { nickname, imageData in
+                
+                #warning("테스트 결과 2MB사진도 적절하게 전송이 안됨, imageSize 작게 변경")
+                //TODO: Image변환 및 사이즈가 더 작아야 전송됨.
+                let imageSize = 10 * 1024 * 1024
+                var image: Data?
+                guard let nickname = nickname else { return }
+                
+                if let imageData = imageData {
+                    if imageData.count < imageSize {
+                        image = UIImage(data: imageData)?.jpegData(compressionQuality: 1)
+                    } else {
+                        image = UIImage(data: imageData)?.jpegData(compressionQuality:  CGFloat(imageSize/imageData.count))
+                    }
+                    
+                    self.signRepository.performRegister(nickname: nickname,
+                                                        imageData: image) { result in
+                        switch result {
+                        case .success(_):
+                            self.allSuccess.onNext(true)
+                        case .failure(let error):
+                            print(error)
+                        }
+                    }
+                }
+            }
             .disposed(by: disposeBag)
     }
     

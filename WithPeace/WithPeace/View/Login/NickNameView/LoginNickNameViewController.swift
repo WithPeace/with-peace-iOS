@@ -150,16 +150,21 @@ final class LoginNickNameViewController: UIViewController {
         
         viewModel.dismissForNext
             .subscribe { [weak self] in
-                if $0.isError {
+                if $0 != .success {
                     self?.toastMessage?.presentStandardToastMessage("닉네임 등록을 완료해주세요")
-                } else {
+                }
+            }
+            .disposed(by: disposeBag)
+        
+        viewModel.allSuccess
+            .subscribe { [weak self] in
+                if $0 {
                     DispatchQueue.main.async {
                         guard let app = UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate else { return }
                         app.changeViewController()
                     }
                 }
             }
-            .disposed(by: disposeBag)
     }
     
     private func configureUI(isError: Bool) {
