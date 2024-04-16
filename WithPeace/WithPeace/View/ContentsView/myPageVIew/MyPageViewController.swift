@@ -6,10 +6,12 @@
 //
 
 import UIKit
+import RxSwift
 
 final class MyPageViewController: UIViewController {
     
     private let viewModel = MyPageViewModel()
+    private let disposeBag = DisposeBag()
     
     private let profileView = ProfileView()
     private let seperateViewFour = CustomProfileSeparatorView(colorName: Const.CustomColor.SystemColor.gray3)
@@ -29,6 +31,27 @@ final class MyPageViewController: UIViewController {
         
         configureLayout()
         setupButtonAction()
+        bind()
+    }
+    
+    func bind() {
+        viewModel.profileImage
+            .subscribe(onNext: {
+                self.profileView.setup(image: $0)
+            })
+            .disposed(by: disposeBag)
+        
+        viewModel.profileNickname
+            .subscribe(onNext: { [weak self] in
+                self?.profileView.setup(nickName: $0)
+            })
+            .disposed(by: disposeBag)
+        
+        viewModel.accountEmail
+            .subscribe(onNext: {
+                self.profileAccountView.setEmailTitle($0)
+            })
+            .disposed(by: disposeBag)
     }
     
     private func configureLayout() {
@@ -81,10 +104,9 @@ final class MyPageViewController: UIViewController {
 //        }
         
         // profileETCView View
-//        profileETCView.setup(logOutAction: { [weak self] in
-//            let pushingViewController =
-//            self?.navigationController?.pushViewController(pushingViewController, animated: true)
-//        })
+        profileETCView.setup(logOutAction: { [weak self] in
+            self?.viewModel.tapLogoutButton.onNext(())
+        })
         
 //        profileETCView.setup(signOutAction: { [weak self] in
 //            let pushingViewController =
