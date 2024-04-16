@@ -46,7 +46,7 @@ final class ForumViewController: UIViewController {
         configureUI()
         sortPosts()
     }
-    
+
     private func bind() {
         selectedCategory
             .subscribe(onNext: { [weak self] category in

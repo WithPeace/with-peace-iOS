@@ -49,6 +49,15 @@ extension Const {
     struct CustomIcon {
         private init() {}
         
+        struct ICAlert {
+            private init() {}
+            
+            static let icComplain = "ic-complain"
+            static let icDelete = "ic-delete"
+            static let icEdit = "ic-edit"
+            static let icHide = "ic-hide"
+        }
+        
         struct ICBtnPostcreate {
             private init() {}
             
@@ -76,6 +85,17 @@ extension Const {
             static let icCateQuestion = "ic-cate-question"
         }
         
+        struct ICCateFrame {
+            private init() {}
+            
+            static let eco = "ic-cate-eco-frame"
+            static let free = "ic-cate-free-frame"
+            static let hobby = "ic-cate-hobby-frame"
+            static let info = "ic-cate-info-frame"
+            static let living = "ic-cate-living-frame"
+            static let question = "ic-cate-question-frame"
+        }
+        
         struct ICCell {
             private init() {}
             
@@ -93,6 +113,13 @@ extension Const {
             static let icMypageSelect = "ic-mypage-select"
             static let icMypage = "ic-mypage"
             static let icRegist = "ic-regist"
+        }
+        
+        struct ICProfile {
+            private init() {}
+                
+            static let defualtProfile = "default-Profile"
+            static let icMypageEdit = "ic-mypage-edit"
         }
     }
 }
