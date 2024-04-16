@@ -34,7 +34,7 @@ final class MyPageViewController: UIViewController {
         bind()
     }
     
-    func bind() {
+    private func bind() {
         viewModel.profileImage
             .subscribe(onNext: {
                 self.profileView.setup(image: $0)
@@ -53,6 +53,29 @@ final class MyPageViewController: UIViewController {
             })
             .disposed(by: disposeBag)
     }
+    
+    //TODO: Button Action 추가
+    private func setupButtonAction() {
+        // profileView
+//        profileView.setup { [weak self] in
+//            let pushingViewController =
+//            self?.navigationController?.pushViewController(pushingViewController, animated: true)
+//        }
+        
+        // profileETCView View
+        profileETCView.setup(logOutAction: { [weak self] in
+            self?.viewModel.tapLogoutButton.onNext(())
+        })
+        
+//        profileETCView.setup(signOutAction: { [weak self] in
+//            let pushingViewController =
+//            self?.navigationController?.pushViewController(pushingViewController, animated: true)
+//        })
+    }
+}
+
+// MARK: Layout
+extension MyPageViewController {
     
     private func configureLayout() {
         [profileView, seperateViewFour, profileAccountView, seperateViewOne, profileETCView].forEach {
@@ -93,24 +116,5 @@ final class MyPageViewController: UIViewController {
             profileETCView.leadingAnchor.constraint(equalTo: safe.leadingAnchor, constant: 24),
             profileETCView.trailingAnchor.constraint(equalTo: safe.trailingAnchor, constant: -24),
         ])
-    }
-    
-    //TODO: Button Action 추가
-    private func setupButtonAction() {
-        // profileView
-//        profileView.setup { [weak self] in
-//            let pushingViewController =
-//            self?.navigationController?.pushViewController(pushingViewController, animated: true)
-//        }
-        
-        // profileETCView View
-        profileETCView.setup(logOutAction: { [weak self] in
-            self?.viewModel.tapLogoutButton.onNext(())
-        })
-        
-//        profileETCView.setup(signOutAction: { [weak self] in
-//            let pushingViewController =
-//            self?.navigationController?.pushViewController(pushingViewController, animated: true)
-//        })
     }
 }
