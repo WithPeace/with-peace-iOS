@@ -41,6 +41,7 @@ final class DescriptionCell: UITableViewCell, UITextViewDelegate {
     private var dataSource: UICollectionViewDiffableDataSource<Section, Item>!
     
     var textChanged: PublishSubject<String> = PublishSubject()
+    var onImageDeleted: ((UIImage) -> Void)?
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -77,6 +78,14 @@ final class DescriptionCell: UITableViewCell, UITextViewDelegate {
         updatePlaceholderVisibility()
     }
     
+    func configureWithPostModel(_ model: PostModel) {
+        descriptionTextView.text = model.content
+        updatePlaceholderVisibility()
+        
+        let images = model.imageData.compactMap { UIImage(data: $0) }
+        addImages(images)
+    }
+
     private func updatePlaceholderVisibility() {
         placeholderLabel.isHidden = !descriptionTextView.text.isEmpty
     }
@@ -166,10 +175,12 @@ extension DescriptionCell {
             cell?.onDelete = { [weak self, weak collectionView] cell in
                 guard let self = self,
                       let collectionView = collectionView,
-                      let indexPath = collectionView.indexPath(for: cell) else {
+                      let indexPath = collectionView.indexPath(for: cell),
+                      let item = self.dataSource.itemIdentifier(for: indexPath) else {
                     return
                 }
                 self.removeImage(indexPath: indexPath)
+                self.onImageDeleted?(item.image)
             }
             return cell
         }

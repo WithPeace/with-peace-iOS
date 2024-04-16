@@ -70,4 +70,8 @@ final class PostViewModel {
     func selectImage(_ image: UIImage) {
         selectedImages.append(image)
     }
+    
+    func removeSelectedImage(_ image: UIImage) {
+        selectedImages.removeAll { $0 == image }
+    }
 }
