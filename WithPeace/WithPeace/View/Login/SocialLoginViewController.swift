@@ -141,12 +141,20 @@ extension SocialLoginViewController {
             .disposed(by: disposeBag)
         
         viewModel.signInSuccess
-            .subscribe(onNext: { token in
-                print("SignIn Success: \(token)")
+            .subscribe(onNext: { datas in
+                print("SignIn Success: \(datas.token)")
                 
-                DispatchQueue.main.async {
-                    let loginNickNameViewController = LoginNickNameViewController()
-                    self.navigationController?.pushViewController(loginNickNameViewController, animated: true)
+                switch datas.role {
+                case .guest:
+                    DispatchQueue.main.async {
+                        let loginNickNameViewController = LoginNickNameViewController()
+                        self.navigationController?.pushViewController(loginNickNameViewController, animated: true)
+                    }
+                case .user:
+                    DispatchQueue.main.async {
+                        guard let app = UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate else { return }
+                        app.changeViewController()
+                    }
                 }
             })
             .disposed(by: disposeBag)
