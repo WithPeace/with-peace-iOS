@@ -10,6 +10,8 @@ import UIKit
 final class MyPageViewController: UIViewController {
     
     private let viewModel = MyPageViewModel()
+    var imageData: Data? = nil
+    var nickname: String = String()
     
     private let profileView = ProfileView()
     private let seperateViewFour = CustomProfileSeparatorView(colorName: Const.CustomColor.SystemColor.gray3)
@@ -29,6 +31,36 @@ final class MyPageViewController: UIViewController {
         
         configureLayout()
         setupButtonAction()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        ProfileRepository().searchProfile { result in
+            switch result {
+            case .success(let data):
+                DispatchQueue.main.async {
+                    self.profileView.setup(nickName: data.nickname)
+                    self.profileAccountView.setEmailTitle(data.email)
+                }
+                self.nickname = data.nickname
+                
+                URLSession.shared.dataTask(with: URLRequest(url: URL(string: data.profileImageUrl)!)) { data, response, error in
+                    
+                    guard let data = data,
+                          let image = UIImage(data: data) else { return }
+                    self.imageData = data
+                    
+                    
+                    DispatchQueue.main.async {
+                        self.profileView.setup(image: image)
+                    }
+                    
+                }.resume()
+            case .failure(let error):
+                print(error)
+            }
+        }
     }
     
     private func configureLayout() {
@@ -75,10 +107,12 @@ final class MyPageViewController: UIViewController {
     //TODO: Button Action 추가
     private func setupButtonAction() {
         // profileView
-//        profileView.setup { [weak self] in
-//            let pushingViewController =
-//            self?.navigationController?.pushViewController(pushingViewController, animated: true)
-//        }
+        profileView.setup { [weak self] in
+            guard let nickname = self?.nickname else { return }
+            let pushingViewController = ProfileEditViewController(defaultNickname: nickname,
+                                                                  defaultImageData: self?.imageData)
+            self?.navigationController?.pushViewController(pushingViewController, animated: true)
+        }
         
         // profileETCView View
 //        profileETCView.setup(logOutAction: { [weak self] in
