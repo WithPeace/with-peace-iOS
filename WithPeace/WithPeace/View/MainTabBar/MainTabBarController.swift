@@ -14,7 +14,7 @@ final class MainTabbarController: UITabBarController {
     private let homeViewController = UIViewController()
     private let registBlankViewController = UIViewController()
     private let registViewController = PostViewController()
-    private let myPageViewController =  MyPageViewController()
+    private let myPageViewController = MyPageViewController()
     
     private let forumViewController = ForumViewController()
     
