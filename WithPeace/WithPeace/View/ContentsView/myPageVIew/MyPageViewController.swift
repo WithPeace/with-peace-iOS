@@ -6,10 +6,12 @@
 //
 
 import UIKit
+import RxSwift
 
 final class MyPageViewController: UIViewController {
     
     private let viewModel = MyPageViewModel()
+    private let disposeBag = DisposeBag()
     
     private let profileView = ProfileView()
     private let seperateViewFour = CustomProfileSeparatorView(colorName: Const.CustomColor.SystemColor.gray3)
@@ -29,7 +31,51 @@ final class MyPageViewController: UIViewController {
         
         configureLayout()
         setupButtonAction()
+        bind()
     }
+    
+    private func bind() {
+        viewModel.profileImage
+            .subscribe(onNext: {
+                self.profileView.setup(image: $0)
+            })
+            .disposed(by: disposeBag)
+        
+        viewModel.profileNickname
+            .subscribe(onNext: { [weak self] in
+                self?.profileView.setup(nickName: $0)
+            })
+            .disposed(by: disposeBag)
+        
+        viewModel.accountEmail
+            .subscribe(onNext: {
+                self.profileAccountView.setEmailTitle($0)
+            })
+            .disposed(by: disposeBag)
+    }
+    
+    //TODO: Button Action 추가
+    private func setupButtonAction() {
+        // profileView
+//        profileView.setup { [weak self] in
+//            let pushingViewController =
+//            self?.navigationController?.pushViewController(pushingViewController, animated: true)
+//        }
+        
+        // profileETCView View
+        profileETCView.setup(logOutAction: { [weak self] in
+            self?.viewModel.tapLogoutButton.onNext(())
+        })
+        
+//        profileETCView.setup(signOutAction: { [weak self] in
+//            let pushingViewController =
+//            self?.navigationController?.pushViewController(pushingViewController, animated: true)
+//        })
+    }
+}
+
+// MARK: Layout
+extension MyPageViewController {
     
     private func configureLayout() {
         [profileView, seperateViewFour, profileAccountView, seperateViewOne, profileETCView].forEach {
@@ -70,25 +116,5 @@ final class MyPageViewController: UIViewController {
             profileETCView.leadingAnchor.constraint(equalTo: safe.leadingAnchor, constant: 24),
             profileETCView.trailingAnchor.constraint(equalTo: safe.trailingAnchor, constant: -24),
         ])
-    }
-    
-    //TODO: Button Action 추가
-    private func setupButtonAction() {
-        // profileView
-//        profileView.setup { [weak self] in
-//            let pushingViewController =
-//            self?.navigationController?.pushViewController(pushingViewController, animated: true)
-//        }
-        
-        // profileETCView View
-//        profileETCView.setup(logOutAction: { [weak self] in
-//            let pushingViewController =
-//            self?.navigationController?.pushViewController(pushingViewController, animated: true)
-//        })
-        
-//        profileETCView.setup(signOutAction: { [weak self] in
-//            let pushingViewController =
-//            self?.navigationController?.pushViewController(pushingViewController, animated: true)
-//        })
     }
 }
