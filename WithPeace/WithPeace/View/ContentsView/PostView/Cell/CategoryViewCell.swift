@@ -54,6 +54,10 @@ final class CategoryViewCell: UITableViewCell {
         categoryLabel.text = category
     }
     
+    func configureWithPostModel(_ model: PostModel) {
+        categoryLabel.text = model.type
+    }
+    
     @objc private func didTapSelectButton() {
         onButtonTapped?()
     }

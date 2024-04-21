@@ -9,7 +9,7 @@ import UIKit
 import RxSwift
 import Photos
 
-class LoginNickNameViewController: UIViewController {
+final class LoginNickNameViewController: UIViewController {
     
     private let viewModel = LoginNickNameViewModel()
     private let disposeBag = DisposeBag()
@@ -28,14 +28,22 @@ class LoginNickNameViewController: UIViewController {
     private let profileImageView: UIImageView = {
         let imageView = UIImageView()
         
-        #warning("Profile default Image Change")
         imageView.clipsToBounds = true
         imageView.layer.cornerRadius = 60
-        imageView.image = UIImage(named: Const.Logo.MainLogo.withpeaceLogo)
+        imageView.image = UIImage(named: Const.CustomIcon.ICProfile.defualtProfile)
         
         return imageView
     }()
     
+    private let editImageView: UIImageView = {
+        let imageView = UIImageView()
+        
+        imageView.image = UIImage(named: Const.CustomIcon.ICProfile.icMypageEdit)
+        imageView.clipsToBounds = true
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        
+       return imageView
+    }()
     
     private let bodyLabel: UILabel = {
         let label = UILabel()
@@ -108,9 +116,26 @@ class LoginNickNameViewController: UIViewController {
     }
     
     private func bind() {
+        viewModel.checkingDuplication
+            .subscribe(onNext: { [weak self] emit in
+                DispatchQueue.main.async {
+                    self?.errorLabel.text = emit.description
+                }
+                self?.configureUI(isError: emit.isError)
+            })
+            .disposed(by: disposeBag)
+        
         viewModel.isNicknameValid
             .subscribe(onNext: { [weak self] emit in
-                self?.errorLabel.text = emit.description
+                DispatchQueue.main.async {
+                    self?.errorLabel.text = emit.description
+                }
+                
+                if emit == .empty {
+                    self?.configureUI(isError: false)
+                    return
+                }
+                
                 self?.configureUI(isError: emit.isError)
             })
             .disposed(by: disposeBag)
@@ -125,18 +150,21 @@ class LoginNickNameViewController: UIViewController {
         
         viewModel.dismissForNext
             .subscribe { [weak self] in
-                if $0.isError {
+                if $0 != .success {
                     self?.toastMessage?.presentStandardToastMessage("닉네임 등록을 완료해주세요")
-                } else {
-                    DispatchQueue.main.async {
-                        let tabBarController = MainTabbarController()
-                        
-                        self?.navigationController?.isNavigationBarHidden = true
-                        self?.navigationController?.pushViewController(tabBarController, animated: true)
-                    }
                 }
             }
             .disposed(by: disposeBag)
+        
+        viewModel.allSuccess
+            .subscribe { [weak self] in
+                if $0 {
+                    DispatchQueue.main.async {
+                        guard let app = UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate else { return }
+                        app.changeViewController()
+                    }
+                }
+            }
     }
     
     private func configureUI(isError: Bool) {
@@ -156,7 +184,6 @@ extension LoginNickNameViewController {
     private func tapRegistButton() {
         viewModel.tapRegisterButton.onNext(())
     }
-    
     private func configureTargetAction() {
         registButton.addTarget(self, action: #selector(tapRegistButton), for: .touchUpInside)
         nicknameTextField.addTarget(self, action: #selector(textFieldDidChange), for: .editingChanged)
@@ -174,7 +201,7 @@ extension LoginNickNameViewController {
         self.present(customPhotoAlbumViewController, animated: true)
         
         //TODO: 이미지 변환할 때 까지 Button 비활성화 (비동기에 의한 데이터 변환 딜레이 대비)
-        customPhotoAlbumViewController.completionHandlerChangePHAssetsToDatas = { [weak self] in
+        customPhotoAlbumViewController.completionHandlerPHAssets = { [weak self] in
             guard let asset = $0.first else { return }
             
             PHImageManager().requestImageDataAndOrientation(for: asset, options: nil) { data, _, _, _ in
@@ -195,6 +222,16 @@ extension LoginNickNameViewController {
         }
         
         let safe = view.safeAreaLayoutGuide
+        
+        view.addSubview(editImageView)
+        NSLayoutConstraint.activate([
+            editImageView.trailingAnchor.constraint(equalTo: profileImageView.trailingAnchor,
+                                                    constant: -6),
+            editImageView.bottomAnchor.constraint(equalTo: profileImageView.bottomAnchor,
+                                                  constant: -6),
+            editImageView.heightAnchor.constraint(equalToConstant: 26),
+            editImageView.widthAnchor.constraint(equalToConstant: 26),
+        ])
         
         NSLayoutConstraint.activate([
             titleLabel.centerXAnchor.constraint(equalTo: safe.centerXAnchor),

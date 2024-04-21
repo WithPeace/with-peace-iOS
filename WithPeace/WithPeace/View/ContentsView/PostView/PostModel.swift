@@ -8,6 +8,7 @@
 import Foundation
 
 struct PostModel {
+    var uuid = UUID()
     var title: String
     var content: String
     var type: String

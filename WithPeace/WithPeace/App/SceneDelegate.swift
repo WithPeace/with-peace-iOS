@@ -58,4 +58,12 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         return true
     }
+    
+    func changeViewController() {
+        let tabBarController = MainTabbarController()
+        let navigationController = UINavigationController(rootViewController: tabBarController)
+        
+        guard let window = window else { return }
+        window.rootViewController = navigationController
+    }
 }
