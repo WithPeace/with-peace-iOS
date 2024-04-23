@@ -91,7 +91,7 @@ final class ForumPostViewCell: UICollectionViewCell {
         titleLabel.text = postModel.title
         contentLabel.text = postModel.content
         
-        if let imageData = postModel.imageData.first {
+        if let imageData = postModel.imageFiles.first {
             let image = UIImage(data: imageData)
             imageView.image = image
             updateLayoutForImagePresence(isImagePresent: true)

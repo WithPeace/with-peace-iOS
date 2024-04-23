@@ -18,10 +18,11 @@ final class PostViewModel {
     }
     var isCompleteButtonEnabled: Observable<Bool>
     var selectedImages: [UIImage] = []
-    private var postModel: [PostModel] = []
+    var postModel: PostModel?
     private var selectedCategory: String?
     private var titleText: String = ""
     private var contentText: String = ""
+    private let postManager = PostManager()
     
     let disposeBag = DisposeBag()
     
@@ -57,14 +58,26 @@ final class PostViewModel {
     func updatePostModel() {
         var imageData = [Data]()
         for image in selectedImages {
-            if let data = image.pngData() {
+            //TODO: 이미지 압축? 10메가 이하로 진행
+            if let data = image.jpegData(compressionQuality: 0.6) {
                 imageData.append(data)
             }
         }
-        let newPost = PostModel(title: titleText, content: contentText, type: selectedCategory ?? "", imageData: imageData, creationDate: Date())
-        postModel.append(newPost)
+        let newPost = PostModel(title: titleText, content: contentText, type: "QUESTION", imageFiles: imageData, creationDate: Date())
+        postModel = newPost
         postCreatedSubject.onNext(newPost)
-        print("\(newPost) 모델")
+        uploadPost(postModel: newPost)
+    }
+    
+    private func uploadPost(postModel: PostModel) {
+        postManager.uploadPost(postModel: postModel) { result in
+            switch result {
+            case .success(let data):
+                print("success \(data)")
+            case .failure(let error):
+                print("upLoad Fail \(error)")
+            }
+        }
     }
     
     func selectImage(_ image: UIImage) {

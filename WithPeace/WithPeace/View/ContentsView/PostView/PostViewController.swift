@@ -19,7 +19,6 @@ final class PostViewController: UIViewController {
         
         return tableView
     }()
-    var postModel: PostModel?
     
 //    init(postModel: PostModel) {
 //        self.postModel = postModel
@@ -73,7 +72,7 @@ final class PostViewController: UIViewController {
     }
     
     private func configureMode() {
-        if let model = postModel {
+        if let model = viewModel.postModel {
             setupForEditMode(model)
         } else {
             setupForCreateMode()

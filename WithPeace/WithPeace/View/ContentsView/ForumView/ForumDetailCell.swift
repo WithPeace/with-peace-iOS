@@ -165,7 +165,7 @@ final class ForumDetailCell: UITableViewCell {
         profileImage.image = UIImage(systemName: "person.fill")
         //        }
         
-        if let firstImageData = postModel.imageData.first,
+        if let firstImageData = postModel.imageFiles.first,
            let firstImage = UIImage(data: firstImageData) {
             let aspectRatio = firstImage.size.height / firstImage.size.width
             let width = self.imagesCollectionView.frame.width
@@ -180,7 +180,7 @@ final class ForumDetailCell: UITableViewCell {
     
     private func updateCollectionViewHeight(postModel: PostModel) {
         var totalHeight: CGFloat = 0
-        for imageData in postModel.imageData {
+        for imageData in postModel.imageFiles {
             if let image = UIImage(data: imageData) {
                 let aspectRatio = image.size.height / image.size.width
                 let width = self.contentView.bounds.width
@@ -202,7 +202,7 @@ final class ForumDetailCell: UITableViewCell {
 
 extension ForumDetailCell: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return postModel?.imageData.count ?? 0
+        return postModel?.imageFiles.count ?? 0
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -211,7 +211,7 @@ extension ForumDetailCell: UICollectionViewDataSource, UICollectionViewDelegateF
         }
         
         DispatchQueue.main.async {
-            if let imageData = self.postModel?.imageData[indexPath.item],
+            if let imageData = self.postModel?.imageFiles[indexPath.item],
                let image = UIImage(data: imageData) {
                 cell.configure(image: image)
             }
@@ -220,7 +220,7 @@ extension ForumDetailCell: UICollectionViewDataSource, UICollectionViewDelegateF
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        guard let imageData = postModel?.imageData[indexPath.item],
+        guard let imageData = postModel?.imageFiles[indexPath.item],
               let image = UIImage(data: imageData) else {
             return CGSize(width: collectionView.frame.width, height: collectionView.frame.height)
         }

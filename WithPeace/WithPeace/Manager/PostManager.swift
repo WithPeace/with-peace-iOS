@@ -5,78 +5,61 @@
 //  Created by Hemg on 3/21/24.
 //
 
-import Foundation
+import UIKit
 
 final class PostManager {
     private let keychainManager = KeychainManager()
     
-    func createRequest(postModel: PostModel) throws -> URLRequest {
-        let boundary = "Boundary-\(UUID().uuidString)"
+    func uploadPost(postModel: PostModel, completion: @escaping (Result<Data, NetworkError>) -> Void) {
+        do {
+            let endPoint = try createPostEndPoint(postModel: postModel)
+            NetworkManager.shared.fetchData(endpoint: endPoint, completion: completion)
+        } catch {
+            completion(.failure(.getDataError))
+        }
+    }
+    
+    private func createPostEndPoint(postModel: PostModel) throws -> EndPoint {
         guard let baseURL = Bundle.main.apiKey else {
             print("baseURL Error")
             throw NetworkError.badRequest
         }
         
-        guard let keychainAccessToken = keychainManager.get(account: "accessToken") else {
+        guard let tokenData = keychainManager.get(account: "accessToken"),
+              let tokenString = String(data: tokenData, encoding: .utf8) else {
+            print("토큰을 가져오는데 실패했습니다.")
             throw SignRepositoryError.notKeychain
         }
         
-        let headers = ["Authorization":"Bearer \(keychainAccessToken)",
-                       "Content-Type": "multipart/form-data; boundary=\(boundary)"]
-        let endPoint = EndPoint(baseURL: baseURL,
-                                path: "/api/v1/posts/register",
-                                port: 8080,
-                                scheme: "http",
-                                headers: headers,
-                                method: .post)
-        
-        guard let url = endPoint.generateURL() else {
-            throw NetworkError.badRequest
+        var multipartFormData = MultipartFormData()
+        guard let contentType = multipartFormData.generateHeader()["Content-Type"] else {
+            throw NetworkError.getDataError
         }
+        let headers = ["Authorization": "Bearer \(tokenString)",
+                       "Content-Type": contentType]
+        let apiEndPoint = "/api/v1/posts/register"
+        prepareFormData(multipartFormData: &multipartFormData, postModel: postModel)
+        let body = multipartFormData.generateData()
         
-        var request = URLRequest(url: url)
-        
-        var body = Data()
-        
-        body.append(convertFormField(name: "title", value: postModel.title, boundary: boundary))
-        body.append(convertFormField(name: "centent", value: postModel.content, boundary: boundary))
-        body.append(convertFormField(name: "category", value: postModel.type, boundary: boundary))
-        
-        for imageData in postModel.imageData {
-            body.append(convertFileData(fieldName: "imageFiles[]",
-                                        fileName: "image.jpg",
-                                        mimeType: "image/jpeg",
-                                        fileData: imageData,
-                                        boundary: boundary))
-        }
-        
-        body.append("--\(boundary)--\r\n")
-        request.httpBody = body
-        
-        return request
+        return EndPoint(baseURL: baseURL,
+                        path: apiEndPoint,
+                        port: 8080,
+                        scheme: "http",
+                        headers: headers,
+                        method: .post,
+                        body: body)
     }
     
-    private func convertFormField(name: String, value: String, boundary: String) -> Data {
-        var data = Data()
-        data.append("--\(boundary)\r\n")
-        data.append("Content-Disposition: form-data; name=\"\(name)\"\r\n\r\n")
-        data.append("\(value)\r\n")
-        
-        return data
-    }
-    
-    private func convertFileData(fieldName: String,
-                                 fileName: String,
-                                 mimeType: String,
-                                 fileData: Data,
-                                 boundary: String) -> Data {
-        var data = Data()
-        data.append("--\(boundary)\r\n")
-        data.append("Content-Disposition: form-data; name=\"\(fieldName)\"; filename=\"\(fileName)\"\r\n")
-        data.append("Content-Type: \(mimeType)\r\n\r\n")
-        data.append(fileData)
-        data.append("\r\n")
-        
-        return data
+    private func prepareFormData(multipartFormData: inout MultipartFormData, postModel: PostModel) {
+        multipartFormData.createFormFiled(name: "title", value: postModel.title)
+        multipartFormData.createFormFiled(name: "content", value: postModel.content)
+        multipartFormData.createFormFiled(name: "type", value: postModel.type)
+        for (index, imageData) in postModel.imageFiles.enumerated() {
+            let fileName = "image\(index).jpg"
+            multipartFormData.addFilesBodyData(fieldName: "imageFiles[]",
+                                               fileName: fileName,
+                                               mimeType: "image/jpeg",
+                                               fileData: imageData)
+        }
     }
 }

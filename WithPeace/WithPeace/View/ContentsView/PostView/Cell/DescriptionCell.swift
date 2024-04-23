@@ -82,7 +82,7 @@ final class DescriptionCell: UITableViewCell, UITextViewDelegate {
         descriptionTextView.text = model.content
         updatePlaceholderVisibility()
         
-        let images = model.imageData.compactMap { UIImage(data: $0) }
+        let images = model.imageFiles.compactMap { UIImage(data: $0) }
         addImages(images)
     }
 
