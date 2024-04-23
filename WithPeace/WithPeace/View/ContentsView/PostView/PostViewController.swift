@@ -133,14 +133,9 @@ extension PostViewController: UITableViewDataSource {
         case 0:
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "CategoryCell",
                                                            for: indexPath) as? CategoryViewCell else { return UITableViewCell() }
-            
-//            if let postModel = postModel {
-//                cell.configureWithPostModel(postModel)
-//            }
-
             viewModel.categorySelected
                 .subscribe(onNext: { category in
-                    let category = category ?? "카테고리의 주제를 선택하세요"
+                    let category = category?.rawValue ?? "카테고리의 주제를 선택하세요"
                     cell.configure(category)
                 })
                 .disposed(by: disposeBag)

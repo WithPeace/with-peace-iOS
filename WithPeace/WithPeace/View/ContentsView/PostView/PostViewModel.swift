@@ -9,7 +9,7 @@ import UIKit
 import RxSwift
 
 final class PostViewModel {
-    let categorySelected = BehaviorSubject<String?>(value: nil)
+    let categorySelected = BehaviorSubject<Category?>(value: nil)
     let titleTextChanged = PublishSubject<String>()
     let contentTextChanged = PublishSubject<String>()
     private let postCreatedSubject = PublishSubject<PostModel>()
@@ -19,7 +19,7 @@ final class PostViewModel {
     var isCompleteButtonEnabled: Observable<Bool>
     var selectedImages: [UIImage] = []
     var postModel: PostModel?
-    private var selectedCategory: String?
+    private var selectedCategory: Category?
     private var titleText: String = ""
     private var contentText: String = ""
     private let postManager = PostManager()
@@ -63,7 +63,9 @@ final class PostViewModel {
                 imageData.append(data)
             }
         }
-        let newPost = PostModel(title: titleText, content: contentText, type: "QUESTION", imageFiles: imageData, creationDate: Date())
+        guard let trpeString = selectedCategory?.displayName else { return }
+        print(trpeString)
+        let newPost = PostModel(title: titleText, content: contentText, type: trpeString, imageFiles: imageData, creationDate: Date())
         postModel = newPost
         postCreatedSubject.onNext(newPost)
         uploadPost(postModel: newPost)

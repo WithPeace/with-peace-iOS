@@ -14,7 +14,18 @@ enum Category: String, CaseIterable {
     case life = "생활"
     case hobby = "취미"
     case economy = "경제"
-
+    
+    var displayName: String {
+        switch self {
+        case .free: return "FREEDOM"
+        case .information: return "INFORMATION"
+        case .question: return "QUESTION"
+        case .life: return "LIVING"
+        case .hobby: return "HOBBY"
+        case .economy: return "ECONOMY"
+        }
+    }
+    
     var imageName: String {
         switch self {
         case .free: return "ic-cate-free"
@@ -43,8 +54,8 @@ final class CategorySelectViewController: UIViewController {
     
     private var categoryButtons: [UIButton] = []
     private let gridStackView = UIStackView()
-    var onCategorySelected: ((String) -> Void)?
-    var previouslySelectedCategory: String?
+    var onCategorySelected: ((Category) -> Void)?
+    var previouslySelectedCategory: Category?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -117,7 +128,7 @@ final class CategorySelectViewController: UIViewController {
     private func updateSelectedButtonState() {
         if let selectedCategory = previouslySelectedCategory {
             for button in categoryButtons {
-                if button.title(for: .normal) == selectedCategory {
+                if button.title(for: .normal) == selectedCategory.displayName {
                     button.isSelected = true
                     break
                 }
@@ -129,7 +140,7 @@ final class CategorySelectViewController: UIViewController {
         guard let title = sender.title(for: .normal),
               let category = Category(rawValue: title) else { return }
         
-        onCategorySelected?(category.rawValue)
+        onCategorySelected?(category)
         dismiss(animated: true)
     }
     
