@@ -22,7 +22,7 @@ final class PostViewModel {
     private var selectedCategory: Category?
     private var titleText: String = ""
     private var contentText: String = ""
-    private let postManager = PostManager()
+    private let postManager = PostRepository()
     
     let disposeBag = DisposeBag()
     

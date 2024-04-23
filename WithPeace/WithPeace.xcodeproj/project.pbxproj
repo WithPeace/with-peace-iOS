@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		6303235D2BAC636700B16E7C /* PostManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6303235C2BAC636700B16E7C /* PostManager.swift */; };
+		6303235D2BAC636700B16E7C /* PostRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6303235C2BAC636700B16E7C /* PostRepository.swift */; };
 		6303235F2BB143CE00B16E7C /* CustomActionSheetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6303235E2BB143CD00B16E7C /* CustomActionSheetViewController.swift */; };
 		630323632BB5590000B16E7C /* ForumPostViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 630323622BB5590000B16E7C /* ForumPostViewCell.swift */; };
 		630323672BBAD26200B16E7C /* ForumCategoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 630323662BBAD26200B16E7C /* ForumCategoryView.swift */; };
@@ -95,7 +95,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		6303235C2BAC636700B16E7C /* PostManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostManager.swift; sourceTree = "<group>"; };
+		6303235C2BAC636700B16E7C /* PostRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostRepository.swift; sourceTree = "<group>"; };
 		6303235E2BB143CD00B16E7C /* CustomActionSheetViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = CustomActionSheetViewController.swift; path = WithPeace/Manager/CustomActionSheetViewController.swift; sourceTree = SOURCE_ROOT; };
 		630323622BB5590000B16E7C /* ForumPostViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForumPostViewCell.swift; sourceTree = "<group>"; };
 		630323662BBAD26200B16E7C /* ForumCategoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForumCategoryView.swift; sourceTree = "<group>"; };
@@ -265,7 +265,7 @@
 				633F8E212B9AC37500B92ADC /* KeychainManager.swift */,
 				F6B94ABE2BAEFC95005FDEE6 /* ProfileRepository.swift */,
 				F671A9C12BA00E35002808DA /* API */,
-				6303235C2BAC636700B16E7C /* PostManager.swift */,
+				6303235C2BAC636700B16E7C /* PostRepository.swift */,
 			);
 			path = Manager;
 			sourceTree = "<group>";
@@ -693,7 +693,7 @@
 				630EA20F2BA0277800F04ED3 /* SignRepository.swift in Sources */,
 				F69011DD2BB4685C009A8087 /* CustomAlertSheetViewController.swift in Sources */,
 				63C52F972BA962590072DE18 /* PostPhotoView.swift in Sources */,
-				6303235D2BAC636700B16E7C /* PostManager.swift in Sources */,
+				6303235D2BAC636700B16E7C /* PostRepository.swift in Sources */,
 				630323712BC7D66500B16E7C /* ForumDetailCell.swift in Sources */,
 				F6B5B40A2BBBFDC3000C8494 /* ProfileAccountView.swift in Sources */,
 				630EA2002BA0039300F04ED3 /* GoogleSignError.swift in Sources */,

@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct PostModel {
+struct PostModel: Codable {
     var uuid = UUID()
     var title: String
     var content: String

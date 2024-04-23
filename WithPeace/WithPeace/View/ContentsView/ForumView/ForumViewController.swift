@@ -43,10 +43,12 @@ final class ForumViewController: UIViewController {
     
     override func viewIsAppearing(_ animated: Bool) {
         super.viewIsAppearing(animated)
+        
+//        fetchPosts()
         configureUI()
         sortPosts()
     }
-
+    
     private func bind() {
         selectedCategory
             .subscribe(onNext: { [weak self] category in
@@ -130,9 +132,21 @@ final class ForumViewController: UIViewController {
     private func loadPosts(for category: Category?) {
         posts = allPosts.filter { post in
             guard let category = category else { return true }
-            return post.type == category.rawValue
+            return post.type == category.displayName
         }
         collectionView.reloadData()
+    }
+    
+    private func fetchPosts() {
+        let postRepository = PostRepository()
+            postRepository.fetchPost(postId: 1) { [weak self] result in
+                switch result {
+                case .success(let posts):
+                    self?.allPosts = posts
+                case .failure(let error):
+                    print(error)
+            }
+        }
     }
 }
 
