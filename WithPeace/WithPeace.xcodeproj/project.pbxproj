@@ -17,6 +17,7 @@
 		630EA2002BA0039300F04ED3 /* GoogleSignError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 630EA1FF2BA0039300F04ED3 /* GoogleSignError.swift */; };
 		630EA20D2BA0243800F04ED3 /* SignAuthDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 630EA20C2BA0243800F04ED3 /* SignAuthDTO.swift */; };
 		630EA20F2BA0277800F04ED3 /* SignRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 630EA20E2BA0277800F04ED3 /* SignRepository.swift */; };
+		633385102BDAA9EC0089C598 /* ForumModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6333850F2BDAA9EC0089C598 /* ForumModel.swift */; };
 		633F8E222B9AC37500B92ADC /* KeychainManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 633F8E212B9AC37500B92ADC /* KeychainManager.swift */; };
 		635BCBA92BA3521F00F0DCBC /* SocialLoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 635BCBA82BA3521F00F0DCBC /* SocialLoginViewModel.swift */; };
 		635BCBAE2BA7E72A00F0DCBC /* PostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 635BCBAD2BA7E72A00F0DCBC /* PostViewController.swift */; };
@@ -105,6 +106,7 @@
 		630EA1FF2BA0039300F04ED3 /* GoogleSignError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleSignError.swift; sourceTree = "<group>"; };
 		630EA20C2BA0243800F04ED3 /* SignAuthDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignAuthDTO.swift; sourceTree = "<group>"; };
 		630EA20E2BA0277800F04ED3 /* SignRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignRepository.swift; sourceTree = "<group>"; };
+		6333850F2BDAA9EC0089C598 /* ForumModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForumModel.swift; sourceTree = "<group>"; };
 		633F8E212B9AC37500B92ADC /* KeychainManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainManager.swift; sourceTree = "<group>"; };
 		635BCBA82BA3521F00F0DCBC /* SocialLoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocialLoginViewModel.swift; sourceTree = "<group>"; };
 		635BCBAD2BA7E72A00F0DCBC /* PostViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostViewController.swift; sourceTree = "<group>"; };
@@ -366,6 +368,7 @@
 				6303236E2BC7D61100B16E7C /* ForumDetailViewController.swift */,
 				630323702BC7D66500B16E7C /* ForumDetailCell.swift */,
 				630323722BC7D68200B16E7C /* ImageDetailCollectionViewCell.swift */,
+				6333850F2BDAA9EC0089C598 /* ForumModel.swift */,
 			);
 			path = ForumView;
 			sourceTree = "<group>";
@@ -687,6 +690,7 @@
 				6303235F2BB143CE00B16E7C /* CustomActionSheetViewController.swift in Sources */,
 				635BCBB02BA80C7300F0DCBC /* PostNavigationBarView.swift in Sources */,
 				635BCBB52BA952C600F0DCBC /* TitleCell.swift in Sources */,
+				633385102BDAA9EC0089C598 /* ForumModel.swift in Sources */,
 				F68C9D222BA2DEAD008CB7E4 /* MyPageViewController.swift in Sources */,
 				F6B5B4082BBBFDA2000C8494 /* ProfileETCView.swift in Sources */,
 				F671A9CA2BA0174E002808DA /* NetworkError.swift in Sources */,

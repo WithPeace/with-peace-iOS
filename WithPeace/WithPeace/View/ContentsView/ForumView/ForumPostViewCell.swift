@@ -40,7 +40,7 @@ final class ForumPostViewCell: UICollectionViewCell {
     private var titleLabelTrailingConstraintWithoutImage: NSLayoutConstraint?
     private var contentLabelTrailingConstraintWithImage: NSLayoutConstraint?
     private var contentLabelTrailingConstraintWithoutImage: NSLayoutConstraint?
-
+    
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -87,22 +87,41 @@ final class ForumPostViewCell: UICollectionViewCell {
         contentLabelTrailingConstraintWithoutImage = contentLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16)
     }
     
-    func configure(postModel: PostModel) {
+    func configure(postModel: PostListModel) {
         titleLabel.text = postModel.title
         contentLabel.text = postModel.content
         
-        if let imageData = postModel.imageFiles.first {
-            let image = UIImage(data: imageData)
-            imageView.image = image
-            updateLayoutForImagePresence(isImagePresent: true)
+        loadImageFromUrl(postModel.postImageUrl)
+        
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy/MM/dd HH:mm:ss"
+        if let date = formatter.date(from: postModel.createDate) {
+            timeLabel.text = relativeTimeString(from: date)
         } else {
+            timeLabel.text = "날짜 파싱 실패"
+        }
+    }
+    
+    private func loadImageFromUrl(_ urlString: String?) {
+        guard let urlString = urlString, let url = URL(string: urlString) else {
             imageView.image = nil
             updateLayoutForImagePresence(isImagePresent: false)
+            return
         }
-        let formatter = DateFormatter()
-        formatter.dateStyle = .medium
-        formatter.timeStyle = .short
-        timeLabel.text = relativeTimeString(from: postModel.creationDate)
+        
+        URLSession.shared.dataTask(with: url) { [weak self] data, response, error in
+            guard let data = data, let image = UIImage(data: data), error == nil else {
+                DispatchQueue.main.async {
+                    self?.imageView.image = nil
+                    self?.updateLayoutForImagePresence(isImagePresent: false)
+                }
+                return
+            }
+            DispatchQueue.main.async {
+                self?.imageView.image = image
+                self?.updateLayoutForImagePresence(isImagePresent: true)
+            }
+        }.resume()
     }
     
     private func relativeTimeString(from postDate: Date) -> String {

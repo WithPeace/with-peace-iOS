@@ -43,6 +43,8 @@ final class PostViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+//        let a = KeychainManager()
+//        a.delete(account: "accessToken")
         setupCustomNaviBar()
         configureUI()
         setupTableView()

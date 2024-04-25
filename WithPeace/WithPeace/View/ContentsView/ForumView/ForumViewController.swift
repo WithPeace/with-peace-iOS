@@ -12,7 +12,10 @@ final class ForumViewController: UIViewController {
     
     private var posts: [PostModel] = []
     private var allPosts: [PostModel] = []
-    private var selectedCategory = BehaviorSubject<Category?>(value: nil)
+    private var allListPosts: [PostListModel] = []
+    private let postRepository = PostRepository()
+    // 기본값의 문제 올케이스? 어떻게해야하나 알엑스가 문제인지... 확인
+    private var selectedCategory = BehaviorSubject<Category?>(value: .free)
     private let disposeBag = DisposeBag()
     private lazy var collectionView: UICollectionView = {
         let layout = createLayout()
@@ -39,12 +42,12 @@ final class ForumViewController: UIViewController {
         configureUI()
         setupCollectionView()
         bind()
+        fetchPosts()
     }
     
     override func viewIsAppearing(_ animated: Bool) {
         super.viewIsAppearing(animated)
         
-//        fetchPosts()
         configureUI()
         sortPosts()
     }
@@ -59,6 +62,7 @@ final class ForumViewController: UIViewController {
         
         categoryView.onCategorySelected = { [weak self] category in
             self?.selectedCategory.onNext(category)
+            self?.fetchPosts()
         }
     }
     
@@ -138,13 +142,26 @@ final class ForumViewController: UIViewController {
     }
     
     private func fetchPosts() {
-        let postRepository = PostRepository()
-            postRepository.fetchPost(postId: 1) { [weak self] result in
+        guard let selectedCategoryValue = try? selectedCategory.value() else {
+            print("카테고리 값을 가져올 수 없습니다.")
+            return
+        }
+        
+        let type = selectedCategoryValue.displayName
+        let pageIndex = 0 // 0으로해야지 카테고리 전부다 볼수있음.. ???? 왜지?
+        let pageSize = 5 // 게시글 리스트 수
+        
+        postRepository.fetchPostsList(type: type, pageIndex: pageIndex, pageSize: pageSize) { [weak self] result in
+            DispatchQueue.main.async {
                 switch result {
-                case .success(let posts):
-                    self?.allPosts = posts
+                case .success(let fetchedPosts):
+                    self?.allListPosts = fetchedPosts
+                    self?.loadPosts(for: selectedCategoryValue)
+                    self?.collectionView.reloadData()
+                    print("게시글 목록 로드 성공")
                 case .failure(let error):
-                    print(error)
+                    print("게시글 목록 로드 실패: \(error)")
+                }
             }
         }
     }
@@ -152,7 +169,7 @@ final class ForumViewController: UIViewController {
 
 extension ForumViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return posts.count
+        return allListPosts.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -161,7 +178,7 @@ extension ForumViewController: UICollectionViewDataSource {
             return UICollectionViewCell()
         }
         
-        let post = posts[indexPath.row]
+        let post = allListPosts[indexPath.row]
         postCell.configure(postModel: post)
         return postCell
     }
