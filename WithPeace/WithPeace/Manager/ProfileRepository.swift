@@ -16,9 +16,9 @@ protocol ProfileProvider {
                        imageData: Data,
                        completion: @escaping (Result<ProfileDTO, ProfileError>) -> Void)
     func changeProfile(nickname: String,
-                       completion: @escaping (Result<ProfileDTO, ProfileError>) -> Void)
+                       completion: @escaping (Result<ProfileStringDTO, ProfileError>) -> Void)
     func changeProfile(imageData: Data,
-                       completion: @escaping (Result<ProfileDTO, ProfileError>) -> Void)
+                       completion: @escaping (Result<ProfileStringDTO, ProfileError>) -> Void)
     func checkNickname(nickname: String,
                        completion: @escaping (Result<Bool, ProfileError>) -> Void)
     func deleteProfileImage(completion: @escaping (Result<Void, ProfileError>) -> Void)
@@ -110,13 +110,15 @@ final class ProfileRepository: ProfileProvider {
                                   fileName: "image.jpg",
                                   mimeType: "image/jpeg",
                                   fileData: imageData)
-
+        
+        var header = formData.generateHeader()
+        header["Authorization"] = "Bearer \(accessToken)"
         
         let endPoint = EndPoint(baseURL: baseURL,
                                 path: "/api/v1/users/profile",
                                 port: 8080,
                                 scheme: "http",
-                                headers: ["Authorization":"Bearer \(accessToken)"],
+                                headers: header,
                                 method: .put,
                                 body: formData.generateData())
         
@@ -145,7 +147,7 @@ final class ProfileRepository: ProfileProvider {
         }
     }
     
-    func changeProfile(nickname: String, completion: @escaping (Result<ProfileDTO, ProfileError>) -> Void) {
+    func changeProfile(nickname: String, completion: @escaping (Result<ProfileStringDTO, ProfileError>) -> Void) {
         guard let baseURL = Bundle.main.apiKey else {
             completion(.failure(.bundleError))
             return
@@ -174,7 +176,8 @@ final class ProfileRepository: ProfileProvider {
                                 path: "/api/v1/users/profile/nickname",
                                 port: 8080,
                                 scheme: "http",
-                                headers: ["Authorization":"Bearer \(accessToken)"],
+                                headers: ["Authorization":"Bearer \(accessToken)",
+                                          "Content-Type":"application/json"],
                                 method: .patch,
                                 body: nicknameData
         )
@@ -183,7 +186,7 @@ final class ProfileRepository: ProfileProvider {
             switch result {
             case .success(let data):
                 do {
-                    let decodedData = try JSONDecoder().decode(ProfileDTO.self, from: data)
+                    let decodedData = try JSONDecoder().decode(ProfileStringDTO.self, from: data)
                     completion(.success(decodedData))
                 } catch {
                     completion(.failure(.decodeError))
@@ -206,7 +209,7 @@ final class ProfileRepository: ProfileProvider {
     
     
     /// 유저 프로필 변경 (이미지만)
-    func changeProfile(imageData: Data, completion: @escaping (Result<ProfileDTO, ProfileError>) -> Void) {
+    func changeProfile(imageData: Data, completion: @escaping (Result<ProfileStringDTO, ProfileError>) -> Void) {
         guard let baseURL = Bundle.main.apiKey else {
             completion(.failure(.bundleError))
             return
@@ -214,6 +217,7 @@ final class ProfileRepository: ProfileProvider {
         
         guard let accessToken = keyChainManager.get(account: "accessToken") else {
             completion(.failure(.notHaveToken))
+            
             return
         }
         
@@ -227,21 +231,23 @@ final class ProfileRepository: ProfileProvider {
                                   fileName: "image.jpg",
                                   mimeType: "image/jpeg",
                                   fileData: imageData)
-
+        
+        var header = formData.generateHeader()
+        header["Authorization"] = "Bearer \(accessToken)"
         
         let endPoint = EndPoint(baseURL: baseURL,
-                                path: "/api/v1/users/profile",
+                                path: "/api/v1/users/profile/image",
                                 port: 8080,
                                 scheme: "http",
-                                headers: ["Authorization":"Bearer \(accessToken)"],
-                                method: .put,
+                                headers: header,
+                                method: .patch,
                                 body: formData.generateData())
         
         NetworkManager.shared.fetchData(endpoint: endPoint) { result in
             switch result {
             case .success(let data):
                 do {
-                    let data = try JSONDecoder().decode(ProfileDTO.self, from: data)
+                    let data = try JSONDecoder().decode(ProfileStringDTO.self, from: data)
                     completion(.success(data))
                 } catch {
                     completion(.failure(.decodeError))
@@ -366,6 +372,11 @@ enum ProfileError: Error {
 
 struct ProfileDTO: Codable {
     var data: ProfileData?
+    var error: String?
+}
+
+struct ProfileStringDTO: Codable {
+    var data: String?
     var error: String?
 }
 
