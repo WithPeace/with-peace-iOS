@@ -29,6 +29,8 @@
 		63C52F992BA97FB40072DE18 /* CategorySelectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63C52F982BA97FB40072DE18 /* CategorySelectViewController.swift */; };
 		63C52F9B2BA9B80D0072DE18 /* PostModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63C52F9A2BA9B80D0072DE18 /* PostModel.swift */; };
 		63C52F9D2BA9B83F0072DE18 /* PostViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63C52F9C2BA9B83F0072DE18 /* PostViewModel.swift */; };
+		F606EB2F2BCF8DB3006E97E3 /* ProfileEditViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F606EB2E2BCF8DB3006E97E3 /* ProfileEditViewController.swift */; };
+		F606EB312BCF8F85006E97E3 /* ProfileEditViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F606EB302BCF8F85006E97E3 /* ProfileEditViewModel.swift */; };
 		F65E1ECF2BAC086D00326EF7 /* LoginNickNameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F65E1ECE2BAC086D00326EF7 /* LoginNickNameViewController.swift */; };
 		F667FD882BAC2287005AAAB7 /* CustomPhotoAlbumDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F667FD862BAC2287005AAAB7 /* CustomPhotoAlbumDetailViewController.swift */; };
 		F667FD892BAC2287005AAAB7 /* AlbumDetailCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F667FD872BAC2287005AAAB7 /* AlbumDetailCell.swift */; };
@@ -117,6 +119,8 @@
 		63C52F982BA97FB40072DE18 /* CategorySelectViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategorySelectViewController.swift; sourceTree = "<group>"; };
 		63C52F9A2BA9B80D0072DE18 /* PostModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostModel.swift; sourceTree = "<group>"; };
 		63C52F9C2BA9B83F0072DE18 /* PostViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostViewModel.swift; sourceTree = "<group>"; };
+		F606EB2E2BCF8DB3006E97E3 /* ProfileEditViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ProfileEditViewController.swift; path = WithPeace/View/ContentsView/myPageVIew/ProfileEditViewController.swift; sourceTree = SOURCE_ROOT; };
+		F606EB302BCF8F85006E97E3 /* ProfileEditViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ProfileEditViewModel.swift; path = WithPeace/View/ContentsView/myPageVIew/ProfileEditViewModel.swift; sourceTree = SOURCE_ROOT; };
 		F65E1ECE2BAC086D00326EF7 /* LoginNickNameViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginNickNameViewController.swift; sourceTree = "<group>"; };
 		F667FD862BAC2287005AAAB7 /* CustomPhotoAlbumDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomPhotoAlbumDetailViewController.swift; sourceTree = "<group>"; };
 		F667FD872BAC2287005AAAB7 /* AlbumDetailCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlbumDetailCell.swift; sourceTree = "<group>"; };
@@ -379,6 +383,8 @@
 				F6B5B4072BBBFDA2000C8494 /* ProfileETCView.swift */,
 				F6B5B4052BBBFD90000C8494 /* CustomProfileSeparatorView.swift */,
 				F69011E22BB6D91E009A8087 /* MyPageViewModel.swift */,
+				F606EB2E2BCF8DB3006E97E3 /* ProfileEditViewController.swift */,
+				F606EB302BCF8F85006E97E3 /* ProfileEditViewModel.swift */,
 			);
 			path = MyPageVIew;
 			sourceTree = "<group>";
@@ -673,6 +679,7 @@
 				F68719B12BA8635C0049B182 /* CustomPhotoAlbumViewController.swift in Sources */,
 				6303236F2BC7D61100B16E7C /* ForumDetailViewController.swift in Sources */,
 				F6B5B40C2BBBFDDA000C8494 /* ProfileView.swift in Sources */,
+				F606EB2F2BCF8DB3006E97E3 /* ProfileEditViewController.swift in Sources */,
 				630EA20D2BA0243800F04ED3 /* SignAuthDTO.swift in Sources */,
 				F69011E12BB6D352009A8087 /* MultipartFormData.swift in Sources */,
 				F69B80092B996846002675CE /* SceneDelegate.swift in Sources */,
@@ -694,6 +701,7 @@
 				F69011DD2BB4685C009A8087 /* CustomAlertSheetViewController.swift in Sources */,
 				63C52F972BA962590072DE18 /* PostPhotoView.swift in Sources */,
 				6303235D2BAC636700B16E7C /* PostManager.swift in Sources */,
+				F606EB312BCF8F85006E97E3 /* ProfileEditViewModel.swift in Sources */,
 				630323712BC7D66500B16E7C /* ForumDetailCell.swift in Sources */,
 				F6B5B40A2BBBFDC3000C8494 /* ProfileAccountView.swift in Sources */,
 				630EA2002BA0039300F04ED3 /* GoogleSignError.swift in Sources */,
