@@ -85,25 +85,6 @@ final class MyPageViewController: UIViewController {
             })
             .disposed(by: disposeBag)
     }
-    
-    //TODO: Button Action 추가
-    private func setupButtonAction() {
-        // profileView
-//        profileView.setup { [weak self] in
-//            let pushingViewController =
-//            self?.navigationController?.pushViewController(pushingViewController, animated: true)
-//        }
-        
-        // profileETCView View
-        profileETCView.setup(logOutAction: { [weak self] in
-            self?.viewModel.tapLogoutButton.onNext(())
-        })
-        
-//        profileETCView.setup(signOutAction: { [weak self] in
-//            let pushingViewController =
-//            self?.navigationController?.pushViewController(pushingViewController, animated: true)
-//        })
-    }
 }
 
 // MARK: Layout
@@ -161,10 +142,9 @@ extension MyPageViewController {
         }
         
         // profileETCView View
-//        profileETCView.setup(logOutAction: { [weak self] in
-//            let pushingViewController =
-//            self?.navigationController?.pushViewController(pushingViewController, animated: true)
-//        })
+        profileETCView.setup(logOutAction: { [weak self] in
+            self?.viewModel.tapLogoutButton.onNext(())
+        })
         
 //        profileETCView.setup(signOutAction: { [weak self] in
 //            let pushingViewController =
