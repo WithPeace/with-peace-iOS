@@ -1,5 +1,5 @@
 //
-//  PostDetailModel.swift
+//  PostDetailResponse.swift
 //  WithPeace
 //
 //  Created by Hemg on 5/5/24.

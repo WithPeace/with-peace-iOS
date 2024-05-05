@@ -79,7 +79,7 @@ final class ForumDetailCell: UITableViewCell {
         return stackView
     }()
     private var imagesCollectionViewHeightConstraint: NSLayoutConstraint?
-    var postModel: PostModel?
+    var postDetailModel: PostDetailResponse?
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -156,78 +156,96 @@ final class ForumDetailCell: UITableViewCell {
         
     }
     
-    func setupData(postModel: PostModel) {
-        titleLabel.text = postModel.title
-        contentLabel.text = postModel.content
-        nickNametLabel.text = "닉네임 설정"
-        timeLabel.text = formatDate(postModel.creationDate)
-        //        if let profileImageData = postModel.profileImageData {
-        profileImage.image = UIImage(systemName: "person.fill")
-        //        }
+    func setupData(postDetailModel: PostDetailResponse) {
+        titleLabel.text = postDetailModel.data.title
+        contentLabel.text = postDetailModel.data.content
+        nickNametLabel.text = postDetailModel.data.nickname
+        timeLabel.text = formatDate(postDetailModel.data.createDate)
+        profileImage.loadImage(from: postDetailModel.data.profileImageUrl)
         
-        if let firstImageData = postModel.imageFiles.first,
-           let firstImage = UIImage(data: firstImageData) {
-            let aspectRatio = firstImage.size.height / firstImage.size.width
-            let width = self.imagesCollectionView.frame.width
-            let height = width * aspectRatio
-            imagesCollectionViewHeightConstraint?.constant = height
-        }
-        
-        self.postModel = postModel
-        self.imagesCollectionView.reloadData()
-        updateCollectionViewHeight(postModel: postModel)
+        imagesCollectionView.reloadData()
+        updateCollectionViewHeight(imageUrls: postDetailModel.data.postImageUrls)
+        print(postDetailModel.data.profileImageUrl)
+        print("이제 포스트 이미지")
+        print(postDetailModel.data.postImageUrls)
     }
     
-    private func updateCollectionViewHeight(postModel: PostModel) {
-        var totalHeight: CGFloat = 0
-        for imageData in postModel.imageFiles {
-            if let image = UIImage(data: imageData) {
-                let aspectRatio = image.size.height / image.size.width
-                let width = self.contentView.bounds.width
-                let height = width * aspectRatio
-                totalHeight += height
-            }
-        }
-        
-        imagesCollectionViewHeightConstraint?.constant = totalHeight - self.imagesCollectionView.bounds.height
+    private func updateCollectionViewHeight(imageUrls: [String]) {
+        let estimatedAspectRatio: CGFloat = 9 / 16
+        let width = self.contentView.bounds.width
+        let estimatedHeight = width * estimatedAspectRatio
+        let totalHeight = estimatedHeight * CGFloat(imageUrls.count)
+        imagesCollectionViewHeightConstraint?.constant = totalHeight
     }
     
-    private func formatDate(_ date: Date) -> String {
+    private func formatDate(_ dateString: String) -> String {
         let formatter = DateFormatter()
-        formatter.dateStyle = .short
-        formatter.timeStyle = .short
-        return formatter.string(from: date)
+        formatter.dateFormat = "yyyy/MM/dd HH:mm:ss"
+        if let date = formatter.date(from: dateString) {
+            formatter.dateStyle = .short
+            formatter.timeStyle = .short
+            return formatter.string(from: date)
+        }
+        return "날짜 파싱 실패"
     }
 }
 
 extension ForumDetailCell: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return postModel?.imageFiles.count ?? 0
+        return postDetailModel?.data.postImageUrls.count ?? 0
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ImageDetailCell", for: indexPath) as? ImageDetailCollectionViewCell else {
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ImageDetailCell", for: indexPath) as? ImageDetailCollectionViewCell,
+              let urlString = postDetailModel?.data.postImageUrls[indexPath.item] else {
             return UICollectionViewCell()
         }
         
-        DispatchQueue.main.async {
-            if let imageData = self.postModel?.imageFiles[indexPath.item],
-               let image = UIImage(data: imageData) {
-                cell.configure(image: image)
-            }
-        }
+        cell.loadImage(from: urlString)
+        
         return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        guard let imageData = postModel?.imageFiles[indexPath.item],
-              let image = UIImage(data: imageData) else {
-            return CGSize(width: collectionView.frame.width, height: collectionView.frame.height)
+        let width = collectionView.frame.width
+        let estimatedHeight = width * 9 / 16
+        
+        // 이미지 URL을 사용하여 비동기적으로 이미지 로드
+        if let urlString = postDetailModel?.data.postImageUrls[indexPath.item],
+           let url = URL(string: urlString) {
+            URLSession.shared.dataTask(with: url) { [weak self] data, response, error in
+                if let data = data, let image = UIImage(data: data) {
+                    let aspectRatio = image.size.height / image.size.width
+                    let height = width * aspectRatio
+                    DispatchQueue.main.async {
+                        self?.imagesCollectionView.reloadData()
+                    }
+                }
+            }.resume()
         }
         
-        let aspectRatio = image.size.height / image.size.width
-        let width = collectionView.frame.width
-        let height = width * aspectRatio
-        return CGSize(width: width, height: height)
+        return CGSize(width: width, height: estimatedHeight)
+    }
+}
+
+extension UIImageView {
+    func loadImage(from urlString: String) {
+        guard let url = URL(string: urlString) else {
+            self.image = nil
+            return
+        }
+        
+        URLSession.shared.dataTask(with: url) { [weak self] data, response, error in
+            guard let self = self, let data = data,
+                  let image = UIImage(data: data) else {
+                DispatchQueue.main.async {
+                    self?.image = nil
+                }
+                return
+            }
+            DispatchQueue.main.async {
+                self.image = image
+            }
+        }.resume()
     }
 }

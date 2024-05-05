@@ -13,6 +13,7 @@ final class ForumViewController: UIViewController {
     private var posts: [PostModel] = []
     private var allPosts: [PostModel] = []
     private var allListPosts: [PostListModel] = []
+    private var postDetail: [PostDetailResponse] = []
     private let postRepository = PostRepository()
     // 기본값의 문제 올케이스? 어떻게해야하나 알엑스가 문제인지... 확인
     private var selectedCategory = BehaviorSubject<Category?>(value: .free)
@@ -158,6 +159,7 @@ final class ForumViewController: UIViewController {
                     self?.allListPosts = fetchedPosts
                     self?.loadPosts(for: selectedCategoryValue)
                     self?.collectionView.reloadData()
+                    print("게시글 목록 로드 성공, 로드된 데이터 수: \(fetchedPosts.count)")
                     print("게시글 목록 로드 성공")
                 case .failure(let error):
                     print("게시글 목록 로드 실패: \(error)")
@@ -186,18 +188,25 @@ extension ForumViewController: UICollectionViewDataSource {
 
 extension ForumViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let post = posts[indexPath.row]
-        let detailVC = ForumDetailViewController()
-        detailVC.postModel = post
-        detailVC.onPostUpdated = { [weak self] updatedPost in
-            self?.updatePost(updatedPost)
+        let postId = allListPosts[indexPath.row].postId // PostListModel에서 postId를 가져옵니다.
+        
+        postRepository.fetchPostDetail(postId: postId) { [weak self] result in
+            switch result {
+            case .success(let postDetailResponse):
+                DispatchQueue.main.async {
+                    let detailVC = ForumDetailViewController()
+                    detailVC.postModel = postDetailResponse
+                    self?.navigationController?.pushViewController(detailVC, animated: true)
+                }
+            case .failure(let error):
+                print("게시글 상세 정보 로드 실패: \(error)")
+            }
         }
-        navigationController?.pushViewController(detailVC, animated: true)
     }
     
-    func updatePost(_ updatedPost: PostModel) {
-        if let index = posts.firstIndex(where: { $0.uuid == updatedPost.uuid }) {
-            posts[index] = updatedPost
+    func updatePost(_ updatedPost: PostDetailResponse) {
+        if let index = postDetail.firstIndex(where: { $0.data.postId == updatedPost.data.postId }) {
+            postDetail[index] = updatedPost
             collectionView.reloadData()
         }
     }

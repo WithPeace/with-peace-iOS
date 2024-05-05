@@ -14,8 +14,8 @@ final class ForumDetailViewController: UIViewController {
         
         return tableView
     }()
-    var onPostUpdated: ((PostModel) -> Void)?
-    var postModel: PostModel?
+    var onPostUpdated: ((PostDetailResponse) -> Void)?
+    var postModel: PostDetailResponse?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -105,7 +105,7 @@ extension ForumDetailViewController: UITableViewDataSource, UITableViewDelegate 
         }
         
         if let postModel = self.postModel {
-            cell.setupData(postModel: postModel)
+            cell.setupData(postDetailModel: postModel)
         }
         return cell
     }

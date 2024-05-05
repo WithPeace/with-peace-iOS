@@ -44,7 +44,17 @@ final class ImageDetailCollectionViewCell: UICollectionViewCell {
         ])
     }
     
-    func configure(image: UIImage) {
-        imageView.image = image
+    func loadImage(from urlString: String) {
+        guard let url = URL(string: urlString) else {
+            imageView.image = nil
+            return
+        }
+        URLSession.shared.dataTask(with: url) { [weak self] data, response, error in
+            if let data = data, let image = UIImage(data: data) {
+                DispatchQueue.main.async {
+                    self?.imageView.image = image
+                }
+            }
+        }.resume()
     }
 }
