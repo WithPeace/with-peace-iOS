@@ -116,3 +116,51 @@ extension PostRepository {
                         method: .get)
     }
 }
+
+//MARK: 게시글 상세 조회
+extension PostRepository {
+    func fetchPostDetail(postId: Int, completion: @escaping (Result<PostDetailResponse, NetworkError>) -> Void) {
+        do {
+            let endPoint = try createFetchPostDetailEndPoint(postId: postId)
+            NetworkManager.shared.fetchData(endpoint: endPoint) { result in
+                switch result {
+                case .success(let data):
+                    do {
+                        let postDetail = try JSONDecoder().decode(PostDetailResponse.self, from: data)
+                        completion(.success(postDetail))
+                        print("게시글 상세 정보 로드 성공")
+                    } catch {
+                        completion(.failure(.responseError))
+                        print("게시글 상세 정보 로드 실패: \(error)")
+                    }
+                case .failure(let error):
+                    completion(.failure(error))
+                    print("게시글 상세 정보 로드 네트워크 실패: \(error)")
+                }
+            }
+        } catch {
+            completion(.failure(.getDataError))
+        }
+    }
+    
+    private func createFetchPostDetailEndPoint(postId: Int) throws -> EndPoint {
+        guard let baseURL = Bundle.main.apiKey else {
+            throw NetworkError.badRequest
+        }
+        
+        guard let tokenData = keychainManager.get(account: "accessToken"),
+              let tokenString = String(data: tokenData, encoding: .utf8) else {
+            throw SignRepositoryError.notKeychain
+        }
+        
+        let headers = ["Authorization": "Bearer \(tokenString)"]
+        let path = "/api/v1/posts/\(postId)"
+        
+        return EndPoint(baseURL: baseURL,
+                        path: path,
+                        port: 8080,
+                        scheme: "http",
+                        headers: headers,
+                        method: .get)
+    }
+}
