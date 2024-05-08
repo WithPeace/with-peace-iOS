@@ -8,10 +8,12 @@
 import Foundation
 
 struct NetworkManager {
+    typealias StatusWithData = (statusCode: StatusCode, resultData: Data)
     static let shared = NetworkManager()
     
     private init() {}
     
+    /// 기존 fetchData
     func fetchData(endpoint: EndPoint, completion: @escaping (Result<Data, NetworkError>) -> Void) {
         let request = endpoint.genreateURLRequest()
         
@@ -56,6 +58,85 @@ struct NetworkManager {
                 debugPrint("NETWORK 알 수 없는 ERROR")
                 return
             }
+            
+            guard let data = data else {
+                completion(.failure(.getDataError))
+                return
+            }
+            
+            completion(.success(data))
+        }
+        task.resume()
+    }
+    
+    // 단순화
+    func newfetchData(endpoint: EndPoint, completion: @escaping (Result<(StatusWithData), NetworkError>) -> Void) {
+        let request = endpoint.genreateURLRequest()
+        
+        let task = URLSession.shared.dataTask(with: request) { data, response, error in
+            if error != nil {
+                completion(.failure(.defaultsError))
+                return
+            }
+            
+            guard let response = response as? HTTPURLResponse else {
+                completion(.failure(.responseError))
+                return
+            }
+            
+            debugPrint("NETWORK RESPONSE: ", response.statusCode)
+            
+            guard let data = data else {
+                completion(.failure(.getDataError))
+                return
+            }
+            
+            let statusCode = response.statusCode
+            switch statusCode {
+            case 100...199:
+                completion(.success((.informationalResponse, data)))
+                return
+            case 200...299:
+                completion(.success((.successRequest, data)))
+                return
+            case 300...399:
+                completion(.success((.redirection, data)))
+                return
+            case 400...499:
+                completion(.success((.clientErrors, data)))
+                return
+            case 500...599:
+                completion(.success((.serverErrors, data)))
+                return
+            default:
+                debugPrint("NETWORK 알 수 없는 ERROR")
+                completion(.failure(.defaultsError))
+                return
+            }
+        }
+        task.resume()
+    }
+    
+    /// 직접 받아온 URL 사용
+    func fetchData(url: String, completion: @escaping (Result<Data, NetworkError>) -> Void) {
+        guard let requestURL = URL(string: url) else {
+            completion(.failure(.badRequest))
+            return
+        }
+        
+        let request = URLRequest(url: requestURL)
+        let task = URLSession.shared.dataTask(with: request) { data, response, error in
+            if error != nil {
+                completion(.failure(.defaultsError))
+                return
+            }
+            
+            guard let response = response as? HTTPURLResponse else {
+                completion(.failure(.responseError))
+                return
+            }
+            
+            debugPrint("NETWORK RESPONSE: ", response.statusCode)
             
             guard let data = data else {
                 completion(.failure(.getDataError))
