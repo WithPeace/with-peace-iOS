@@ -24,6 +24,7 @@ protocol ProfileProvider {
     func deleteProfileImage(completion: @escaping (Result<Void, ProfileError>) -> Void)
 }
 
+@available(*, deprecated, message: "Using - ProfileAPIRepository.")
 final class ProfileRepository: ProfileProvider {
     private let keyChainManager = KeychainManager()
     private let signRepository = SignRepository()
@@ -361,13 +362,6 @@ final class ProfileRepository: ProfileProvider {
             }
         }
     }
-}
-
-enum ProfileError: Error {
-    case bundleError
-    case notHaveToken
-    case decodeError
-    case networkManagerError
 }
 
 struct ProfileDTO: Codable {
