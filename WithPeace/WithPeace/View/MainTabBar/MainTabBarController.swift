@@ -11,7 +11,7 @@ final class MainTabbarController: UITabBarController {
     private let tabBarConstant = Const.CustomIcon.ICNavigationTabbar.self
     private var beforeSelectedTag: Int = 0
     
-    private let homeViewController = UIViewController()
+    private let homeViewController = HomeViewController()
     private let registBlankViewController = UIViewController()
     private let registViewController = PostViewController()
     private let myPageViewController = MyPageViewController()

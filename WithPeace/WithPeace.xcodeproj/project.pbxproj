@@ -31,6 +31,8 @@
 		63C52F9D2BA9B83F0072DE18 /* PostViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63C52F9C2BA9B83F0072DE18 /* PostViewModel.swift */; };
 		F606EB2F2BCF8DB3006E97E3 /* ProfileEditViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F606EB2E2BCF8DB3006E97E3 /* ProfileEditViewController.swift */; };
 		F606EB312BCF8F85006E97E3 /* ProfileEditViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F606EB302BCF8F85006E97E3 /* ProfileEditViewModel.swift */; };
+		F61B51602BEB799000812C8D /* YouthListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F61B515F2BEB799000812C8D /* YouthListCell.swift */; };
+		F61B51622BECF5B400812C8D /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F61B51612BECF5B400812C8D /* HomeViewModel.swift */; };
 		F65E1ECF2BAC086D00326EF7 /* LoginNickNameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F65E1ECE2BAC086D00326EF7 /* LoginNickNameViewController.swift */; };
 		F667FD882BAC2287005AAAB7 /* CustomPhotoAlbumDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F667FD862BAC2287005AAAB7 /* CustomPhotoAlbumDetailViewController.swift */; };
 		F667FD892BAC2287005AAAB7 /* AlbumDetailCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F667FD872BAC2287005AAAB7 /* AlbumDetailCell.swift */; };
@@ -125,6 +127,8 @@
 		63C52F9C2BA9B83F0072DE18 /* PostViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostViewModel.swift; sourceTree = "<group>"; };
 		F606EB2E2BCF8DB3006E97E3 /* ProfileEditViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ProfileEditViewController.swift; path = WithPeace/View/ContentsView/myPageVIew/ProfileEditViewController.swift; sourceTree = SOURCE_ROOT; };
 		F606EB302BCF8F85006E97E3 /* ProfileEditViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ProfileEditViewModel.swift; path = WithPeace/View/ContentsView/myPageVIew/ProfileEditViewModel.swift; sourceTree = SOURCE_ROOT; };
+		F61B515F2BEB799000812C8D /* YouthListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YouthListCell.swift; sourceTree = "<group>"; };
+		F61B51612BECF5B400812C8D /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
 		F65E1ECE2BAC086D00326EF7 /* LoginNickNameViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginNickNameViewController.swift; sourceTree = "<group>"; };
 		F667FD862BAC2287005AAAB7 /* CustomPhotoAlbumDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomPhotoAlbumDetailViewController.swift; sourceTree = "<group>"; };
 		F667FD872BAC2287005AAAB7 /* AlbumDetailCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlbumDetailCell.swift; sourceTree = "<group>"; };
@@ -369,6 +373,8 @@
 			isa = PBXGroup;
 			children = (
 				F68C9D1B2BA2DE87008CB7E4 /* HomeViewController.swift */,
+				F61B51612BECF5B400812C8D /* HomeViewModel.swift */,
+				F61B515F2BEB799000812C8D /* YouthListCell.swift */,
 			);
 			path = HomeView;
 			sourceTree = "<group>";
@@ -660,6 +666,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				630323632BB5590000B16E7C /* ForumPostViewCell.swift in Sources */,
+				F61B51622BECF5B400812C8D /* HomeViewModel.swift in Sources */,
 				63C52F9D2BA9B83F0072DE18 /* PostViewModel.swift in Sources */,
 				F68C9D242BA2DEDB008CB7E4 /* SocialLoginViewController.swift in Sources */,
 				F69011E32BB6D91E009A8087 /* MyPageViewModel.swift in Sources */,
@@ -667,6 +674,7 @@
 				635BCBA92BA3521F00F0DCBC /* SocialLoginViewModel.swift in Sources */,
 				F674DDDF2BADB17A00536AA7 /* String+.swift in Sources */,
 				F68657442BB415DC00821281 /* CustomActionSheetTransitioningDelegate.swift in Sources */,
+				F61B51602BEB799000812C8D /* YouthListCell.swift in Sources */,
 				F671A9BB2BA00D4A002808DA /* Bundle+.swift in Sources */,
 				630323732BC7D68200B16E7C /* ImageDetailCollectionViewCell.swift in Sources */,
 				630323672BBAD26200B16E7C /* ForumCategoryView.swift in Sources */,
