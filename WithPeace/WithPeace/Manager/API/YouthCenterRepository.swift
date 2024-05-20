@@ -12,6 +12,8 @@ final class YouthCenterRepository: NSObject {
     private var youthPolicyList = YouthPolicyList(youthPolicy: [YouthPolicy]())
     private var currentYouth = YouthPolicy()
     
+    private var result = YouthPolicyList(youthPolicy: [YouthPolicy]())
+    
     /// YouthCenter API
     ///
     /// - Parameters:
@@ -68,7 +70,7 @@ final class YouthCenterRepository: NSObject {
             switch result {
             case .success(let data):
                 self.parseXML(xmlData: data)
-                completion(.success(self.youthPolicyList))
+                completion(.success(self.result))
             case .failure(let error):
                 debugPrint("NETWORK Error: ", error)
                 completion(.failure(.defaultError))
@@ -93,6 +95,13 @@ extension YouthCenterRepository: XMLParserDelegate {
                 qualifiedName qName: String?,
                 attributes attributeDict: [String : String] = [:]) {
         currentElement = elementName
+        
+        
+
+//        youthPolicyList = YouthPolicyList(youthPolicy: [YouthPolicy]())
+//        currentYouth = YouthPolicy()
+//        result = .init(youthPolicy: [YouthPolicy]())
+        
 //        print("시작태그 호출 메서드")
     }
     
@@ -105,48 +114,48 @@ extension YouthCenterRepository: XMLParserDelegate {
             youthPolicyList.totalCnt = string
         case "rnum":
             currentYouth.rnum = string
-        case "bizID":
-            currentYouth.bizID = string
+        case "bizId":
+            currentYouth.bizId = string
         case "polyBizSecd":
             currentYouth.polyBizSecd = string
         case "polyBizTy":
             currentYouth.polyBizTy = string
         case "polyBizSjnm":
             currentYouth.polyBizSjnm = string
-        case "polyItcnCN":
-            currentYouth.polyItcnCN = string
-        case "sporCN":
-            currentYouth.sporCN = string
+        case "polyItcnCn":
+            currentYouth.polyItcnCn = string
+        case "sporCn":
+            currentYouth.sporCn = string
         case "sporScvl":
             currentYouth.sporScvl = string
-        case "bizPrdCN":
-            currentYouth.bizPrdCN = string
+        case "bizPrdCn":
+            currentYouth.bizPrdCn = string
         case "prdRpttSecd":
             currentYouth.prdRpttSecd = string
-        case "rqutPrdCN":
-            currentYouth.rqutPrdCN = string
+        case "rqutPrdCn":
+            currentYouth.rqutPrdCn = string
         case "ageInfo":
             currentYouth.ageInfo = string
-        case "majrRqisCN":
-            currentYouth.majrRqisCN = string
-        case "empmSttsCN":
-            currentYouth.empmSttsCN = string
-        case "splzRlmRqisCN":
-            currentYouth.splzRlmRqisCN = string
-        case "accrRqisCN":
-            currentYouth.accrRqisCN = string
-        case "prcpCN":
-            currentYouth.prcpCN = string
+        case "majrRqisCn":
+            currentYouth.majrRqisCn = string
+        case "empmSttsCn":
+            currentYouth.empmSttsCn = string
+        case "splzRlmRqisCn":
+            currentYouth.splzRlmRqisCn = string
+        case "accrRqisCn":
+            currentYouth.accrRqisCn = string
+        case "prcpCn":
+            currentYouth.prcpCn = string
         case "aditRscn":
             currentYouth.aditRscn = string
-        case "prcpLmttTrgtCN":
-            currentYouth.prcpLmttTrgtCN = string
-        case "rqutProcCN":
-            currentYouth.rqutProcCN = string
-        case "pstnPaprCN":
-            currentYouth.pstnPaprCN = string
-        case "jdgnPresCN":
-            currentYouth.jdgnPresCN = string
+        case "prcpLmttTrgtCn":
+            currentYouth.prcpLmttTrgtCn = string
+        case "rqutProcCn":
+            currentYouth.rqutProcCn = string
+        case "pstnPaprCn":
+            currentYouth.pstnPaprCn = string
+        case "jdgnPresCn":
+            currentYouth.jdgnPresCn = string
         case "rqutUrla":
             currentYouth.rqutUrla = string
         case "rfcSiteUrla1":
@@ -155,20 +164,20 @@ extension YouthCenterRepository: XMLParserDelegate {
             currentYouth.rfcSiteUrla2 = string
         case "mngtMson":
             currentYouth.mngtMson = string
-        case "mngtMrofCherCN":
-            currentYouth.mngtMrofCherCN = string
-        case "cherCtpcCN":
-            currentYouth.cherCtpcCN = string
+        case "mngtMrofCherCn":
+            currentYouth.mngtMrofCherCn = string
+        case "cherCtpcCn":
+            currentYouth.cherCtpcCn = string
         case "cnsgNmor":
             currentYouth.cnsgNmor = string
-        case "tintCherCN":
-            currentYouth.tintCherCN = string
-        case "tintCherCtpcCN":
-            currentYouth.tintCherCtpcCN = string
+        case "tintCherCn":
+            currentYouth.tintCherCn = string
+        case "tintCherCtpcCn":
+            currentYouth.tintCherCtpcCn = string
         case "etct":
             currentYouth.etct = string
-        case "polyRlmCD":
-            currentYouth.polyRlmCD = string
+        case "polyRlmCd":
+            currentYouth.polyRlmCd = string
         default:
             break
         }
@@ -186,12 +195,14 @@ extension YouthCenterRepository: XMLParserDelegate {
     
     // 파싱 완료 시 호출
     func parserDidEndDocument(_ parser: XMLParser) {
-//        print("Parsing Success")
+        print("Parsing Success")
+        result = youthPolicyList
+        youthPolicyList = .init(youthPolicy: [YouthPolicy]())
     }
 }
 
 //MARK: -Request Query
-extension YouthCenterRepository {
+//extension YouthCenterRepository {
     enum Quary: String {
         case polyBizSjnm
         case polyItcnCn
@@ -263,7 +274,7 @@ extension YouthCenterRepository {
             }
         }
     }
-}
+//}
 
 //MARK: -DTO
 extension YouthCenterRepository {
@@ -272,52 +283,96 @@ extension YouthCenterRepository {
         case defaultError
     }
 
-    // MARK: YouthDTO
-    struct YouthDTO {
-        var youthPolicyList: YouthPolicyList
-    }
+}
 
-    // MARK: YouthPolicyList
-    struct YouthPolicyList {
-        var pageIndex: String = ""
-        var totalCnt: String = ""
-        var youthPolicy: [YouthPolicy]
-    }
+// MARK: YouthDTO
+struct YouthDTO {
+    var youthPolicyList: YouthPolicyList
+}
 
-    // MARK: YouthPolicy
-    struct YouthPolicy {
-        var rnum: String = ""
-        var bizID: String = ""
-        var polyBizSecd: String = ""
-        var polyBizTy: String = ""
-        var polyBizSjnm: String = ""
-        var polyItcnCN: String = ""
-        var sporCN: String = ""
-        var sporScvl: String = ""
-        var bizPrdCN: String = ""
-        var prdRpttSecd: String = ""
-        var rqutPrdCN: String = ""
-        var ageInfo: String = ""
-        var majrRqisCN: String = ""
-        var empmSttsCN: String = ""
-        var splzRlmRqisCN: String = ""
-        var accrRqisCN: String = ""
-        var prcpCN: String = ""
-        var aditRscn: String = ""
-        var prcpLmttTrgtCN: String = ""
-        var rqutProcCN: String = ""
-        var pstnPaprCN: String = ""
-        var jdgnPresCN: String = ""
-        var rqutUrla: String = ""
-        var rfcSiteUrla1: String = ""
-        var rfcSiteUrla2: String = ""
-        var mngtMson: String = ""
-        var mngtMrofCherCN: String = ""
-        var cherCtpcCN: String = ""
-        var cnsgNmor: String = ""
-        var tintCherCN: String = ""
-        var tintCherCtpcCN: String = ""
-        var etct: String = ""
-        var polyRlmCD: String = ""
+// MARK: YouthPolicyList
+struct YouthPolicyList {
+    var pageIndex: String = ""
+    var totalCnt: String = ""
+    var youthPolicy: [YouthPolicy]
+}
+
+// MARK: YouthPolicy
+struct YouthPolicy {
+    var rnum: String = ""
+    var bizId: String = ""
+    var polyBizSecd: String = ""
+    var polyBizTy: String = ""
+    var polyBizSjnm: String = ""
+    var polyItcnCn: String = ""
+    var sporCn: String = ""
+    var sporScvl: String = ""
+    var bizPrdCn: String = ""
+    var prdRpttSecd: String = ""
+    var rqutPrdCn: String = ""
+    var ageInfo: String = ""
+    var majrRqisCn: String = ""
+    var empmSttsCn: String = ""
+    var splzRlmRqisCn: String = ""
+    var accrRqisCn: String = ""
+    var prcpCn: String = ""
+    var aditRscn: String = ""
+    var prcpLmttTrgtCn: String = ""
+    var rqutProcCn: String = ""
+    var pstnPaprCn: String = ""
+    var jdgnPresCn: String = ""
+    var rqutUrla: String = ""
+    var rfcSiteUrla1: String = ""
+    var rfcSiteUrla2: String = ""
+    var mngtMson: String = ""
+    var mngtMrofCherCn: String = ""
+    var cherCtpcCn: String = ""
+    var cnsgNmor: String = ""
+    var tintCherCn: String = ""
+    var tintCherCtpcCn: String = ""
+    var etct: String = ""
+    var polyRlmCd: String = ""
+    
+    func region() -> String {
+        let prefix = String(polyBizSecd.prefix(9))
+        
+        switch prefix {
+        case "003002001":
+            return "서울"
+        case "003002002":
+            return "부산"
+        case "003002003":
+            return "대구"
+        case "003002004":
+            return "인천"
+        case "003002005":
+            return "광주"
+        case "003002006":
+            return "대전"
+        case "003002007":
+            return "울산"
+        case "003002008":
+            return "경기"
+        case "003002009":
+            return "강원"
+        case "003002010":
+            return "충북"
+        case "003002011":
+            return "충남"
+        case "003002012":
+            return "전북"
+        case "003002013":
+            return "전남"
+        case "003002014":
+            return "경북"
+        case "003002015":
+            return "경남"
+        case "003002016":
+            return "제주"
+        case "003002017":
+            return "세종"
+        default:
+            return "지역정보없음"
+        }
     }
 }
