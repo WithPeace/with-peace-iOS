@@ -8,10 +8,11 @@
 import UIKit
 import RxSwift
 
-class HomeViewController: UIViewController {
+final class HomeViewController: UIViewController {
     
     private let viewModel = HomeViewModel()
     private let disposeBag = DisposeBag()
+    private var youthDataSource = [YouthPolicy]()
     
     private let collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
@@ -27,15 +28,30 @@ class HomeViewController: UIViewController {
         return collectionView
     }()
     
+    private let refreshControl: UIRefreshControl = {
+        let refreshControl = UIRefreshControl()
+        
+        return refreshControl
+    }()
+    
+    private let indicatorView: UIActivityIndicatorView = {
+        let view = UIActivityIndicatorView()
+        
+        view.startAnimating()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        
+        return view
+    }()
+        
     override func viewDidLoad() {
         super.viewDidLoad()
         
         configureLayout()
-        collectionView.dataSource = self
-        collectionView.delegate = self
-        // 셀 Top inset 변경
-        collectionView.contentInset = .init(top: 16, left: 0, bottom: 0, right: 0)
+        ConfigureCollectionView()
+        configureRefreshController()
+        bind()
         
+        //TODO: 추후 navigationViewController setting에 따른 네비게이션 수정
         // Navigation Appearance
         let navigationBarAppearance = UINavigationBarAppearance()
         navigationBarAppearance.configureWithTransparentBackground()
@@ -43,12 +59,19 @@ class HomeViewController: UIViewController {
         UINavigationBar.appearance().standardAppearance = navigationBarAppearance
         UINavigationBar.appearance().scrollEdgeAppearance = navigationBarAppearance
         
+        //TODO: Tabbar Image 변경
+        tabBarController?.navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "line.3.horizontal.decrease.circle")!,
+                                                                              style: .done,
+                                                                              target: self,
+                                                                              action: #selector(tapRightButton))
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-
+        tabBarController?.navigationController?.isNavigationBarHidden = false
+        
+        //TODO: 추후 navigationViewController setting에 따른 네비게이션 수정
         //NaivgaitonItem View Setting
         let imageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 20, height: 20))
         let image = UIImage(named: Const.Logo.MainLogo.withpeaceLogo)
@@ -64,12 +87,73 @@ class HomeViewController: UIViewController {
         //NavigationItem View disappear
         tabBarController?.navigationItem.titleView = nil
     }
+    
+    private func bind() {
+        viewModel.indicatorViewControll.bind { [weak self] in
+            DispatchQueue.main.async {
+                self?.indicatorView.stopAnimating()
+            }
+        }.disposed(by: disposeBag)
+        
+        viewModel.youthData.bind { [weak self] youthPolicy in
+            self?.youthDataSource = youthPolicy
+            DispatchQueue.main.async {
+                self?.collectionView.reloadData()
+            }
+        }.disposed(by: disposeBag)
+        
+        viewModel.youthData.bind { [weak self] youthPolicy in
+            self?.youthDataSource = youthPolicy
+            DispatchQueue.main.async {
+                self?.collectionView.reloadData()
+            }
+        }.disposed(by: disposeBag)
+        
+        viewModel.refreshControll.bind { [weak self] in
+            DispatchQueue.main.async {
+                self?.refreshControl.endRefreshing()
+            }
+        }.disposed(by: disposeBag)
+    }
+}
+
+//MARK: objc Method
+extension HomeViewController {
+    @objc func refreshAction() {
+        viewModel.refreshAction.onNext(())
+    }
+    
+    @objc
+    func tapRightButton() {
+        //TODO: Navigation RightButton Action (filter데이터 추가)
+        print("Tap RightButton")
+        viewModel.changeFilter.onNext(FilteredData())
+    }
+}
+
+//MARK: Configure View
+extension HomeViewController {
+    
+    private func ConfigureCollectionView() {
+        collectionView.dataSource = self
+        collectionView.delegate = self
+        
+        // 셀 Top inset 변경
+        collectionView.contentInset = .init(top: 16, left: 0, bottom: 0, right: 0)
+        
+        collectionView.refreshControl = refreshControl
+    }
+    
+    private func configureRefreshController() {
+        refreshControl.addTarget(self, action: #selector(refreshAction) , for: .valueChanged)
+    }
 }
 
 extension HomeViewController {
     
     private func configureLayout() {
         self.view.addSubview(collectionView)
+        self.view.addSubview(indicatorView)
         
         let safe = self.view.safeAreaLayoutGuide
         
@@ -79,12 +163,27 @@ extension HomeViewController {
             collectionView.trailingAnchor.constraint(equalTo: safe.trailingAnchor),
             collectionView.bottomAnchor.constraint(equalTo: safe.bottomAnchor),
         ])
+        
+        NSLayoutConstraint.activate([
+            indicatorView.topAnchor.constraint(equalTo: safe.topAnchor),
+            indicatorView.leadingAnchor.constraint(equalTo: safe.leadingAnchor),
+            indicatorView.trailingAnchor.constraint(equalTo: safe.trailingAnchor),
+            indicatorView.bottomAnchor.constraint(equalTo: safe.bottomAnchor),
+        ])
+    }
+}
+
+extension HomeViewController: UICollectionViewDelegateFlowLayout {
+    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
+        if scrollView.contentOffset.y >= (scrollView.contentSize.height - scrollView.frame.size.height) {
+            viewModel.fetchAdditional.onNext(())
+        }
     }
 }
 
 extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        10
+        youthDataSource.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -94,19 +193,13 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
             return UICollectionViewCell()
         }
         
-        if indexPath.row % 2 == 1 {
-            cell.setTitleLabel("청년창업 지원사업 예비 창업자 모집 안내")
-            cell.setBodyLabel("생애 최초로 창업에 도전하는 만 29세 이하 청년 예비 창업자들의 성공을 위해 지원하는 정책이 나왔습니다")
-            cell.setRegionLabel("서울")
-            cell.setAgeLagel("만 29세 이하")
-            cell.setImageView(image: UIImage(named: Const.Logo.MainLogo.withpeaceLogo)!)
-        } else {
-            cell.setTitleLabel("청년창업 지원사업 예비 창업자 모집 안내")
-            cell.setBodyLabel("생애 최초로 창업에 도전하는 ")
-            cell.setRegionLabel("서울")
-            cell.setAgeLagel("만 29세 이하")
-            cell.setImageView(image: UIImage(named: Const.Logo.MainLogo.googleLogo)!)
-        }
+        let cellData = youthDataSource[indexPath.row]
+        
+        cell.setTitleLabel(cellData.polyBizSjnm)
+        cell.setBodyLabel(cellData.polyItcnCn)
+        cell.setRegionLabel(cellData.region())
+        cell.setAgeLagel(cellData.ageInfo)
+        cell.setImageView(image: UIImage(named: Const.Logo.MainLogo.withpeaceLogo)!)
         
         return cell
     }
