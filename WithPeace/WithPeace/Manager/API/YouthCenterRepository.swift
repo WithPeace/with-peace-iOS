@@ -203,77 +203,92 @@ extension YouthCenterRepository: XMLParserDelegate {
 
 //MARK: -Request Query
 //extension YouthCenterRepository {
-    enum Quary: String {
-        case polyBizSjnm
-        case polyItcnCn
-    }
+enum Quary: String {
+    case polyBizSjnm
+    case polyItcnCn
+}
+
+enum BizTycdSel: String, CaseIterable {
+    case job = "023010"
+    case living = "023020"
+    case edu = "023030"
+    case culture = "023040"
+    case participation = "023050"
     
-    enum BizTycdSel: String {
-        case job = "023010"
-        case living = "023020"
-        case edu = "023030"
-        case culture = "023040"
-        case participation = "023050"
-    }
-    
-    enum SrchPolyBizSecd: String {
-        case seoul = "003002001"
-        case busan = "003002002"
-        case daegu = "003002003"
-        case incheon = "003002004"
-        case gwangju = "003002005"
-        case daejeon = "003002006"
-        case ulsan = "003002007"
-        case gyeonggi = "003002008"
-        case gangwon = "003002009"
-        case chungbuk = "003002010"
-        case chungnam = "003002011"
-        case jeonbuk = "003002012"
-        case jeonnam = "003002013"
-        case gyeongbuk = "003002014"
-        case gyeongnam = "003002015"
-        case jeju = "003002016"
-        case sejong = "003002017"
-        
-        var koreanName: String {
-            switch self {
-            case .seoul:
-                "서울"
-            case .busan:
-                "부산"
-            case .daegu:
-                "대구"
-            case .incheon:
-                "인천"
-            case .gwangju:
-                "광주"
-            case .daejeon:
-                "대전"
-            case .ulsan:
-                "울산"
-            case .gyeonggi:
-                "경기"
-            case .gangwon:
-                "강원"
-            case .chungbuk:
-                "충북"
-            case .chungnam:
-                "충남"
-            case .jeonbuk:
-                "전북"
-            case .jeonnam:
-                "전남"
-            case .gyeongbuk:
-                "경북"
-            case .gyeongnam:
-                "경남"
-            case .jeju:
-                "제주"
-            case .sejong:
-                "세종"
-            }
+    var koreanName: String {
+        switch self {
+        case .job:
+            "일자리"
+        case .living:
+            "주거"
+        case .edu:
+            "교육"
+        case .culture:
+            "복지.문화"
+        case .participation:
+            "참여.교육"
         }
     }
+}
+
+enum SrchPolyBizSecd: String, CaseIterable {
+    case seoul = "003002001"
+    case busan = "003002002"
+    case daegu = "003002003"
+    case incheon = "003002004"
+    case gwangju = "003002005"
+    case daejeon = "003002006"
+    case ulsan = "003002007"
+    case gyeonggi = "003002008"
+    case gangwon = "003002009"
+    case chungbuk = "003002010"
+    case chungnam = "003002011"
+    case jeonbuk = "003002012"
+    case jeonnam = "003002013"
+    case gyeongbuk = "003002014"
+    case gyeongnam = "003002015"
+    case jeju = "003002016"
+    case sejong = "003002017"
+    
+    var koreanName: String {
+        switch self {
+        case .seoul:
+            "서울"
+        case .busan:
+            "부산"
+        case .daegu:
+            "대구"
+        case .incheon:
+            "인천"
+        case .gwangju:
+            "광주"
+        case .daejeon:
+            "대전"
+        case .ulsan:
+            "울산"
+        case .gyeonggi:
+            "경기"
+        case .gangwon:
+            "강원"
+        case .chungbuk:
+            "충북"
+        case .chungnam:
+            "충남"
+        case .jeonbuk:
+            "전북"
+        case .jeonnam:
+            "전남"
+        case .gyeongbuk:
+            "경북"
+        case .gyeongnam:
+            "경남"
+        case .jeju:
+            "제주"
+        case .sejong:
+            "세종"
+        }
+    }
+}
 //}
 
 //MARK: -DTO

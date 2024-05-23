@@ -127,6 +127,14 @@ extension HomeViewController {
     func tapRightButton() {
         //TODO: Navigation RightButton Action (filter데이터 추가)
         print("Tap RightButton")
+        
+        let vc = YouthFilterViewController()
+//        vc.modalPresentationStyle = .overFullScreen
+        
+//        vc.modalTransitionStyle = .coverVertical
+//        vc.modalPresentationCapturesStatusBarAppearance = .random()
+        present(vc, animated: true)
+        
         viewModel.changeFilter.onNext(FilteredData())
     }
 }
