@@ -59,11 +59,11 @@ final class HomeViewController: UIViewController {
         UINavigationBar.appearance().standardAppearance = navigationBarAppearance
         UINavigationBar.appearance().scrollEdgeAppearance = navigationBarAppearance
         
-        //TODO: Tabbar Image 변경
-        tabBarController?.navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "line.3.horizontal.decrease.circle")!,
+        tabBarController?.navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: Const.CustomIcon.ICController.icFilter),
                                                                               style: .done,
                                                                               target: self,
                                                                               action: #selector(tapRightButton))
+        tabBarController?.navigationItem.rightBarButtonItem?.tintColor = UIColor(named: Const.CustomColor.BrandColor2.mainPurple)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -74,7 +74,7 @@ final class HomeViewController: UIViewController {
         //TODO: 추후 navigationViewController setting에 따른 네비게이션 수정
         //NaivgaitonItem View Setting
         let imageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 20, height: 20))
-        let image = UIImage(named: Const.Logo.MainLogo.withpeaceLogo)
+        let image = UIImage(named: Const.Logo.MainLogo.chunghaMainLogo)
         imageView.contentMode = .scaleAspectFit
         imageView.image = image
         

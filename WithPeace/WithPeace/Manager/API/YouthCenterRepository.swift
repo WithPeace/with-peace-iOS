@@ -226,12 +226,13 @@ enum BizTycdSel: String, CaseIterable {
         case .culture:
             "복지.문화"
         case .participation:
-            "참여.교육"
+            "참여.권리"
         }
     }
 }
 
 enum SrchPolyBizSecd: String, CaseIterable {
+    case centralMinistry = "003001004"
     case seoul = "003002001"
     case busan = "003002002"
     case daegu = "003002003"
@@ -252,6 +253,8 @@ enum SrchPolyBizSecd: String, CaseIterable {
     
     var koreanName: String {
         switch self {
+        case .centralMinistry:
+            "중앙부처"
         case .seoul:
             "서울"
         case .busan:
@@ -352,6 +355,8 @@ struct YouthPolicy {
         let prefix = String(polyBizSecd.prefix(9))
         
         switch prefix {
+        case "003001004":
+            return "중앙부처"
         case "003002001":
             return "서울"
         case "003002002":

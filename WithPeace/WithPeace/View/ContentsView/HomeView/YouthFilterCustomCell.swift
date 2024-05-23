@@ -24,8 +24,7 @@ final class CustomCell: UITableViewCell {
         let button = UIButton()
         
         button.translatesAutoresizingMaskIntoConstraints = false
-        //TODO: 이미지 변경
-        button.setImage(UIImage(systemName: "apple.logo"), for: .normal)
+//        button.setImage(UIImage(systemName: "apple.logo"), for: .normal)
         
         return button
     }()
@@ -59,10 +58,8 @@ final class CustomCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    // TODO: image변경
     func changeContents(title: String, isClicked: Bool) {
         self.title.text = title
-        //TODO: 이미지 변경
-        isClicked ? self.checkBoxButton.setImage(UIImage(systemName: "apple.logo"), for: .normal) : self.checkBoxButton.setImage(UIImage(systemName: "checkmark"), for: .normal)
+        isClicked ? self.checkBoxButton.setImage(UIImage(named: Const.CustomIcon.ICCheckBox.icCheckboxFill), for: .normal) : self.checkBoxButton.setImage(UIImage(named: Const.CustomIcon.ICCheckBox.icCheckboxEmpty), for: .normal)
     }
 }

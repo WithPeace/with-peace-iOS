@@ -103,6 +103,27 @@ extension Const {
             static let icPictureSelect = "ic-picture-select"
         }
         
+        struct ICCheckBox {
+            private init() {}
+            
+            static let icCheckboxEmpty = "ic-checkbox-empty"
+            static let icCheckboxFill = "ic-checkbox-fill"
+        }
+        
+        struct ICController {
+            private init() {}
+            
+            static let icExit = "ic-exit"
+            static let icFilter = "ic-filter"
+        }
+        
+        struct ICExpansion {
+            private init() {}
+            
+            static let icLess = "ic-less"
+            static let icMore = "ic-more"
+        }
+        
         struct ICNavigationTabbar {
             private init() {}
             
@@ -134,6 +155,23 @@ extension Const {
             static let withpeaceLogo = "withpeace_Logo"
             static let googleLogo = "google_Logo"
             static let appleLogo = "apple_Logo"
+            static let chunghaMainLogo = "chunghaMain_Logo"
+        }
+    }
+}
+
+extension Const {
+    struct Image {
+        private init() {}
+        
+        struct MainLogo {
+            private init() {}
+            
+            static let cultureThumbnail = "cultureThumbnail"
+            static let eduThumbnail = "google_Logo"
+            static let jobThumbnail = "jobThumbnail"
+            static let livingThumbnail = "livingThumbnail"
+            static let participationThumbnail = "participationThumbnail"
         }
     }
 }
