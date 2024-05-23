@@ -226,7 +226,7 @@ enum BizTycdSel: String, CaseIterable {
         case .culture:
             "복지.문화"
         case .participation:
-            "참여.교육"
+            "참여.권리"
         }
     }
 }

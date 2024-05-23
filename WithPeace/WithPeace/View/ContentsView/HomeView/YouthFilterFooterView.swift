@@ -70,10 +70,10 @@ final class YouthFilterFooterView: UIView {
     func changeWill(isFold: Bool) {
         if isFold {
             titleLabel.text = "더보기"
-            imageView.image = UIImage(systemName: "checkmark.circle")
+            imageView.image = UIImage(named: Const.CustomIcon.ICExpansion.icMore)
         } else {
             titleLabel.text = "접기"
-            imageView.image = UIImage(systemName: "checkmark.circle.fill")
+            imageView.image = UIImage(named: Const.CustomIcon.ICExpansion.icLess)
         }
     }
 }

@@ -57,6 +57,3 @@ final class YouthFilterHeaderView: UIView {
         titleLabel.text = label
     }
 }
-
-
-

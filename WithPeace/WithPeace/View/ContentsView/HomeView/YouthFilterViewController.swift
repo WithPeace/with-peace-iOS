@@ -21,10 +21,9 @@ final class YouthFilterViewController: UIViewController {
     private let dismissButton: UIButton = {
         let button = UIButton()
         
-        button.tintColor = UIColor(named: Const.CustomColor.SystemColor.black)
-        //TODO: 이미지 변경
-        button.setImage(UIImage(systemName: "xmark"), for: .normal)
         button.translatesAutoresizingMaskIntoConstraints = false
+        button.tintColor = UIColor(named: Const.CustomColor.SystemColor.black)
+        button.setImage(UIImage(named: Const.CustomIcon.ICController.icExit), for: .normal)
         
         return button
     }()
