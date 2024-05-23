@@ -526,17 +526,9 @@
 			isa = PBXGroup;
 			children = (
 				F69B800F2B996847002675CE /* Assets.xcassets */,
-				F6B5B40D2BBEBEB3000C8494 /* New Group */,
 				F69B80112B996847002675CE /* LaunchScreen.storyboard */,
 			);
 			path = Resource;
-			sourceTree = "<group>";
-		};
-		F6B5B40D2BBEBEB3000C8494 /* New Group */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = "New Group";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
