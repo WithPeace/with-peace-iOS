@@ -9,17 +9,6 @@ import Foundation
 import RxSwift
 
 //TODO: Page Index 관리에 대한 고민
-
-struct FilteredData:Equatable {
-    let display: Int = 10
-    let pageIndex: Int = 1
-    let srchPolicyId: String? = nil
-    let query: Quary? = nil
-    let bizTycdSel: [BizTycdSel]? = nil
-    let srchPolyBizSecd: [SrchPolyBizSecd]? = nil
-    let keyword: [String]? = nil
-}
-
 final class HomeViewModel {
     private let youthCenterRepository = YouthCenterRepository()
     
@@ -32,12 +21,14 @@ final class HomeViewModel {
     // INPUT
     let fetchAdditional: PublishSubject<Void>
     let refreshAction: PublishSubject<Void>
-    let changeFilter = BehaviorSubject<FilteredData>(value: FilteredData())
+    let tapFilterButton = PublishSubject<Void>()
+    let changeFilter = BehaviorSubject<YouthFilterData>(value: YouthFilterData())
     
     // OUTPUT
     let youthData = BehaviorSubject(value: [YouthPolicy]())
     let indicatorViewControll = PublishSubject<Void>()
     let refreshControll = PublishSubject<Void>()
+    let popModal = PublishSubject<YouthFilterData>()
     
     init() {
         let requesting = PublishSubject<Void>()
@@ -132,16 +123,9 @@ final class HomeViewModel {
                 }
             }
         }).disposed(by: disposeBag)
+        
+        tapFilterButton.withLatestFrom(changeFilter)
+            .bind(to: popModal)
+            .disposed(by: disposeBag)
     }
 }
-
-/*
- display: Int, 출력건 10~100
- pageIndex: Int = 1, 조회 페이지
- srchPolicyId: String?, 정책 id -> 상세 구현시 필요
- query: Quary? = nil, 정책명, 정책소개 정보검색
- bizTycdSel: [BizTycdSel]? = nil, 정책유형 5개
- srchPolyBizSecd: [SrchPolyBizSecd]? = nil, 시도 코드
- keyword: [String]? = nil,
- */
-

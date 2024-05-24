@@ -52,7 +52,7 @@ final class YouthCenterRepository: NSObject {
         
         if let srchPolyBizSecd = srchPolyBizSecd {
             let resultSrch = srchPolyBizSecd.map { $0.rawValue }.joined(separator: ",")
-            urlQueryItem.append(URLQueryItem(name: "srchPolyBizeSecd", value: resultSrch))
+            urlQueryItem.append(URLQueryItem(name: "srchPolyBizSecd", value: resultSrch))
         }
         
         if let keyword = keyword {
@@ -351,6 +351,8 @@ struct YouthPolicy {
     var etct: String = ""
     var polyRlmCd: String = ""
     
+    
+    //중앙부처 003001 6자리로 표현됨
     func region() -> String {
         let prefix = String(polyBizSecd.prefix(9))
         
@@ -392,7 +394,7 @@ struct YouthPolicy {
         case "003002017":
             return "세종"
         default:
-            return "지역정보없음"
+            return "중앙부처"
         }
     }
 }

@@ -51,6 +51,7 @@
 		F6833FF32BFDC3B30099F1DA /* YouthFilterCustomCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6833FF22BFDC3B30099F1DA /* YouthFilterCustomCell.swift */; };
 		F6833FF52BFDC4150099F1DA /* YouthFilterFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6833FF42BFDC4150099F1DA /* YouthFilterFooterView.swift */; };
 		F6833FF72BFE24130099F1DA /* YouthFilterHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6833FF62BFE24130099F1DA /* YouthFilterHeaderView.swift */; };
+		F6833FF92C00ACB10099F1DA /* YouthFilterData.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6833FF82C00ACB10099F1DA /* YouthFilterData.swift */; };
 		F68657422BB415A400821281 /* CustomActionSheetPresentationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F68657412BB415A400821281 /* CustomActionSheetPresentationController.swift */; };
 		F68657442BB415DC00821281 /* CustomActionSheetTransitioningDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F68657432BB415DC00821281 /* CustomActionSheetTransitioningDelegate.swift */; };
 		F68719B12BA8635C0049B182 /* CustomPhotoAlbumViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F68719B02BA8635C0049B182 /* CustomPhotoAlbumViewController.swift */; };
@@ -152,6 +153,7 @@
 		F6833FF22BFDC3B30099F1DA /* YouthFilterCustomCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YouthFilterCustomCell.swift; sourceTree = "<group>"; };
 		F6833FF42BFDC4150099F1DA /* YouthFilterFooterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YouthFilterFooterView.swift; sourceTree = "<group>"; };
 		F6833FF62BFE24130099F1DA /* YouthFilterHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YouthFilterHeaderView.swift; sourceTree = "<group>"; };
+		F6833FF82C00ACB10099F1DA /* YouthFilterData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YouthFilterData.swift; sourceTree = "<group>"; };
 		F68657412BB415A400821281 /* CustomActionSheetPresentationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomActionSheetPresentationController.swift; sourceTree = "<group>"; };
 		F68657432BB415DC00821281 /* CustomActionSheetTransitioningDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomActionSheetTransitioningDelegate.swift; sourceTree = "<group>"; };
 		F68719B02BA8635C0049B182 /* CustomPhotoAlbumViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomPhotoAlbumViewController.swift; sourceTree = "<group>"; };
@@ -384,6 +386,7 @@
 			children = (
 				F68C9D1B2BA2DE87008CB7E4 /* HomeViewController.swift */,
 				F61B51612BECF5B400812C8D /* HomeViewModel.swift */,
+				F6833FF82C00ACB10099F1DA /* YouthFilterData.swift */,
 				F61B515F2BEB799000812C8D /* YouthListCell.swift */,
 				F6833FAA2BFC70700099F1DA /* YouthFilterViewController.swift */,
 				F6833FAC2BFC708D0099F1DA /* YouthFilterViewModel.swift */,
@@ -681,6 +684,7 @@
 				635BCBA92BA3521F00F0DCBC /* SocialLoginViewModel.swift in Sources */,
 				F674DDDF2BADB17A00536AA7 /* String+.swift in Sources */,
 				F68657442BB415DC00821281 /* CustomActionSheetTransitioningDelegate.swift in Sources */,
+				F6833FF92C00ACB10099F1DA /* YouthFilterData.swift in Sources */,
 				F61B51602BEB799000812C8D /* YouthListCell.swift in Sources */,
 				F671A9BB2BA00D4A002808DA /* Bundle+.swift in Sources */,
 				630323732BC7D68200B16E7C /* ImageDetailCollectionViewCell.swift in Sources */,
