@@ -300,7 +300,6 @@ extension YouthCenterRepository {
     enum YouthCenterError: Error {
         case defaultError
     }
-
 }
 
 // MARK: YouthDTO
