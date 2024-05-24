@@ -114,6 +114,16 @@ final class HomeViewController: UIViewController {
                 self?.refreshControl.endRefreshing()
             }
         }.disposed(by: disposeBag)
+        
+        viewModel.popModal.bind { [weak self] youthFilterData in
+                DispatchQueue.main.async {
+                    let viewController = YouthFilterViewController(filterData: youthFilterData)
+                    viewController.delegate = self
+                    
+                    self?.present(viewController, animated: true)
+                }
+            }
+            .disposed(by: disposeBag)
     }
 }
 
@@ -125,17 +135,7 @@ extension HomeViewController {
     
     @objc
     func tapRightButton() {
-        //TODO: Navigation RightButton Action (filter데이터 추가)
-        print("Tap RightButton")
-        
-        let vc = YouthFilterViewController()
-//        vc.modalPresentationStyle = .overFullScreen
-        
-//        vc.modalTransitionStyle = .coverVertical
-//        vc.modalPresentationCapturesStatusBarAppearance = .random()
-        present(vc, animated: true)
-        
-        viewModel.changeFilter.onNext(FilteredData())
+        viewModel.tapFilterButton.onNext(())
     }
 }
 
@@ -210,5 +210,11 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
         cell.setImageView(image: UIImage(named: Const.Logo.MainLogo.withpeaceLogo)!)
         
         return cell
+    }
+}
+
+extension HomeViewController: YouthFilterDelegate {
+    func didUpdateFilter(_ filter: YouthFilterData) {
+        viewModel.changeFilter.onNext(filter)
     }
 }

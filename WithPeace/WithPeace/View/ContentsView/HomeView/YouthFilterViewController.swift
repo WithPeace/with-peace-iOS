@@ -8,7 +8,13 @@
 import UIKit
 import RxSwift
 
+protocol YouthFilterDelegate: AnyObject {
+    func didUpdateFilter(_ filter: YouthFilterData)
+}
+
 final class YouthFilterViewController: UIViewController {
+    
+    var delegate: YouthFilterDelegate?
     
     private let seperatorView: CustomProfileSeparatorView = {
         let view = CustomProfileSeparatorView(colorName: Const.CustomColor.SystemColor.gray3)
@@ -103,7 +109,30 @@ final class YouthFilterViewController: UIViewController {
         configureLayout()
         addTargetMethod()
     }
-
+    
+    init(filterData: YouthFilterData) {
+        super.init(nibName: nil, bundle: nil)
+        
+        if let filteredBizTycdSel = filterData.bizTycdSel {
+            for (index, biz) in dataSource.biz.enumerated() {
+                if filteredBizTycdSel.contains(biz.0) {
+                    dataSource.biz[index].1 = true
+                }
+            }
+        }
+        
+        if let filteredSrchPolyBizSecd = filterData.srchPolyBizSecd {
+            for (index, srch) in dataSource.srch.enumerated() {
+                if filteredSrchPolyBizSecd.contains(srch.0) {
+                    dataSource.srch[index].1 = true
+                }
+            }
+        }
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     private func tableViewSetting() {
         tableView.delegate = self
@@ -201,8 +230,25 @@ final class YouthFilterViewController: UIViewController {
     
     @objc
     private func tapSearchButton() {
-        DispatchQueue.main.async {
-            self.dismiss(animated: true)
+        DispatchQueue.main.async { [weak self] in
+            var youth = YouthFilterData(bizTycdSel: [], srchPolyBizSecd: [])
+            
+            if let source = self?.dataSource {
+                for sourceBiz in source.biz {
+                    if sourceBiz.1 {
+                        youth.bizTycdSel?.append(sourceBiz.0)
+                    }
+                }
+                
+                for sourceSrch in source.srch {
+                    if sourceSrch.1 {
+                        youth.srchPolyBizSecd?.append(sourceSrch.0)
+                    }
+                }
+            }
+            
+            self?.delegate?.didUpdateFilter(youth)
+            self?.dismiss(animated: true)
         }
     }
 }
