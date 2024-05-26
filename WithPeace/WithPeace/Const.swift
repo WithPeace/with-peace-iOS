@@ -168,7 +168,7 @@ extension Const {
             private init() {}
             
             static let cultureThumbnail = "cultureThumbnail"
-            static let eduThumbnail = "google_Logo"
+            static let eduThumbnail = "eduThumbnail"
             static let jobThumbnail = "jobThumbnail"
             static let livingThumbnail = "livingThumbnail"
             static let participationThumbnail = "participationThumbnail"
