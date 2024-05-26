@@ -207,7 +207,28 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
         cell.setBodyLabel(cellData.polyItcnCn)
         cell.setRegionLabel(cellData.region())
         cell.setAgeLagel(cellData.ageInfo)
-        cell.setImageView(image: UIImage(named: Const.Logo.MainLogo.withpeaceLogo)!)
+        
+        //TODO: Hard coding 수정
+        var image: UIImage? = UIImage()
+        
+        switch cellData.polyRlmCd {
+        case "023010":
+            image = UIImage(named: Const.Image.MainLogo.jobThumbnail)
+        case "023020":
+            image = UIImage(named: Const.Image.MainLogo.livingThumbnail)
+        case "023030":
+            image = UIImage(named: Const.Image.MainLogo.eduThumbnail)
+        case "023040":
+            image = UIImage(named: Const.Image.MainLogo.cultureThumbnail)
+        case "023050":
+            image = UIImage(named: Const.Image.MainLogo.participationThumbnail)
+        default:
+            image = UIImage(named: Const.Logo.MainLogo.chunghaMainLogo)
+        }
+        
+        if let image = image {
+            cell.setImageView(image: image)
+        }
         
         return cell
     }
