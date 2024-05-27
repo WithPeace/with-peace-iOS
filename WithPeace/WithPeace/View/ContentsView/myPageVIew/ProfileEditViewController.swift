@@ -97,6 +97,9 @@ final class ProfileEditViewController: UIViewController {
         configureLayout()
         configureTargetAction()
         bind()
+        
+        //TODO: -CustomNavigationBar 변경
+        navigationController?.navigationItem.titleView = CustomNavigationBar()
     }
     
     override func viewDidLayoutSubviews() {
@@ -266,5 +269,35 @@ extension ProfileEditViewController {
             registButton.trailingAnchor.constraint(equalTo: safe.trailingAnchor, constant: -24),
             registButton.bottomAnchor.constraint(equalTo: safe.bottomAnchor, constant: -43)
         ])
+    }
+}
+
+//TODO: -CustomNavigationBar Setting
+final class CustomNavigationBar: UIView {
+    
+    private let titleLabel: UILabel = {
+        let label = UILabel()
+        
+        label.text = "마이페이지"
+        label.translatesAutoresizingMaskIntoConstraints = false
+        
+        return label
+    }()
+    
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        
+        self.addSubview(titleLabel)
+        
+        NSLayoutConstraint.activate([
+            titleLabel.centerXAnchor.constraint(equalTo: self.centerXAnchor),
+            titleLabel.centerYAnchor.constraint(equalTo: self.centerYAnchor),
+            
+            self.heightAnchor.constraint(equalToConstant: 56)
+        ])
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
 }

@@ -67,8 +67,8 @@ final class ProfileEditViewModel {
             }
         }
     }
-
-    let profileRepository = ProfileRepository()
+    
+    let profileRepository = ProfileAPIRepository()
     let disposeBag = DisposeBag()
     
     //INPUT
