@@ -17,7 +17,7 @@ final class ProfileView: UIView {
         view.clipsToBounds = true
         view.layer.cornerRadius = 27
         view.contentMode = .scaleAspectFill
-        view.image = UIImage(named: Const.Logo.MainLogo.withpeaceLogo)
+        view.image = UIImage(named: Const.Logo.MainLogo.chunghaMainLogo)
         
         return view
     }()
