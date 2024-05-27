@@ -64,7 +64,7 @@ final class LoginNickNameViewModel {
         }
     }
     
-    let profileRepository = ProfileRepository()
+    let profileRepository = ProfileAPIRepository()
     let signRepository = SignRepository()
     let disposeBag = DisposeBag()
     

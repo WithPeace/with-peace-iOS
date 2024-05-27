@@ -19,9 +19,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         if hasToken() {
             //기존 로그인
             let tabBarController = MainTabbarController()
-            let navigationController = UINavigationController(rootViewController: tabBarController)
             
-            window.rootViewController = navigationController
+            window.rootViewController = tabBarController
         } else {
             //최초 로그인
             let socialLoginViewController = SocialLoginViewController()
@@ -60,10 +59,9 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     }
     
     func changeViewController() {
-        let tabBarController = MainTabbarController()
-        let navigationController = UINavigationController(rootViewController: tabBarController)
-        
         guard let window = window else { return }
-        window.rootViewController = navigationController
+        
+        let tabBarController = MainTabbarController()
+        window.rootViewController = tabBarController
     }
 }
