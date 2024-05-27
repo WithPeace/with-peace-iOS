@@ -1,6 +1,7 @@
 {
   "images" : [
     {
+      "filename" : "ChunghaMainLogo.png",
       "idiom" : "universal",
       "platform" : "ios",
       "size" : "1024x1024"
