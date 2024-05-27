@@ -46,46 +46,35 @@ final class HomeViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        view.backgroundColor = .systemBackground
+        
+        configureNavigationController()
         configureLayout()
-        ConfigureCollectionView()
+        configureCollectionView()
         configureRefreshController()
         bind()
-        
-        //TODO: 추후 navigationViewController setting에 따른 네비게이션 수정
-        // Navigation Appearance
-        let navigationBarAppearance = UINavigationBarAppearance()
-        navigationBarAppearance.configureWithTransparentBackground()
-        navigationBarAppearance.backgroundColor = .white
-        UINavigationBar.appearance().standardAppearance = navigationBarAppearance
-        UINavigationBar.appearance().scrollEdgeAppearance = navigationBarAppearance
-        
-        tabBarController?.navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: Const.CustomIcon.ICController.icFilter),
-                                                                              style: .done,
-                                                                              target: self,
-                                                                              action: #selector(tapRightButton))
-        tabBarController?.navigationItem.rightBarButtonItem?.tintColor = UIColor(named: Const.CustomColor.BrandColor2.mainPurple)
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        tabBarController?.navigationController?.isNavigationBarHidden = false
-        
-        //TODO: 추후 navigationViewController setting에 따른 네비게이션 수정
-        //NaivgaitonItem View Setting
         let imageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 20, height: 20))
         let image = UIImage(named: Const.Logo.MainLogo.chunghaMainLogo)
         imageView.contentMode = .scaleAspectFit
         imageView.image = image
         
-        tabBarController?.navigationItem.titleView = imageView
+        navigationItem.titleView = imageView
     }
     
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
+    private func configureNavigationController() {
+        self.navigationController?.navigationBar.standardAppearance.configureWithTransparentBackground()
+        self.navigationController?.navigationBar.backgroundColor = .systemBackground
         
-        //NavigationItem View disappear
-        tabBarController?.navigationItem.titleView = nil
+        navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: Const.CustomIcon.ICController.icFilter),
+                                                                              style: .done,
+                                                                              target: self,
+                                                                              action: #selector(tapRightButton))
+        navigationItem.rightBarButtonItem?.tintColor = UIColor(named: Const.CustomColor.BrandColor2.mainPurple)
     }
     
     private func bind() {
@@ -142,7 +131,7 @@ extension HomeViewController {
 //MARK: Configure View
 extension HomeViewController {
     
-    private func ConfigureCollectionView() {
+    private func configureCollectionView() {
         collectionView.dataSource = self
         collectionView.delegate = self
         

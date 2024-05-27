@@ -12,7 +12,7 @@ import RxSwift
 final class MyPageViewModel {
     
     let signRepository = SignRepository()
-    let profileRepository = ProfileRepository()
+    let profileRepository = ProfileAPIRepository()
     
     // INPUT
     let tapProfileSetupButton = PublishSubject<Void>()

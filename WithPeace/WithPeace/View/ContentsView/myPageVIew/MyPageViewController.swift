@@ -24,13 +24,9 @@ final class MyPageViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        view.backgroundColor = .white
-//        self.navigationController?.navigationBar.backgroundColor = .systemMint
-//        self.navigationController?.title = "asdf" // navigation tabbbar title
+        view.backgroundColor = .systemBackground
         
-//        navigationController?.tabBarItem.title = "마이페이지"
-//        navigationController?.navigationBar.isTranslucent = false // 불투명 = false 반투명 = true
-        
+        configureNavigation()
         configureLayout()
         setupButtonAction()
         bind()
@@ -84,6 +80,13 @@ final class MyPageViewController: UIViewController {
                 self.profileAccountView.setEmailTitle($0)
             })
             .disposed(by: disposeBag)
+    }
+    
+    private func configureNavigation() {
+        self.navigationController?.navigationBar.standardAppearance.configureWithDefaultBackground()
+        self.navigationController?.navigationBar.backgroundColor = .systemBackground
+        
+        self.navigationController?.navigationBar.topItem?.title = "마이페이지"
     }
 }
 
