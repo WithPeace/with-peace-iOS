@@ -34,6 +34,11 @@
 		F61B51602BEB799000812C8D /* YouthListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F61B515F2BEB799000812C8D /* YouthListCell.swift */; };
 		F61B51622BECF5B400812C8D /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F61B51612BECF5B400812C8D /* HomeViewModel.swift */; };
 		F65E1ECF2BAC086D00326EF7 /* LoginNickNameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F65E1ECE2BAC086D00326EF7 /* LoginNickNameViewController.swift */; };
+		F65FFA8F2C04C3D3009A6FB3 /* YouthDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F65FFA8E2C04C3D3009A6FB3 /* YouthDetailViewController.swift */; };
+		F65FFA912C04C71C009A6FB3 /* YouthDetailHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F65FFA902C04C71C009A6FB3 /* YouthDetailHeaderView.swift */; };
+		F65FFA932C05CEC3009A6FB3 /* YouthDetailCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F65FFA922C05CEC3009A6FB3 /* YouthDetailCell.swift */; };
+		F65FFA952C074904009A6FB3 /* YouthDetailTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F65FFA942C074904009A6FB3 /* YouthDetailTableView.swift */; };
+		F65FFA972C074914009A6FB3 /* YouthDetailTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F65FFA962C074914009A6FB3 /* YouthDetailTableViewController.swift */; };
 		F667FD882BAC2287005AAAB7 /* CustomPhotoAlbumDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F667FD862BAC2287005AAAB7 /* CustomPhotoAlbumDetailViewController.swift */; };
 		F667FD892BAC2287005AAAB7 /* AlbumDetailCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F667FD872BAC2287005AAAB7 /* AlbumDetailCell.swift */; };
 		F66C98222BA1F5AD001E121C /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F66C98212BA1F5AD001E121C /* MainTabBarController.swift */; };
@@ -136,6 +141,11 @@
 		F61B515F2BEB799000812C8D /* YouthListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YouthListCell.swift; sourceTree = "<group>"; };
 		F61B51612BECF5B400812C8D /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
 		F65E1ECE2BAC086D00326EF7 /* LoginNickNameViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginNickNameViewController.swift; sourceTree = "<group>"; };
+		F65FFA8E2C04C3D3009A6FB3 /* YouthDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YouthDetailViewController.swift; sourceTree = "<group>"; };
+		F65FFA902C04C71C009A6FB3 /* YouthDetailHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YouthDetailHeaderView.swift; sourceTree = "<group>"; };
+		F65FFA922C05CEC3009A6FB3 /* YouthDetailCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YouthDetailCell.swift; sourceTree = "<group>"; };
+		F65FFA942C074904009A6FB3 /* YouthDetailTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YouthDetailTableView.swift; sourceTree = "<group>"; };
+		F65FFA962C074914009A6FB3 /* YouthDetailTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YouthDetailTableViewController.swift; sourceTree = "<group>"; };
 		F667FD862BAC2287005AAAB7 /* CustomPhotoAlbumDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomPhotoAlbumDetailViewController.swift; sourceTree = "<group>"; };
 		F667FD872BAC2287005AAAB7 /* AlbumDetailCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlbumDetailCell.swift; sourceTree = "<group>"; };
 		F66C98212BA1F5AD001E121C /* MainTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarController.swift; sourceTree = "<group>"; };
@@ -393,6 +403,11 @@
 				F6833FF22BFDC3B30099F1DA /* YouthFilterCustomCell.swift */,
 				F6833FF62BFE24130099F1DA /* YouthFilterHeaderView.swift */,
 				F6833FF42BFDC4150099F1DA /* YouthFilterFooterView.swift */,
+				F65FFA8E2C04C3D3009A6FB3 /* YouthDetailViewController.swift */,
+				F65FFA962C074914009A6FB3 /* YouthDetailTableViewController.swift */,
+				F65FFA942C074904009A6FB3 /* YouthDetailTableView.swift */,
+				F65FFA902C04C71C009A6FB3 /* YouthDetailHeaderView.swift */,
+				F65FFA922C05CEC3009A6FB3 /* YouthDetailCell.swift */,
 			);
 			path = HomeView;
 			sourceTree = "<group>";
@@ -684,6 +699,7 @@
 				635BCBA92BA3521F00F0DCBC /* SocialLoginViewModel.swift in Sources */,
 				F674DDDF2BADB17A00536AA7 /* String+.swift in Sources */,
 				F68657442BB415DC00821281 /* CustomActionSheetTransitioningDelegate.swift in Sources */,
+				F65FFA8F2C04C3D3009A6FB3 /* YouthDetailViewController.swift in Sources */,
 				F6833FF92C00ACB10099F1DA /* YouthFilterData.swift in Sources */,
 				F61B51602BEB799000812C8D /* YouthListCell.swift in Sources */,
 				F671A9BB2BA00D4A002808DA /* Bundle+.swift in Sources */,
@@ -694,6 +710,7 @@
 				F65E1ECF2BAC086D00326EF7 /* LoginNickNameViewController.swift in Sources */,
 				F667FD892BAC2287005AAAB7 /* AlbumDetailCell.swift in Sources */,
 				63C52F992BA97FB40072DE18 /* CategorySelectViewController.swift in Sources */,
+				F65FFA932C05CEC3009A6FB3 /* YouthDetailCell.swift in Sources */,
 				F6B94ABF2BAEFC95005FDEE6 /* ProfileRepository.swift in Sources */,
 				F6833FF32BFDC3B30099F1DA /* YouthFilterCustomCell.swift in Sources */,
 				F69B800B2B996846002675CE /* ViewController.swift in Sources */,
@@ -709,6 +726,7 @@
 				F671A9CD2BA059DB002808DA /* Const.swift in Sources */,
 				F6833FF52BFDC4150099F1DA /* YouthFilterFooterView.swift in Sources */,
 				F6A35EBD2BE508A000313B7D /* StatusCode.swift in Sources */,
+				F65FFA952C074904009A6FB3 /* YouthDetailTableView.swift in Sources */,
 				635BCBAE2BA7E72A00F0DCBC /* PostViewController.swift in Sources */,
 				F68C9D6E2BA5E291008CB7E4 /* ToastMessageView.swift in Sources */,
 				F671A9C42BA00FBA002808DA /* NetworkManager.swift in Sources */,
@@ -734,9 +752,11 @@
 				F68C9D222BA2DEAD008CB7E4 /* MyPageViewController.swift in Sources */,
 				F6833FF72BFE24130099F1DA /* YouthFilterHeaderView.swift in Sources */,
 				F6B5B4082BBBFDA2000C8494 /* ProfileETCView.swift in Sources */,
+				F65FFA912C04C71C009A6FB3 /* YouthDetailHeaderView.swift in Sources */,
 				F671A9CA2BA0174E002808DA /* NetworkError.swift in Sources */,
 				630EA20F2BA0277800F04ED3 /* SignRepository.swift in Sources */,
 				F69011DD2BB4685C009A8087 /* CustomAlertSheetViewController.swift in Sources */,
+				F65FFA972C074914009A6FB3 /* YouthDetailTableViewController.swift in Sources */,
 				63C52F972BA962590072DE18 /* PostPhotoView.swift in Sources */,
 				6303235D2BAC636700B16E7C /* PostManager.swift in Sources */,
 				F606EB312BCF8F85006E97E3 /* ProfileEditViewModel.swift in Sources */,
