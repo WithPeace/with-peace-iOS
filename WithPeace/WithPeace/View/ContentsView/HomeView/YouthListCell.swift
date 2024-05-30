@@ -21,6 +21,7 @@ final class YouthListCell: UICollectionViewCell {
         let label = UILabel()
         
         label.numberOfLines = 1
+        label.textColor = .label
         label.font = .boldSystemFont(ofSize: 16)
         
         return label
@@ -30,6 +31,7 @@ final class YouthListCell: UICollectionViewCell {
         let label = UILabel()
         
         label.numberOfLines = 2
+        label.textColor = .label
         label.font = .systemFont(ofSize: 12)
         
         return label
@@ -52,6 +54,7 @@ final class YouthListCell: UICollectionViewCell {
         let label = BasePaddingLabel()
         
         label.font = .systemFont(ofSize: 12)
+        label.textColor = UIColor(named: Const.CustomColor.SystemColor.black)
         label.backgroundColor = UIColor(named: Const.CustomColor.SystemColor.gray3)
         
         label.layer.masksToBounds = true
@@ -74,7 +77,7 @@ final class YouthListCell: UICollectionViewCell {
         
         configureLayout()
         
-        self.contentView.backgroundColor = .white
+        self.contentView.backgroundColor = .systemBackground
         self.contentView.layer.cornerRadius = 10
     }
     

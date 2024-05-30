@@ -223,8 +223,9 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let youthDetailViewController = YouthDetailViewController(youthPolicy: youthDataSource[indexPath.row])
+        self.navigationController?.pushViewController(youthDetailViewController, animated: true)
     }
-    
 }
 
 extension HomeViewController: YouthFilterDelegate {
