@@ -7,12 +7,15 @@
 
 import UIKit
 
+/// 해당 뷰에 Tabbar 있으면 true
 final class ToastMessageView {
     
     private let superView: UIView
+    private let hasTabbar: Bool
     
-    init(superView: UIView) {
+    init(superView: UIView, hasTabbar: Bool = false) {
         self.superView = superView
+        self.hasTabbar = hasTabbar
     }
     
     /// WithPeace Standard ToastMessage
@@ -20,9 +23,13 @@ final class ToastMessageView {
     ///     - message: 토스트 메세지 띄울 문구
     
     func presentStandardToastMessage(_ message : String) {
+        var frameY: CGFloat = 35
+        if hasTabbar {
+            frameY += 85
+        }
         
         let toastLabel = UILabel(frame: CGRect(x: 24,
-                                               y: superView.frame.size.height - (35+49),
+                                               y: superView.frame.size.height - (frameY + 49),
                                                width: superView.frame.size.width - 48,
                                                height: 49))
         

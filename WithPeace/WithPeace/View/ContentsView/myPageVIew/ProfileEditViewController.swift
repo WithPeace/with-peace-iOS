@@ -15,7 +15,7 @@ final class ProfileEditViewController: UIViewController {
     private let disposeBag = DisposeBag()
     private let bottomLayer = CALayer()
     
-    lazy private var toastMessage = ToastMessageView(superView: self.view)
+    lazy private var toastMessage = ToastMessageView(superView: self.view, hasTabbar: true)
     
     private let profileImageView: UIImageView = {
         let imageView = UIImageView()
