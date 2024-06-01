@@ -58,6 +58,7 @@ final class HomeViewModel {
         
         // 필터 상태에 따른 fetch (데이터 추가)
         fetchAdditional.withLatestFrom(changeFilter)
+            .debounce(.seconds(1), scheduler: MainScheduler.instance)
             .subscribe(onNext: { filterData in
                 //TODO: pageIndex관리
                 self.nowPageIndex += 1
