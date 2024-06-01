@@ -29,10 +29,10 @@
 		63C52F992BA97FB40072DE18 /* CategorySelectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63C52F982BA97FB40072DE18 /* CategorySelectViewController.swift */; };
 		63C52F9B2BA9B80D0072DE18 /* PostModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63C52F9A2BA9B80D0072DE18 /* PostModel.swift */; };
 		63C52F9D2BA9B83F0072DE18 /* PostViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63C52F9C2BA9B83F0072DE18 /* PostViewModel.swift */; };
-		F606EB2F2BCF8DB3006E97E3 /* ProfileEditViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F606EB2E2BCF8DB3006E97E3 /* ProfileEditViewController.swift */; };
-		F606EB312BCF8F85006E97E3 /* ProfileEditViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F606EB302BCF8F85006E97E3 /* ProfileEditViewModel.swift */; };
 		F61B51602BEB799000812C8D /* YouthListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F61B515F2BEB799000812C8D /* YouthListCell.swift */; };
 		F61B51622BECF5B400812C8D /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F61B51612BECF5B400812C8D /* HomeViewModel.swift */; };
+		F65A3E282C0AEA6C0035314B /* ProfileEditViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F65A3E262C0AEA6B0035314B /* ProfileEditViewModel.swift */; };
+		F65A3E292C0AEA6C0035314B /* ProfileEditViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F65A3E272C0AEA6B0035314B /* ProfileEditViewController.swift */; };
 		F65E1ECF2BAC086D00326EF7 /* LoginNickNameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F65E1ECE2BAC086D00326EF7 /* LoginNickNameViewController.swift */; };
 		F65FFA8F2C04C3D3009A6FB3 /* YouthDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F65FFA8E2C04C3D3009A6FB3 /* YouthDetailViewController.swift */; };
 		F65FFA912C04C71C009A6FB3 /* YouthDetailHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F65FFA902C04C71C009A6FB3 /* YouthDetailHeaderView.swift */; };
@@ -91,7 +91,7 @@
 		F6A35EBB2BE5087300313B7D /* ServerAuthManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6A35EBA2BE5087300313B7D /* ServerAuthManager.swift */; };
 		F6A35EBD2BE508A000313B7D /* StatusCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6A35EBC2BE508A000313B7D /* StatusCode.swift */; };
 		F6ACBCE52BEB47D3006386DE /* ProfileAPIRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6ACBCE42BEB47D3006386DE /* ProfileAPIRepository.swift */; };
-		F6B5B4062BBBFD90000C8494 /* CustomProfileSeparatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6B5B4052BBBFD90000C8494 /* CustomProfileSeparatorView.swift */; };
+		F6B5B4062BBBFD90000C8494 /* CustomSeparatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6B5B4052BBBFD90000C8494 /* CustomSeparatorView.swift */; };
 		F6B5B4082BBBFDA2000C8494 /* ProfileETCView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6B5B4072BBBFDA2000C8494 /* ProfileETCView.swift */; };
 		F6B5B40A2BBBFDC3000C8494 /* ProfileAccountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6B5B4092BBBFDC3000C8494 /* ProfileAccountView.swift */; };
 		F6B5B40C2BBBFDDA000C8494 /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6B5B40B2BBBFDDA000C8494 /* ProfileView.swift */; };
@@ -140,10 +140,10 @@
 		63C52F982BA97FB40072DE18 /* CategorySelectViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategorySelectViewController.swift; sourceTree = "<group>"; };
 		63C52F9A2BA9B80D0072DE18 /* PostModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostModel.swift; sourceTree = "<group>"; };
 		63C52F9C2BA9B83F0072DE18 /* PostViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostViewModel.swift; sourceTree = "<group>"; };
-		F606EB2E2BCF8DB3006E97E3 /* ProfileEditViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ProfileEditViewController.swift; path = WithPeace/View/ContentsView/myPageVIew/ProfileEditViewController.swift; sourceTree = SOURCE_ROOT; };
-		F606EB302BCF8F85006E97E3 /* ProfileEditViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ProfileEditViewModel.swift; path = WithPeace/View/ContentsView/myPageVIew/ProfileEditViewModel.swift; sourceTree = SOURCE_ROOT; };
 		F61B515F2BEB799000812C8D /* YouthListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YouthListCell.swift; sourceTree = "<group>"; };
 		F61B51612BECF5B400812C8D /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
+		F65A3E262C0AEA6B0035314B /* ProfileEditViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ProfileEditViewModel.swift; path = WithPeace/View/ContentsView/myPageVIew/ProfileEditView/ProfileEditViewModel.swift; sourceTree = SOURCE_ROOT; };
+		F65A3E272C0AEA6B0035314B /* ProfileEditViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ProfileEditViewController.swift; path = WithPeace/View/ContentsView/myPageVIew/ProfileEditView/ProfileEditViewController.swift; sourceTree = SOURCE_ROOT; };
 		F65E1ECE2BAC086D00326EF7 /* LoginNickNameViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginNickNameViewController.swift; sourceTree = "<group>"; };
 		F65FFA8E2C04C3D3009A6FB3 /* YouthDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YouthDetailViewController.swift; sourceTree = "<group>"; };
 		F65FFA902C04C71C009A6FB3 /* YouthDetailHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YouthDetailHeaderView.swift; sourceTree = "<group>"; };
@@ -202,7 +202,7 @@
 		F6A35EBA2BE5087300313B7D /* ServerAuthManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServerAuthManager.swift; sourceTree = "<group>"; };
 		F6A35EBC2BE508A000313B7D /* StatusCode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusCode.swift; sourceTree = "<group>"; };
 		F6ACBCE42BEB47D3006386DE /* ProfileAPIRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileAPIRepository.swift; sourceTree = "<group>"; };
-		F6B5B4052BBBFD90000C8494 /* CustomProfileSeparatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomProfileSeparatorView.swift; sourceTree = "<group>"; };
+		F6B5B4052BBBFD90000C8494 /* CustomSeparatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomSeparatorView.swift; sourceTree = "<group>"; };
 		F6B5B4072BBBFDA2000C8494 /* ProfileETCView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileETCView.swift; sourceTree = "<group>"; };
 		F6B5B4092BBBFDC3000C8494 /* ProfileAccountView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileAccountView.swift; sourceTree = "<group>"; };
 		F6B5B40B2BBBFDDA000C8494 /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
@@ -274,6 +274,71 @@
 			path = Cell;
 			sourceTree = "<group>";
 		};
+		F65A3E202C0AE6090035314B /* YouthTableViewController(deprecated) */ = {
+			isa = PBXGroup;
+			children = (
+				F65FFA982C075F1B009A6FB3 /* YouthDetailViewControllerWithTableView.swift */,
+				F65FFA962C074914009A6FB3 /* YouthDetailTableViewController.swift */,
+				F65FFA942C074904009A6FB3 /* YouthDetailTableView.swift */,
+				F65FFA902C04C71C009A6FB3 /* YouthDetailHeaderView.swift */,
+				F65FFA922C05CEC3009A6FB3 /* YouthDetailCell.swift */,
+			);
+			name = "YouthTableViewController(deprecated)";
+			sourceTree = "<group>";
+		};
+		F65A3E212C0AE6260035314B /* YouthDetailView */ = {
+			isa = PBXGroup;
+			children = (
+				F65FFA8E2C04C3D3009A6FB3 /* YouthDetailViewController.swift */,
+				F6F0548D2C0863C000CC7FAF /* YouthDetailTopView.swift */,
+				F65FFA9A2C075FAA009A6FB3 /* YouthDetailContentView.swift */,
+				F6F0548B2C0863A800CC7FAF /* YouthDetailSubTitleView.swift */,
+			);
+			name = YouthDetailView;
+			sourceTree = "<group>";
+		};
+		F65A3E222C0AE64D0035314B /* YouthFilterView */ = {
+			isa = PBXGroup;
+			children = (
+				F6833FAA2BFC70700099F1DA /* YouthFilterViewController.swift */,
+				F6833FAC2BFC708D0099F1DA /* YouthFilterViewModel.swift */,
+				F6833FF22BFDC3B30099F1DA /* YouthFilterCustomCell.swift */,
+				F6833FF62BFE24130099F1DA /* YouthFilterHeaderView.swift */,
+				F6833FF42BFDC4150099F1DA /* YouthFilterFooterView.swift */,
+			);
+			name = YouthFilterView;
+			sourceTree = "<group>";
+		};
+		F65A3E232C0AE6C60035314B /* CheungHaAPI */ = {
+			isa = PBXGroup;
+			children = (
+				F6B94ABE2BAEFC95005FDEE6 /* ProfileRepository.swift */,
+				F6ACBCE42BEB47D3006386DE /* ProfileAPIRepository.swift */,
+				F6A35EBA2BE5087300313B7D /* ServerAuthManager.swift */,
+				630EA20E2BA0277800F04ED3 /* SignRepository.swift */,
+			);
+			path = CheungHaAPI;
+			sourceTree = "<group>";
+		};
+		F65A3E242C0AE9FF0035314B /* OtherManager */ = {
+			isa = PBXGroup;
+			children = (
+				F69B80462B9A0D1B002675CE /* GoogleSignInManager.swift */,
+				633F8E212B9AC37500B92ADC /* KeychainManager.swift */,
+				6303235C2BAC636700B16E7C /* PostManager.swift */,
+			);
+			path = OtherManager;
+			sourceTree = "<group>";
+		};
+		F65A3E252C0AEA2D0035314B /* ProfileEditView */ = {
+			isa = PBXGroup;
+			children = (
+				F65A3E272C0AEA6B0035314B /* ProfileEditViewController.swift */,
+				F65A3E262C0AEA6B0035314B /* ProfileEditViewModel.swift */,
+			);
+			path = ProfileEditView;
+			sourceTree = "<group>";
+		};
 		F667FD852BAC2287005AAAB7 /* CustomPhotoAlbumDetailView */ = {
 			isa = PBXGroup;
 			children = (
@@ -307,14 +372,10 @@
 			isa = PBXGroup;
 			children = (
 				F671A9CB2BA017BA002808DA /* NetworkManager */,
-				F69B80462B9A0D1B002675CE /* GoogleSignInManager.swift */,
-				633F8E212B9AC37500B92ADC /* KeychainManager.swift */,
-				F6B94ABE2BAEFC95005FDEE6 /* ProfileRepository.swift */,
-				F6ACBCE42BEB47D3006386DE /* ProfileAPIRepository.swift */,
-				F6A35EBA2BE5087300313B7D /* ServerAuthManager.swift */,
-				F6A35EBC2BE508A000313B7D /* StatusCode.swift */,
+				F65A3E242C0AE9FF0035314B /* OtherManager */,
+				F65A3E232C0AE6C60035314B /* CheungHaAPI */,
 				F671A9C12BA00E35002808DA /* API */,
-				6303235C2BAC636700B16E7C /* PostManager.swift */,
+				F6A35EBC2BE508A000313B7D /* StatusCode.swift */,
 			);
 			path = Manager;
 			sourceTree = "<group>";
@@ -323,6 +384,7 @@
 			isa = PBXGroup;
 			children = (
 				F68C9D152BA2DBB4008CB7E4 /* Login */,
+				F68C9D272BA2F1DC008CB7E4 /* NickNameView */,
 				F68C9D162BA2DC99008CB7E4 /* MainTabBar */,
 				F671A9C02BA00DF5002808DA /* ContentsView */,
 				F697444B2BB07E43006683AF /* Assistant */,
@@ -345,7 +407,6 @@
 		F671A9C12BA00E35002808DA /* API */ = {
 			isa = PBXGroup;
 			children = (
-				630EA20E2BA0277800F04ED3 /* SignRepository.swift */,
 				F672505C2BD9082D002C5835 /* YouthCenterRepository.swift */,
 			);
 			path = API;
@@ -386,7 +447,6 @@
 			children = (
 				F68C9D232BA2DEDB008CB7E4 /* SocialLoginViewController.swift */,
 				635BCBA82BA3521F00F0DCBC /* SocialLoginViewModel.swift */,
-				F68C9D272BA2F1DC008CB7E4 /* NickNameView */,
 			);
 			path = Login;
 			sourceTree = "<group>";
@@ -406,20 +466,9 @@
 				F61B51612BECF5B400812C8D /* HomeViewModel.swift */,
 				F6833FF82C00ACB10099F1DA /* YouthFilterData.swift */,
 				F61B515F2BEB799000812C8D /* YouthListCell.swift */,
-				F6833FAA2BFC70700099F1DA /* YouthFilterViewController.swift */,
-				F6833FAC2BFC708D0099F1DA /* YouthFilterViewModel.swift */,
-				F6833FF22BFDC3B30099F1DA /* YouthFilterCustomCell.swift */,
-				F6833FF62BFE24130099F1DA /* YouthFilterHeaderView.swift */,
-				F6833FF42BFDC4150099F1DA /* YouthFilterFooterView.swift */,
-				F65FFA8E2C04C3D3009A6FB3 /* YouthDetailViewController.swift */,
-				F6F0548D2C0863C000CC7FAF /* YouthDetailTopView.swift */,
-				F65FFA9A2C075FAA009A6FB3 /* YouthDetailContentView.swift */,
-				F6F0548B2C0863A800CC7FAF /* YouthDetailSubTitleView.swift */,
-				F65FFA982C075F1B009A6FB3 /* YouthDetailViewControllerWithTableView.swift */,
-				F65FFA962C074914009A6FB3 /* YouthDetailTableViewController.swift */,
-				F65FFA942C074904009A6FB3 /* YouthDetailTableView.swift */,
-				F65FFA902C04C71C009A6FB3 /* YouthDetailHeaderView.swift */,
-				F65FFA922C05CEC3009A6FB3 /* YouthDetailCell.swift */,
+				F65A3E222C0AE64D0035314B /* YouthFilterView */,
+				F65A3E212C0AE6260035314B /* YouthDetailView */,
+				F65A3E202C0AE6090035314B /* YouthTableViewController(deprecated) */,
 			);
 			path = HomeView;
 			sourceTree = "<group>";
@@ -441,13 +490,11 @@
 			isa = PBXGroup;
 			children = (
 				F68C9D212BA2DEAD008CB7E4 /* MyPageViewController.swift */,
+				F69011E22BB6D91E009A8087 /* MyPageViewModel.swift */,
 				F6B5B40B2BBBFDDA000C8494 /* ProfileView.swift */,
 				F6B5B4092BBBFDC3000C8494 /* ProfileAccountView.swift */,
 				F6B5B4072BBBFDA2000C8494 /* ProfileETCView.swift */,
-				F6B5B4052BBBFD90000C8494 /* CustomProfileSeparatorView.swift */,
-				F69011E22BB6D91E009A8087 /* MyPageViewModel.swift */,
-				F606EB2E2BCF8DB3006E97E3 /* ProfileEditViewController.swift */,
-				F606EB302BCF8F85006E97E3 /* ProfileEditViewModel.swift */,
+				F65A3E252C0AEA2D0035314B /* ProfileEditView */,
 			);
 			path = MyPageVIew;
 			sourceTree = "<group>";
@@ -464,6 +511,7 @@
 		F697444B2BB07E43006683AF /* Assistant */ = {
 			isa = PBXGroup;
 			children = (
+				F6B5B4052BBBFD90000C8494 /* CustomSeparatorView.swift */,
 				F697444D2BB07F47006683AF /* CustomActionSheet */,
 				F697444C2BB07F45006683AF /* CustomAlertSheet */,
 				F68C9D6D2BA5E291008CB7E4 /* ToastMessageView.swift */,
@@ -727,7 +775,7 @@
 				F6833FF32BFDC3B30099F1DA /* YouthFilterCustomCell.swift in Sources */,
 				F69B800B2B996846002675CE /* ViewController.swift in Sources */,
 				F68C9D292BA2FFA0008CB7E4 /* LoginNickNameViewModel.swift in Sources */,
-				F6B5B4062BBBFD90000C8494 /* CustomProfileSeparatorView.swift in Sources */,
+				F6B5B4062BBBFD90000C8494 /* CustomSeparatorView.swift in Sources */,
 				F68C9D1C2BA2DE87008CB7E4 /* HomeViewController.swift in Sources */,
 				635BCBB32BA94F6600F0DCBC /* CategoryViewCell.swift in Sources */,
 				F6833FAD2BFC708D0099F1DA /* YouthFilterViewModel.swift in Sources */,
@@ -735,7 +783,9 @@
 				F68719B32BA867FE0049B182 /* UICollectionViewLayout+.swift in Sources */,
 				F671A9C62BA00FD7002808DA /* EndPoint.swift in Sources */,
 				F69B80072B996846002675CE /* AppDelegate.swift in Sources */,
+				F65A3E292C0AEA6C0035314B /* ProfileEditViewController.swift in Sources */,
 				F671A9CD2BA059DB002808DA /* Const.swift in Sources */,
+				F65A3E282C0AEA6C0035314B /* ProfileEditViewModel.swift in Sources */,
 				F6F0548E2C0863C000CC7FAF /* YouthDetailTopView.swift in Sources */,
 				F6833FF52BFDC4150099F1DA /* YouthFilterFooterView.swift in Sources */,
 				F6A35EBD2BE508A000313B7D /* StatusCode.swift in Sources */,
@@ -747,7 +797,6 @@
 				F6ACBCE52BEB47D3006386DE /* ProfileAPIRepository.swift in Sources */,
 				6303236F2BC7D61100B16E7C /* ForumDetailViewController.swift in Sources */,
 				F6B5B40C2BBBFDDA000C8494 /* ProfileView.swift in Sources */,
-				F606EB2F2BCF8DB3006E97E3 /* ProfileEditViewController.swift in Sources */,
 				630EA20D2BA0243800F04ED3 /* SignAuthDTO.swift in Sources */,
 				F69011E12BB6D352009A8087 /* MultipartFormData.swift in Sources */,
 				F69B80092B996846002675CE /* SceneDelegate.swift in Sources */,
@@ -775,7 +824,6 @@
 				F65FFA992C075F1B009A6FB3 /* YouthDetailViewControllerWithTableView.swift in Sources */,
 				63C52F972BA962590072DE18 /* PostPhotoView.swift in Sources */,
 				6303235D2BAC636700B16E7C /* PostManager.swift in Sources */,
-				F606EB312BCF8F85006E97E3 /* ProfileEditViewModel.swift in Sources */,
 				630323712BC7D66500B16E7C /* ForumDetailCell.swift in Sources */,
 				F672505D2BD9082D002C5835 /* YouthCenterRepository.swift in Sources */,
 				F6B5B40A2BBBFDC3000C8494 /* ProfileAccountView.swift in Sources */,

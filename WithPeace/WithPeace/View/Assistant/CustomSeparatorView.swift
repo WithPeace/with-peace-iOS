@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class CustomProfileSeparatorView: UIView {
+final class CustomSeparatorView: UIView {
     
     init(colorName: String) {
         super.init(frame: .zero)

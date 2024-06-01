@@ -16,9 +16,9 @@ final class MyPageViewController: UIViewController {
     private let disposeBag = DisposeBag()
     
     private let profileView = ProfileView()
-    private let seperateViewFour = CustomProfileSeparatorView(colorName: Const.CustomColor.SystemColor.gray3)
+    private let seperateViewFour = CustomSeparatorView(colorName: Const.CustomColor.SystemColor.gray3)
     private let profileAccountView = ProfileAccountView()
-    private let seperateViewOne = CustomProfileSeparatorView(colorName: Const.CustomColor.SystemColor.gray3)
+    private let seperateViewOne = CustomSeparatorView(colorName: Const.CustomColor.SystemColor.gray3)
     private let profileETCView = ProfileETCView()
     
     override func viewDidLoad() {

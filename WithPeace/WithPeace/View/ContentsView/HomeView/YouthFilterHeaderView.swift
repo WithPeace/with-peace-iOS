@@ -9,7 +9,7 @@ import UIKit
 
 final class YouthFilterHeaderView: UIView {
     
-    private let seperatorView = CustomProfileSeparatorView(colorName: Const.CustomColor.SystemColor.gray3)
+    private let seperatorView = CustomSeparatorView(colorName: Const.CustomColor.SystemColor.gray3)
     
     private let titleLabel: UILabel = {
         let label = UILabel()
