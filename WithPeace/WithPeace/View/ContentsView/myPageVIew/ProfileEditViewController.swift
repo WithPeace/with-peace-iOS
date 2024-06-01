@@ -94,6 +94,7 @@ final class ProfileEditViewController: UIViewController {
         
         view.backgroundColor = .systemBackground
         
+        nicknameTextField.delegate = self
         configureLayout()
         configureTargetAction()
         bind()
@@ -222,6 +223,18 @@ extension ProfileEditViewController {
                 self?.viewModel.tapProfileImage.onNext(data)
             }
         }
+    }
+}
+
+//MARK: -Keyboard
+extension ProfileEditViewController: UITextFieldDelegate {
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        view.endEditing(true)
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
     }
 }
 

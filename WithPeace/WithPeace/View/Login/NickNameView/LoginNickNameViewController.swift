@@ -97,6 +97,7 @@ final class LoginNickNameViewController: UIViewController {
         
         view.backgroundColor = .systemBackground
         
+        nicknameTextField.delegate = self
         configureLayout()
         configureTargetAction()
         bind()
@@ -258,5 +259,17 @@ extension LoginNickNameViewController {
             registButton.trailingAnchor.constraint(equalTo: safe.trailingAnchor, constant: -24),
             registButton.bottomAnchor.constraint(equalTo: safe.bottomAnchor, constant: -43)
         ])
+    }
+}
+
+extension LoginNickNameViewController: UITextFieldDelegate {
+    //MARK: -Keyboard
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        view.endEditing(true)
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
     }
 }
