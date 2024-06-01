@@ -16,8 +16,8 @@ final class YouthFilterViewController: UIViewController {
     
     var delegate: YouthFilterDelegate?
     
-    private let seperatorView: CustomProfileSeparatorView = {
-        let view = CustomProfileSeparatorView(colorName: Const.CustomColor.SystemColor.gray3)
+    private let seperatorView: CustomSeparatorView = {
+        let view = CustomSeparatorView(colorName: Const.CustomColor.SystemColor.gray3)
         
         view.translatesAutoresizingMaskIntoConstraints = false
         

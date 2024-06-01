@@ -9,8 +9,8 @@ import UIKit
 
 final class YouthDetailTopView: UIView {
     
-    private let separatorView: CustomProfileSeparatorView = {
-        let view = CustomProfileSeparatorView(colorName: Const.CustomColor.SystemColor.gray3)
+    private let separatorView: CustomSeparatorView = {
+        let view = CustomSeparatorView(colorName: Const.CustomColor.SystemColor.gray3)
         
         view.translatesAutoresizingMaskIntoConstraints = false
         

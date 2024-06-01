@@ -44,7 +44,7 @@ final class CustomAlertViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        view.backgroundColor = UIColor(white: 1, alpha: 0.5)
+        view.backgroundColor = .label.withAlphaComponent(0.5)
         
         configureLayout()
     }

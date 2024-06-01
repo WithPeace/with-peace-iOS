@@ -11,8 +11,8 @@ final class YouthDetailContentView: UIView {
     
     private let contents: [(title: String, body: String)]
     
-    private let separatorView: CustomProfileSeparatorView = {
-        let separatorView = CustomProfileSeparatorView(colorName: Const.CustomColor.SystemColor.gray3)
+    private let separatorView: CustomSeparatorView = {
+        let separatorView = CustomSeparatorView(colorName: Const.CustomColor.SystemColor.gray3)
         
         separatorView.translatesAutoresizingMaskIntoConstraints = false
         
