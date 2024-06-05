@@ -166,6 +166,6 @@ extension MyPageViewController {
     }
     
     private func tapResignRightAlertButton() {
-        self.viewModel.tapSignoutButton.onNext(())
+        self.viewModel.tapResignButton.onNext(())
     }
 }
