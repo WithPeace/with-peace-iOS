@@ -92,6 +92,19 @@ class ServerAuthManager {
                                 }
                             }
                         }
+                        
+                        //access 만료시에 호출됨
+                        if decodedData.error?.code == 40101 {
+                            self.signRepository.performRefresh { result in
+                                switch result {
+                                case .success(let data):
+                                    print(data)
+                                case .failure(let error):
+                                    completion(.failure(.unKnownError))
+                                    debugPrint("Error : ", error)
+                                }
+                            }
+                        }
                     }
                     
                     return

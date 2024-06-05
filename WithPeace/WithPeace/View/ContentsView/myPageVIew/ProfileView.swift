@@ -86,11 +86,15 @@ final class ProfileView: UIView {
     }
     
     func setup(image: UIImage) {
-        profileImageView.image = image
+        DispatchQueue.main.async {
+            self.profileImageView.image = image
+        }
     }
     
     func setup(nickName: String) {
-        nickNameLabel.text = nickName
+        DispatchQueue.main.async {
+            self.nickNameLabel.text = nickName
+        }
     }
     
     func setup(action: @escaping () -> Void) {
