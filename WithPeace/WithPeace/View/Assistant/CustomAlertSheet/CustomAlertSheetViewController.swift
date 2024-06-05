@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class CustomAlertViewController: UIViewController {
+final class CustomAlertSheetViewController: UIViewController {
     
     private let isTitleUsing: Bool
     private var containerView: CustomAlertSheetView

@@ -72,6 +72,8 @@ final class ProfileAccountView: UIView {
     }
     
     func setEmailTitle(_ text: String) {
-        self.emailLabel.text = text
+        DispatchQueue.main.async {
+            self.emailLabel.text = text
+        }
     }
 }
