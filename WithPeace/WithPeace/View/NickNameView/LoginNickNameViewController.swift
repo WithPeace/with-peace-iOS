@@ -166,6 +166,7 @@ final class LoginNickNameViewController: UIViewController {
                     }
                 }
             }
+            .disposed(by: disposeBag)
     }
     
     private func configureUI(isError: Bool) {

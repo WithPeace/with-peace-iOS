@@ -145,7 +145,7 @@ final class ProfileEditViewController: UIViewController {
             .subscribe { bool in
                 switch bool {
                 case true:
-                    let alert = CustomAlertViewController(body: "수정사항이 있습니다. \n저장하시겠습니까?",
+                    let alert = CustomAlertSheetViewController(body: "수정사항이 있습니다. \n저장하시겠습니까?",
                                                         leftButtonTitle: "나가기",
                                                         leftButtonAction: self.tapLeftButton,
                                                         rightButtonTitle: "저장하기",
