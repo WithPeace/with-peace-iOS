@@ -12,6 +12,47 @@ final class ProfileAPIRepository {
     private let signRepository = SignRepository()
     private let serverAuthManager = ServerAuthManager()
     
+    /// Recovery User
+    func recoveryUser(with email: String, completion: @escaping (Result<Bool, ProfileError>) -> Void) {
+        
+        let emailData = email.data(using: .utf8)
+        
+        serverAuthManager.common(path: "/api/v1/users/recovery",
+                                 httpMethod: .patch,
+                                 body: emailData) { (result: Result<Bool?, ServerAuthManagerError>) in
+            switch result {
+            case .success(let data):
+                guard let data = data else {
+                    completion(.failure(.dataBindError))
+                    return
+                }
+                completion(.success(data))
+            case .failure(let error):
+                completion(.failure(.failureError))
+                debugPrint(error)
+            }
+        }
+    }
+    
+    /// Resign User
+    func resignUser(completion: @escaping (Result<Bool, ProfileError>) -> Void) {
+    
+    serverAuthManager.common(path: "/api/v1/users",
+                             httpMethod: .delete) { (result: Result<Bool?, ServerAuthManagerError>) in
+        switch result {
+        case .success(let data):
+            guard let data = data else {
+                completion(.failure(.dataBindError))
+                return
+            }
+            completion(.success(data))
+        case .failure(let error):
+            completion(.failure(.failureError))
+            debugPrint(error)
+        }
+    }
+}
+    
     /// Search User Profile
     func searchProfile(completion: @escaping (Result<SearchDataDTO, ProfileError>) -> Void) {
         serverAuthManager.common(path: "/api/v1/users/profile",

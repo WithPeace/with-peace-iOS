@@ -19,7 +19,7 @@ final class MyPageViewModel {
     // INPUT
     let tapProfileSetupButton = PublishSubject<Void>()
     let tapLogoutButton = PublishSubject<Void>()
-    let tapSignoutButton = PublishSubject<Void>()
+    let tapResignButton = PublishSubject<Void>()
     let viewWillAppear = PublishSubject<Void>()
     
     // OUTPUT
@@ -79,10 +79,21 @@ final class MyPageViewModel {
         .disposed(by: disposeBag)
         
         //회원 탈퇴 구현
-        tapSignoutButton.subscribe { _ in
-            nickname.onNext("nicknamenickname")
-            email.onNext("email@email.com")
-            image.onNext(UIImage(named: Const.Logo.MainLogo.chunghaMainLogo)!)
+        tapResignButton.subscribe { _ in
+            self.profileRepository.resignUser { result in
+                switch result {
+                case .success(let data):
+                    print("회원탈퇴: ", data)
+                    
+                    nickname.onNext("nicknamenickname")
+                    email.onNext("email@email.com")
+                    image.onNext(UIImage(named: Const.Logo.MainLogo.chunghaMainLogo)!)
+                    
+                    // TODO: User, Guest 변경에 따른 로직 구현
+                case .failure(_):
+                    debugPrint("RESIGN ERROR: MyPageViewModel")
+                }
+            }
         }
         .disposed(by: disposeBag)
     }

@@ -139,8 +139,6 @@ final class LoginNickNameViewModel {
             }).withLatestFrom(Observable.combineLatest(nicknameField, profileImage))
             .subscribe { nickname, imageData in
                 
-                #warning("테스트 결과 2MB사진도 적절하게 전송이 안됨, imageSize 작게 변경")
-                //TODO: Image변환 및 사이즈가 더 작아야 전송됨.
                 let imageSize = 10 * 1024 * 1024
                 var image: Data?
                 guard let nickname = nickname else { return }
