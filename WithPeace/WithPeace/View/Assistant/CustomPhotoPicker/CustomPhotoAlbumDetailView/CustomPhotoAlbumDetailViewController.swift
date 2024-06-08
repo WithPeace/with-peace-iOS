@@ -156,9 +156,12 @@ extension CustomPhotoAlbumDetailViewController {
         var snapshot = NSDiffableDataSourceSnapshot<LayoutSection, PHAsset>()
         snapshot.appendSections([.DetailPhotos])
         
-        let phFetchResult = PHAsset.fetchAssets(in: albumCollection as! PHAssetCollection, options: nil)
+        let fetchOptions = PHFetchOptions()
+        fetchOptions.predicate = NSPredicate(format: "mediaType == %d", PHAssetMediaType.image.rawValue)
         
-        for i in 0..<phFetchResult.count {
+        let phFetchResult = PHAsset.fetchAssets(in: albumCollection as! PHAssetCollection, options: fetchOptions)
+        
+        for i in (0..<phFetchResult.count).reversed() {
             let asset = phFetchResult.object(at: i)
             
             snapshot.appendItems([asset])
