@@ -92,7 +92,7 @@ extension CustomPhotoAlbumViewController {
             
             guard let targetSize = self?.view.frame.width else { return UICollectionViewCell() }
             
-            if let asset = PHAsset.fetchAssets(in: assetCollection, options: nil).firstObject {
+            if let asset = PHAsset.fetchAssets(in: assetCollection, options: nil).lastObject {
                 PHImageManager.default().requestImage(for: asset,
                                                       targetSize: CGSize(width: targetSize,
                                                                          height: targetSize),

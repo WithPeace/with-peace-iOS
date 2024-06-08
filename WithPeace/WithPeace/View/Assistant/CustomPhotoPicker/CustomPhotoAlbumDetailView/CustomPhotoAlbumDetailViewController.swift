@@ -158,7 +158,7 @@ extension CustomPhotoAlbumDetailViewController {
         
         let phFetchResult = PHAsset.fetchAssets(in: albumCollection as! PHAssetCollection, options: nil)
         
-        for i in 0..<phFetchResult.count {
+        for i in (0..<phFetchResult.count).reversed() {
             let asset = phFetchResult.object(at: i)
             
             snapshot.appendItems([asset])
