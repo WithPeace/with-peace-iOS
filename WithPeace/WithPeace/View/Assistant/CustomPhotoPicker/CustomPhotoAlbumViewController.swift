@@ -92,7 +92,10 @@ extension CustomPhotoAlbumViewController {
             
             guard let targetSize = self?.view.frame.width else { return UICollectionViewCell() }
             
-            if let asset = PHAsset.fetchAssets(in: assetCollection, options: nil).lastObject {
+            let fetchOptions = PHFetchOptions()
+            fetchOptions.predicate = NSPredicate(format: "mediaType == %d", PHAssetMediaType.image.rawValue)
+            
+            if let asset = PHAsset.fetchAssets(in: assetCollection, options: fetchOptions).lastObject {
                 PHImageManager.default().requestImage(for: asset,
                                                       targetSize: CGSize(width: targetSize,
                                                                          height: targetSize),
@@ -105,7 +108,7 @@ extension CustomPhotoAlbumViewController {
             }
             
             cell.setup(title: identifier.localizedTitle ?? "알 수 없는 앨범")
-            cell.setup(count: PHAsset.fetchAssets(in: assetCollection, options: nil).count)
+            cell.setup(count: PHAsset.fetchAssets(in: assetCollection, options: fetchOptions).count)
             
             return cell
         }
