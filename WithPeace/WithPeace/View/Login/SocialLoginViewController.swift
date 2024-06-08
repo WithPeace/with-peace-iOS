@@ -14,7 +14,7 @@ final class SocialLoginViewController: UIViewController {
     private let mainLogoImage: UIImageView = {
         let image = UIImageView()
         image.translatesAutoresizingMaskIntoConstraints = false
-        image.image = UIImage(named: Const.Logo.MainLogo.chunghaMainLogo)
+        image.image = UIImage(named: Const.Logo.MainLogo.cheonghaMainLogo)
         
         return image
     }()

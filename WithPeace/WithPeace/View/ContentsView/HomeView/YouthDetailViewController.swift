@@ -94,7 +94,7 @@ final class YouthDetailViewController: UIViewController {
             topView.setImage(UIImage(named: Const.Image.MainLogo.participationThumbnail))
             polyRlmCdToString = "참여.권리"
         default:
-            topView.setImage(UIImage(named: Const.Logo.MainLogo.chunghaMainLogo))
+            topView.setImage(UIImage(named: Const.Logo.MainLogo.cheonghaMainLogo))
         }
         
         topView.setTitle(youthPolicy.polyBizSjnm)

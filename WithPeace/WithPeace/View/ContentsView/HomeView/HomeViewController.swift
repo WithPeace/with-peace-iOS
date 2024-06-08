@@ -59,7 +59,7 @@ final class HomeViewController: UIViewController {
         super.viewWillAppear(animated)
         
         let imageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 20, height: 20))
-        let image = UIImage(named: Const.Logo.MainLogo.chunghaMainLogo)
+        let image = UIImage(named: Const.Logo.MainLogo.cheonghaTextLogo)
         imageView.contentMode = .scaleAspectFit
         imageView.image = image
         
@@ -212,7 +212,7 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
         case "023050":
             image = UIImage(named: Const.Image.MainLogo.participationThumbnail)
         default:
-            image = UIImage(named: Const.Logo.MainLogo.chunghaMainLogo)
+            image = UIImage(named: Const.Logo.MainLogo.cheonghaMainLogo)
         }
         
         if let image = image {
