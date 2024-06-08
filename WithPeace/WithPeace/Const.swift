@@ -155,7 +155,8 @@ extension Const {
             static let withpeaceLogo = "withpeace_Logo"
             static let googleLogo = "google_Logo"
             static let appleLogo = "apple_Logo"
-            static let chunghaMainLogo = "chunghaMain_Logo"
+            static let cheonghaTextLogo = "cheongha-text-logo"
+            static let cheonghaMainLogo = "cheongha-main-Logo"
         }
     }
 }

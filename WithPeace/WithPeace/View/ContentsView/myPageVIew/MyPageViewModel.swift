@@ -28,9 +28,9 @@ final class MyPageViewModel {
     var accountEmail: Observable<String>
     
     init() {
-        let image = BehaviorSubject<UIImage>(value: UIImage(named: Const.Logo.MainLogo.chunghaMainLogo)!)
-        let nickname = BehaviorSubject<String>(value: "cheungha")
-        let email = BehaviorSubject<String>(value: "cheungha@cheungha.com")
+        let image = BehaviorSubject<UIImage>(value: UIImage(named: Const.Logo.MainLogo.cheonghaMainLogo)!)
+        let nickname = BehaviorSubject<String>(value: "cheongha")
+        let email = BehaviorSubject<String>(value: "cheongha@cheongha.com")
         
         profileImage = image.distinctUntilChanged()
         profileNickname = nickname.distinctUntilChanged()
@@ -68,7 +68,7 @@ final class MyPageViewModel {
                 case .success(_):
                     nickname.onNext("nicknamenickname")
                     email.onNext("email@email.com")
-                    image.onNext(UIImage(named: Const.Logo.MainLogo.chunghaMainLogo)!)
+                    image.onNext(UIImage(named: Const.Logo.MainLogo.cheonghaMainLogo)!)
                     
                     // TODO: User Guest등 계정 관련 Logout 진행
                 case .failure(_):
@@ -87,7 +87,7 @@ final class MyPageViewModel {
                     
                     nickname.onNext("nicknamenickname")
                     email.onNext("email@email.com")
-                    image.onNext(UIImage(named: Const.Logo.MainLogo.chunghaMainLogo)!)
+                    image.onNext(UIImage(named: Const.Logo.MainLogo.cheonghaMainLogo)!)
                     
                     // TODO: User, Guest 변경에 따른 로직 구현
                 case .failure(_):
