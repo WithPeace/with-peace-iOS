@@ -29,7 +29,7 @@ final class YouthFilterViewController: UIViewController {
         
         button.translatesAutoresizingMaskIntoConstraints = false
         button.tintColor = UIColor(named: Const.CustomColor.SystemColor.black)
-        button.setImage(UIImage(named: Const.CustomIcon.ICController.icExit), for: .normal)
+        button.setImage(UIImage(named: Const.CustomIcon.ICController.icExit)?.withTintColor(.label), for: .normal)
         
         return button
     }()
@@ -49,7 +49,7 @@ final class YouthFilterViewController: UIViewController {
     private let allClearButton: UIButton = {
         let button = UIButton()
         
-        button.setTitleColor(.black, for: .normal)
+        button.setTitleColor(.label, for: .normal)
         button.setTitle("전체 해제", for: .normal)
         button.translatesAutoresizingMaskIntoConstraints = false
         

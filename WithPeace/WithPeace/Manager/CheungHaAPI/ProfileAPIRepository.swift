@@ -42,6 +42,8 @@ final class ProfileAPIRepository {
         switch result {
         case .success(let data):
             guard let data = data else {
+                self.keyChainManager.delete(account: "accessToken")
+                self.keyChainManager.delete(account: "refreshToken")
                 completion(.failure(.dataBindError))
                 return
             }
