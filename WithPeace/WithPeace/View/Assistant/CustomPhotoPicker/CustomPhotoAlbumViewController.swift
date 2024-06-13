@@ -95,20 +95,25 @@ extension CustomPhotoAlbumViewController {
             let fetchOptions = PHFetchOptions()
             fetchOptions.predicate = NSPredicate(format: "mediaType == %d", PHAssetMediaType.image.rawValue)
             
-            if let asset = PHAsset.fetchAssets(in: assetCollection, options: fetchOptions).lastObject {
-                PHImageManager.default().requestImage(for: asset,
-                                                      targetSize: CGSize(width: targetSize,
-                                                                         height: targetSize),
-                                                      contentMode: .aspectFit,
-                                                      options: nil) { image, hash in
-                    if let image {
-                        cell.setup(image: image)
-                    }
-                }
-            }
+            let fetchResult = PHAsset.fetchAssets(in: assetCollection, options: fetchOptions)
             
             cell.setup(title: identifier.localizedTitle ?? "알 수 없는 앨범")
-            cell.setup(count: PHAsset.fetchAssets(in: assetCollection, options: fetchOptions).count)
+            cell.setup(count: fetchResult.count)
+            if fetchResult.count != 0 {
+                if let asset = fetchResult.lastObject {
+                    PHImageManager.default().requestImage(for: asset,
+                                                          targetSize: CGSize(width: targetSize,
+                                                                             height: targetSize),
+                                                          contentMode: .aspectFit,
+                                                          options: nil) { image, hash in
+                        if let image {
+                            cell.setup(image: image)
+                        }
+                    }
+                }
+            } else {
+                cell.setup(image: UIImage(named: Const.Logo.MainLogo.cheonghaMainLogo)!)
+            }
             
             return cell
         }

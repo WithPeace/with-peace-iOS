@@ -16,7 +16,7 @@ final class AlbumDetailCell: UICollectionViewCell {
     private let albumImageView: UIImageView = {
         let imageView = UIImageView()
         
-        imageView.image = UIImage(named: Const.Logo.MainLogo.withpeaceLogo)
+        imageView.image = UIImage(named: Const.Logo.MainLogo.cheonghaMainLogo)
         imageView.clipsToBounds = true
         imageView.contentMode = .scaleAspectFill
         

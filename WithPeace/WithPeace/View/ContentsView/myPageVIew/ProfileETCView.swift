@@ -26,7 +26,7 @@ final class ProfileETCView: UIView {
         let button = UIButton()
         
         button.setTitle("로그아웃", for: .normal)
-        button.setTitleColor(.black, for: .normal)
+        button.setTitleColor(.label, for: .normal)
         button.titleLabel?.font = .systemFont(ofSize: 16)
         
         return button
@@ -36,7 +36,7 @@ final class ProfileETCView: UIView {
         let button = UIButton()
         
         button.setTitle("탈퇴하기", for: .normal)
-        button.setTitleColor(.black, for: .normal)
+        button.setTitleColor(.label, for: .normal)
         button.titleLabel?.font = .systemFont(ofSize: 16)
         
         return button
