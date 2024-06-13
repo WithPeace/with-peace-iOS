@@ -64,4 +64,13 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         let tabBarController = MainTabbarController()
         window.rootViewController = tabBarController
     }
+    
+    func moveToDefaultLoginView() {
+        guard let window = window else { return }
+        
+        let socialLoginViewController = SocialLoginViewController()
+        let navigationController = UINavigationController(rootViewController: socialLoginViewController)
+        
+        window.rootViewController = navigationController
+    }
 }

@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import UIKit
 
 protocol AuthenticationProvider {
     func performGoogleSign(idToken: String,
@@ -89,7 +90,6 @@ final class SignRepository: AuthenticationProvider {
         contentsTypeHeader["Authorization"] = "Bearer \(keychainAccessToken)"
 //        var contentsTypeHeader = ["Authorization":"Bearer \(keychainAccessToken)"]
 //        contentsTypeHeader["Content-Type"] = "multipart/form-data; boundary=\(formData.getBoundary())"
-        
         
         let endPoint = EndPoint(baseURL: baseURL,
                                 path: "/api/v1/auth/register",
@@ -188,6 +188,15 @@ final class SignRepository: AuthenticationProvider {
                     // 서버에서 우리가 로그아웃 하지 않았는데, 로그인이 되었다면 어떻게 되는것인가?
                     //      만약 서버에서 로그인시도가 있을 때 자동 로그아웃 처리되면 우리는 그냥 로그인다시하면됨.
                     // 하지만 서버에서 로그아웃 -> 로그인 을 원하면? 그건 다시생각야함.
+                    
+                    // 에러 발생시 해당 뷰로 넘어가줌
+                    self.keychainManager.delete(account: "accessToken")
+                    self.keychainManager.delete(account: "refreshToken")
+                    
+                    DispatchQueue.main.async {
+                        guard let app = UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate else { return }
+                        app.moveToDefaultLoginView()
+                    }
                 } else {
                     completion(.failure(.networkError))
                 }
@@ -221,6 +230,14 @@ final class SignRepository: AuthenticationProvider {
                     let decodedResponse = try JSONDecoder().decode(SignAuthResponse.self, from: data)
                     if decodedResponse.data == "logout success" {
                         completion(.success(()))
+                        
+                        self.keychainManager.delete(account: "accessToken")
+                        self.keychainManager.delete(account: "refreshToken")
+                        
+                        DispatchQueue.main.async {
+                            guard let app = UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate else { return }
+                            app.moveToDefaultLoginView()
+                        }
                     } else {
                         completion(.failure(.logoutFail))
                     }

@@ -71,6 +71,11 @@ final class MyPageViewModel {
                     image.onNext(UIImage(named: Const.Logo.MainLogo.cheonghaMainLogo)!)
                     
                     // TODO: User Guest등 계정 관련 Logout 진행
+                    // 최초 로그인 화면으로 이동.
+                    DispatchQueue.main.async {
+                        guard let app = UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate else { return }
+                        app.moveToDefaultLoginView()
+                    }
                 case .failure(_):
                     debugPrint("LOGOUT ERROR: MyPageViewModel")
                 }
@@ -90,6 +95,11 @@ final class MyPageViewModel {
                     image.onNext(UIImage(named: Const.Logo.MainLogo.cheonghaMainLogo)!)
                     
                     // TODO: User, Guest 변경에 따른 로직 구현
+                    // 최초 로그인 화면으로 이동.
+                    DispatchQueue.main.async {
+                        guard let app = UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate else { return }
+                        app.moveToDefaultLoginView()
+                    }
                 case .failure(_):
                     debugPrint("RESIGN ERROR: MyPageViewModel")
                 }

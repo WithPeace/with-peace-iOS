@@ -70,11 +70,10 @@ final class YouthFilterFooterView: UIView {
     func changeWill(isFold: Bool) {
         if isFold {
             titleLabel.text = "더보기"
-            imageView.image = UIImage(named: Const.CustomIcon.ICExpansion.icMore)
+            imageView.image = UIImage(named: Const.CustomIcon.ICExpansion.icMore)?.withTintColor(.label)
         } else {
             titleLabel.text = "접기"
-            imageView.image = UIImage(named: Const.CustomIcon.ICExpansion.icLess)
+            imageView.image = UIImage(named: Const.CustomIcon.ICExpansion.icLess)?.withTintColor(.label)
         }
     }
 }
-

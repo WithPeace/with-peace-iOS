@@ -30,6 +30,7 @@ final class LoginNickNameViewController: UIViewController {
         
         imageView.clipsToBounds = true
         imageView.layer.cornerRadius = 60
+        imageView.contentMode = .scaleAspectFill
         imageView.image = UIImage(named: Const.CustomIcon.ICProfile.defualtProfile)
         
         return imageView
