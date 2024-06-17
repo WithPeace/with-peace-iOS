@@ -31,6 +31,11 @@
 		63C52F9D2BA9B83F0072DE18 /* PostViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63C52F9C2BA9B83F0072DE18 /* PostViewModel.swift */; };
 		F61B51602BEB799000812C8D /* YouthListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F61B515F2BEB799000812C8D /* YouthListCell.swift */; };
 		F61B51622BECF5B400812C8D /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F61B51612BECF5B400812C8D /* HomeViewModel.swift */; };
+		F65040A22C20750C00B14D84 /* PostDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = F65040A12C20750C00B14D84 /* PostDTO.swift */; };
+		F65040A42C20759A00B14D84 /* ProfileDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = F65040A32C20759A00B14D84 /* ProfileDTO.swift */; };
+		F65040A72C2075E000B14D84 /* ServerAPIError.swift in Sources */ = {isa = PBXBuildFile; fileRef = F65040A62C2075E000B14D84 /* ServerAPIError.swift */; };
+		F65040A92C20816900B14D84 /* PostType.swift in Sources */ = {isa = PBXBuildFile; fileRef = F65040A82C20816900B14D84 /* PostType.swift */; };
+		F65040AB2C20818C00B14D84 /* ReportMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = F65040AA2C20818C00B14D84 /* ReportMessage.swift */; };
 		F65A3E282C0AEA6C0035314B /* ProfileEditViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F65A3E262C0AEA6B0035314B /* ProfileEditViewModel.swift */; };
 		F65A3E292C0AEA6C0035314B /* ProfileEditViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F65A3E272C0AEA6B0035314B /* ProfileEditViewController.swift */; };
 		F65E1ECF2BAC086D00326EF7 /* LoginNickNameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F65E1ECE2BAC086D00326EF7 /* LoginNickNameViewController.swift */; };
@@ -96,6 +101,8 @@
 		F6B5B40A2BBBFDC3000C8494 /* ProfileAccountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6B5B4092BBBFDC3000C8494 /* ProfileAccountView.swift */; };
 		F6B5B40C2BBBFDDA000C8494 /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6B5B40B2BBBFDDA000C8494 /* ProfileView.swift */; };
 		F6B94ABF2BAEFC95005FDEE6 /* ProfileRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6B94ABE2BAEFC95005FDEE6 /* ProfileRepository.swift */; };
+		F6BEDA8E2C1DD2BD00BD770A /* PostAPIRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6BEDA8D2C1DD2BD00BD770A /* PostAPIRepository.swift */; };
+		F6BEDA902C1DD7AA00BD770A /* ServerNetworkDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6BEDA8F2C1DD7AA00BD770A /* ServerNetworkDTO.swift */; };
 		F6F0548C2C0863A800CC7FAF /* YouthDetailSubTitleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6F0548B2C0863A800CC7FAF /* YouthDetailSubTitleView.swift */; };
 		F6F0548E2C0863C000CC7FAF /* YouthDetailTopView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6F0548D2C0863C000CC7FAF /* YouthDetailTopView.swift */; };
 /* End PBXBuildFile section */
@@ -142,6 +149,11 @@
 		63C52F9C2BA9B83F0072DE18 /* PostViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostViewModel.swift; sourceTree = "<group>"; };
 		F61B515F2BEB799000812C8D /* YouthListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YouthListCell.swift; sourceTree = "<group>"; };
 		F61B51612BECF5B400812C8D /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
+		F65040A12C20750C00B14D84 /* PostDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostDTO.swift; sourceTree = "<group>"; };
+		F65040A32C20759A00B14D84 /* ProfileDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileDTO.swift; sourceTree = "<group>"; };
+		F65040A62C2075E000B14D84 /* ServerAPIError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServerAPIError.swift; sourceTree = "<group>"; };
+		F65040A82C20816900B14D84 /* PostType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostType.swift; sourceTree = "<group>"; };
+		F65040AA2C20818C00B14D84 /* ReportMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportMessage.swift; sourceTree = "<group>"; };
 		F65A3E262C0AEA6B0035314B /* ProfileEditViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ProfileEditViewModel.swift; path = WithPeace/View/ContentsView/myPageVIew/ProfileEditView/ProfileEditViewModel.swift; sourceTree = SOURCE_ROOT; };
 		F65A3E272C0AEA6B0035314B /* ProfileEditViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ProfileEditViewController.swift; path = WithPeace/View/ContentsView/myPageVIew/ProfileEditView/ProfileEditViewController.swift; sourceTree = SOURCE_ROOT; };
 		F65E1ECE2BAC086D00326EF7 /* LoginNickNameViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginNickNameViewController.swift; sourceTree = "<group>"; };
@@ -207,6 +219,8 @@
 		F6B5B4092BBBFDC3000C8494 /* ProfileAccountView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileAccountView.swift; sourceTree = "<group>"; };
 		F6B5B40B2BBBFDDA000C8494 /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
 		F6B94ABE2BAEFC95005FDEE6 /* ProfileRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileRepository.swift; sourceTree = "<group>"; };
+		F6BEDA8D2C1DD2BD00BD770A /* PostAPIRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostAPIRepository.swift; sourceTree = "<group>"; };
+		F6BEDA8F2C1DD7AA00BD770A /* ServerNetworkDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServerNetworkDTO.swift; sourceTree = "<group>"; };
 		F6F0548B2C0863A800CC7FAF /* YouthDetailSubTitleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YouthDetailSubTitleView.swift; sourceTree = "<group>"; };
 		F6F0548D2C0863C000CC7FAF /* YouthDetailTopView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YouthDetailTopView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -274,6 +288,16 @@
 			path = Cell;
 			sourceTree = "<group>";
 		};
+		F65040A52C2075B000B14D84 /* DTO */ = {
+			isa = PBXGroup;
+			children = (
+				F6BEDA8F2C1DD7AA00BD770A /* ServerNetworkDTO.swift */,
+				F65040A12C20750C00B14D84 /* PostDTO.swift */,
+				F65040A32C20759A00B14D84 /* ProfileDTO.swift */,
+			);
+			path = DTO;
+			sourceTree = "<group>";
+		};
 		F65A3E202C0AE6090035314B /* YouthTableViewController(deprecated) */ = {
 			isa = PBXGroup;
 			children = (
@@ -309,15 +333,19 @@
 			name = YouthFilterView;
 			sourceTree = "<group>";
 		};
-		F65A3E232C0AE6C60035314B /* CheungHaAPI */ = {
+		F65A3E232C0AE6C60035314B /* CheongHaAPI */ = {
 			isa = PBXGroup;
 			children = (
-				F6B94ABE2BAEFC95005FDEE6 /* ProfileRepository.swift */,
-				F6ACBCE42BEB47D3006386DE /* ProfileAPIRepository.swift */,
-				F6A35EBA2BE5087300313B7D /* ServerAuthManager.swift */,
 				630EA20E2BA0277800F04ED3 /* SignRepository.swift */,
+				F6A35EBA2BE5087300313B7D /* ServerAuthManager.swift */,
+				F65040A62C2075E000B14D84 /* ServerAPIError.swift */,
+				F65040A82C20816900B14D84 /* PostType.swift */,
+				F65040AA2C20818C00B14D84 /* ReportMessage.swift */,
+				F6BEDA912C1DD7D400BD770A /* ServerAPI */,
+				F65040A52C2075B000B14D84 /* DTO */,
+				F6BEDA922C1DD7E000BD770A /* DeprecatedAPI */,
 			);
-			path = CheungHaAPI;
+			path = CheongHaAPI;
 			sourceTree = "<group>";
 		};
 		F65A3E242C0AE9FF0035314B /* OtherManager */ = {
@@ -373,7 +401,7 @@
 			children = (
 				F671A9CB2BA017BA002808DA /* NetworkManager */,
 				F65A3E242C0AE9FF0035314B /* OtherManager */,
-				F65A3E232C0AE6C60035314B /* CheungHaAPI */,
+				F65A3E232C0AE6C60035314B /* CheongHaAPI */,
 				F671A9C12BA00E35002808DA /* API */,
 				F6A35EBC2BE508A000313B7D /* StatusCode.swift */,
 			);
@@ -609,6 +637,23 @@
 			path = Resource;
 			sourceTree = "<group>";
 		};
+		F6BEDA912C1DD7D400BD770A /* ServerAPI */ = {
+			isa = PBXGroup;
+			children = (
+				F6ACBCE42BEB47D3006386DE /* ProfileAPIRepository.swift */,
+				F6BEDA8D2C1DD2BD00BD770A /* PostAPIRepository.swift */,
+			);
+			path = ServerAPI;
+			sourceTree = "<group>";
+		};
+		F6BEDA922C1DD7E000BD770A /* DeprecatedAPI */ = {
+			isa = PBXGroup;
+			children = (
+				F6B94ABE2BAEFC95005FDEE6 /* ProfileRepository.swift */,
+			);
+			path = DeprecatedAPI;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -762,6 +807,7 @@
 				F65FFA8F2C04C3D3009A6FB3 /* YouthDetailViewController.swift in Sources */,
 				F6833FF92C00ACB10099F1DA /* YouthFilterData.swift in Sources */,
 				F61B51602BEB799000812C8D /* YouthListCell.swift in Sources */,
+				F6BEDA8E2C1DD2BD00BD770A /* PostAPIRepository.swift in Sources */,
 				F671A9BB2BA00D4A002808DA /* Bundle+.swift in Sources */,
 				630323732BC7D68200B16E7C /* ImageDetailCollectionViewCell.swift in Sources */,
 				630323672BBAD26200B16E7C /* ForumCategoryView.swift in Sources */,
@@ -770,7 +816,10 @@
 				F65E1ECF2BAC086D00326EF7 /* LoginNickNameViewController.swift in Sources */,
 				F667FD892BAC2287005AAAB7 /* AlbumDetailCell.swift in Sources */,
 				63C52F992BA97FB40072DE18 /* CategorySelectViewController.swift in Sources */,
+				F65040A92C20816900B14D84 /* PostType.swift in Sources */,
 				F65FFA932C05CEC3009A6FB3 /* YouthDetailCell.swift in Sources */,
+				F65040AB2C20818C00B14D84 /* ReportMessage.swift in Sources */,
+				F65040A72C2075E000B14D84 /* ServerAPIError.swift in Sources */,
 				F6B94ABF2BAEFC95005FDEE6 /* ProfileRepository.swift in Sources */,
 				F6833FF32BFDC3B30099F1DA /* YouthFilterCustomCell.swift in Sources */,
 				F69B800B2B996846002675CE /* ViewController.swift in Sources */,
@@ -786,8 +835,10 @@
 				F65A3E292C0AEA6C0035314B /* ProfileEditViewController.swift in Sources */,
 				F671A9CD2BA059DB002808DA /* Const.swift in Sources */,
 				F65A3E282C0AEA6C0035314B /* ProfileEditViewModel.swift in Sources */,
+				F65040A22C20750C00B14D84 /* PostDTO.swift in Sources */,
 				F6F0548E2C0863C000CC7FAF /* YouthDetailTopView.swift in Sources */,
 				F6833FF52BFDC4150099F1DA /* YouthFilterFooterView.swift in Sources */,
+				F6BEDA902C1DD7AA00BD770A /* ServerNetworkDTO.swift in Sources */,
 				F6A35EBD2BE508A000313B7D /* StatusCode.swift in Sources */,
 				F65FFA952C074904009A6FB3 /* YouthDetailTableView.swift in Sources */,
 				635BCBAE2BA7E72A00F0DCBC /* PostViewController.swift in Sources */,
@@ -819,6 +870,7 @@
 				F65FFA912C04C71C009A6FB3 /* YouthDetailHeaderView.swift in Sources */,
 				F671A9CA2BA0174E002808DA /* NetworkError.swift in Sources */,
 				630EA20F2BA0277800F04ED3 /* SignRepository.swift in Sources */,
+				F65040A42C20759A00B14D84 /* ProfileDTO.swift in Sources */,
 				F69011DD2BB4685C009A8087 /* CustomAlertSheetViewController.swift in Sources */,
 				F65FFA972C074914009A6FB3 /* YouthDetailTableViewController.swift in Sources */,
 				F65FFA992C075F1B009A6FB3 /* YouthDetailViewControllerWithTableView.swift in Sources */,
@@ -1002,6 +1054,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = WithPeace/WithPeace.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = S9SM8UDTPN;
@@ -1031,6 +1084,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = WithPeace/WithPeace.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = S9SM8UDTPN;

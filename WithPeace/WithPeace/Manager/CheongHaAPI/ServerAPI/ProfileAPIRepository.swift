@@ -13,13 +13,13 @@ final class ProfileAPIRepository {
     private let serverAuthManager = ServerAuthManager()
     
     /// Recovery User
-    func recoveryUser(with email: String, completion: @escaping (Result<Bool, ProfileError>) -> Void) {
+    func recoveryUser(with email: String, completion: @escaping (Result<Bool, ServerAPIError>) -> Void) {
         
         let emailData = email.data(using: .utf8)
         
         serverAuthManager.common(path: "/api/v1/users/recovery",
                                  httpMethod: .patch,
-                                 body: emailData) { (result: Result<Bool?, ServerAuthManagerError>) in
+                                 body: emailData) { (result: Result<Bool?, ServerAPIError>) in
             switch result {
             case .success(let data):
                 guard let data = data else {
@@ -35,10 +35,10 @@ final class ProfileAPIRepository {
     }
     
     /// Resign User
-    func resignUser(completion: @escaping (Result<Bool, ProfileError>) -> Void) {
+    func resignUser(completion: @escaping (Result<Bool, ServerAPIError>) -> Void) {
     
     serverAuthManager.common(path: "/api/v1/users",
-                             httpMethod: .delete) { (result: Result<Bool?, ServerAuthManagerError>) in
+                             httpMethod: .delete) { (result: Result<Bool?, ServerAPIError>) in
         switch result {
         case .success(let data):
             guard let data = data else {
@@ -56,9 +56,9 @@ final class ProfileAPIRepository {
 }
     
     /// Search User Profile
-    func searchProfile(completion: @escaping (Result<SearchDataDTO, ProfileError>) -> Void) {
+    func searchProfile(completion: @escaping (Result<SearchDataDTO, ServerAPIError>) -> Void) {
         serverAuthManager.common(path: "/api/v1/users/profile",
-                                 httpMethod: .get) { (result: Result<SearchDataDTO?, ServerAuthManagerError>) in
+                                 httpMethod: .get) { (result: Result<SearchDataDTO?, ServerAPIError>) in
             switch result {
             case .success(let fetchedData):
                 guard let fetchedData = fetchedData else {
@@ -76,7 +76,7 @@ final class ProfileAPIRepository {
     /// Change User Profile
     func changeProfile(nickname: String,
                        imageData: Data,
-                       completion: @escaping (Result<SearchDataDTO, ProfileError>) -> Void) {
+                       completion: @escaping (Result<SearchDataDTO, ServerAPIError>) -> Void) {
         
         var formData = MultipartFormData()
         formData.createFormFiled(name: "nickname", value: nickname)
@@ -90,7 +90,7 @@ final class ProfileAPIRepository {
         self.serverAuthManager.common(path: "/api/v1/users/profile",
                                       headers: header,
                                       httpMethod: .put,
-                                      body: formData.generateData()) { (result: Result<SearchDataDTO?, ServerAuthManagerError>) in
+                                      body: formData.generateData()) { (result: Result<SearchDataDTO?, ServerAPIError>) in
             switch result {
             case .success(let fetchedData):
                 guard let fetchedData = fetchedData else {
@@ -107,7 +107,7 @@ final class ProfileAPIRepository {
     
     /// Change Only Nickname
     func changeProfile(nickname: String,
-                       completion: @escaping (Result<String, ProfileError>) -> Void) {
+                       completion: @escaping (Result<String, ServerAPIError>) -> Void) {
         var nicknameData = Data()
         
         do {
@@ -121,7 +121,7 @@ final class ProfileAPIRepository {
         serverAuthManager.common(path: "/api/v1/users/profile/nickname",
                                  headers: ["Content-Type":"application/json"],
                                  httpMethod: .patch,
-                                 body: nicknameData) { (result: Result<String?, ServerAuthManagerError>) in
+                                 body: nicknameData) { (result: Result<String?, ServerAPIError>) in
             switch result {
             case .success(let fetchedData):
                 guard let fetchedData = fetchedData else {
@@ -138,7 +138,7 @@ final class ProfileAPIRepository {
     
     /// Change Only Image -> string = ImagePath
     func changeProfile(imageData: Data,
-                       completion: @escaping (Result<String, ProfileError>) -> Void) {
+                       completion: @escaping (Result<String, ServerAPIError>) -> Void) {
         var formData = MultipartFormData()
         formData.addFilesBodyData(fieldName: "imageFile",
                                   fileName: "image.jpg",
@@ -150,7 +150,7 @@ final class ProfileAPIRepository {
         serverAuthManager.common(path: "/api/v1/users/profile/image",
                                  headers: header,
                                  httpMethod: .patch,
-                                 body: formData.generateData()) { (result: Result<String?, ServerAuthManagerError>)  in
+                                 body: formData.generateData()) { (result: Result<String?, ServerAPIError>)  in
             switch result {
             case .success(let fetchedData):
                 guard let fetchedData = fetchedData else {
@@ -167,12 +167,12 @@ final class ProfileAPIRepository {
     }
     
     /// Check Nickname Duplicate
-    func checkNickname(nickname: String, completion: @escaping (Result<Bool, ProfileError>) -> Void) {
+    func checkNickname(nickname: String, completion: @escaping (Result<Bool, ServerAPIError>) -> Void) {
         let query = [URLQueryItem(name: "nickname", value: nickname)]
         
         serverAuthManager.common(path: "/api/v1/users/profile/nickname/check",
                                  queryItems: query,
-                                 httpMethod: .get) { (result: Result<Bool?, ServerAuthManagerError>) in
+                                 httpMethod: .get) { (result: Result<Bool?, ServerAPIError>) in
             switch result {
             case .success(let fetchedData):
                 guard let fetchedData = fetchedData else {
@@ -189,9 +189,9 @@ final class ProfileAPIRepository {
     }
     
     /// Delete Profile Image
-    func deleteProfileImage(completion: @escaping (Result<String, ProfileError>) -> Void) {
+    func deleteProfileImage(completion: @escaping (Result<String, ServerAPIError>) -> Void) {
         serverAuthManager.common(path: "/api/v1/users/profile/image",
-                                 httpMethod: .delete)  { (result: Result<String?, ServerAuthManagerError>) in
+                                 httpMethod: .delete)  { (result: Result<String?, ServerAPIError>) in
             switch result {
             case .success(let fetchedData):
                 guard let fetchedData = fetchedData else {
@@ -206,23 +206,4 @@ final class ProfileAPIRepository {
             }
         }
     }
-}
-
-struct SearchDataDTO: Codable {
-    var userId: Int
-    var email: String
-    var profileImageUrl: String //기본 Image의 경우 default.png
-    var nickname: String
-}
-
-enum ProfileError: Error {
-    case bundleError
-    case notHaveToken
-    case decodeError
-    case networkManagerError
-    
-    // 추가
-    case dataBindError
-    case failureError
-    case unKnownError
 }

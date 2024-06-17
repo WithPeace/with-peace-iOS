@@ -11,17 +11,17 @@ protocol ProfileProvider {
     associatedtype ProfileDuplicate
     associatedtype ProfileStringData
     
-    func searchProfile(completion: @escaping (Result<ProfileData, ProfileError>) -> Void)
+    func searchProfile(completion: @escaping (Result<ProfileData, ServerAPIError>) -> Void)
     func changeProfile(nickname: String,
                        imageData: Data,
-                       completion: @escaping (Result<ProfileDTO, ProfileError>) -> Void)
+                       completion: @escaping (Result<ProfileDTO, ServerAPIError>) -> Void)
     func changeProfile(nickname: String,
-                       completion: @escaping (Result<ProfileStringDTO, ProfileError>) -> Void)
+                       completion: @escaping (Result<ProfileStringDTO, ServerAPIError>) -> Void)
     func changeProfile(imageData: Data,
-                       completion: @escaping (Result<ProfileStringDTO, ProfileError>) -> Void)
+                       completion: @escaping (Result<ProfileStringDTO, ServerAPIError>) -> Void)
     func checkNickname(nickname: String,
-                       completion: @escaping (Result<Bool, ProfileError>) -> Void)
-    func deleteProfileImage(completion: @escaping (Result<Void, ProfileError>) -> Void)
+                       completion: @escaping (Result<Bool, ServerAPIError>) -> Void)
+    func deleteProfileImage(completion: @escaping (Result<Void, ServerAPIError>) -> Void)
 }
 
 @available(*, deprecated, message: "Using - ProfileAPIRepository.")
@@ -40,7 +40,7 @@ final class ProfileRepository: ProfileProvider {
     }
     
     /// 유저 프로필 조회
-    func searchProfile(completion: @escaping (Result<ProfileData, ProfileError>) -> Void) {
+    func searchProfile(completion: @escaping (Result<ProfileData, ServerAPIError>) -> Void) {
         guard let baseURL = Bundle.main.apiKey else {
             completion(.failure(.bundleError))
             return
@@ -89,7 +89,7 @@ final class ProfileRepository: ProfileProvider {
     }
     
     ///유저 프로필 변경
-    func changeProfile(nickname: String, imageData: Data, completion: @escaping (Result<ProfileDTO, ProfileError>) -> Void) {
+    func changeProfile(nickname: String, imageData: Data, completion: @escaping (Result<ProfileDTO, ServerAPIError>) -> Void) {
         guard let baseURL = Bundle.main.apiKey else {
             completion(.failure(.bundleError))
             return
@@ -148,7 +148,7 @@ final class ProfileRepository: ProfileProvider {
         }
     }
     
-    func changeProfile(nickname: String, completion: @escaping (Result<ProfileStringDTO, ProfileError>) -> Void) {
+    func changeProfile(nickname: String, completion: @escaping (Result<ProfileStringDTO, ServerAPIError>) -> Void) {
         guard let baseURL = Bundle.main.apiKey else {
             completion(.failure(.bundleError))
             return
@@ -210,7 +210,7 @@ final class ProfileRepository: ProfileProvider {
     
     
     /// 유저 프로필 변경 (이미지만)
-    func changeProfile(imageData: Data, completion: @escaping (Result<ProfileStringDTO, ProfileError>) -> Void) {
+    func changeProfile(imageData: Data, completion: @escaping (Result<ProfileStringDTO, ServerAPIError>) -> Void) {
         guard let baseURL = Bundle.main.apiKey else {
             completion(.failure(.bundleError))
             return
@@ -270,7 +270,7 @@ final class ProfileRepository: ProfileProvider {
     }
     
     /// 유저 프로필 닉네임 중복 확인
-    func checkNickname(nickname: String, completion: @escaping (Result<Bool, ProfileError>) -> Void) {
+    func checkNickname(nickname: String, completion: @escaping (Result<Bool, ServerAPIError>) -> Void) {
         guard let baseURL = Bundle.main.apiKey else {
             completion(.failure(.bundleError))
             return
@@ -321,7 +321,7 @@ final class ProfileRepository: ProfileProvider {
     }
     
     /// 유저 프로필 이미지 삭제
-    func deleteProfileImage(completion: @escaping (Result<Void, ProfileError>) -> Void) {
+    func deleteProfileImage(completion: @escaping (Result<Void, ServerAPIError>) -> Void) {
         guard let baseURL = Bundle.main.apiKey else {
             completion(.failure(.bundleError))
             return
