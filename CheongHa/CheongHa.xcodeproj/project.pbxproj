@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		6303235D2BAC636700B16E7C /* PostManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6303235C2BAC636700B16E7C /* PostManager.swift */; };
-		6303235F2BB143CE00B16E7C /* CustomActionSheetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6303235E2BB143CD00B16E7C /* CustomActionSheetViewController.swift */; };
 		630323632BB5590000B16E7C /* ForumPostViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 630323622BB5590000B16E7C /* ForumPostViewCell.swift */; };
 		630323672BBAD26200B16E7C /* ForumCategoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 630323662BBAD26200B16E7C /* ForumCategoryView.swift */; };
 		6303236F2BC7D61100B16E7C /* ForumDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6303236E2BC7D61100B16E7C /* ForumDetailViewController.swift */; };
@@ -36,8 +35,9 @@
 		F65040A72C2075E000B14D84 /* ServerAPIError.swift in Sources */ = {isa = PBXBuildFile; fileRef = F65040A62C2075E000B14D84 /* ServerAPIError.swift */; };
 		F65040A92C20816900B14D84 /* PostType.swift in Sources */ = {isa = PBXBuildFile; fileRef = F65040A82C20816900B14D84 /* PostType.swift */; };
 		F65040AB2C20818C00B14D84 /* ReportMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = F65040AA2C20818C00B14D84 /* ReportMessage.swift */; };
-		F65A3E282C0AEA6C0035314B /* ProfileEditViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F65A3E262C0AEA6B0035314B /* ProfileEditViewModel.swift */; };
-		F65A3E292C0AEA6C0035314B /* ProfileEditViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F65A3E272C0AEA6B0035314B /* ProfileEditViewController.swift */; };
+		F65040AE2C208EAC00B14D84 /* ProfileEditViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F65040AC2C208EAC00B14D84 /* ProfileEditViewModel.swift */; };
+		F65040AF2C208EAC00B14D84 /* ProfileEditViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F65040AD2C208EAC00B14D84 /* ProfileEditViewController.swift */; };
+		F65040B32C208F1700B14D84 /* CustomActionSheetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F65040B22C208F1700B14D84 /* CustomActionSheetViewController.swift */; };
 		F65E1ECF2BAC086D00326EF7 /* LoginNickNameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F65E1ECE2BAC086D00326EF7 /* LoginNickNameViewController.swift */; };
 		F65FFA8F2C04C3D3009A6FB3 /* YouthDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F65FFA8E2C04C3D3009A6FB3 /* YouthDetailViewController.swift */; };
 		F65FFA912C04C71C009A6FB3 /* YouthDetailHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F65FFA902C04C71C009A6FB3 /* YouthDetailHeaderView.swift */; };
@@ -87,9 +87,6 @@
 		F69B800B2B996846002675CE /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F69B800A2B996846002675CE /* ViewController.swift */; };
 		F69B80102B996847002675CE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F69B800F2B996847002675CE /* Assets.xcassets */; };
 		F69B80132B996847002675CE /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F69B80112B996847002675CE /* LaunchScreen.storyboard */; };
-		F69B801E2B996847002675CE /* WithPeaceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F69B801D2B996847002675CE /* WithPeaceTests.swift */; };
-		F69B80282B996847002675CE /* WithPeaceUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F69B80272B996847002675CE /* WithPeaceUITests.swift */; };
-		F69B802A2B996847002675CE /* WithPeaceUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F69B80292B996847002675CE /* WithPeaceUITestsLaunchTests.swift */; };
 		F69B80432B9A09FB002675CE /* GoogleSignIn in Frameworks */ = {isa = PBXBuildFile; productRef = F69B80422B9A09FB002675CE /* GoogleSignIn */; };
 		F69B80452B9A09FB002675CE /* GoogleSignInSwift in Frameworks */ = {isa = PBXBuildFile; productRef = F69B80442B9A09FB002675CE /* GoogleSignInSwift */; };
 		F69B80472B9A0D1B002675CE /* GoogleSignInManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F69B80462B9A0D1B002675CE /* GoogleSignInManager.swift */; };
@@ -126,7 +123,6 @@
 
 /* Begin PBXFileReference section */
 		6303235C2BAC636700B16E7C /* PostManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostManager.swift; sourceTree = "<group>"; };
-		6303235E2BB143CD00B16E7C /* CustomActionSheetViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = CustomActionSheetViewController.swift; path = WithPeace/Manager/CustomActionSheetViewController.swift; sourceTree = SOURCE_ROOT; };
 		630323622BB5590000B16E7C /* ForumPostViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForumPostViewCell.swift; sourceTree = "<group>"; };
 		630323662BBAD26200B16E7C /* ForumCategoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForumCategoryView.swift; sourceTree = "<group>"; };
 		6303236E2BC7D61100B16E7C /* ForumDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForumDetailViewController.swift; sourceTree = "<group>"; };
@@ -154,8 +150,9 @@
 		F65040A62C2075E000B14D84 /* ServerAPIError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServerAPIError.swift; sourceTree = "<group>"; };
 		F65040A82C20816900B14D84 /* PostType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostType.swift; sourceTree = "<group>"; };
 		F65040AA2C20818C00B14D84 /* ReportMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportMessage.swift; sourceTree = "<group>"; };
-		F65A3E262C0AEA6B0035314B /* ProfileEditViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ProfileEditViewModel.swift; path = WithPeace/View/ContentsView/myPageVIew/ProfileEditView/ProfileEditViewModel.swift; sourceTree = SOURCE_ROOT; };
-		F65A3E272C0AEA6B0035314B /* ProfileEditViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ProfileEditViewController.swift; path = WithPeace/View/ContentsView/myPageVIew/ProfileEditView/ProfileEditViewController.swift; sourceTree = SOURCE_ROOT; };
+		F65040AC2C208EAC00B14D84 /* ProfileEditViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ProfileEditViewModel.swift; path = CheongHa/View/ContentsView/myPageVIew/ProfileEditView/ProfileEditViewModel.swift; sourceTree = SOURCE_ROOT; };
+		F65040AD2C208EAC00B14D84 /* ProfileEditViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ProfileEditViewController.swift; path = CheongHa/View/ContentsView/myPageVIew/ProfileEditView/ProfileEditViewController.swift; sourceTree = SOURCE_ROOT; };
+		F65040B22C208F1700B14D84 /* CustomActionSheetViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomActionSheetViewController.swift; sourceTree = "<group>"; };
 		F65E1ECE2BAC086D00326EF7 /* LoginNickNameViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginNickNameViewController.swift; sourceTree = "<group>"; };
 		F65FFA8E2C04C3D3009A6FB3 /* YouthDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YouthDetailViewController.swift; sourceTree = "<group>"; };
 		F65FFA902C04C71C009A6FB3 /* YouthDetailHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YouthDetailHeaderView.swift; sourceTree = "<group>"; };
@@ -198,18 +195,15 @@
 		F69011E02BB6D352009A8087 /* MultipartFormData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultipartFormData.swift; sourceTree = "<group>"; };
 		F69011E22BB6D91E009A8087 /* MyPageViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageViewModel.swift; sourceTree = "<group>"; };
 		F697444E2BB08AD6006683AF /* Data+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Data+.swift"; sourceTree = "<group>"; };
-		F69B80032B996846002675CE /* WithPeace.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WithPeace.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		F69B80032B996846002675CE /* CheongHa.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CheongHa.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F69B80062B996846002675CE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F69B80082B996846002675CE /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		F69B800A2B996846002675CE /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		F69B800F2B996847002675CE /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		F69B80122B996847002675CE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		F69B80142B996847002675CE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		F69B80192B996847002675CE /* WithPeaceTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = WithPeaceTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		F69B801D2B996847002675CE /* WithPeaceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WithPeaceTests.swift; sourceTree = "<group>"; };
-		F69B80232B996847002675CE /* WithPeaceUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = WithPeaceUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		F69B80272B996847002675CE /* WithPeaceUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WithPeaceUITests.swift; sourceTree = "<group>"; };
-		F69B80292B996847002675CE /* WithPeaceUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WithPeaceUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		F69B80192B996847002675CE /* CheongHaTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CheongHaTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		F69B80232B996847002675CE /* CheongHaUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CheongHaUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		F69B80462B9A0D1B002675CE /* GoogleSignInManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleSignInManager.swift; sourceTree = "<group>"; };
 		F6A35EBA2BE5087300313B7D /* ServerAuthManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServerAuthManager.swift; sourceTree = "<group>"; };
 		F6A35EBC2BE508A000313B7D /* StatusCode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusCode.swift; sourceTree = "<group>"; };
@@ -361,8 +355,8 @@
 		F65A3E252C0AEA2D0035314B /* ProfileEditView */ = {
 			isa = PBXGroup;
 			children = (
-				F65A3E272C0AEA6B0035314B /* ProfileEditViewController.swift */,
-				F65A3E262C0AEA6B0035314B /* ProfileEditViewModel.swift */,
+				F65040AD2C208EAC00B14D84 /* ProfileEditViewController.swift */,
+				F65040AC2C208EAC00B14D84 /* ProfileEditViewModel.swift */,
 			);
 			path = ProfileEditView;
 			sourceTree = "<group>";
@@ -560,7 +554,7 @@
 		F697444D2BB07F47006683AF /* CustomActionSheet */ = {
 			isa = PBXGroup;
 			children = (
-				6303235E2BB143CD00B16E7C /* CustomActionSheetViewController.swift */,
+				F65040B22C208F1700B14D84 /* CustomActionSheetViewController.swift */,
 				F68657412BB415A400821281 /* CustomActionSheetPresentationController.swift */,
 				F68657432BB415DC00821281 /* CustomActionSheetTransitioningDelegate.swift */,
 			);
@@ -571,9 +565,7 @@
 			isa = PBXGroup;
 			children = (
 				F671A9B82BA00C28002808DA /* Secrets.plist */,
-				F69B80052B996846002675CE /* WithPeace */,
-				F69B801C2B996847002675CE /* WithPeaceTests */,
-				F69B80262B996847002675CE /* WithPeaceUITests */,
+				F69B80052B996846002675CE /* CheongHa */,
 				F69B80042B996846002675CE /* Products */,
 			);
 			sourceTree = "<group>";
@@ -581,14 +573,14 @@
 		F69B80042B996846002675CE /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				F69B80032B996846002675CE /* WithPeace.app */,
-				F69B80192B996847002675CE /* WithPeaceTests.xctest */,
-				F69B80232B996847002675CE /* WithPeaceUITests.xctest */,
+				F69B80032B996846002675CE /* CheongHa.app */,
+				F69B80192B996847002675CE /* CheongHaTests.xctest */,
+				F69B80232B996847002675CE /* CheongHaUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		F69B80052B996846002675CE /* WithPeace */ = {
+		F69B80052B996846002675CE /* CheongHa */ = {
 			isa = PBXGroup;
 			children = (
 				F671A9CC2BA059DB002808DA /* Const.swift */,
@@ -599,24 +591,7 @@
 				F69B80372B996981002675CE /* Resource */,
 				F69B80142B996847002675CE /* Info.plist */,
 			);
-			path = WithPeace;
-			sourceTree = "<group>";
-		};
-		F69B801C2B996847002675CE /* WithPeaceTests */ = {
-			isa = PBXGroup;
-			children = (
-				F69B801D2B996847002675CE /* WithPeaceTests.swift */,
-			);
-			path = WithPeaceTests;
-			sourceTree = "<group>";
-		};
-		F69B80262B996847002675CE /* WithPeaceUITests */ = {
-			isa = PBXGroup;
-			children = (
-				F69B80272B996847002675CE /* WithPeaceUITests.swift */,
-				F69B80292B996847002675CE /* WithPeaceUITestsLaunchTests.swift */,
-			);
-			path = WithPeaceUITests;
+			path = CheongHa;
 			sourceTree = "<group>";
 		};
 		F69B80362B996972002675CE /* App */ = {
@@ -657,9 +632,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		F69B80022B996846002675CE /* WithPeace */ = {
+		F69B80022B996846002675CE /* CheongHa */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = F69B802D2B996847002675CE /* Build configuration list for PBXNativeTarget "WithPeace" */;
+			buildConfigurationList = F69B802D2B996847002675CE /* Build configuration list for PBXNativeTarget "CheongHa" */;
 			buildPhases = (
 				F69B7FFF2B996846002675CE /* Sources */,
 				F69B80002B996846002675CE /* Frameworks */,
@@ -669,7 +644,7 @@
 			);
 			dependencies = (
 			);
-			name = WithPeace;
+			name = CheongHa;
 			packageProductDependencies = (
 				F69B80422B9A09FB002675CE /* GoogleSignIn */,
 				F69B80442B9A09FB002675CE /* GoogleSignInSwift */,
@@ -677,12 +652,12 @@
 				F68C9D132BA2DB39008CB7E4 /* RxSwift */,
 			);
 			productName = WithPeace;
-			productReference = F69B80032B996846002675CE /* WithPeace.app */;
+			productReference = F69B80032B996846002675CE /* CheongHa.app */;
 			productType = "com.apple.product-type.application";
 		};
-		F69B80182B996847002675CE /* WithPeaceTests */ = {
+		F69B80182B996847002675CE /* CheongHaTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = F69B80302B996847002675CE /* Build configuration list for PBXNativeTarget "WithPeaceTests" */;
+			buildConfigurationList = F69B80302B996847002675CE /* Build configuration list for PBXNativeTarget "CheongHaTests" */;
 			buildPhases = (
 				F69B80152B996847002675CE /* Sources */,
 				F69B80162B996847002675CE /* Frameworks */,
@@ -693,14 +668,14 @@
 			dependencies = (
 				F69B801B2B996847002675CE /* PBXTargetDependency */,
 			);
-			name = WithPeaceTests;
+			name = CheongHaTests;
 			productName = WithPeaceTests;
-			productReference = F69B80192B996847002675CE /* WithPeaceTests.xctest */;
+			productReference = F69B80192B996847002675CE /* CheongHaTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
-		F69B80222B996847002675CE /* WithPeaceUITests */ = {
+		F69B80222B996847002675CE /* CheongHaUITests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = F69B80332B996847002675CE /* Build configuration list for PBXNativeTarget "WithPeaceUITests" */;
+			buildConfigurationList = F69B80332B996847002675CE /* Build configuration list for PBXNativeTarget "CheongHaUITests" */;
 			buildPhases = (
 				F69B801F2B996847002675CE /* Sources */,
 				F69B80202B996847002675CE /* Frameworks */,
@@ -711,9 +686,9 @@
 			dependencies = (
 				F69B80252B996847002675CE /* PBXTargetDependency */,
 			);
-			name = WithPeaceUITests;
+			name = CheongHaUITests;
 			productName = WithPeaceUITests;
-			productReference = F69B80232B996847002675CE /* WithPeaceUITests.xctest */;
+			productReference = F69B80232B996847002675CE /* CheongHaUITests.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
 		};
 /* End PBXNativeTarget section */
@@ -739,7 +714,7 @@
 					};
 				};
 			};
-			buildConfigurationList = F69B7FFE2B996845002675CE /* Build configuration list for PBXProject "WithPeace" */;
+			buildConfigurationList = F69B7FFE2B996845002675CE /* Build configuration list for PBXProject "CheongHa" */;
 			compatibilityVersion = "Xcode 14.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -756,9 +731,9 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				F69B80022B996846002675CE /* WithPeace */,
-				F69B80182B996847002675CE /* WithPeaceTests */,
-				F69B80222B996847002675CE /* WithPeaceUITests */,
+				F69B80022B996846002675CE /* CheongHa */,
+				F69B80182B996847002675CE /* CheongHaTests */,
+				F69B80222B996847002675CE /* CheongHaUITests */,
 			);
 		};
 /* End PBXProject section */
@@ -832,19 +807,19 @@
 				F68719B32BA867FE0049B182 /* UICollectionViewLayout+.swift in Sources */,
 				F671A9C62BA00FD7002808DA /* EndPoint.swift in Sources */,
 				F69B80072B996846002675CE /* AppDelegate.swift in Sources */,
-				F65A3E292C0AEA6C0035314B /* ProfileEditViewController.swift in Sources */,
 				F671A9CD2BA059DB002808DA /* Const.swift in Sources */,
-				F65A3E282C0AEA6C0035314B /* ProfileEditViewModel.swift in Sources */,
 				F65040A22C20750C00B14D84 /* PostDTO.swift in Sources */,
 				F6F0548E2C0863C000CC7FAF /* YouthDetailTopView.swift in Sources */,
 				F6833FF52BFDC4150099F1DA /* YouthFilterFooterView.swift in Sources */,
 				F6BEDA902C1DD7AA00BD770A /* ServerNetworkDTO.swift in Sources */,
 				F6A35EBD2BE508A000313B7D /* StatusCode.swift in Sources */,
 				F65FFA952C074904009A6FB3 /* YouthDetailTableView.swift in Sources */,
+				F65040AF2C208EAC00B14D84 /* ProfileEditViewController.swift in Sources */,
 				635BCBAE2BA7E72A00F0DCBC /* PostViewController.swift in Sources */,
 				F68C9D6E2BA5E291008CB7E4 /* ToastMessageView.swift in Sources */,
 				F671A9C42BA00FBA002808DA /* NetworkManager.swift in Sources */,
 				F68719B12BA8635C0049B182 /* CustomPhotoAlbumViewController.swift in Sources */,
+				F65040B32C208F1700B14D84 /* CustomActionSheetViewController.swift in Sources */,
 				F6ACBCE52BEB47D3006386DE /* ProfileAPIRepository.swift in Sources */,
 				6303236F2BC7D61100B16E7C /* ForumDetailViewController.swift in Sources */,
 				F6B5B40C2BBBFDDA000C8494 /* ProfileView.swift in Sources */,
@@ -859,7 +834,7 @@
 				F671A9C82BA0173E002808DA /* HTTPMethod.swift in Sources */,
 				F69011DF2BB5A9B2009A8087 /* CustomAlertSheetView.swift in Sources */,
 				F667FD882BAC2287005AAAB7 /* CustomPhotoAlbumDetailViewController.swift in Sources */,
-				6303235F2BB143CE00B16E7C /* CustomActionSheetViewController.swift in Sources */,
+				F65040AE2C208EAC00B14D84 /* ProfileEditViewModel.swift in Sources */,
 				F65FFA9B2C075FAA009A6FB3 /* YouthDetailContentView.swift in Sources */,
 				635BCBB02BA80C7300F0DCBC /* PostNavigationBarView.swift in Sources */,
 				F6F0548C2C0863A800CC7FAF /* YouthDetailSubTitleView.swift in Sources */,
@@ -890,7 +865,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F69B801E2B996847002675CE /* WithPeaceTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -898,8 +872,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F69B80282B996847002675CE /* WithPeaceUITests.swift in Sources */,
-				F69B802A2B996847002675CE /* WithPeaceUITestsLaunchTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -908,12 +880,12 @@
 /* Begin PBXTargetDependency section */
 		F69B801B2B996847002675CE /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = F69B80022B996846002675CE /* WithPeace */;
+			target = F69B80022B996846002675CE /* CheongHa */;
 			targetProxy = F69B801A2B996847002675CE /* PBXContainerItemProxy */;
 		};
 		F69B80252B996847002675CE /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = F69B80022B996846002675CE /* WithPeace */;
+			target = F69B80022B996846002675CE /* CheongHa */;
 			targetProxy = F69B80242B996847002675CE /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -1054,12 +1026,13 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_ENTITLEMENTS = WithPeace/WithPeace.entitlements;
+				CODE_SIGN_ENTITLEMENTS = CheongHa/WithPeace.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = S9SM8UDTPN;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = WithPeace/Info.plist;
+				INFOPLIST_FILE = CheongHa/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = "청하";
 				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "사진첩사용";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen.storyboard;
@@ -1071,7 +1044,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = baemg.WithPeace;
+				PRODUCT_BUNDLE_IDENTIFIER = com.cheongha.cheongha;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -1084,12 +1057,13 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_ENTITLEMENTS = WithPeace/WithPeace.entitlements;
+				CODE_SIGN_ENTITLEMENTS = CheongHa/WithPeace.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = S9SM8UDTPN;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = WithPeace/Info.plist;
+				INFOPLIST_FILE = CheongHa/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = "청하";
 				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "사진첩사용";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen.storyboard;
@@ -1101,7 +1075,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = baemg.WithPeace;
+				PRODUCT_BUNDLE_IDENTIFIER = com.cheongha.cheongha;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -1125,7 +1099,7 @@
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/WithPeace.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/WithPeace";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/CheongHa.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/CheongHa";
 			};
 			name = Debug;
 		};
@@ -1145,7 +1119,7 @@
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/WithPeace.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/WithPeace";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/CheongHa.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/CheongHa";
 			};
 			name = Release;
 		};
@@ -1188,7 +1162,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		F69B7FFE2B996845002675CE /* Build configuration list for PBXProject "WithPeace" */ = {
+		F69B7FFE2B996845002675CE /* Build configuration list for PBXProject "CheongHa" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				F69B802B2B996847002675CE /* Debug */,
@@ -1197,7 +1171,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		F69B802D2B996847002675CE /* Build configuration list for PBXNativeTarget "WithPeace" */ = {
+		F69B802D2B996847002675CE /* Build configuration list for PBXNativeTarget "CheongHa" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				F69B802E2B996847002675CE /* Debug */,
@@ -1206,7 +1180,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		F69B80302B996847002675CE /* Build configuration list for PBXNativeTarget "WithPeaceTests" */ = {
+		F69B80302B996847002675CE /* Build configuration list for PBXNativeTarget "CheongHaTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				F69B80312B996847002675CE /* Debug */,
@@ -1215,7 +1189,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		F69B80332B996847002675CE /* Build configuration list for PBXNativeTarget "WithPeaceUITests" */ = {
+		F69B80332B996847002675CE /* Build configuration list for PBXNativeTarget "CheongHaUITests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				F69B80342B996847002675CE /* Debug */,
