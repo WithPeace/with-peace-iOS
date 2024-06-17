@@ -18,7 +18,7 @@ class ServerAuthManager {
                                    headers: Dictionary<String, String> = [:],
                                    httpMethod: HTTPMethod,
                                    body: Data? = nil,
-                                   completion: @escaping (Result<DataType?, ServerAuthManagerError>) -> Void) {
+                                   completion: @escaping (Result<DataType?, ServerAPIError>) -> Void) {
         
         // baseURL with Bundle
         guard let baseURL = Bundle.main.apiKey else {
@@ -59,7 +59,7 @@ class ServerAuthManager {
                         guard let decodedData = try? JSONDecoder().decode(ServerNetworkDTO<DataType>.self,
                                                                           from: getData.resultData),
                               let resultData = decodedData.data else {
-                            completion(.failure(.decodingError))
+                            completion(.failure(.decodeError))
                             return
                         }
                         
@@ -74,12 +74,13 @@ class ServerAuthManager {
                     do {
                         guard let decodedData = try? JSONDecoder().decode(ServerNetworkDTO<ServerNetworkErrorData>.self,
                                                                           from: getData.resultData) else {
-                            completion(.failure(.decodingError))
+                            completion(.failure(.decodeError))
                             return
                         }
                         
-//                        debugPrint(decodedData.error?.message)
-//                        debugPrint(decodedData.error?.code)
+                        debugPrint(decodedData.error?.message)
+                        debugPrint(decodedData.error?.code)
+                        debugPrint(endPoint.generateURL())
                         
                         if decodedData.error?.code == 40100 {
                             self.signRepository.performRefresh { result in
@@ -113,7 +114,7 @@ class ServerAuthManager {
                     // TODO: 서버 오류.
                     guard let decodedData = try? JSONDecoder().decode(ServerNetworkDTO<ServerNetworkErrorData>.self,
                                                                       from: getData.resultData) else {
-                        completion(.failure(.decodingError))
+                        completion(.failure(.decodeError))
                         return
                     }
                     print(decodedData)
@@ -126,22 +127,4 @@ class ServerAuthManager {
             }
         }
     }
-}
-
-enum ServerAuthManagerError: Error {
-    case unKnownError
-    
-    case bundleURLError
-    case notHaveToken
-    case decodingError
-}
-
-struct ServerNetworkDTO<T: Codable>: Codable {
-    var data: T?
-    var error: ServerNetworkErrorData?
-}
-
-struct ServerNetworkErrorData: Codable {
-    var code: Int
-    var message: String
 }

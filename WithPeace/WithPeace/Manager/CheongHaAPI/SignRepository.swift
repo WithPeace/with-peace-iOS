@@ -265,11 +265,6 @@ extension SignRepository {
     }
 }
 
-//MARK: 회원가입 RequestBody
-fileprivate struct Nickname: Codable {
-    let nickname: String
-}
-
 //MARK: Logout Model
 fileprivate struct SignAuthResponse: Codable {
     let data: String
