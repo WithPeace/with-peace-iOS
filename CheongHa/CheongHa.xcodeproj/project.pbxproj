@@ -92,6 +92,7 @@
 		F69B80472B9A0D1B002675CE /* GoogleSignInManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F69B80462B9A0D1B002675CE /* GoogleSignInManager.swift */; };
 		F6A35EBB2BE5087300313B7D /* ServerAuthManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6A35EBA2BE5087300313B7D /* ServerAuthManager.swift */; };
 		F6A35EBD2BE508A000313B7D /* StatusCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6A35EBC2BE508A000313B7D /* StatusCode.swift */; };
+		F6A9660E2C2479B90079B89E /* BlankPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6A9660D2C2479B90079B89E /* BlankPageViewController.swift */; };
 		F6ACBCE52BEB47D3006386DE /* ProfileAPIRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6ACBCE42BEB47D3006386DE /* ProfileAPIRepository.swift */; };
 		F6B5B4062BBBFD90000C8494 /* CustomSeparatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6B5B4052BBBFD90000C8494 /* CustomSeparatorView.swift */; };
 		F6B5B4082BBBFDA2000C8494 /* ProfileETCView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6B5B4072BBBFDA2000C8494 /* ProfileETCView.swift */; };
@@ -207,6 +208,7 @@
 		F69B80462B9A0D1B002675CE /* GoogleSignInManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleSignInManager.swift; sourceTree = "<group>"; };
 		F6A35EBA2BE5087300313B7D /* ServerAuthManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServerAuthManager.swift; sourceTree = "<group>"; };
 		F6A35EBC2BE508A000313B7D /* StatusCode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusCode.swift; sourceTree = "<group>"; };
+		F6A9660D2C2479B90079B89E /* BlankPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlankPageViewController.swift; sourceTree = "<group>"; };
 		F6ACBCE42BEB47D3006386DE /* ProfileAPIRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileAPIRepository.swift; sourceTree = "<group>"; };
 		F6B5B4052BBBFD90000C8494 /* CustomSeparatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomSeparatorView.swift; sourceTree = "<group>"; };
 		F6B5B4072BBBFDA2000C8494 /* ProfileETCView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileETCView.swift; sourceTree = "<group>"; };
@@ -533,6 +535,7 @@
 		F697444B2BB07E43006683AF /* Assistant */ = {
 			isa = PBXGroup;
 			children = (
+				F6A9660D2C2479B90079B89E /* BlankPageViewController.swift */,
 				F6B5B4052BBBFD90000C8494 /* CustomSeparatorView.swift */,
 				F697444D2BB07F47006683AF /* CustomActionSheet */,
 				F697444C2BB07F45006683AF /* CustomAlertSheet */,
@@ -793,6 +796,7 @@
 				63C52F992BA97FB40072DE18 /* CategorySelectViewController.swift in Sources */,
 				F65040A92C20816900B14D84 /* PostType.swift in Sources */,
 				F65FFA932C05CEC3009A6FB3 /* YouthDetailCell.swift in Sources */,
+				F6A9660E2C2479B90079B89E /* BlankPageViewController.swift in Sources */,
 				F65040AB2C20818C00B14D84 /* ReportMessage.swift in Sources */,
 				F65040A72C2075E000B14D84 /* ServerAPIError.swift in Sources */,
 				F6B94ABF2BAEFC95005FDEE6 /* ProfileRepository.swift in Sources */,
