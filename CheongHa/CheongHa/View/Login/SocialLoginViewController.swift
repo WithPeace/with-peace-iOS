@@ -11,8 +11,12 @@ import RxSwift
 import RxCocoa
 
 final class SocialLoginViewController: UIViewController {
+    
+    private lazy var toastMessage = ToastMessageView(superView: self.view)
+    
     private let mainLogoImage: UIImageView = {
         let image = UIImageView()
+        
         image.translatesAutoresizingMaskIntoConstraints = false
         image.image = UIImage(named: Const.Logo.MainLogo.cheonghaMainLogo)
         
@@ -21,23 +25,25 @@ final class SocialLoginViewController: UIViewController {
     
     private let mainTitleLabel: UILabel = {
         let label = UILabel()
-        label.translatesAutoresizingMaskIntoConstraints = false
-        label.textColor = .black
-        label.text = "위드피스에 오신 것을 환영합니다."
-        label.font = .boldSystemFont(ofSize: 20)
+        
         label.textAlignment = .center
+        label.text = "청하에 오신 것을 환영합니다."
+        label.font = .boldSystemFont(ofSize: 20)
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.textColor = UIColor(named: Const.CustomColor.SystemColor.black)
         
         return label
     }()
     
     private let mainSubtitleLabel: UILabel = {
         let label = UILabel()
-        label.translatesAutoresizingMaskIntoConstraints = false
-        label.textColor = .black
+        
         label.numberOfLines = 0
-        label.text = "1인 가구의 모든 것 \n유용한 정보를 함께 공유해보세요!"
-        label.font = .systemFont(ofSize: 16, weight: .regular)
         label.textAlignment = .center
+        label.text = "청년을 위한 모든 것,\n유용한 정보를 함께 공유해보세요!"
+        label.font = .systemFont(ofSize: 16, weight: .regular)
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.textColor = UIColor(named: Const.CustomColor.SystemColor.black)
         
         return label
     }()
@@ -47,13 +53,14 @@ final class SocialLoginViewController: UIViewController {
         config.imagePlacement = .leading
         config.imagePadding = 54
         config.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 16, bottom: 0, trailing: 16)
+        
         let button = UIButton(configuration: config)
         button.translatesAutoresizingMaskIntoConstraints = false
         button.setTitle("Google로 로그인하기", for: .normal)
         button.setImage(UIImage(named: Const.Logo.MainLogo.googleLogo), for: .normal)
         button.setTitleColor(.black, for: .normal)
         button.titleLabel?.font = UIFont.systemFont(ofSize: 16)
-        button.layer.borderColor = UIColor.black.cgColor
+        button.layer.borderColor = (UIColor(named: Const.CustomColor.SystemColor.black) ?? UIColor.label).cgColor
         button.layer.borderWidth = 1
         button.layer.cornerRadius = 10
         button.contentHorizontalAlignment = .leading
@@ -67,6 +74,7 @@ final class SocialLoginViewController: UIViewController {
         config.imagePlacement = .leading
         config.imagePadding = 62
         config.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 16, bottom: 0, trailing: 0)
+        
         let button = UIButton(configuration: config)
         button.translatesAutoresizingMaskIntoConstraints = false
         button.setTitle("Apple로 로그인하기", for: .normal)
@@ -96,10 +104,10 @@ final class SocialLoginViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        setupLayout()
+        configureLayout()
     }
     
-    private func setupLayout() {
+    private func configureLayout() {
         view.backgroundColor = .systemBackground
         view.addSubview(mainLogoImage)
         view.addSubview(mainTitleLabel)
@@ -140,6 +148,11 @@ extension SocialLoginViewController {
             })
             .disposed(by: disposeBag)
         
+        appleLoginButton.rx.tap
+            .subscribe { [weak self] _ in
+                self?.viewModel.performAppleLogin()
+            }.disposed(by: disposeBag)
+        
         viewModel.signInSuccess
             .subscribe(onNext: { datas in
                 print("SignIn Success: \(datas.token)")
@@ -160,8 +173,10 @@ extension SocialLoginViewController {
             .disposed(by: disposeBag)
         
         viewModel.signInFailure
-            .subscribe(onNext: { error in
-                print("SignIn Error: \(error.localizedDescription)")
+            .subscribe(onNext: { errorMessage in
+                DispatchQueue.main.async {
+                    self.toastMessage.presentStandardToastMessage(errorMessage)
+                }
             })
             .disposed(by: disposeBag)
     }
