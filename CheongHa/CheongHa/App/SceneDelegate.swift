@@ -16,20 +16,30 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         let window = UIWindow(windowScene: windowScene)
         
-        if hasToken() {
-            //기존 로그인
-            let tabBarController = MainTabbarController()
-            
-            window.rootViewController = tabBarController
-        } else {
-            //최초 로그인
-            let socialLoginViewController = SocialLoginViewController()
-            let navigationController = UINavigationController(rootViewController: socialLoginViewController)
-            
-            window.rootViewController = navigationController
+        // Launch Screen 보여주면서 데이터를 받아오지 못한다면 사용할 수 없도록 구현 -> indicatorView 구현 + Due Time 구현
+        ProfileAPIRepository().searchProfile { result in
+            switch result {
+            case .success(let data):
+                print(data)
+                print("로그인 성공")
+                DispatchQueue.main.async {
+                    let tabBarController = MainTabbarController()
+                    window.rootViewController = tabBarController
+                    window.makeKeyAndVisible()
+                }
+                
+            case .failure(let error):
+                print(error)
+                print("로그인 에러")
+                DispatchQueue.main.async {
+                    let socialLoginViewController = SocialLoginViewController()
+                    let navigationController = UINavigationController(rootViewController: socialLoginViewController)
+                    
+                    window.rootViewController = navigationController
+                    window.makeKeyAndVisible()
+                }
+            }
         }
-        
-        window.makeKeyAndVisible()
         
         self.window = window
     }
@@ -47,15 +57,6 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     }
     
     func sceneDidEnterBackground(_ scene: UIScene) {
-    }
-    
-    private func hasToken() -> Bool {
-        let keyChainManager = KeychainManager()
-        guard keyChainManager.get(account: "accessToken") != nil else {
-            return false
-        }
-        
-        return true
     }
     
     func changeViewController() {
