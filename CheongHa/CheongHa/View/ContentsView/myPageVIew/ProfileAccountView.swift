@@ -31,7 +31,7 @@ final class ProfileAccountView: UIView {
     private let emailLabel:  UILabel = {
         let label = UILabel()
         
-        label.text = "withpeace@withpeace.com"
+        label.text = "CheongHa@CheongHa.com"
         label.font = .systemFont(ofSize: 14)
         label.textColor = UIColor(named: Const.CustomColor.SystemColor.gray2)
         

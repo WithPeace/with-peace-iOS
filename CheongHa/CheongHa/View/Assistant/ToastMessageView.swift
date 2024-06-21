@@ -18,7 +18,7 @@ final class ToastMessageView {
         self.hasTabbar = hasTabbar
     }
     
-    /// WithPeace Standard ToastMessage
+    /// CheongHa Standard ToastMessage
     /// - Parameters:
     ///     - message: 토스트 메세지 띄울 문구
     

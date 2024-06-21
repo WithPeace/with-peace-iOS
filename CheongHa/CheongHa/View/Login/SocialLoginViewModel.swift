@@ -7,26 +7,50 @@
 
 import RxSwift
 import GoogleSignIn
-import RxCocoa
 
 final class SocialLoginViewModel {
+    
     private let googleSigninManager: AuthenticationProvider
     private let disposeBag = DisposeBag()
-    private var isSign = false
+    
+    // Input
+    
+    // Output
     let signInSuccess: PublishSubject<(token: String, role: Role)> = PublishSubject()
-    let signInFailure: PublishSubject<Error> = PublishSubject()
+    let signInFailure: PublishSubject<String> = PublishSubject()
     
     init(googleSigninManager: AuthenticationProvider) {
         self.googleSigninManager = googleSigninManager
+    }
+
+}
+
+//MARK: Apple Login
+extension SocialLoginViewModel {
+    func performAppleLogin() {
+        
+    }
+}
+
+//MARK: Google Login
+extension SocialLoginViewModel {
+    
+    func performGoogleLogin() {
+        guard let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
+              let rootViewController = windowScene.windows.first(where: { $0.isKeyWindow })?.rootViewController else {
+            return
+        }
+        
+        self.signInWithGoogle(presentVC: rootViewController)
     }
     
     private func signInWithGoogle(presentVC: UIViewController) {
         GIDSignIn.sharedInstance.signIn(withPresenting: presentVC) { [weak self] signIn, error in
             guard let self else { return }
-            self.isSign = false
             
             if let error = error {
-                self.signInFailure.onNext(error)
+                debugPrint(error)
+                self.signInFailure.onNext("로그인에 실패했습니다")
             }
             
             guard let signIn = signIn else { return }
@@ -51,20 +75,9 @@ final class SocialLoginViewModel {
                 }
                 
             case .failure(let error):
-                self?.signInFailure.onNext(error)
+                debugPrint("SignIn Error: \(error.localizedDescription)")
+                self?.signInFailure.onNext("삭제된 계정입니다.")
             }
         }
-    }
-    
-    func performGoogleLogin() {
-        guard !isSign else { return }
-        
-        guard let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
-              let rootViewController = windowScene.windows.first(where: { $0.isKeyWindow })?.rootViewController else {
-            return
-        }
-        
-        isSign = true
-        self.signInWithGoogle(presentVC: rootViewController)
     }
 }
