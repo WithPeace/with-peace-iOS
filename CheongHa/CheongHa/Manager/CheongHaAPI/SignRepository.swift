@@ -11,6 +11,8 @@ import UIKit
 protocol AuthenticationProvider {
     func performGoogleSign(idToken: String,
                            completion: @escaping (Result<SignAuthDTO, SignRepositoryError>) -> Void)
+    func performAppleLogin(idToken: String,
+                           completion: @escaping (Result<SignAuthDTO, SignRepositoryError>) -> Void)
     func performRegister(nickname: String,
                          imageData: Data?,
                          completion: @escaping (Result<Void, SignRepositoryError>) -> Void)
@@ -246,6 +248,43 @@ final class SignRepository: AuthenticationProvider {
                 }
             case .failure:
                 //TODO: - 토큰 만료시 로그아웃 여부 확인 후 구현
+                completion(.failure(.networkError))
+            }
+        }
+    }
+    
+    func performAppleLogin(idToken: String,
+                    completion: @escaping (Result<SignAuthDTO, SignRepositoryError>) -> Void) {
+        guard let baseURL = Bundle.main.apiKey else {
+            completion(.failure(.bundleError))
+            return
+        }
+        
+        let endPoint = EndPoint(baseURL: baseURL,
+                                path: "/api/v1/auth/apple",
+                                port: 8080,
+                                scheme: "http",
+                                headers: ["Authorization":"Bearer \(idToken)"],
+                                method: .post)
+        
+        NetworkManager.shared.fetchData(endpoint: endPoint) { result in
+            switch result {
+            case .success(let data):
+                do {
+                    let signDTO = try JSONDecoder().decode(SignAuthDTO.self, from: data)
+                    guard let accessToken = signDTO.data.jwtTokenDto?.accessToken,
+                          let refreshToken = signDTO.data.jwtTokenDto?.refreshToken else {
+                        completion(.failure(.googleInvalidToken))
+                        return
+                    }
+                    
+                    try self.saveTokens(accessToken: accessToken, refreshToken: refreshToken)
+                    completion(.success(signDTO))
+                } catch {
+                    completion(.failure(.notSaveToken))
+                    return
+                }
+            case .failure(_):
                 completion(.failure(.networkError))
             }
         }

@@ -36,12 +36,14 @@ final class ToastMessageView {
         let duration: Double = 2
         let delay: Double = 2
         
-        toastLabel.backgroundColor =  UIColor(named: Const.CustomColor.SystemColor.black)
-        toastLabel.textColor = UIColor.white
+        toastLabel.backgroundColor = UIColor(named: Const.CustomColor.SystemColor.black)
+        toastLabel.textColor = UIColor.systemBackground
         toastLabel.font = UIFont.systemFont(ofSize: 14.0)
         toastLabel.textAlignment = .left
         toastLabel.alpha = 1.0
         toastLabel.layer.cornerRadius = 4
+        toastLabel.layer.borderWidth = 1
+        toastLabel.layer.borderColor = UIColor.black.cgColor
         toastLabel.clipsToBounds  =  true
         
         let paragraphStyle = NSMutableParagraphStyle()
