@@ -9,6 +9,8 @@ import UIKit
 
 final class BlankPageViewController: UIViewController {
     
+    private let isPresent: Bool
+    
     private let topBackButton: UIButton = {
         let button = UIButton()
         
@@ -75,18 +77,66 @@ final class BlankPageViewController: UIViewController {
         return button
     }()
     
+    init(isPresent: Bool = false) {
+        self.isPresent = isPresent
+        
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         view.backgroundColor = .systemBackground
         
-        configureLayout()
-        [topBackButton, backButton].forEach {
-            $0.addTarget(self, action: #selector(tapButton), for: .touchUpInside)
+        if isPresent {
+            configureLayoutOnPresent()
+            
+            [topBackButton, backButton].forEach {
+                $0.addTarget(self, action: #selector(tapButton), for: .touchUpInside)
+            }
+        } else {
+            configureLayout()
         }
     }
     
     private func configureLayout() {
+        view.addSubview(contentView)
+        
+        [imageView, mainTitleLabel, bodyLabel].forEach {
+            contentView.addSubview($0)
+        }
+        
+        NSLayoutConstraint.activate([
+            contentView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            contentView.centerYAnchor.constraint(equalTo: view.centerYAnchor)
+        ])
+        
+        NSLayoutConstraint.activate([
+            imageView.topAnchor.constraint(equalTo: contentView.topAnchor),
+            imageView.heightAnchor.constraint(equalToConstant: 160),
+            imageView.widthAnchor.constraint(equalToConstant: 160),
+            imageView.centerXAnchor.constraint(equalTo: contentView.centerXAnchor)
+        ])
+        
+        NSLayoutConstraint.activate([
+            mainTitleLabel.topAnchor.constraint(equalTo: imageView.bottomAnchor, constant: 24),
+            mainTitleLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
+            mainTitleLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor)
+        ])
+        
+        NSLayoutConstraint.activate([
+            bodyLabel.topAnchor.constraint(equalTo: mainTitleLabel.bottomAnchor, constant: 8),
+            bodyLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
+            bodyLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
+            bodyLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor)
+        ])
+    }
+    
+    private func configureLayoutOnPresent() {
         let safe = view.safeAreaLayoutGuide
         
         view.addSubview(topBackButton)
