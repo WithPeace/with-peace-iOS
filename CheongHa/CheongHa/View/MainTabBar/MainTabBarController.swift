@@ -12,11 +12,11 @@ final class MainTabbarController: UITabBarController {
     private var beforeSelectedTag: Int = 0
     
     private let homeViewController = UINavigationController(rootViewController: HomeViewController())
-    private let registBlankViewController = UIViewController()
-    private let registViewController = PostViewController()
+    private let forumViewController = BlankPageViewController()
+    private let registBlankViewController = BlankPageViewController()
     private let myPageViewController = UINavigationController(rootViewController: MyPageViewController())
     
-    private let forumViewController = ForumViewController()
+    private let registViewController = BlankPageViewController()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -66,22 +66,23 @@ final class MainTabbarController: UITabBarController {
 }
 
 extension MainTabbarController: UITabBarControllerDelegate {
-    func tabBarController(_ tabBarController: UITabBarController, didSelect viewController: UIViewController) {
-        if viewController.tabBarItem.tag == 2 {
-            let postVC = PostViewController()
-            postVC.viewModel.postCreated
-                .subscribe(onNext: { [weak self] newPost in
-                    self?.forumViewController.addNewPost(newPost)
-                })
-                .disposed(by: postVC.disposeBag)
-            
-            postVC.hidesBottomBarWhenPushed = true
-            postVC.modalPresentationStyle = .fullScreen
-            self.present(postVC, animated: true, completion: nil)
-            
-            self.selectedIndex = beforeSelectedTag
-        } else {
-            beforeSelectedTag = viewController.tabBarItem.tag
-        }
-    }
+    // TODO: 3번째 Tab 클릭 시 present 로직
+//    func tabBarController(_ tabBarController: UITabBarController, didSelect viewController: UIViewController) {
+//        if viewController.tabBarItem.tag == 2 {
+//            let postVC = PostViewController()
+//            postVC.viewModel.postCreated
+//                .subscribe(onNext: { [weak self] newPost in
+//                    self?.forumViewController.addNewPost(newPost)
+//                })
+//                .disposed(by: postVC.disposeBag)
+//            
+//            postVC.hidesBottomBarWhenPushed = true
+//            postVC.modalPresentationStyle = .fullScreen
+//            self.present(postVC, animated: true, completion: nil)
+//            
+//            self.selectedIndex = beforeSelectedTag
+//        } else {
+//            beforeSelectedTag = viewController.tabBarItem.tag
+//        }
+//    }
 }
