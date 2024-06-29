@@ -7,29 +7,42 @@
 
 import RxSwift
 import GoogleSignIn
+import AuthenticationServices
 
 final class SocialLoginViewModel {
     
-    private let googleSigninManager: AuthenticationProvider
+    private let signinManager: AuthenticationProvider
     private let disposeBag = DisposeBag()
     
-    // Input
-    
-    // Output
+    let appleLoginSuccess = PublishSubject<String>()
     let signInSuccess: PublishSubject<(token: String, role: Role)> = PublishSubject()
     let signInFailure: PublishSubject<String> = PublishSubject()
     
     init(googleSigninManager: AuthenticationProvider) {
-        self.googleSigninManager = googleSigninManager
+        self.signinManager = googleSigninManager
+        
+        self.appleLoginSuccess.subscribe { id in
+            self.signinManager.performAppleLogin(idToken: id) { result in
+                switch result {
+                case .success(let data):
+                    guard let role = data.data.role else { return }
+                    
+                    switch role {
+                    case .guest:
+                        self.signInSuccess.onNext(("Token: \(data)", Role.guest))
+                    case .user:
+                        self.signInSuccess.onNext(("Token: \(data)", Role.user))
+                    }
+                case .failure(let error):
+                    print(error)
+                }
+            }
+        }.disposed(by: disposeBag)
     }
-
 }
 
 //MARK: Apple Login
 extension SocialLoginViewModel {
-    func performAppleLogin() {
-        
-    }
 }
 
 //MARK: Google Login
@@ -62,7 +75,7 @@ extension SocialLoginViewModel {
     }
     
     private func performGoogleSignIn(idToken: String) {
-        googleSigninManager.performGoogleSign(idToken: idToken) { [weak self] result in
+        signinManager.performGoogleSign(idToken: idToken) { [weak self] result in
             switch result {
             case .success(let data):
                 guard let role = data.data.role else { return }

@@ -92,10 +92,7 @@ class ServerAuthManager {
                                     debugPrint("Error : ", error)
                                 }
                             }
-                        }
-                        
-                        //access 만료시에 호출됨
-                        if decodedData.error?.code == 40101 {
+                        } else if decodedData.error?.code == 40101 { //access 만료시에 호출됨
                             self.signRepository.performRefresh { result in
                                 switch result {
                                 case .success(let data):
@@ -105,6 +102,8 @@ class ServerAuthManager {
                                     debugPrint("Error : ", error)
                                 }
                             }
+                        } else {
+                            completion(.failure(.unKnownError))
                         }
                     }
                     
