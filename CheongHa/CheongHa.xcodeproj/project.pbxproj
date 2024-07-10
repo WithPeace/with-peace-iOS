@@ -30,6 +30,7 @@
 		63C52F9D2BA9B83F0072DE18 /* PostViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63C52F9C2BA9B83F0072DE18 /* PostViewModel.swift */; };
 		F61B51602BEB799000812C8D /* YouthListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F61B515F2BEB799000812C8D /* YouthListCell.swift */; };
 		F61B51622BECF5B400812C8D /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F61B51612BECF5B400812C8D /* HomeViewModel.swift */; };
+		F6394B9D2C301F9E0092FFB5 /* TermsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6394B9C2C301F9E0092FFB5 /* TermsViewController.swift */; };
 		F65040A22C20750C00B14D84 /* PostDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = F65040A12C20750C00B14D84 /* PostDTO.swift */; };
 		F65040A42C20759A00B14D84 /* ProfileDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = F65040A32C20759A00B14D84 /* ProfileDTO.swift */; };
 		F65040A72C2075E000B14D84 /* ServerAPIError.swift in Sources */ = {isa = PBXBuildFile; fileRef = F65040A62C2075E000B14D84 /* ServerAPIError.swift */; };
@@ -146,6 +147,7 @@
 		63C52F9C2BA9B83F0072DE18 /* PostViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostViewModel.swift; sourceTree = "<group>"; };
 		F61B515F2BEB799000812C8D /* YouthListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YouthListCell.swift; sourceTree = "<group>"; };
 		F61B51612BECF5B400812C8D /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
+		F6394B9C2C301F9E0092FFB5 /* TermsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TermsViewController.swift; sourceTree = "<group>"; };
 		F65040A12C20750C00B14D84 /* PostDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostDTO.swift; sourceTree = "<group>"; };
 		F65040A32C20759A00B14D84 /* ProfileDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileDTO.swift; sourceTree = "<group>"; };
 		F65040A62C2075E000B14D84 /* ServerAPIError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServerAPIError.swift; sourceTree = "<group>"; };
@@ -408,6 +410,7 @@
 			isa = PBXGroup;
 			children = (
 				F68C9D152BA2DBB4008CB7E4 /* Login */,
+				F6394B9C2C301F9E0092FFB5 /* TermsViewController.swift */,
 				F68C9D272BA2F1DC008CB7E4 /* NickNameView */,
 				F68C9D162BA2DC99008CB7E4 /* MainTabBar */,
 				F671A9C02BA00DF5002808DA /* ContentsView */,
@@ -777,6 +780,7 @@
 				F61B51622BECF5B400812C8D /* HomeViewModel.swift in Sources */,
 				63C52F9D2BA9B83F0072DE18 /* PostViewModel.swift in Sources */,
 				F68C9D242BA2DEDB008CB7E4 /* SocialLoginViewController.swift in Sources */,
+				F6394B9D2C301F9E0092FFB5 /* TermsViewController.swift in Sources */,
 				F69011E32BB6D91E009A8087 /* MyPageViewModel.swift in Sources */,
 				F69B80472B9A0D1B002675CE /* GoogleSignInManager.swift in Sources */,
 				635BCBA92BA3521F00F0DCBC /* SocialLoginViewModel.swift in Sources */,

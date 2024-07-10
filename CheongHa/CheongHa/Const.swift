@@ -176,3 +176,16 @@ extension Const {
         }
     }
 }
+
+extension Const {
+    struct URL {
+        private init() {}
+        
+        struct URLLink {
+            private init() {}
+            
+            static let termsOfUse = "https://pointy-shampoo-9c7.notion.site/099b85822b9a4394848888fc2bc96560?pvs=4"
+            static let privacyPolicy = "https://pointy-shampoo-9c7.notion.site/3671c1dbd4664645831707152f29105a?pvs=74"
+        }
+    }
+}
