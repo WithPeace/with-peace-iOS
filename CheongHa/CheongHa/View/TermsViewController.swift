@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class TermsViewController: UIViewController {
+final class TermsViewController: UIViewController, WebViewRequestDelegate {
     
     private let contentView: UIView = {
         let view = UIView()
@@ -71,6 +71,9 @@ final class TermsViewController: UIViewController {
         view.backgroundColor = .systemBackground
         nextButton.addTarget(self, action: #selector(tapNextButton), for: .touchUpInside)
         configureLayout()
+        
+        agreementView.privacyPolicyView.webViewDelegate = self
+        agreementView.termsOfUseView.webViewDelegate = self
     }
     
     private func configureLayout() {
@@ -119,6 +122,11 @@ final class TermsViewController: UIViewController {
             debugPrint("약관 동의 필요")
         }
     }
+    
+    func pushView(urlString: String) {
+        navigationController?.pushViewController(WebViewAssistantViewController(urlString: urlString),
+                                                 animated: true)
+    }
 }
 
 final class TermsSubView: UIView, CheckButtonSendable {
@@ -137,9 +145,9 @@ final class TermsSubView: UIView, CheckButtonSendable {
         return stackView
     }()
     
-    private let termsOfUseView = CheckButtonView("[필수] 서비스 이용약관",
+    private(set) var termsOfUseView = CheckButtonView("[필수] 서비스 이용약관",
                                                          url: Const.URL.URLLink.termsOfUse)
-    private let privacyPolicyView = CheckButtonView("[필수] 개인정보처리방침",
+    private(set) var privacyPolicyView = CheckButtonView("[필수] 개인정보처리방침",
                                                             url: Const.URL.URLLink.privacyPolicy)
     
     lazy var subSelectingView = [termsOfUseView, privacyPolicyView]
@@ -147,15 +155,11 @@ final class TermsSubView: UIView, CheckButtonSendable {
     override init(frame: CGRect) {
         super.init(frame: frame)
         
-        termsOfUseView.delegate = self
-        privacyPolicyView.delegate = self
-        
-        let gesture = UITapGestureRecognizer(target: self, action: #selector(tapAllCheck))
-        allAgreeView.addGestureRecognizer(gesture)
-        allAgreeView.isUserInteractionEnabled = true
-        
+        delegateSetting()
+        gestureRegist()
         configureLayout()
     }
+    
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
@@ -188,6 +192,18 @@ final class TermsSubView: UIView, CheckButtonSendable {
             privacyPolicyView.changing(check: true)
         }
         allAgreeView.changeState()
+    }
+    
+    private func delegateSetting() {
+        termsOfUseView.checkButtonDelegate = self
+        privacyPolicyView.checkButtonDelegate = self
+    }
+    
+    private func gestureRegist() {
+        let gesture = UITapGestureRecognizer(target: self, action: #selector(tapAllCheck))
+        
+        allAgreeView.addGestureRecognizer(gesture)
+        allAgreeView.isUserInteractionEnabled = true
     }
     
     private func configureLayout() {
@@ -260,6 +276,7 @@ final class AllAgreementView: UIView {
                 self.allAgreementLabel.font = .systemFont(ofSize: 16)
             }
         }
+        
         isAllChecked.toggle()
     }
     
@@ -286,9 +303,14 @@ protocol CheckButtonSendable {
     func selectStateSend(_ isChecked: Bool)
 }
 
+protocol WebViewRequestDelegate {
+    func pushView(urlString: String)
+}
+
 final class CheckButtonView: UIView {
     
-    var delegate: CheckButtonSendable?
+    var checkButtonDelegate: CheckButtonSendable?
+    var webViewDelegate: WebViewRequestDelegate?
     
     private(set) var isChecked: Bool = false
     private var urlString: String? = nil
@@ -352,13 +374,14 @@ final class CheckButtonView: UIView {
     @objc
     func tapFrontView() {
         self.changeState()
-        delegate?.selectStateSend(isChecked)
+        checkButtonDelegate?.selectStateSend(isChecked)
     }
     
     @objc
     func tapWebViewButton() {
         //TODO: WebView
         print("webview tab")
+        webViewDelegate?.pushView(urlString: urlString!)
     }
     
     required init?(coder: NSCoder) {
@@ -373,7 +396,7 @@ final class CheckButtonView: UIView {
     
     private func changeState() {
         DispatchQueue.main.async {
-            if self.isChecked { // check -> uncheck
+            if self.isChecked {
                 self.imageView.image = UIImage(named: Const.CustomIcon.ICCheckBox.icCheckboxFill)
                 self.termsLabel.font = .boldSystemFont(ofSize: 16)
             } else {
