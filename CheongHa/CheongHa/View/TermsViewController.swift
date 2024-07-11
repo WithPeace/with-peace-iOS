@@ -117,9 +117,12 @@ final class TermsViewController: UIViewController, WebViewRequestDelegate {
     func tapNextButton() {
         if agreementView.allCheck {
             //TODO: NextPage
-            print("가즈아 다음페이지")
+            DispatchQueue.main.async {
+                let loginNickNameViewController = LoginNickNameViewController()
+                self.navigationController?.pushViewController(loginNickNameViewController, animated: true)
+            }
         } else {
-            debugPrint("약관 동의 필요")
+            ToastMessageView(superView: self.view).presentStandardToastMessage("약관에 동의해주세요.")
         }
     }
     
