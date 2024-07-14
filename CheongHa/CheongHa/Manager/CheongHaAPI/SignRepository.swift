@@ -33,8 +33,6 @@ final class SignRepository: AuthenticationProvider {
         
         let endPoint = EndPoint(baseURL: baseURL,
                                 path: "/api/v1/auth/google",
-                                port: 8080,
-                                scheme: "http",
                                 headers: ["Authorization":"Bearer \(idToken)"],
                                 method: .post)
         
@@ -90,13 +88,9 @@ final class SignRepository: AuthenticationProvider {
         
         var contentsTypeHeader = formData.generateHeader()
         contentsTypeHeader["Authorization"] = "Bearer \(keychainAccessToken)"
-//        var contentsTypeHeader = ["Authorization":"Bearer \(keychainAccessToken)"]
-//        contentsTypeHeader["Content-Type"] = "multipart/form-data; boundary=\(formData.getBoundary())"
         
         let endPoint = EndPoint(baseURL: baseURL,
                                 path: "/api/v1/auth/register",
-                                port: 8080,
-                                scheme: "http",
                                 headers: contentsTypeHeader,
                                 method: .post,
                                 body: requestBody)
@@ -160,8 +154,6 @@ final class SignRepository: AuthenticationProvider {
         
         let endPoint = EndPoint(baseURL: baseURL,
                                 path: "/api/v1/auth/refresh",
-                                port: 8080,
-                                scheme: "http",
                                 headers: ["Authorization":"Bearer \(keychainRefreshToken)"],
                                 method: .post)
         
@@ -220,8 +212,6 @@ final class SignRepository: AuthenticationProvider {
         
         let endPoint = EndPoint(baseURL: baseURL,
                                 path: "/api/v1/auth/logout",
-                                port: 8080,
-                                scheme: "http",
                                 headers: ["Authorization": "Bearer \(keychainAccessToken)"],
                                 method: .post)
         
@@ -262,8 +252,6 @@ final class SignRepository: AuthenticationProvider {
         
         let endPoint = EndPoint(baseURL: baseURL,
                                 path: "/api/v1/auth/apple",
-                                port: 8080,
-                                scheme: "http",
                                 headers: ["Authorization":"Bearer \(idToken)"],
                                 method: .post)
         
