@@ -162,8 +162,8 @@ extension SocialLoginViewController {
                 switch datas.role {
                 case .guest:
                     DispatchQueue.main.async {
-                        let loginNickNameViewController = LoginNickNameViewController()
-                        self.navigationController?.pushViewController(loginNickNameViewController, animated: true)
+                        let termsViewController = TermsViewController()
+                        self.navigationController?.pushViewController(termsViewController, animated: true)
                     }
                 case .user:
                     DispatchQueue.main.async {

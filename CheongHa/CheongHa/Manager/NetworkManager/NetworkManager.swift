@@ -17,7 +17,13 @@ struct NetworkManager {
     func fetchData(endpoint: EndPoint, completion: @escaping (Result<Data, NetworkError>) -> Void) {
         let request = endpoint.genreateURLRequest()
         
-        let task = URLSession.shared.dataTask(with: request) { data, response, error in
+        let configuration = URLSessionConfiguration.default
+        configuration.timeoutIntervalForRequest = 10.0
+        configuration.timeoutIntervalForResource = 10.0
+        
+        let urlSession = URLSession(configuration: configuration)
+        
+        let task = urlSession.dataTask(with: request) { data, response, error in
             if error != nil {
                 completion(.failure(.defaultsError))
                 return
