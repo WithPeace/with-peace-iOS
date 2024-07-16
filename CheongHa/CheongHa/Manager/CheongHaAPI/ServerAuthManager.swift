@@ -39,8 +39,6 @@ class ServerAuthManager {
         
         let endPoint = EndPoint(baseURL: baseURL,
                                 path: path,
-                                port: 8080,
-                                scheme: "http",
                                 queryItems: queryItems,
                                 headers: endpointHeader,
                                 method: httpMethod,

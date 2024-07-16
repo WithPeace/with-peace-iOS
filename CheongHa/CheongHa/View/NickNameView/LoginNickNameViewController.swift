@@ -187,6 +187,7 @@ extension LoginNickNameViewController {
     private func tapRegistButton() {
         viewModel.tapRegisterButton.onNext(())
     }
+    
     private func configureTargetAction() {
         registButton.addTarget(self, action: #selector(tapRegistButton), for: .touchUpInside)
         nicknameTextField.addTarget(self, action: #selector(textFieldDidChange), for: .editingChanged)

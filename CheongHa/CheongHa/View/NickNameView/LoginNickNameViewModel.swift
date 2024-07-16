@@ -144,20 +144,24 @@ final class LoginNickNameViewModel {
                 guard let nickname = nickname else { return }
                 
                 if let imageData = imageData {
-                    if imageData.count < imageSize {
-                        image = UIImage(data: imageData)?.jpegData(compressionQuality: 1)
-                    } else {
-                        image = UIImage(data: imageData)?.jpegData(compressionQuality:  CGFloat(imageSize/imageData.count))
-                    }
                     
-                    self.signRepository.performRegister(nickname: nickname,
-                                                        imageData: image) { result in
-                        switch result {
-                        case .success(_):
-                            self.allSuccess.onNext(true)
-                        case .failure(let error):
-                            print(error)
-                        }
+                    //TODO: image Size Server확인
+                    #warning("image size 조절 (일정 크기 넘어가면 오류로 인해 강제 low resizing )")
+//                    if imageData.count < imageSize {
+//                        image = UIImage(data: imageData)?.jpegData(compressionQuality: 1)
+//                    } else {
+//                        image = UIImage(data: imageData)?.jpegData(compressionQuality:  CGFloat(imageSize/imageData.count))
+//                    } 
+                    image = UIImage(data: imageData)?.jpegData(compressionQuality: 0.1)
+                }
+                
+                self.signRepository.performRegister(nickname: nickname,
+                                                    imageData: image) { result in
+                    switch result {
+                    case .success(_):
+                        self.allSuccess.onNext(true)
+                    case .failure(let error):
+                        print(error)
                     }
                 }
             }
@@ -165,6 +169,7 @@ final class LoginNickNameViewModel {
     }
     
     private func checkDuplication(nickname: String) {
+        
         profileRepository.checkNickname(nickname: nickname) { result in
             switch result {
             case .success(let bool):

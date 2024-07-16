@@ -20,6 +20,7 @@ final class YouthDetailTopView: UIView {
     private let titleLabel: UILabel = {
         let label = UILabel()
         
+        label.numberOfLines = 0
         label.font = .systemFont(ofSize: 20, weight: .bold)
         label.translatesAutoresizingMaskIntoConstraints = false
         
@@ -29,7 +30,7 @@ final class YouthDetailTopView: UIView {
     private let bodyLabel: UILabel = {
         let label = UILabel()
         
-        label.numberOfLines = 2
+        label.numberOfLines = 0
         label.font = .systemFont(ofSize: 16)
         label.translatesAutoresizingMaskIntoConstraints = false
         
