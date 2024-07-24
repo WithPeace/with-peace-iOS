@@ -191,6 +191,7 @@ final class SignRepository: AuthenticationProvider {
                         guard let app = UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate else { return }
                         app.moveToDefaultLoginView()
                     }
+//                    completion(.failure(.unauthorized))
                 } else {
                     completion(.failure(.networkError))
                 }
@@ -262,7 +263,7 @@ final class SignRepository: AuthenticationProvider {
                     let signDTO = try JSONDecoder().decode(SignAuthDTO.self, from: data)
                     guard let accessToken = signDTO.data.jwtTokenDto?.accessToken,
                           let refreshToken = signDTO.data.jwtTokenDto?.refreshToken else {
-                        completion(.failure(.googleInvalidToken))
+                        completion(.failure(.appleInvalidToken))
                         return
                     }
                     
