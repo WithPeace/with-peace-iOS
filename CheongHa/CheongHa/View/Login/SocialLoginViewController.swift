@@ -91,6 +91,22 @@ final class SocialLoginViewController: UIViewController {
         return button
     }()
     
+    private let logoContentView: UIView = {
+        var view = UIView()
+        
+        view.translatesAutoresizingMaskIntoConstraints = false
+        
+        return view
+    }()
+    
+    private let buttonView: UIView = {
+        var view = UIView()
+        
+        view.translatesAutoresizingMaskIntoConstraints = false
+        
+        return view
+    }()
+    
     private var viewModel = SocialLoginViewModel(googleSigninManager: SignRepository())
     private let disposeBag = DisposeBag()
     
@@ -111,31 +127,52 @@ final class SocialLoginViewController: UIViewController {
     
     private func configureLayout() {
         view.backgroundColor = .systemBackground
-        view.addSubview(mainLogoImage)
-        view.addSubview(mainTitleLabel)
-        view.addSubview(mainSubtitleLabel)
-        view.addSubview(googleLoginButton)
-        view.addSubview(appleLoginButton)
+        
+        view.addSubview(logoContentView)
+        view.addSubview(buttonView)
+        
+        [mainLogoImage, mainTitleLabel, mainSubtitleLabel].forEach {
+            logoContentView.addSubview($0)
+        }
+        
+        [googleLoginButton, appleLoginButton].forEach {
+            buttonView.addSubview($0)
+        }
         
         NSLayoutConstraint.activate([
-            mainLogoImage.topAnchor.constraint(equalTo: view.topAnchor, constant: 236),
-            mainLogoImage.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            logoContentView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            logoContentView.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: -30),
+            
+            buttonView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 24),
+            buttonView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -24),
+            buttonView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -43),
+        ])
+        
+        NSLayoutConstraint.activate([
+            mainLogoImage.topAnchor.constraint(equalTo: logoContentView.topAnchor),
+            mainLogoImage.centerXAnchor.constraint(equalTo: logoContentView.centerXAnchor),
+            mainLogoImage.heightAnchor.constraint(equalToConstant: 150),
+            mainLogoImage.widthAnchor.constraint(equalToConstant: 150),
             
             mainTitleLabel.topAnchor.constraint(equalTo: mainLogoImage.bottomAnchor, constant: 40),
-            mainTitleLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            mainTitleLabel.centerXAnchor.constraint(equalTo: logoContentView.centerXAnchor),
             
             mainSubtitleLabel.topAnchor.constraint(equalTo: mainTitleLabel.bottomAnchor, constant: 24),
-            mainSubtitleLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            
-            googleLoginButton.topAnchor.constraint(equalTo: mainSubtitleLabel.bottomAnchor, constant: 131),
-            googleLoginButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 24),
-            googleLoginButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -24),
+            mainSubtitleLabel.centerXAnchor.constraint(equalTo: logoContentView.centerXAnchor),
+            mainSubtitleLabel.bottomAnchor.constraint(equalTo: logoContentView.bottomAnchor)
+        ])
+        
+        NSLayoutConstraint.activate([
+            googleLoginButton.topAnchor.constraint(equalTo: buttonView.topAnchor),
+            googleLoginButton.leadingAnchor.constraint(equalTo: buttonView.leadingAnchor),
+            googleLoginButton.trailingAnchor.constraint(equalTo: buttonView.trailingAnchor),
             googleLoginButton.heightAnchor.constraint(equalToConstant: 55),
             
             appleLoginButton.topAnchor.constraint(equalTo: googleLoginButton.bottomAnchor, constant: 16),
-            appleLoginButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 24),
-            appleLoginButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -24),
+            appleLoginButton.leadingAnchor.constraint(equalTo: buttonView.leadingAnchor),
+            appleLoginButton.trailingAnchor.constraint(equalTo: buttonView.trailingAnchor),
             appleLoginButton.heightAnchor.constraint(equalToConstant: 55),
+            appleLoginButton.bottomAnchor.constraint(equalTo: buttonView.bottomAnchor)
         ])
     }
 }
