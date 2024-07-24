@@ -130,9 +130,9 @@ final class YouthListCell: UICollectionViewCell {
             
             imageView.topAnchor.constraint(equalTo: self.contentView.topAnchor, constant: 16),
             imageView.trailingAnchor.constraint(equalTo: self.contentView.trailingAnchor, constant: -16),
-            imageView.widthAnchor.constraint(equalToConstant: screenWidth * 57/327),
+//            imageView.widthAnchor.constraint(equalToConstant: screenWidth * 57/327),
+            imageView.widthAnchor.constraint(equalToConstant: 57),
             imageView.heightAnchor.constraint(equalTo: imageView.widthAnchor),
-            
         ])
         
         NSLayoutConstraint.activate([
