@@ -85,6 +85,7 @@ class ServerAuthManager {
                                 switch result {
                                 case .success(let data):
                                     print(data)
+                                    completion(.success(nil))
                                 case .failure(let error):
                                     completion(.failure(.unKnownError))
                                     debugPrint("Error : ", error)
@@ -95,6 +96,7 @@ class ServerAuthManager {
                                 switch result {
                                 case .success(let data):
                                     print(data)
+                                    completion(.success(nil))
                                 case .failure(let error):
                                     completion(.failure(.unKnownError))
                                     debugPrint("Error : ", error)
@@ -120,6 +122,7 @@ class ServerAuthManager {
                 }
             case .failure(_):
                 debugPrint("ERROR - ServerAuthManager logic")
+                completion(.failure(.unKnownError))
                 return
             }
         }
