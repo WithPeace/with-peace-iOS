@@ -60,6 +60,8 @@
 		F671A9CD2BA059DB002808DA /* Const.swift in Sources */ = {isa = PBXBuildFile; fileRef = F671A9CC2BA059DB002808DA /* Const.swift */; };
 		F672505D2BD9082D002C5835 /* YouthCenterRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = F672505C2BD9082D002C5835 /* YouthCenterRepository.swift */; };
 		F674DDDF2BADB17A00536AA7 /* String+.swift in Sources */ = {isa = PBXBuildFile; fileRef = F674DDDE2BADB17A00536AA7 /* String+.swift */; };
+		F67A64C02C60DC88009572CE /* ExampleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F67A64BF2C60DC88009572CE /* ExampleViewController.swift */; };
+		F67A64C22C60DD12009572CE /* ExampleViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F67A64C12C60DD12009572CE /* ExampleViewModel.swift */; };
 		F6833FAB2BFC70700099F1DA /* YouthFilterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6833FAA2BFC70700099F1DA /* YouthFilterViewController.swift */; };
 		F6833FAD2BFC708D0099F1DA /* YouthFilterViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6833FAC2BFC708D0099F1DA /* YouthFilterViewModel.swift */; };
 		F6833FF32BFDC3B30099F1DA /* YouthFilterCustomCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6833FF22BFDC3B30099F1DA /* YouthFilterCustomCell.swift */; };
@@ -178,6 +180,8 @@
 		F671A9CC2BA059DB002808DA /* Const.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Const.swift; sourceTree = "<group>"; };
 		F672505C2BD9082D002C5835 /* YouthCenterRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YouthCenterRepository.swift; sourceTree = "<group>"; };
 		F674DDDE2BADB17A00536AA7 /* String+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+.swift"; sourceTree = "<group>"; };
+		F67A64BF2C60DC88009572CE /* ExampleViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExampleViewController.swift; sourceTree = "<group>"; };
+		F67A64C12C60DD12009572CE /* ExampleViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExampleViewModel.swift; sourceTree = "<group>"; };
 		F6833FAA2BFC70700099F1DA /* YouthFilterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YouthFilterViewController.swift; sourceTree = "<group>"; };
 		F6833FAC2BFC708D0099F1DA /* YouthFilterViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YouthFilterViewModel.swift; sourceTree = "<group>"; };
 		F6833FF22BFDC3B30099F1DA /* YouthFilterCustomCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YouthFilterCustomCell.swift; sourceTree = "<group>"; };
@@ -411,6 +415,8 @@
 		F671A9BF2BA00DB2002808DA /* View */ = {
 			isa = PBXGroup;
 			children = (
+				F67A64BF2C60DC88009572CE /* ExampleViewController.swift */,
+				F67A64C12C60DD12009572CE /* ExampleViewModel.swift */,
 				F68C9D152BA2DBB4008CB7E4 /* Login */,
 				F6394B9C2C301F9E0092FFB5 /* TermsViewController.swift */,
 				F66959642C3F4E2600644DE9 /* WebViewAssistantViewController.swift */,
@@ -840,6 +846,7 @@
 				F69B80092B996846002675CE /* SceneDelegate.swift in Sources */,
 				F68657422BB415A400821281 /* CustomActionSheetPresentationController.swift in Sources */,
 				633F8E222B9AC37500B92ADC /* KeychainManager.swift in Sources */,
+				F67A64C22C60DD12009572CE /* ExampleViewModel.swift in Sources */,
 				F68719B62BA8707D0049B182 /* CustomAlbumCell.swift in Sources */,
 				63C52F9B2BA9B80D0072DE18 /* PostModel.swift in Sources */,
 				F66C98222BA1F5AD001E121C /* MainTabBarController.swift in Sources */,
@@ -864,6 +871,7 @@
 				63C52F972BA962590072DE18 /* PostPhotoView.swift in Sources */,
 				6303235D2BAC636700B16E7C /* PostManager.swift in Sources */,
 				630323712BC7D66500B16E7C /* ForumDetailCell.swift in Sources */,
+				F67A64C02C60DC88009572CE /* ExampleViewController.swift in Sources */,
 				F672505D2BD9082D002C5835 /* YouthCenterRepository.swift in Sources */,
 				F6B5B40A2BBBFDC3000C8494 /* ProfileAccountView.swift in Sources */,
 				F6833FAB2BFC70700099F1DA /* YouthFilterViewController.swift in Sources */,
