@@ -91,6 +91,16 @@ final class SocialLoginViewController: UIViewController {
         return button
     }()
     
+    private let takeTourButton: UIButton = {
+        let button = UIButton()
+        
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.setTitle("둘러보기", for: .normal)
+        button.setTitleColor(UIColor(named: Const.CustomColor.SystemColor.gray2), for: .normal)
+        
+        return button
+    }()
+    
     private let logoContentView: UIView = {
         var view = UIView()
         
@@ -123,6 +133,7 @@ final class SocialLoginViewController: UIViewController {
         super.viewDidLoad()
         
         configureLayout()
+        takeTourButtonTargeting()
     }
     
     private func configureLayout() {
@@ -135,7 +146,7 @@ final class SocialLoginViewController: UIViewController {
             logoContentView.addSubview($0)
         }
         
-        [googleLoginButton, appleLoginButton].forEach {
+        [googleLoginButton, appleLoginButton, takeTourButton].forEach {
             buttonView.addSubview($0)
         }
         
@@ -172,7 +183,11 @@ final class SocialLoginViewController: UIViewController {
             appleLoginButton.leadingAnchor.constraint(equalTo: buttonView.leadingAnchor),
             appleLoginButton.trailingAnchor.constraint(equalTo: buttonView.trailingAnchor),
             appleLoginButton.heightAnchor.constraint(equalToConstant: 55),
-            appleLoginButton.bottomAnchor.constraint(equalTo: buttonView.bottomAnchor)
+//            appleLoginButton.bottomAnchor.constraint(equalTo: buttonView.bottomAnchor),
+            
+            takeTourButton.topAnchor.constraint(equalTo: appleLoginButton.bottomAnchor, constant: 16),
+            takeTourButton.bottomAnchor.constraint(equalTo: buttonView.bottomAnchor),
+            takeTourButton.centerXAnchor.constraint(equalTo: buttonView.centerXAnchor)
         ])
     }
 }
@@ -267,5 +282,18 @@ extension SocialLoginViewController: ASAuthorizationControllerDelegate, ASAuthor
     func authorizationController(controller: ASAuthorizationController, didCompleteWithError error: Error) {
         print("인증 실패, ERROR authorizationController 호출")
         self.viewModel.signInFailure.onNext("로그인에 실패했습니다.")
+    }
+    
+    private func takeTourButtonTargeting() {
+        takeTourButton.addTarget(self, action: #selector(tapTourButton), for: .touchUpInside)
+    }
+    
+    @objc
+    private func tapTourButton() {
+        DispatchQueue.main.async {
+            
+            guard let app = UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate else { return }
+            app.moveToExampleView()
+        }
     }
 }

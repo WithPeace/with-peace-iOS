@@ -74,4 +74,13 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         window.rootViewController = navigationController
     }
+    
+    func moveToExampleView() {
+        guard let window = window else { return }
+        
+        let exampleViewController = ExampleViewController()
+        let navigationController = UINavigationController(rootViewController: exampleViewController)
+        
+        window.rootViewController = navigationController
+    }
 }
