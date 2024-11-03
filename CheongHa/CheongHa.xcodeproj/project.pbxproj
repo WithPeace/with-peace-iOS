@@ -10,6 +10,11 @@
 		00839A0D2CD7C3850024337F /* Secrets.plist in Resources */ = {isa = PBXBuildFile; fileRef = 00839A0C2CD7C3850024337F /* Secrets.plist */; };
 		00839A0F2CD7C3B10024337F /* APIKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00839A0E2CD7C3B10024337F /* APIKeys.swift */; };
 		00839A162CD7C6640024337F /* SocialLoginRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00839A152CD7C6640024337F /* SocialLoginRouter.swift */; };
+		00839A1C2CD7C8050024337F /* CleanNetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00839A1B2CD7C8050024337F /* CleanNetworkManager.swift */; };
+		00839A1F2CD7C82F0024337F /* RxMoya in Frameworks */ = {isa = PBXBuildFile; productRef = 00839A1E2CD7C82F0024337F /* RxMoya */; };
+		00839A212CD7C8420024337F /* LoginRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00839A202CD7C8420024337F /* LoginRouter.swift */; };
+		00839A242CD7C94A0024337F /* LoginRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00839A232CD7C94A0024337F /* LoginRepository.swift */; };
+		00839A262CD7C95A0024337F /* LoginUsecase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00839A252CD7C95A0024337F /* LoginUsecase.swift */; };
 		6303235D2BAC636700B16E7C /* PostManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6303235C2BAC636700B16E7C /* PostManager.swift */; };
 		630323632BB5590000B16E7C /* ForumPostViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 630323622BB5590000B16E7C /* ForumPostViewCell.swift */; };
 		630323672BBAD26200B16E7C /* ForumCategoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 630323662BBAD26200B16E7C /* ForumCategoryView.swift */; };
@@ -132,6 +137,10 @@
 		00839A0C2CD7C3850024337F /* Secrets.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Secrets.plist; sourceTree = "<group>"; };
 		00839A0E2CD7C3B10024337F /* APIKeys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIKeys.swift; sourceTree = "<group>"; };
 		00839A152CD7C6640024337F /* SocialLoginRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocialLoginRouter.swift; sourceTree = "<group>"; };
+		00839A1B2CD7C8050024337F /* CleanNetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CleanNetworkManager.swift; sourceTree = "<group>"; };
+		00839A202CD7C8420024337F /* LoginRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginRouter.swift; sourceTree = "<group>"; };
+		00839A232CD7C94A0024337F /* LoginRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginRepository.swift; sourceTree = "<group>"; };
+		00839A252CD7C95A0024337F /* LoginUsecase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginUsecase.swift; sourceTree = "<group>"; };
 		6303235C2BAC636700B16E7C /* PostManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostManager.swift; sourceTree = "<group>"; };
 		630323622BB5590000B16E7C /* ForumPostViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForumPostViewCell.swift; sourceTree = "<group>"; };
 		630323662BBAD26200B16E7C /* ForumCategoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForumCategoryView.swift; sourceTree = "<group>"; };
@@ -238,6 +247,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				00839A1F2CD7C82F0024337F /* RxMoya in Frameworks */,
 				F68C9D122BA2DB39008CB7E4 /* RxCocoa in Frameworks */,
 				F69B80432B9A09FB002675CE /* GoogleSignIn in Frameworks */,
 				F68C9D142BA2DB39008CB7E4 /* RxSwift in Frameworks */,
@@ -266,8 +276,8 @@
 			isa = PBXGroup;
 			children = (
 				00839A112CD7C62E0024337F /* Presentation */,
-				00839A132CD7C6430024337F /* Data */,
 				00839A122CD7C6370024337F /* Domain */,
+				00839A132CD7C6430024337F /* Data */,
 			);
 			path = CleanArchitecture;
 			sourceTree = "<group>";
@@ -283,6 +293,8 @@
 		00839A122CD7C6370024337F /* Domain */ = {
 			isa = PBXGroup;
 			children = (
+				00839A192CD7C79A0024337F /* Usecase */,
+				00839A1A2CD7C7A00024337F /* Entity */,
 			);
 			path = Domain;
 			sourceTree = "<group>";
@@ -290,6 +302,8 @@
 		00839A132CD7C6430024337F /* Data */ = {
 			isa = PBXGroup;
 			children = (
+				00839A172CD7C7880024337F /* Repository */,
+				00839A182CD7C78D0024337F /* Network */,
 			);
 			path = Data;
 			sourceTree = "<group>";
@@ -300,6 +314,47 @@
 				00839A152CD7C6640024337F /* SocialLoginRouter.swift */,
 			);
 			path = Login;
+			sourceTree = "<group>";
+		};
+		00839A172CD7C7880024337F /* Repository */ = {
+			isa = PBXGroup;
+			children = (
+				00839A232CD7C94A0024337F /* LoginRepository.swift */,
+			);
+			path = Repository;
+			sourceTree = "<group>";
+		};
+		00839A182CD7C78D0024337F /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				00839A222CD7C8D10024337F /* Routers */,
+				00839A1B2CD7C8050024337F /* CleanNetworkManager.swift */,
+			);
+			path = Network;
+			sourceTree = "<group>";
+		};
+		00839A192CD7C79A0024337F /* Usecase */ = {
+			isa = PBXGroup;
+			children = (
+				00839A252CD7C95A0024337F /* LoginUsecase.swift */,
+			);
+			path = Usecase;
+			sourceTree = "<group>";
+		};
+		00839A1A2CD7C7A00024337F /* Entity */ = {
+			isa = PBXGroup;
+			children = (
+				630EA20C2BA0243800F04ED3 /* SignAuthDTO.swift */,
+			);
+			path = Entity;
+			sourceTree = "<group>";
+		};
+		00839A222CD7C8D10024337F /* Routers */ = {
+			isa = PBXGroup;
+			children = (
+				00839A202CD7C8420024337F /* LoginRouter.swift */,
+			);
+			path = Routers;
 			sourceTree = "<group>";
 		};
 		630EA2012BA0058600F04ED3 /* Error */ = {
@@ -495,7 +550,6 @@
 		F671A9C22BA00E4B002808DA /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				630EA20C2BA0243800F04ED3 /* SignAuthDTO.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -711,6 +765,7 @@
 				F69B80442B9A09FB002675CE /* GoogleSignInSwift */,
 				F68C9D112BA2DB39008CB7E4 /* RxCocoa */,
 				F68C9D132BA2DB39008CB7E4 /* RxSwift */,
+				00839A1E2CD7C82F0024337F /* RxMoya */,
 			);
 			productName = WithPeace;
 			productReference = F69B80032B996846002675CE /* CheongHa.app */;
@@ -787,6 +842,7 @@
 			packageReferences = (
 				F69B80412B9A09FA002675CE /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */,
 				F68C9D102BA2DB39008CB7E4 /* XCRemoteSwiftPackageReference "RxSwift" */,
+				00839A1D2CD7C82F0024337F /* XCRemoteSwiftPackageReference "Moya" */,
 			);
 			productRefGroup = F69B80042B996846002675CE /* Products */;
 			projectDirPath = "";
@@ -862,6 +918,7 @@
 				F6B94ABF2BAEFC95005FDEE6 /* ProfileRepository.swift in Sources */,
 				F6833FF32BFDC3B30099F1DA /* YouthFilterCustomCell.swift in Sources */,
 				F69B800B2B996846002675CE /* ViewController.swift in Sources */,
+				00839A242CD7C94A0024337F /* LoginRepository.swift in Sources */,
 				F68C9D292BA2FFA0008CB7E4 /* LoginNickNameViewModel.swift in Sources */,
 				F6B5B4062BBBFD90000C8494 /* CustomSeparatorView.swift in Sources */,
 				F68C9D1C2BA2DE87008CB7E4 /* HomeViewController.swift in Sources */,
@@ -876,6 +933,7 @@
 				F6F0548E2C0863C000CC7FAF /* YouthDetailTopView.swift in Sources */,
 				F6833FF52BFDC4150099F1DA /* YouthFilterFooterView.swift in Sources */,
 				F6BEDA902C1DD7AA00BD770A /* ServerNetworkDTO.swift in Sources */,
+				00839A262CD7C95A0024337F /* LoginUsecase.swift in Sources */,
 				F6A35EBD2BE508A000313B7D /* StatusCode.swift in Sources */,
 				F65FFA952C074904009A6FB3 /* YouthDetailTableView.swift in Sources */,
 				F65040AF2C208EAC00B14D84 /* ProfileEditViewController.swift in Sources */,
@@ -891,7 +949,9 @@
 				F69011E12BB6D352009A8087 /* MultipartFormData.swift in Sources */,
 				F69B80092B996846002675CE /* SceneDelegate.swift in Sources */,
 				F68657422BB415A400821281 /* CustomActionSheetPresentationController.swift in Sources */,
+				00839A1C2CD7C8050024337F /* CleanNetworkManager.swift in Sources */,
 				00839A0F2CD7C3B10024337F /* APIKeys.swift in Sources */,
+				00839A212CD7C8420024337F /* LoginRouter.swift in Sources */,
 				633F8E222B9AC37500B92ADC /* KeychainManager.swift in Sources */,
 				F67A64C22C60DD12009572CE /* ExampleViewModel.swift in Sources */,
 				F68719B62BA8707D0049B182 /* CustomAlbumCell.swift in Sources */,
@@ -1098,7 +1158,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = S9SM8UDTPN;
+				DEVELOPMENT_TEAM = 59V6NJY3X6;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = CheongHa/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "청하";
@@ -1108,13 +1168,14 @@
 				INFOPLIST_KEY_UIRequiresFullScreen = YES;
 				INFOPLIST_KEY_UIStatusBarStyle = "";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UIUserInterfaceStyle = Light;
 				IPHONEOS_DEPLOYMENT_TARGET = 15.2;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.cheongha.cheongha;
+				PRODUCT_BUNDLE_IDENTIFIER = com.cheongha.cheonghaTest;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -1132,7 +1193,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = S9SM8UDTPN;
+				DEVELOPMENT_TEAM = 59V6NJY3X6;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = CheongHa/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "청하";
@@ -1142,13 +1203,14 @@
 				INFOPLIST_KEY_UIRequiresFullScreen = YES;
 				INFOPLIST_KEY_UIStatusBarStyle = "";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UIUserInterfaceStyle = Light;
 				IPHONEOS_DEPLOYMENT_TARGET = 15.2;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.cheongha.cheongha;
+				PRODUCT_BUNDLE_IDENTIFIER = com.cheongha.cheonghaTest;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -1275,6 +1337,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		00839A1D2CD7C82F0024337F /* XCRemoteSwiftPackageReference "Moya" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Moya/Moya.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 15.0.3;
+			};
+		};
 		F68C9D102BA2DB39008CB7E4 /* XCRemoteSwiftPackageReference "RxSwift" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/ReactiveX/RxSwift";
@@ -1294,6 +1364,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		00839A1E2CD7C82F0024337F /* RxMoya */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 00839A1D2CD7C82F0024337F /* XCRemoteSwiftPackageReference "Moya" */;
+			productName = RxMoya;
+		};
 		F68C9D112BA2DB39008CB7E4 /* RxCocoa */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = F68C9D102BA2DB39008CB7E4 /* XCRemoteSwiftPackageReference "RxSwift" */;

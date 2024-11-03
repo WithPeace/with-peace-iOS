@@ -119,7 +119,8 @@ final class SocialLoginViewController: UIViewController {
     
     private var viewModel = SocialLoginViewModel(
         googleSigninManager: SignRepository(),
-        socialLoginRouter: SocialLoginRouter()
+        socialLoginRouter: SocialLoginRouter(),
+        loginUsecase: LoginUsecase(loginRepository: LoginRepository(network: CleanNetworkManager()))
     )
     private let disposeBag = DisposeBag()
     

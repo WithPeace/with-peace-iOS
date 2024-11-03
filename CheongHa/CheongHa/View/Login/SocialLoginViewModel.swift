@@ -15,6 +15,7 @@ final class SocialLoginViewModel {
     private let disposeBag = DisposeBag()
     
     private let socialLoginRouter: SocialLoginRouterProtocol
+    private let loginUsecase: LoginUsecaseProtocol
     
     let appleLoginSuccess = PublishSubject<String>()
     let signInSuccess: PublishSubject<(token: String, role: Role)> = PublishSubject()
@@ -22,10 +23,12 @@ final class SocialLoginViewModel {
     
     init(
         googleSigninManager: AuthenticationProvider,
-        socialLoginRouter: SocialLoginRouterProtocol
+        socialLoginRouter: SocialLoginRouterProtocol,
+        loginUsecase: LoginUsecaseProtocol
     ) {
         self.signinManager = googleSigninManager
         self.socialLoginRouter = socialLoginRouter
+        self.loginUsecase = loginUsecase
         
         self.appleLoginSuccess.subscribe { id in
             self.signinManager.performAppleLogin(idToken: id) { result in
@@ -67,53 +70,27 @@ extension SocialLoginViewModel {
             let user = signIn.user
             guard let idToken = user.idToken?.tokenString else { return }
             
-//            self.performGoogleLogin(idToken: idToken)
+            performGoogleLogin(idToken: idToken)
         }
     }
     
-    func performGoogleLogin() {
-        guard let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
-              let rootViewController = windowScene.windows.first(where: { $0.isKeyWindow })?.rootViewController else {
-            return
-        }
-        
-        self.signInWithGoogle(presentVC: rootViewController)
-    }
-    
-    private func signInWithGoogle(presentVC: UIViewController) {
-        GIDSignIn.sharedInstance.signIn(withPresenting: presentVC) { [weak self] signIn, error in
-            guard let self else { return }
-            
-            if let error = error {
-                debugPrint(error)
-                self.signInFailure.onNext("로그인에 실패했습니다")
-            }
-            
-            guard let signIn = signIn else { return }
-            let user = signIn.user
-            guard let idToken = user.idToken?.tokenString else { return }
-            
-            self.performGoogleSignIn(idToken: idToken)
-        }
-    }
-    
-    private func performGoogleSignIn(idToken: String) {
-        signinManager.performGoogleSign(idToken: idToken) { [weak self] result in
-            switch result {
-            case .success(let data):
-                guard let role = data.data.role else { return }
-                
-                switch role {
-                case .guest:
-                    self?.signInSuccess.onNext(("Token: \(data)", Role.guest))
-                case .user:
-                    self?.signInSuccess.onNext(("Token: \(data)", Role.user))
+    private func performGoogleLogin(idToken: String) {
+        loginUsecase
+            .performGoogleLogin(idToken: idToken)
+            .subscribe(with: self) { owner, data in
+                if data.error == nil {
+                    guard let role = data.data.role else { return }
+                    switch role {
+                    case .guest:
+                        owner.signInSuccess.onNext(("Token: \(data)", Role.guest))
+                    case .user:
+                        owner.signInSuccess.onNext(("Token: \(data)", Role.user))
+                    }
+                } else {
+                    print("error", data.error?.message ?? "")
+                    owner.signInFailure.onNext("삭제된 계정입니다.")
                 }
-                
-            case .failure(let error):
-                debugPrint("SignIn Error: \(error.localizedDescription)")
-                self?.signInFailure.onNext("삭제된 계정입니다.")
             }
-        }
+            .disposed(by: disposeBag)
     }
 }
