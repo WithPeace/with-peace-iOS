@@ -12,11 +12,11 @@
 		0080A7D42CD675B5009BEDBD /* PinLayout in Frameworks */ = {isa = PBXBuildFile; productRef = 0080A7D32CD675B5009BEDBD /* PinLayout */; };
 		0080A7D72CD675D0009BEDBD /* FlexLayout in Frameworks */ = {isa = PBXBuildFile; productRef = 0080A7D62CD675D0009BEDBD /* FlexLayout */; };
 		008399F52CD751750024337F /* SocialLoginRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 008399F42CD751750024337F /* SocialLoginRouter.swift */; };
-		008399FA2CD768870024337F /* APIKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 008399F92CD768870024337F /* APIKeys.swift */; };
 		00839A002CD7B67D0024337F /* LoginUsecase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 008399FF2CD7B67D0024337F /* LoginUsecase.swift */; };
 		00839A022CD7B6990024337F /* LoginRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00839A012CD7B6990024337F /* LoginRepository.swift */; };
 		00839A052CD7B6B10024337F /* LoginRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00839A042CD7B6B10024337F /* LoginRouter.swift */; };
 		00839A072CD7B6C30024337F /* NetworkManager2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00839A062CD7B6C30024337F /* NetworkManager2.swift */; };
+		00839A0B2CD7BDDF0024337F /* APIKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00839A0A2CD7BDDF0024337F /* APIKeys.swift */; };
 		6303235D2BAC636700B16E7C /* PostManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6303235C2BAC636700B16E7C /* PostManager.swift */; };
 		630323632BB5590000B16E7C /* ForumPostViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 630323622BB5590000B16E7C /* ForumPostViewCell.swift */; };
 		630323672BBAD26200B16E7C /* ForumCategoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 630323662BBAD26200B16E7C /* ForumCategoryView.swift */; };
@@ -138,11 +138,11 @@
 /* Begin PBXFileReference section */
 		0080A7C12CD6213C009BEDBD /* Secrets.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Secrets.plist; sourceTree = "<group>"; };
 		008399F42CD751750024337F /* SocialLoginRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocialLoginRouter.swift; sourceTree = "<group>"; };
-		008399F92CD768870024337F /* APIKeys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIKeys.swift; sourceTree = "<group>"; };
 		008399FF2CD7B67D0024337F /* LoginUsecase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginUsecase.swift; sourceTree = "<group>"; };
 		00839A012CD7B6990024337F /* LoginRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginRepository.swift; sourceTree = "<group>"; };
 		00839A042CD7B6B10024337F /* LoginRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginRouter.swift; sourceTree = "<group>"; };
 		00839A062CD7B6C30024337F /* NetworkManager2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager2.swift; sourceTree = "<group>"; };
+		00839A0A2CD7BDDF0024337F /* APIKeys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIKeys.swift; sourceTree = "<group>"; };
 		6303235C2BAC636700B16E7C /* PostManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostManager.swift; sourceTree = "<group>"; };
 		630323622BB5590000B16E7C /* ForumPostViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForumPostViewCell.swift; sourceTree = "<group>"; };
 		630323662BBAD26200B16E7C /* ForumCategoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForumCategoryView.swift; sourceTree = "<group>"; };
@@ -681,6 +681,7 @@
 		F69B7FFA2B996845002675CE = {
 			isa = PBXGroup;
 			children = (
+				00839A0A2CD7BDDF0024337F /* APIKeys.swift */,
 				0080A7C12CD6213C009BEDBD /* Secrets.plist */,
 				F69B80052B996846002675CE /* CheongHa */,
 				F69B80042B996846002675CE /* Products */,
@@ -708,7 +709,6 @@
 				F671A9BD2BA00D81002808DA /* Util */,
 				F69B80372B996981002675CE /* Resource */,
 				F69B80142B996847002675CE /* Info.plist */,
-				008399F92CD768870024337F /* APIKeys.swift */,
 			);
 			path = CheongHa;
 			sourceTree = "<group>";
@@ -898,7 +898,6 @@
 				630323632BB5590000B16E7C /* ForumPostViewCell.swift in Sources */,
 				F66959652C3F4E2600644DE9 /* WebViewAssistantViewController.swift in Sources */,
 				F61B51622BECF5B400812C8D /* HomeViewModel.swift in Sources */,
-				008399FA2CD768870024337F /* APIKeys.swift in Sources */,
 				63C52F9D2BA9B83F0072DE18 /* PostViewModel.swift in Sources */,
 				F68C9D242BA2DEDB008CB7E4 /* SocialLoginViewController.swift in Sources */,
 				F6394B9D2C301F9E0092FFB5 /* TermsViewController.swift in Sources */,
@@ -962,6 +961,7 @@
 				F68657422BB415A400821281 /* CustomActionSheetPresentationController.swift in Sources */,
 				633F8E222B9AC37500B92ADC /* KeychainManager.swift in Sources */,
 				F67A64C22C60DD12009572CE /* ExampleViewModel.swift in Sources */,
+				00839A0B2CD7BDDF0024337F /* APIKeys.swift in Sources */,
 				F68719B62BA8707D0049B182 /* CustomAlbumCell.swift in Sources */,
 				63C52F9B2BA9B80D0072DE18 /* PostModel.swift in Sources */,
 				F66C98222BA1F5AD001E121C /* MainTabBarController.swift in Sources */,
