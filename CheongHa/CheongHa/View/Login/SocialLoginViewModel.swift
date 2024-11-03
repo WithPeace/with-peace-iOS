@@ -14,12 +14,18 @@ final class SocialLoginViewModel {
     private let signinManager: AuthenticationProvider
     private let disposeBag = DisposeBag()
     
+    private let socialLoginRouter: SocialLoginRouterProtocol
+    
     let appleLoginSuccess = PublishSubject<String>()
     let signInSuccess: PublishSubject<(token: String, role: Role)> = PublishSubject()
     let signInFailure: PublishSubject<String> = PublishSubject()
     
-    init(googleSigninManager: AuthenticationProvider) {
+    init(
+        googleSigninManager: AuthenticationProvider,
+        socialLoginRouter: SocialLoginRouterProtocol
+    ) {
         self.signinManager = googleSigninManager
+        self.socialLoginRouter = socialLoginRouter
         
         self.appleLoginSuccess.subscribe { id in
             self.signinManager.performAppleLogin(idToken: id) { result in
@@ -47,6 +53,23 @@ extension SocialLoginViewModel {
 
 //MARK: Google Login
 extension SocialLoginViewModel {
+    
+    func routeToGoogleLogin() {
+        socialLoginRouter.routeToGoogleLogin { [weak self] signIn, error in
+            guard let self else { return }
+            
+            if let error = error {
+                debugPrint(error)
+                self.signInFailure.onNext("로그인에 실패했습니다")
+            }
+            
+            guard let signIn = signIn else { return }
+            let user = signIn.user
+            guard let idToken = user.idToken?.tokenString else { return }
+            
+//            self.performGoogleLogin(idToken: idToken)
+        }
+    }
     
     func performGoogleLogin() {
         guard let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,

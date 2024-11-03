@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		00839A0D2CD7C3850024337F /* Secrets.plist in Resources */ = {isa = PBXBuildFile; fileRef = 00839A0C2CD7C3850024337F /* Secrets.plist */; };
 		00839A0F2CD7C3B10024337F /* APIKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00839A0E2CD7C3B10024337F /* APIKeys.swift */; };
+		00839A162CD7C6640024337F /* SocialLoginRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00839A152CD7C6640024337F /* SocialLoginRouter.swift */; };
 		6303235D2BAC636700B16E7C /* PostManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6303235C2BAC636700B16E7C /* PostManager.swift */; };
 		630323632BB5590000B16E7C /* ForumPostViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 630323622BB5590000B16E7C /* ForumPostViewCell.swift */; };
 		630323672BBAD26200B16E7C /* ForumCategoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 630323662BBAD26200B16E7C /* ForumCategoryView.swift */; };
@@ -130,6 +131,7 @@
 /* Begin PBXFileReference section */
 		00839A0C2CD7C3850024337F /* Secrets.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Secrets.plist; sourceTree = "<group>"; };
 		00839A0E2CD7C3B10024337F /* APIKeys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIKeys.swift; sourceTree = "<group>"; };
+		00839A152CD7C6640024337F /* SocialLoginRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocialLoginRouter.swift; sourceTree = "<group>"; };
 		6303235C2BAC636700B16E7C /* PostManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostManager.swift; sourceTree = "<group>"; };
 		630323622BB5590000B16E7C /* ForumPostViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForumPostViewCell.swift; sourceTree = "<group>"; };
 		630323662BBAD26200B16E7C /* ForumCategoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForumCategoryView.swift; sourceTree = "<group>"; };
@@ -260,6 +262,46 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		00839A102CD7C6220024337F /* CleanArchitecture */ = {
+			isa = PBXGroup;
+			children = (
+				00839A112CD7C62E0024337F /* Presentation */,
+				00839A132CD7C6430024337F /* Data */,
+				00839A122CD7C6370024337F /* Domain */,
+			);
+			path = CleanArchitecture;
+			sourceTree = "<group>";
+		};
+		00839A112CD7C62E0024337F /* Presentation */ = {
+			isa = PBXGroup;
+			children = (
+				00839A142CD7C6510024337F /* Login */,
+			);
+			path = Presentation;
+			sourceTree = "<group>";
+		};
+		00839A122CD7C6370024337F /* Domain */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Domain;
+			sourceTree = "<group>";
+		};
+		00839A132CD7C6430024337F /* Data */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Data;
+			sourceTree = "<group>";
+		};
+		00839A142CD7C6510024337F /* Login */ = {
+			isa = PBXGroup;
+			children = (
+				00839A152CD7C6640024337F /* SocialLoginRouter.swift */,
+			);
+			path = Login;
+			sourceTree = "<group>";
+		};
 		630EA2012BA0058600F04ED3 /* Error */ = {
 			isa = PBXGroup;
 			children = (
@@ -601,6 +643,7 @@
 		F69B80052B996846002675CE /* CheongHa */ = {
 			isa = PBXGroup;
 			children = (
+				00839A102CD7C6220024337F /* CleanArchitecture */,
 				F671A9CC2BA059DB002808DA /* Const.swift */,
 				F69B80362B996972002675CE /* App */,
 				F671A9BF2BA00DB2002808DA /* View */,
@@ -859,6 +902,7 @@
 				F667FD882BAC2287005AAAB7 /* CustomPhotoAlbumDetailViewController.swift in Sources */,
 				F65040AE2C208EAC00B14D84 /* ProfileEditViewModel.swift in Sources */,
 				F65FFA9B2C075FAA009A6FB3 /* YouthDetailContentView.swift in Sources */,
+				00839A162CD7C6640024337F /* SocialLoginRouter.swift in Sources */,
 				635BCBB02BA80C7300F0DCBC /* PostNavigationBarView.swift in Sources */,
 				F6F0548C2C0863A800CC7FAF /* YouthDetailSubTitleView.swift in Sources */,
 				635BCBB52BA952C600F0DCBC /* TitleCell.swift in Sources */,
