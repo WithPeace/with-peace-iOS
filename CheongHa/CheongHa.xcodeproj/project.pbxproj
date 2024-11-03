@@ -9,10 +9,14 @@
 /* Begin PBXBuildFile section */
 		0080A7C22CD6213C009BEDBD /* Secrets.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0080A7C12CD6213C009BEDBD /* Secrets.plist */; };
 		0080A7CC2CD65748009BEDBD /* RxMoya in Frameworks */ = {isa = PBXBuildFile; productRef = 0080A7CB2CD65748009BEDBD /* RxMoya */; };
-		0080A7D12CD657E5009BEDBD /* NetworkManager2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0080A7D02CD657E5009BEDBD /* NetworkManager2.swift */; };
 		0080A7D42CD675B5009BEDBD /* PinLayout in Frameworks */ = {isa = PBXBuildFile; productRef = 0080A7D32CD675B5009BEDBD /* PinLayout */; };
 		0080A7D72CD675D0009BEDBD /* FlexLayout in Frameworks */ = {isa = PBXBuildFile; productRef = 0080A7D62CD675D0009BEDBD /* FlexLayout */; };
 		008399F52CD751750024337F /* SocialLoginRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 008399F42CD751750024337F /* SocialLoginRouter.swift */; };
+		008399FA2CD768870024337F /* APIKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 008399F92CD768870024337F /* APIKeys.swift */; };
+		00839A002CD7B67D0024337F /* LoginUsecase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 008399FF2CD7B67D0024337F /* LoginUsecase.swift */; };
+		00839A022CD7B6990024337F /* LoginRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00839A012CD7B6990024337F /* LoginRepository.swift */; };
+		00839A052CD7B6B10024337F /* LoginRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00839A042CD7B6B10024337F /* LoginRouter.swift */; };
+		00839A072CD7B6C30024337F /* NetworkManager2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00839A062CD7B6C30024337F /* NetworkManager2.swift */; };
 		6303235D2BAC636700B16E7C /* PostManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6303235C2BAC636700B16E7C /* PostManager.swift */; };
 		630323632BB5590000B16E7C /* ForumPostViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 630323622BB5590000B16E7C /* ForumPostViewCell.swift */; };
 		630323672BBAD26200B16E7C /* ForumCategoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 630323662BBAD26200B16E7C /* ForumCategoryView.swift */; };
@@ -133,8 +137,12 @@
 
 /* Begin PBXFileReference section */
 		0080A7C12CD6213C009BEDBD /* Secrets.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Secrets.plist; sourceTree = "<group>"; };
-		0080A7D02CD657E5009BEDBD /* NetworkManager2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager2.swift; sourceTree = "<group>"; };
 		008399F42CD751750024337F /* SocialLoginRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocialLoginRouter.swift; sourceTree = "<group>"; };
+		008399F92CD768870024337F /* APIKeys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIKeys.swift; sourceTree = "<group>"; };
+		008399FF2CD7B67D0024337F /* LoginUsecase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginUsecase.swift; sourceTree = "<group>"; };
+		00839A012CD7B6990024337F /* LoginRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginRepository.swift; sourceTree = "<group>"; };
+		00839A042CD7B6B10024337F /* LoginRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginRouter.swift; sourceTree = "<group>"; };
+		00839A062CD7B6C30024337F /* NetworkManager2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager2.swift; sourceTree = "<group>"; };
 		6303235C2BAC636700B16E7C /* PostManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostManager.swift; sourceTree = "<group>"; };
 		630323622BB5590000B16E7C /* ForumPostViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForumPostViewCell.swift; sourceTree = "<group>"; };
 		630323662BBAD26200B16E7C /* ForumCategoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForumCategoryView.swift; sourceTree = "<group>"; };
@@ -276,52 +284,38 @@
 			path = Presentation;
 			sourceTree = "<group>";
 		};
-		0080A7C42CD621A5009BEDBD /* Data */ = {
+		0080A7C42CD621A5009BEDBD /* Entity */ = {
 			isa = PBXGroup;
 			children = (
-				0080A7C62CD621B6009BEDBD /* Repository */,
-				0080A7C72CD63653009BEDBD /* Network */,
+				630EA20C2BA0243800F04ED3 /* SignAuthDTO.swift */,
 			);
-			path = Data;
+			path = Entity;
 			sourceTree = "<group>";
 		};
 		0080A7C52CD621AC009BEDBD /* Domain */ = {
 			isa = PBXGroup;
 			children = (
 				0080A7C82CD63662009BEDBD /* Usecase */,
-				0080A7C42CD621A5009BEDBD /* Data */,
+				0080A7C42CD621A5009BEDBD /* Entity */,
 			);
 			path = Domain;
-			sourceTree = "<group>";
-		};
-		0080A7C62CD621B6009BEDBD /* Repository */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Repository;
-			sourceTree = "<group>";
-		};
-		0080A7C72CD63653009BEDBD /* Network */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Network;
 			sourceTree = "<group>";
 		};
 		0080A7C82CD63662009BEDBD /* Usecase */ = {
 			isa = PBXGroup;
 			children = (
+				008399FF2CD7B67D0024337F /* LoginUsecase.swift */,
 			);
 			path = Usecase;
 			sourceTree = "<group>";
 		};
-		0080A7C92CD6366B009BEDBD /* Entity */ = {
+		0080A7C92CD6366B009BEDBD /* Data */ = {
 			isa = PBXGroup;
 			children = (
 				0080A7CE2CD657BF009BEDBD /* Repository */,
 				0080A7CF2CD657C5009BEDBD /* Network */,
 			);
-			path = Entity;
+			path = Data;
 			sourceTree = "<group>";
 		};
 		0080A7CD2CD657A3009BEDBD /* NewWay */ = {
@@ -329,7 +323,7 @@
 			children = (
 				0080A7C32CD6219C009BEDBD /* Presentation */,
 				0080A7C52CD621AC009BEDBD /* Domain */,
-				0080A7C92CD6366B009BEDBD /* Entity */,
+				0080A7C92CD6366B009BEDBD /* Data */,
 			);
 			path = NewWay;
 			sourceTree = "<group>";
@@ -337,6 +331,7 @@
 		0080A7CE2CD657BF009BEDBD /* Repository */ = {
 			isa = PBXGroup;
 			children = (
+				00839A012CD7B6990024337F /* LoginRepository.swift */,
 			);
 			path = Repository;
 			sourceTree = "<group>";
@@ -344,7 +339,8 @@
 		0080A7CF2CD657C5009BEDBD /* Network */ = {
 			isa = PBXGroup;
 			children = (
-				0080A7D02CD657E5009BEDBD /* NetworkManager2.swift */,
+				00839A032CD7B6AD0024337F /* Routers */,
+				00839A062CD7B6C30024337F /* NetworkManager2.swift */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -355,6 +351,14 @@
 				008399F42CD751750024337F /* SocialLoginRouter.swift */,
 			);
 			path = Login;
+			sourceTree = "<group>";
+		};
+		00839A032CD7B6AD0024337F /* Routers */ = {
+			isa = PBXGroup;
+			children = (
+				00839A042CD7B6B10024337F /* LoginRouter.swift */,
+			);
+			path = Routers;
 			sourceTree = "<group>";
 		};
 		630EA2012BA0058600F04ED3 /* Error */ = {
@@ -550,7 +554,6 @@
 		F671A9C22BA00E4B002808DA /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				630EA20C2BA0243800F04ED3 /* SignAuthDTO.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -705,6 +708,7 @@
 				F671A9BD2BA00D81002808DA /* Util */,
 				F69B80372B996981002675CE /* Resource */,
 				F69B80142B996847002675CE /* Info.plist */,
+				008399F92CD768870024337F /* APIKeys.swift */,
 			);
 			path = CheongHa;
 			sourceTree = "<group>";
@@ -894,6 +898,7 @@
 				630323632BB5590000B16E7C /* ForumPostViewCell.swift in Sources */,
 				F66959652C3F4E2600644DE9 /* WebViewAssistantViewController.swift in Sources */,
 				F61B51622BECF5B400812C8D /* HomeViewModel.swift in Sources */,
+				008399FA2CD768870024337F /* APIKeys.swift in Sources */,
 				63C52F9D2BA9B83F0072DE18 /* PostViewModel.swift in Sources */,
 				F68C9D242BA2DEDB008CB7E4 /* SocialLoginViewController.swift in Sources */,
 				F6394B9D2C301F9E0092FFB5 /* TermsViewController.swift in Sources */,
@@ -905,7 +910,6 @@
 				F65FFA8F2C04C3D3009A6FB3 /* YouthDetailViewController.swift in Sources */,
 				F6833FF92C00ACB10099F1DA /* YouthFilterData.swift in Sources */,
 				F61B51602BEB799000812C8D /* YouthListCell.swift in Sources */,
-				0080A7D12CD657E5009BEDBD /* NetworkManager2.swift in Sources */,
 				F6BEDA8E2C1DD2BD00BD770A /* PostAPIRepository.swift in Sources */,
 				F671A9BB2BA00D4A002808DA /* Bundle+.swift in Sources */,
 				630323732BC7D68200B16E7C /* ImageDetailCollectionViewCell.swift in Sources */,
@@ -931,6 +935,8 @@
 				635BCBB72BA952F000F0DCBC /* DescriptionCell.swift in Sources */,
 				F68719B32BA867FE0049B182 /* UICollectionViewLayout+.swift in Sources */,
 				F671A9C62BA00FD7002808DA /* EndPoint.swift in Sources */,
+				00839A052CD7B6B10024337F /* LoginRouter.swift in Sources */,
+				00839A022CD7B6990024337F /* LoginRepository.swift in Sources */,
 				F69B80072B996846002675CE /* AppDelegate.swift in Sources */,
 				F671A9CD2BA059DB002808DA /* Const.swift in Sources */,
 				F65040A22C20750C00B14D84 /* PostDTO.swift in Sources */,
@@ -942,6 +948,7 @@
 				F65040AF2C208EAC00B14D84 /* ProfileEditViewController.swift in Sources */,
 				635BCBAE2BA7E72A00F0DCBC /* PostViewController.swift in Sources */,
 				008399F52CD751750024337F /* SocialLoginRouter.swift in Sources */,
+				00839A072CD7B6C30024337F /* NetworkManager2.swift in Sources */,
 				F68C9D6E2BA5E291008CB7E4 /* ToastMessageView.swift in Sources */,
 				F671A9C42BA00FBA002808DA /* NetworkManager.swift in Sources */,
 				F68719B12BA8635C0049B182 /* CustomPhotoAlbumViewController.swift in Sources */,
@@ -970,6 +977,7 @@
 				F6833FF72BFE24130099F1DA /* YouthFilterHeaderView.swift in Sources */,
 				F6B5B4082BBBFDA2000C8494 /* ProfileETCView.swift in Sources */,
 				F65FFA912C04C71C009A6FB3 /* YouthDetailHeaderView.swift in Sources */,
+				00839A002CD7B67D0024337F /* LoginUsecase.swift in Sources */,
 				F671A9CA2BA0174E002808DA /* NetworkError.swift in Sources */,
 				630EA20F2BA0277800F04ED3 /* SignRepository.swift in Sources */,
 				F65040A42C20759A00B14D84 /* ProfileDTO.swift in Sources */,
@@ -1158,7 +1166,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = S9SM8UDTPN;
+				DEVELOPMENT_TEAM = 59V6NJY3X6;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = CheongHa/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "청하";
@@ -1168,13 +1176,14 @@
 				INFOPLIST_KEY_UIRequiresFullScreen = YES;
 				INFOPLIST_KEY_UIStatusBarStyle = "";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UIUserInterfaceStyle = Light;
 				IPHONEOS_DEPLOYMENT_TARGET = 15.2;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.cheongha.cheongha;
+				PRODUCT_BUNDLE_IDENTIFIER = com.cheongha.cheonghaTest;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
@@ -1196,7 +1205,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = S9SM8UDTPN;
+				DEVELOPMENT_TEAM = 59V6NJY3X6;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = CheongHa/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "청하";
@@ -1206,13 +1215,14 @@
 				INFOPLIST_KEY_UIRequiresFullScreen = YES;
 				INFOPLIST_KEY_UIStatusBarStyle = "";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UIUserInterfaceStyle = Light;
 				IPHONEOS_DEPLOYMENT_TARGET = 15.2;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.cheongha.cheongha;
+				PRODUCT_BUNDLE_IDENTIFIER = com.cheongha.cheonghaTest;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";

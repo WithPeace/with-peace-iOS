@@ -119,7 +119,8 @@ final class SocialLoginViewController: UIViewController {
     
     private var viewModel = SocialLoginViewModel(
         googleSigninManager: SignRepository(),
-        socialLoginRouter: SocialLoginRouter()
+        socialLoginRouter: SocialLoginRouter(),
+        loginUsecase: LoginUsecase(loginRepository: LoginRepository(network: NetworkManager2()))
     )
     private let disposeBag = DisposeBag()
     
@@ -201,7 +202,6 @@ extension SocialLoginViewController {
     private func bindViewModel() {
         googleLoginButton.rx.tap
             .subscribe(onNext: { [weak self] _ in
-//                self?.viewModel.performGoogleLogin()
                 self?.viewModel.routeToGoogleLogin()
             })
             .disposed(by: disposeBag)
