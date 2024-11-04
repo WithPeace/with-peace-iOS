@@ -10,6 +10,7 @@ import Moya
 
 enum LoginRouter {
     case googleSocialLogin(idToken: String)
+    case appleSocialLogin(idToken: String)
 }
 
 extension LoginRouter: TargetType {
@@ -21,19 +22,21 @@ extension LoginRouter: TargetType {
         switch self {
         case .googleSocialLogin:
             return "/auth/google"
+        case .appleSocialLogin:
+            return "/auth/apple"
         }
     }
     
     var method: Moya.Method {
         switch self {
-        case .googleSocialLogin:
+        case .googleSocialLogin, .appleSocialLogin:
             return .post
         }
     }
     
     var task: Moya.Task {
         switch self {
-        case .googleSocialLogin:
+        case .googleSocialLogin, .appleSocialLogin:
             return .requestPlain
         }
     }
@@ -41,6 +44,8 @@ extension LoginRouter: TargetType {
     var headers: [String : String]? {
         switch self {
         case .googleSocialLogin(let idToken):
+            return ["Authorization" : "Bearer \(idToken)"]
+        case .appleSocialLogin(let idToken):
             return ["Authorization" : "Bearer \(idToken)"]
         }
     }

@@ -32,25 +32,43 @@ final class SocialLoginViewModel: NSObject {
         
         super.init()
 
-        self.appleLoginSuccess.subscribe { [weak self] id in
-            guard let self else { return }
-            
-            signinManager.performAppleLogin(idToken: id) { result in
-                switch result {
-                case .success(let data):
-                    guard let role = data.data.role else { return }
-                    
-                    switch role {
-                    case .guest:
-                        self.signInSuccess.onNext(("Token: \(data)", Role.guest))
-                    case .user:
-                        self.signInSuccess.onNext(("Token: \(data)", Role.user))
-                    }
-                case .failure(let error):
-                    print(error)
+        self.appleLoginSuccess
+            .withUnretained(self)
+            .flatMap { owner, idToken in
+                owner.loginUsecase
+                    .performAppleLogin(idToken: idToken)
+            }
+            .subscribe { data in
+                guard let role = data.data.role else { return }
+                
+                switch role {
+                case .guest:
+                    self.signInSuccess.onNext(("Token: \(data)", Role.guest))
+                case .user:
+                    self.signInSuccess.onNext(("Token: \(data)", Role.user))
                 }
             }
-        }.disposed(by: disposeBag)
+            .disposed(by: disposeBag)
+        
+//        self.appleLoginSuccess.subscribe { [weak self] id in
+//            guard let self else { return }
+//            
+//            signinManager.performAppleLogin(idToken: id) { result in
+//                switch result {
+//                case .success(let data):
+//                    guard let role = data.data.role else { return }
+//                    
+//                    switch role {
+//                    case .guest:
+//                        self.signInSuccess.onNext(("Token: \(data)", Role.guest))
+//                    case .user:
+//                        self.signInSuccess.onNext(("Token: \(data)", Role.user))
+//                    }
+//                case .failure(let error):
+//                    print(error)
+//                }
+//            }
+//        }.disposed(by: disposeBag)
     }
 }
 

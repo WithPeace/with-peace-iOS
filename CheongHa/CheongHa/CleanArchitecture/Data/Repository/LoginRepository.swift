@@ -11,6 +11,7 @@ import RxSwift
 
 protocol LoginRepositoryProtocol {
     func performGoogleLogin(api: LoginRouter) -> Single<SignAuthDTO>
+    func performAppleLogin(api: LoginRouter) -> Single<SignAuthDTO>
 }
 
 final class LoginRepository: LoginRepositoryProtocol {
@@ -22,6 +23,12 @@ final class LoginRepository: LoginRepositoryProtocol {
     }
     
     func performGoogleLogin(api: LoginRouter) -> Single<SignAuthDTO> {
+        network
+            .reqeust(api)
+            .map(SignAuthDTO.self)
+    }
+    
+    func performAppleLogin(api: LoginRouter) -> Single<SignAuthDTO> {
         network
             .reqeust(api)
             .map(SignAuthDTO.self)
