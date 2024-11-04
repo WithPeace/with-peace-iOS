@@ -272,6 +272,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		005E85A52CD8B36800029F7C /* Keychain */ = {
+			isa = PBXGroup;
+			children = (
+				633F8E212B9AC37500B92ADC /* KeychainManager.swift */,
+			);
+			path = Keychain;
+			sourceTree = "<group>";
+		};
 		00839A102CD7C6220024337F /* CleanArchitecture */ = {
 			isa = PBXGroup;
 			children = (
@@ -303,6 +311,7 @@
 			isa = PBXGroup;
 			children = (
 				00839A172CD7C7880024337F /* Repository */,
+				005E85A52CD8B36800029F7C /* Keychain */,
 				00839A182CD7C78D0024337F /* Network */,
 			);
 			path = Data;
@@ -455,7 +464,6 @@
 			isa = PBXGroup;
 			children = (
 				F69B80462B9A0D1B002675CE /* GoogleSignInManager.swift */,
-				633F8E212B9AC37500B92ADC /* KeychainManager.swift */,
 				6303235C2BAC636700B16E7C /* PostManager.swift */,
 			);
 			path = OtherManager;

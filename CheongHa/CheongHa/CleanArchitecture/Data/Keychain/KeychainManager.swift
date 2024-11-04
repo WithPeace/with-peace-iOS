@@ -12,7 +12,14 @@ enum KeychainError: Error {
     case unkown(OSStatus)
 }
 
-final class KeychainManager {
+protocol KeychainManagerProtocol {
+    func save(account: String, password: Data) throws
+    func update(account: String, password: Data) throws
+    func get(account: String) -> Data?
+    func delete(account: String)
+}
+
+final class KeychainManager: KeychainManagerProtocol {
     
     //TODO: 키체인저장
     func save(account: String, password: Data) throws {

@@ -26,7 +26,7 @@ final class LoginUsecase: LoginUsecaseProtocol {
     }
     
     func performAppleLogin(idToken: String) -> Single<SignAuthDTO> {
-        return loginRepository.performAppleLogin(api: .googleSocialLogin(idToken: idToken))
+        return loginRepository.performAppleLogin(api: .appleSocialLogin(idToken: idToken))
     }
 }
 
