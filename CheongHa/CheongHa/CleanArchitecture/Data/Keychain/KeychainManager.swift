@@ -12,7 +12,7 @@ enum KeychainError: Error {
     case unkown(OSStatus)
 }
 
-protocol KeychainManagerProtocol {
+protocol KeychainManagerProtocol: Sendable {
     func save(account: String, password: Data) throws
     func update(account: String, password: Data) throws
     func get(account: String) -> Data?

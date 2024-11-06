@@ -9,7 +9,7 @@ import Foundation
 import Moya
 import RxSwift
 
-protocol NetworkManagerProtocol {
+protocol NetworkManagerProtocol: Sendable {
     func reqeust<Target: TargetType>(_ target: Target) -> Single<Response>
 }
 
@@ -20,7 +20,9 @@ final class CleanNetworkManager: NetworkManagerProtocol {
     }
     
     private func performReqeust<Target: TargetType>(_ target: Target) -> Single<Response> {
-        let provider = MoyaProvider<Target>()
+        let session = Session(interceptor: AuthInterceptor.shared)
+        let provider = MoyaProvider<Target>(session: session)
+        
         return Single<Response>.create { [weak self] singleObserver in
             guard self != nil else { return Disposables.create() }
             provider.request(target) { result in

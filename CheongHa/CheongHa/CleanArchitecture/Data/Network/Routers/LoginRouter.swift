@@ -8,15 +8,14 @@
 import Foundation
 import Moya
 
+// TODO: 이름 변경 LoginRouter -> AuthRouter
 enum LoginRouter {
     case googleSocialLogin(idToken: String)
     case appleSocialLogin(idToken: String)
+    case refreshToken
 }
 
-extension LoginRouter: TargetType {
-    var baseURL: URL {
-        return URL(string: APIKeys.baseURL)!
-    }
+extension LoginRouter: BaseTargetType {
     
     var path: String {
         switch self {
@@ -24,19 +23,21 @@ extension LoginRouter: TargetType {
             return "/auth/google"
         case .appleSocialLogin:
             return "/auth/apple"
+        case .refreshToken:
+            return "/auth/refresh"
         }
     }
     
     var method: Moya.Method {
         switch self {
-        case .googleSocialLogin, .appleSocialLogin:
+        case .googleSocialLogin, .appleSocialLogin, .refreshToken:
             return .post
         }
     }
     
     var task: Moya.Task {
         switch self {
-        case .googleSocialLogin, .appleSocialLogin:
+        case .googleSocialLogin, .appleSocialLogin, .refreshToken:
             return .requestPlain
         }
     }
@@ -47,7 +48,8 @@ extension LoginRouter: TargetType {
             return ["Authorization" : "Bearer \(idToken)"]
         case .appleSocialLogin(let idToken):
             return ["Authorization" : "Bearer \(idToken)"]
+        case .refreshToken:
+            return nil
         }
     }
 }
-
