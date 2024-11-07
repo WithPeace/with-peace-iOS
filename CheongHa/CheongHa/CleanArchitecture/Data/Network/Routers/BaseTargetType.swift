@@ -19,6 +19,12 @@ extension BaseTargetType {
     }
     
     var headers: [String : String]? {
-        return nil
+        let keyChainManager = KeychainManager()
+        guard let keyChainAccessToken = keyChainManager.get(account: "accessToken"),
+              let accessToken = String(data: keyChainAccessToken, encoding: .utf8)
+        else { return nil }
+
+        print("accessToken: \(accessToken)")
+        return ["Authorization": "Bearer \(accessToken)"]
     }
 }

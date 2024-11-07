@@ -17,7 +17,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         guard let windowScene = (scene as? UIWindowScene) else { return }
         
-        self.window  = UIWindow(windowScene: windowScene)
+        self.window = UIWindow(windowScene: windowScene)
         
         let keychain = KeychainManager()
         let network = CleanNetworkManager()
@@ -25,7 +25,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         let profileUsecase = ProfileUsecase(profileRepository: profileRepository)
         let appViewModel = AppViewModel(profileUsecase: profileUsecase)
         
-        bind(appViewModel: appViewModel)
+        // Launch Screen 보여주면서 데이터를 받아오지 못한다면 사용할 수 없도록 구현 -> indicatorView 구현 + Due Time 구현
+        bind(viewModel: appViewModel)
     }
     
     func sceneDidDisconnect(_ scene: UIScene) {
@@ -68,23 +69,27 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         window.rootViewController = navigationController
     }
     
-    func bind(appViewModel: AppViewModel) {
+    func bind(viewModel: AppViewModel) {
         let input = AppViewModel.Input(initializeApp: Observable.just(()))
-        let output = appViewModel.transform(input: input)
+        let output = viewModel.transform(input: input)
         output.profile
             .drive(with: self) { owner, profile in
                 if profile.error == nil {
                     print(profile.data)
                     print("로그인 성공")
-                    let tabBarController = MainTabbarController()
-                    owner.window?.rootViewController = tabBarController
+                    DispatchQueue.main.async {
+                        let tabBarController = MainTabbarController()
+                        owner.window?.rootViewController = tabBarController
+                    }
                 } else {
                     print(profile.error)
                     print("로그인 에러")
-                    let socialLoginViewController = SocialLoginViewController()
-                    let navigationController = UINavigationController(rootViewController: socialLoginViewController)
-                    
-                    owner.window?.rootViewController = navigationController
+                    DispatchQueue.main.async {
+                        let socialLoginViewController = SocialLoginViewController()
+                        let navigationController = UINavigationController(rootViewController: socialLoginViewController)
+                        
+                        owner.window?.rootViewController = navigationController
+                    }
                 }
                 owner.window?.makeKeyAndVisible()
             }
