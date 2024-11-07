@@ -39,7 +39,7 @@ final class SocialLoginViewModel: NSObject {
                     .performAppleLogin(idToken: idToken)
             }
             .subscribe { data in
-                guard let role = data.data.role else { return }
+                guard let role = data.data?.role else { return }
                 
                 switch role {
                 case .guest:
@@ -77,7 +77,7 @@ extension SocialLoginViewModel {
             .performGoogleLogin(idToken: idToken)
             .subscribe(with: self) { owner, data in
                 if data.error == nil {
-                    guard let role = data.data.role else { return }
+                    guard let role = data.data?.role else { return }
                     switch role {
                     case .guest:
                         owner.signInSuccess.onNext(("Token: \(data)", Role.guest))

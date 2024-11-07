@@ -18,10 +18,6 @@ extension BaseTargetType {
         return URL(string: APIKeys.baseURL)!
     }
     
-    var validationType: ValidationType {
-        return .successCodes
-    }
-    
     var headers: [String : String]? {
         return nil
     }

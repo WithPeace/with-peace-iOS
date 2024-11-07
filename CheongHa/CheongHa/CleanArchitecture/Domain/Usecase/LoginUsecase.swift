@@ -9,8 +9,8 @@ import Foundation
 import RxSwift
 
 protocol LoginUsecaseProtocol {
-    func performGoogleLogin(idToken: String) -> Single<SignAuthDTO>
-    func performAppleLogin(idToken: String) -> Single<SignAuthDTO>
+    func performGoogleLogin(idToken: String) -> Single<SocialLoginDTO>
+    func performAppleLogin(idToken: String) -> Single<SocialLoginDTO>
 }
 
 final class LoginUsecase: LoginUsecaseProtocol {
@@ -21,11 +21,11 @@ final class LoginUsecase: LoginUsecaseProtocol {
         self.loginRepository = loginRepository
     }
     
-    func performGoogleLogin(idToken: String) -> Single<SignAuthDTO> {
+    func performGoogleLogin(idToken: String) -> Single<SocialLoginDTO> {
         return loginRepository.performGoogleLogin(api: .googleSocialLogin(idToken: idToken))
     }
     
-    func performAppleLogin(idToken: String) -> Single<SignAuthDTO> {
+    func performAppleLogin(idToken: String) -> Single<SocialLoginDTO> {
         return loginRepository.performAppleLogin(api: .appleSocialLogin(idToken: idToken))
     }
 }
