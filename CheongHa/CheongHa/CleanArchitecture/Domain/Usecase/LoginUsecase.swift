@@ -29,5 +29,3 @@ final class LoginUsecase: LoginUsecaseProtocol {
         return loginRepository.performAppleLogin(api: .appleSocialLogin(idToken: idToken))
     }
 }
-
-

@@ -9,6 +9,7 @@ import Foundation
 import RxMoya
 import RxSwift
 
+// TODO: 명칭 변경 Login -> Auth
 protocol LoginRepositoryProtocol {
     func performGoogleLogin(api: LoginRouter) -> Single<SocialLoginDTO>
     func performAppleLogin(api: LoginRouter) -> Single<SocialLoginDTO>
