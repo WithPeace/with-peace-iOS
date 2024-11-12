@@ -11,7 +11,7 @@ final class MainTabbarController: UITabBarController {
     private let tabBarConstant = Const.CustomIcon.ICNavigationTabbar.self
     private var beforeSelectedTag: Int = 0
     
-    private let homeViewController = UINavigationController(rootViewController: HomeViewController())
+    private let youthPolicyViewController = UINavigationController(rootViewController: YouthPolicyViewController())
     private let forumViewController = BlankPageViewController()
     private let registBlankViewController = BlankPageViewController()
     private let myPageViewController = UINavigationController(rootViewController: MyPageViewController())
@@ -27,26 +27,26 @@ final class MainTabbarController: UITabBarController {
     }
     
     private func configureTabbarContents() {
-        setViewControllers([homeViewController,
+        setViewControllers([youthPolicyViewController,
                             forumViewController,
                             registBlankViewController,
                             myPageViewController], animated: true)
         
-        homeViewController.tabBarItem.image = UIImage(named: tabBarConstant.icHome)
+        youthPolicyViewController.tabBarItem.image = UIImage(named: tabBarConstant.icHome)
         forumViewController.tabBarItem.image = UIImage(named: tabBarConstant.icBoard)
         registBlankViewController.tabBarItem.image = UIImage(named: tabBarConstant.icRegist)
         myPageViewController.tabBarItem.image = UIImage(named: tabBarConstant.icMypage)
         
-        homeViewController.tabBarItem.selectedImage = UIImage(named: tabBarConstant.icHomeSelect)
+        youthPolicyViewController.tabBarItem.selectedImage = UIImage(named: tabBarConstant.icHomeSelect)
 //        forumViewController.tabBarItem.selectedImage = UIImage(named: tabBarConstant.icBoardSelect)
         myPageViewController.tabBarItem.selectedImage = UIImage(named: tabBarConstant.icMypageSelect)
         
-        homeViewController.tabBarItem.title = "홈"
+        youthPolicyViewController.tabBarItem.title = "홈"
         forumViewController.tabBarItem.title = "게시판"
         registBlankViewController.tabBarItem.title = "등록"
         myPageViewController.tabBarItem.title = "마이페이지"
         
-        homeViewController.tabBarItem.tag = 0
+        youthPolicyViewController.tabBarItem.tag = 0
         forumViewController.tabBarItem.tag = 1
         registBlankViewController.tabBarItem.tag = 2
         myPageViewController.tabBarItem.tag = 3

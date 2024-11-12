@@ -65,7 +65,6 @@ final class YouthCenterRepository: NSObject {
                                 port: nil,
                                 queryItems: urlQueryItem,
                                 method: .get)
-        
         NetworkManager.shared.fetchData(endpoint: endpoint) { result in
             switch result {
             case .success(let data):

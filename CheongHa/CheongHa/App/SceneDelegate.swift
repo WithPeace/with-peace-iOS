@@ -19,14 +19,17 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         self.window = UIWindow(windowScene: windowScene)
         
-        let keychain = KeychainManager()
-        let network = CleanNetworkManager()
-        let profileRepository = CleanProfileRepository(keychain: keychain, network: network)
-        let profileUsecase = ProfileUsecase(profileRepository: profileRepository)
-        let appViewModel = AppViewModel(profileUsecase: profileUsecase)
+        window?.rootViewController = HomeViewController()
+        window?.makeKeyAndVisible()
         
-        // Launch Screen 보여주면서 데이터를 받아오지 못한다면 사용할 수 없도록 구현 -> indicatorView 구현 + Due Time 구현
-        bind(viewModel: appViewModel)
+//        let keychain = KeychainManager()
+//        let network = CleanNetworkManager()
+//        let profileRepository = CleanProfileRepository(keychain: keychain, network: network)
+//        let profileUsecase = ProfileUsecase(profileRepository: profileRepository)
+//        let appViewModel = AppViewModel(profileUsecase: profileUsecase)
+//        
+//        // Launch Screen 보여주면서 데이터를 받아오지 못한다면 사용할 수 없도록 구현 -> indicatorView 구현 + Due Time 구현
+//        bind(viewModel: appViewModel)
     }
     
     func sceneDidDisconnect(_ scene: UIScene) {

@@ -1,5 +1,5 @@
 //
-//  HomeViewModel.swift
+//  YouthPolicyViewModel.swift
 //  WithPeace
 //
 //  Created by Dylan_Y on 5/9/24.
@@ -9,7 +9,7 @@ import Foundation
 import RxSwift
 
 //TODO: Page Index 관리에 대한 고민
-final class HomeViewModel {
+final class YouthPolicyViewModel {
     private let youthCenterRepository = YouthCenterRepository()
     
     private let disposeBag = DisposeBag()
@@ -39,8 +39,8 @@ final class HomeViewModel {
         refreshAction = refreshing.asObserver()
         
         //최초 진입 시 데이터 fetch
-        self.youthCenterRepository.perform(display: fetchDisplayDataCount,
-                                           pageIndex: nowPageIndex,
+        self.youthCenterRepository.perform(display: fetchDisplayDataCount, // 10
+                                           pageIndex: nowPageIndex, // 1
                                            srchPolicyId: nil,
                                            query: nil,
                                            bizTycdSel: nil,
