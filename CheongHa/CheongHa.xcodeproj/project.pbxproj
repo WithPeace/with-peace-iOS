@@ -330,9 +330,155 @@
 			path = Keychain;
 			sourceTree = "<group>";
 		};
+		006E63752CE87EC200CF2F45 /* Sections */ = {
+			isa = PBXGroup;
+			children = (
+				006E63762CE87EDF00CF2F45 /* MyKeywords */,
+				006E63792CE87F3E00CF2F45 /* HotPolicy */,
+				006E637A2CE87F5400CF2F45 /* PolicyRecommendationCollection */,
+				006E637B2CE87F6A00CF2F45 /* Coummunity */,
+			);
+			path = Sections;
+			sourceTree = "<group>";
+		};
+		006E63762CE87EDF00CF2F45 /* MyKeywords */ = {
+			isa = PBXGroup;
+			children = (
+				00C2A5262CE395B100EFF471 /* Header */,
+				006E637C2CE87F8800CF2F45 /* CustomCell */,
+			);
+			path = MyKeywords;
+			sourceTree = "<group>";
+		};
+		006E63772CE87F2800CF2F45 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				006E63832CE87FDE00CF2F45 /* Protocols */,
+				006E63782CE87F2E00CF2F45 /* Extensions */,
+			);
+			path = Utils;
+			sourceTree = "<group>";
+		};
+		006E63782CE87F2E00CF2F45 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				00C2A5202CE3607300EFF471 /* UICollectionViewCell+Ext.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		006E63792CE87F3E00CF2F45 /* HotPolicy */ = {
+			isa = PBXGroup;
+			children = (
+				006E637D2CE87FA100CF2F45 /* Header */,
+				006E637E2CE87FA600CF2F45 /* CustomCell */,
+			);
+			path = HotPolicy;
+			sourceTree = "<group>";
+		};
+		006E637A2CE87F5400CF2F45 /* PolicyRecommendationCollection */ = {
+			isa = PBXGroup;
+			children = (
+				006E637F2CE87FAE00CF2F45 /* Header */,
+				006E63802CE87FB100CF2F45 /* CustomCell */,
+			);
+			path = PolicyRecommendationCollection;
+			sourceTree = "<group>";
+		};
+		006E637B2CE87F6A00CF2F45 /* Coummunity */ = {
+			isa = PBXGroup;
+			children = (
+				006E63812CE87FB700CF2F45 /* Header */,
+				006E63822CE87FBB00CF2F45 /* CustomCell */,
+			);
+			path = Coummunity;
+			sourceTree = "<group>";
+		};
+		006E637C2CE87F8800CF2F45 /* CustomCell */ = {
+			isa = PBXGroup;
+			children = (
+				00C2A51E2CE3601200EFF471 /* MyKeywordsCollectionViewCell.swift */,
+			);
+			path = CustomCell;
+			sourceTree = "<group>";
+		};
+		006E637D2CE87FA100CF2F45 /* Header */ = {
+			isa = PBXGroup;
+			children = (
+				00C2A5272CE396B400EFF471 /* HotPolicyHeader.swift */,
+			);
+			path = Header;
+			sourceTree = "<group>";
+		};
+		006E637E2CE87FA600CF2F45 /* CustomCell */ = {
+			isa = PBXGroup;
+			children = (
+				00C2A5192CE3389200EFF471 /* HotPolicyCollectionViewCell.swift */,
+			);
+			path = CustomCell;
+			sourceTree = "<group>";
+		};
+		006E637F2CE87FAE00CF2F45 /* Header */ = {
+			isa = PBXGroup;
+			children = (
+				00C2A5292CE3973800EFF471 /* PolicyRecommendationHeader.swift */,
+			);
+			path = Header;
+			sourceTree = "<group>";
+		};
+		006E63802CE87FB100CF2F45 /* CustomCell */ = {
+			isa = PBXGroup;
+			children = (
+				00C2A5222CE360EF00EFF471 /* PolicyRecommendationCollectionViewCell.swift */,
+			);
+			path = CustomCell;
+			sourceTree = "<group>";
+		};
+		006E63812CE87FB700CF2F45 /* Header */ = {
+			isa = PBXGroup;
+			children = (
+				00C2A52B2CE3974D00EFF471 /* CommunityHeader.swift */,
+			);
+			path = Header;
+			sourceTree = "<group>";
+		};
+		006E63822CE87FBB00CF2F45 /* CustomCell */ = {
+			isa = PBXGroup;
+			children = (
+				00C2A5242CE3610400EFF471 /* CommunityCollectionViewCell.swift */,
+			);
+			path = CustomCell;
+			sourceTree = "<group>";
+		};
+		006E63832CE87FDE00CF2F45 /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+				00DE3F4B2CDCDA2A00CAC3D8 /* ViewModelType.swift */,
+			);
+			path = Protocols;
+			sourceTree = "<group>";
+		};
+		006E63842CE87FF600CF2F45 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				00B683922CE1F640005110D2 /* HomeViewController.swift */,
+				006E63752CE87EC200CF2F45 /* Sections */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		006E63852CE87FFC00CF2F45 /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				00B683A52CE1F90B005110D2 /* HomeViewModel.swift */,
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
 		00839A102CD7C6220024337F /* CleanArchitecture */ = {
 			isa = PBXGroup;
 			children = (
+				006E63772CE87F2800CF2F45 /* Utils */,
 				00839A112CD7C62E0024337F /* Presentation */,
 				00839A122CD7C6370024337F /* Domain */,
 				00839A132CD7C6430024337F /* Data */,
@@ -426,32 +572,15 @@
 		00B683912CE1F62C005110D2 /* Home */ = {
 			isa = PBXGroup;
 			children = (
-				00B683922CE1F640005110D2 /* HomeViewController.swift */,
-				00B683A52CE1F90B005110D2 /* HomeViewModel.swift */,
-				00C2A5262CE395B100EFF471 /* Header */,
-				00C2A51D2CE35FE600EFF471 /* HomeCollectionViewCell */,
+				006E63842CE87FF600CF2F45 /* Views */,
+				006E63852CE87FFC00CF2F45 /* ViewModels */,
 			);
 			path = Home;
-			sourceTree = "<group>";
-		};
-		00C2A51D2CE35FE600EFF471 /* HomeCollectionViewCell */ = {
-			isa = PBXGroup;
-			children = (
-				00C2A5202CE3607300EFF471 /* UICollectionViewCell+Ext.swift */,
-				00C2A51E2CE3601200EFF471 /* MyKeywordsCollectionViewCell.swift */,
-				00C2A5192CE3389200EFF471 /* HotPolicyCollectionViewCell.swift */,
-				00C2A5222CE360EF00EFF471 /* PolicyRecommendationCollectionViewCell.swift */,
-				00C2A5242CE3610400EFF471 /* CommunityCollectionViewCell.swift */,
-			);
-			path = HomeCollectionViewCell;
 			sourceTree = "<group>";
 		};
 		00C2A5262CE395B100EFF471 /* Header */ = {
 			isa = PBXGroup;
 			children = (
-				00C2A5272CE396B400EFF471 /* HotPolicyHeader.swift */,
-				00C2A5292CE3973800EFF471 /* PolicyRecommendationHeader.swift */,
-				00C2A52B2CE3974D00EFF471 /* CommunityHeader.swift */,
 			);
 			path = Header;
 			sourceTree = "<group>";
@@ -831,7 +960,6 @@
 				F69B80062B996846002675CE /* AppDelegate.swift */,
 				F69B80082B996846002675CE /* SceneDelegate.swift */,
 				00DE3F492CDCD91F00CAC3D8 /* AppViewModel.swift */,
-				00DE3F4B2CDCDA2A00CAC3D8 /* ViewModelType.swift */,
 			);
 			path = App;
 			sourceTree = "<group>";
