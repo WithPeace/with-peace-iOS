@@ -10,103 +10,6 @@ import SnapKit
 import RxSwift
 import RxCocoa
 
-enum HomeSection: Int, CaseIterable {
-    case myKeywords
-    case hotPolicy
-    case policyRecommendation
-    case community
-}
-
-enum HomeSectionItem: Hashable {
-    case myKeywords(data: HomeSectionItemDataCollection)
-    case hotPolicy(data: HomeSectionItemDataCollection)
-    case policyRecommendation(data: HomeSectionItemDataCollection)
-    case community(data: HomeSectionItemDataCollection)
-    
-    var data: HomeSectionItemDataCollection {
-        switch self {
-        case .myKeywords(let data):
-            return data
-        case .hotPolicy(let data):
-            return data
-        case .policyRecommendation(let data):
-            return data
-        case .community(let data):
-            return data
-        }
-    }
-}
-
-struct HomeSectionItemDataCollection: Hashable {
-    var myKeywordsData: MyKeywordsData
-    var hotPolicyData: HotPolicyData
-    var policyRecommendationData: PolicyRecommendationData
-    var communityData: CommunityData
-    
-    init(
-        myKeywordsData: MyKeywordsData = .init(),
-        hotPolicyData: HotPolicyData = .init(),
-        policyRecommendationData: PolicyRecommendationData = .init(),
-        communityData: CommunityData = .init()
-    ) {
-        self.myKeywordsData = myKeywordsData
-        self.hotPolicyData = hotPolicyData
-        self.policyRecommendationData = policyRecommendationData
-        self.communityData = communityData
-    }
-    
-    struct MyKeywordsData: Identifiable, Hashable {
-        let id = UUID()
-        var keywords: [String]
-        
-        init(keywords: [String] = []) {
-            self.keywords = keywords
-        }
-    }
-    
-    struct HotPolicyData: Identifiable, Hashable {
-        let id = UUID()
-        var thumnail: String
-        var description: String
-        
-        init(
-            thumnail: String = "",
-            description: String = ""
-        ) {
-            self.thumnail = thumnail
-            self.description = description
-        }
-    }
-    
-    struct PolicyRecommendationData: Identifiable, Hashable {
-        let id = UUID()
-        var thumnail: String
-        var description: String
-        
-        init(
-            thumnail: String = "",
-            description: String = ""
-        ) {
-            self.thumnail = thumnail
-            self.description = description
-        }
-    }
-    
-    struct CommunityData: Identifiable, Hashable {
-        let id = UUID()
-        var title: String
-        var recentPostTitle: String
-        
-        init(
-            title: String = "",
-            recentPostTitle: String = ""
-        ) {
-            self.title = title
-            self.recentPostTitle = recentPostTitle
-        }
-    }
-}
-
 final class HomeViewController: UIViewController {
     
     private lazy var collectionView = UICollectionView(frame: .zero, collectionViewLayout: configureCollectionViewLayout())
@@ -132,8 +35,19 @@ final class HomeViewController: UIViewController {
         cellRegistration()
         
         snapshot.appendSections(HomeSection.allCases)
-        let temp: HomeSectionItem = .myKeywords(data: .init(myKeywordsData: .init(keywords: ["1", "2", "3"])))
-        update(section: .myKeywords, items: [temp])
+        update(section: .myKeywords, items: [
+            .myKeywords(data: .init(myKeywordsData: "#DeclarativeUI")),
+            .myKeywords(data: .init(myKeywordsData: "UIKit")),
+            .myKeywords(data: .init(myKeywordsData: "#ModernConcurrency")),
+            .myKeywords(data: .init(myKeywordsData: "#SwiftUI")),
+            .myKeywords(data: .init(myKeywordsData: "#CoreData")),
+            .myKeywords(data: .init(myKeywordsData: "#Combine")),
+            .myKeywords(data: .init(myKeywordsData: "#Combine")),
+            .myKeywords(data: .init(myKeywordsData: "#Combine")),
+            .myKeywords(data: .init(myKeywordsData: "#Combine")),
+            .myKeywords(data: .init(myKeywordsData: "#Combine")),
+            .myKeywords(data: .init(myKeywordsData: "#Combine")),
+        ])
         update(section: .hotPolicy, items: [
             .hotPolicy(data: .init(hotPolicyData: .init(thumnail: "1", description: "@"))),
             .hotPolicy(data: .init(hotPolicyData: .init(thumnail: "2", description: "3"))),
@@ -154,25 +68,40 @@ final class HomeViewController: UIViewController {
             .community(data: .init(communityData: .init(title: "sdf", recentPostTitle: "SDs234df"))),
             .community(data: .init(communityData: .init(title: "sdf", recentPostTitle: "SDs234df"))),
         ])
-        snapshot.deleteItems([temp])
-        update(section: .myKeywords, items: [.myKeywords(data: .init(myKeywordsData: .init(keywords: ["1", "2", "3", "4"])))])
     }
     
     private func configureCollectionViewLayout() -> UICollectionViewCompositionalLayout {
         let layout = UICollectionViewCompositionalLayout { (sectionNumber, env) -> NSCollectionLayoutSection? in
             if sectionNumber == 0 {
                 let itemSize = NSCollectionLayoutSize(
-                    widthDimension: .fractionalWidth(1),
-                    heightDimension: .estimated(74)
+                    widthDimension: .estimated(60),
+                    heightDimension: .estimated(10)
                 )
                 let item = NSCollectionLayoutItem(layoutSize: itemSize)
                 
                 let groupSize = NSCollectionLayoutSize(
                     widthDimension: .fractionalWidth(1),
-                    heightDimension: .estimated(74)
+                    heightDimension: .estimated(10)
                 )
                 let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
+                group.interItemSpacing = .fixed(8)
+                
                 let section = NSCollectionLayoutSection(group: group)
+                section.contentInsets = .init(top: 0, leading: 24, bottom: 0, trailing: 24)
+                section.interGroupSpacing = 8
+                
+                // Header 레이아웃 생성
+                let headerSize = NSCollectionLayoutSize(
+                    widthDimension: .fractionalWidth(1),
+                    heightDimension: .absolute(50)
+                )
+                let header = NSCollectionLayoutBoundarySupplementaryItem(
+                    layoutSize: headerSize,
+                    elementKind: MyKeywordsHeader.identifier,
+                    alignment: .top
+                )
+                section.boundarySupplementaryItems = [header]
+                
                 return section
             } else if sectionNumber == 1 {
                 let itemSize = NSCollectionLayoutSize(
@@ -310,6 +239,10 @@ final class HomeViewController: UIViewController {
         })
         
         // 헤더 등록
+        let myKeywordsHeaderRegistration = UICollectionView.SupplementaryRegistration<HotPolicyHeader>(elementKind: MyKeywordsHeader.identifier) { supplementaryView, elementKind, indexPath in
+            
+        }
+        
         let hotPolicyHeaderRegistration = UICollectionView.SupplementaryRegistration<HotPolicyHeader>(elementKind: HotPolicyHeader.identifier) { supplementaryView, elementKind, indexPath in
             
         }
@@ -326,6 +259,10 @@ final class HomeViewController: UIViewController {
             guard let self else { return nil }
             
             switch kind {
+            case MyKeywordsHeader.identifier:
+                return collectionView.dequeueConfiguredReusableSupplementary(
+                    using: myKeywordsHeaderRegistration,
+                    for: indexPath)
             case HotPolicyHeader.identifier:
                 return collectionView.dequeueConfiguredReusableSupplementary(
                     using: hotPolicyHeaderRegistration,
