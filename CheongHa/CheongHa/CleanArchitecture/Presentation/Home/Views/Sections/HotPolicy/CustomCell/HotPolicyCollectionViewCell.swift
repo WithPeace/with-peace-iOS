@@ -20,6 +20,6 @@ final class HotPolicyCollectionViewCell: UICollectionViewCell {
     }
     
     func setData(_ data: HomeSectionItemDataCollection.HotPolicyData) {
-        print("HotPolicyData", data)
+//        print("HotPolicyData", data)
     }
 }

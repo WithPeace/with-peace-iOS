@@ -19,7 +19,25 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         self.window = UIWindow(windowScene: windowScene)
         
-        window?.rootViewController = HomeViewController()
+        let keychain = KeychainManager()
+        let network = CleanNetworkManager()
+        
+        window?.rootViewController = HomeViewController(
+            viewModel: HomeViewModel(
+                policyUsecase: PolicyUsecase(
+                    policyRepository: PolicyRepository(
+                        keychain: keychain,
+                        network: network
+                    )
+                ),
+                postUsecase: PostUsecase(
+                    postRepository: PostRepository(
+                        keychain: keychain,
+                        network: network
+                    )
+                )
+            )
+        )
         window?.makeKeyAndVisible()
         
 //        let keychain = KeychainManager()

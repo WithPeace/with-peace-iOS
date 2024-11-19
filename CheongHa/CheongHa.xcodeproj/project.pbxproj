@@ -7,6 +7,15 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0025D4402CEC64BE00E3BBD9 /* PolicyDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0025D43F2CEC64BE00E3BBD9 /* PolicyDTO.swift */; };
+		0025D4422CEC663100E3BBD9 /* PolicyRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0025D4412CEC663100E3BBD9 /* PolicyRouter.swift */; };
+		0025D4442CEC672400E3BBD9 /* PolicyRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0025D4432CEC672400E3BBD9 /* PolicyRepository.swift */; };
+		0025D4462CEC682300E3BBD9 /* PolicyUsecase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0025D4452CEC682300E3BBD9 /* PolicyUsecase.swift */; };
+		0025D4492CEC6E3400E3BBD9 /* RxAppState in Frameworks */ = {isa = PBXBuildFile; productRef = 0025D4482CEC6E3400E3BBD9 /* RxAppState */; };
+		0025D44C2CEC7AAC00E3BBD9 /* CleanPostDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0025D44B2CEC7AAC00E3BBD9 /* CleanPostDTO.swift */; };
+		0025D44E2CEC7B6D00E3BBD9 /* PostRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0025D44D2CEC7B6D00E3BBD9 /* PostRouter.swift */; };
+		0025D4502CEC7BCC00E3BBD9 /* PostRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0025D44F2CEC7BCC00E3BBD9 /* PostRepository.swift */; };
+		0025D4522CEC7C8500E3BBD9 /* PostUsecase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0025D4512CEC7C8500E3BBD9 /* PostUsecase.swift */; };
 		006E63872CE8818300CF2F45 /* HomeSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 006E63862CE8818300CF2F45 /* HomeSection.swift */; };
 		00839A0D2CD7C3850024337F /* Secrets.plist in Resources */ = {isa = PBXBuildFile; fileRef = 00839A0C2CD7C3850024337F /* Secrets.plist */; };
 		00839A0F2CD7C3B10024337F /* APIKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00839A0E2CD7C3B10024337F /* APIKeys.swift */; };
@@ -161,6 +170,14 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0025D43F2CEC64BE00E3BBD9 /* PolicyDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PolicyDTO.swift; sourceTree = "<group>"; };
+		0025D4412CEC663100E3BBD9 /* PolicyRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PolicyRouter.swift; sourceTree = "<group>"; };
+		0025D4432CEC672400E3BBD9 /* PolicyRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PolicyRepository.swift; sourceTree = "<group>"; };
+		0025D4452CEC682300E3BBD9 /* PolicyUsecase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PolicyUsecase.swift; sourceTree = "<group>"; };
+		0025D44B2CEC7AAC00E3BBD9 /* CleanPostDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CleanPostDTO.swift; sourceTree = "<group>"; };
+		0025D44D2CEC7B6D00E3BBD9 /* PostRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostRouter.swift; sourceTree = "<group>"; };
+		0025D44F2CEC7BCC00E3BBD9 /* PostRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostRepository.swift; sourceTree = "<group>"; };
+		0025D4512CEC7C8500E3BBD9 /* PostUsecase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostUsecase.swift; sourceTree = "<group>"; };
 		006E63862CE8818300CF2F45 /* HomeSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeSection.swift; sourceTree = "<group>"; };
 		00839A0C2CD7C3850024337F /* Secrets.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Secrets.plist; sourceTree = "<group>"; };
 		00839A0E2CD7C3B10024337F /* APIKeys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIKeys.swift; sourceTree = "<group>"; };
@@ -306,6 +323,7 @@
 				F68C9D142BA2DB39008CB7E4 /* RxSwift in Frameworks */,
 				00C2A5142CE333E500EFF471 /* Differentiator in Frameworks */,
 				F69B80452B9A09FB002675CE /* GoogleSignInSwift in Frameworks */,
+				0025D4492CEC6E3400E3BBD9 /* RxAppState in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -326,6 +344,22 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0025D43E2CEC639800E3BBD9 /* Policy */ = {
+			isa = PBXGroup;
+			children = (
+				0025D43F2CEC64BE00E3BBD9 /* PolicyDTO.swift */,
+			);
+			path = Policy;
+			sourceTree = "<group>";
+		};
+		0025D44A2CEC7A9F00E3BBD9 /* Post */ = {
+			isa = PBXGroup;
+			children = (
+				0025D44B2CEC7AAC00E3BBD9 /* CleanPostDTO.swift */,
+			);
+			path = Post;
+			sourceTree = "<group>";
+		};
 		005E85A52CD8B36800029F7C /* Keychain */ = {
 			isa = PBXGroup;
 			children = (
@@ -532,6 +566,8 @@
 			children = (
 				00839A232CD7C94A0024337F /* LoginRepository.swift */,
 				00DE3F452CDCD38100CAC3D8 /* ProfileRepository.swift */,
+				0025D4432CEC672400E3BBD9 /* PolicyRepository.swift */,
+				0025D44F2CEC7BCC00E3BBD9 /* PostRepository.swift */,
 			);
 			path = Repository;
 			sourceTree = "<group>";
@@ -550,6 +586,8 @@
 			children = (
 				00839A252CD7C95A0024337F /* LoginUsecase.swift */,
 				00DE3F472CDCD73200CAC3D8 /* ProfileUsecase.swift */,
+				0025D4452CEC682300E3BBD9 /* PolicyUsecase.swift */,
+				0025D4512CEC7C8500E3BBD9 /* PostUsecase.swift */,
 			);
 			path = Usecase;
 			sourceTree = "<group>";
@@ -560,6 +598,8 @@
 				009D0E892CDBAFAB007D70C2 /* DTOType.swift */,
 				00DB008A2CDB51A00012B2B1 /* Auth */,
 				00DB008B2CDB52000012B2B1 /* Profie */,
+				0025D43E2CEC639800E3BBD9 /* Policy */,
+				0025D44A2CEC7A9F00E3BBD9 /* Post */,
 			);
 			path = Entity;
 			sourceTree = "<group>";
@@ -570,6 +610,8 @@
 				00DB008E2CDB5A0B0012B2B1 /* BaseTargetType.swift */,
 				00839A202CD7C8420024337F /* LoginRouter.swift */,
 				00DB008C2CDB52170012B2B1 /* ProfileRouter.swift */,
+				0025D4412CEC663100E3BBD9 /* PolicyRouter.swift */,
+				0025D44D2CEC7B6D00E3BBD9 /* PostRouter.swift */,
 			);
 			path = Routers;
 			sourceTree = "<group>";
@@ -1023,6 +1065,7 @@
 				00B6839B2CE1F771005110D2 /* SnapKit */,
 				00C2A5132CE333E500EFF471 /* Differentiator */,
 				00C2A5152CE333E500EFF471 /* RxDataSources */,
+				0025D4482CEC6E3400E3BBD9 /* RxAppState */,
 			);
 			productName = WithPeace;
 			productReference = F69B80032B996846002675CE /* CheongHa.app */;
@@ -1104,6 +1147,7 @@
 				00B683972CE1F6D9005110D2 /* XCRemoteSwiftPackageReference "FlexLayout" */,
 				00B6839A2CE1F771005110D2 /* XCRemoteSwiftPackageReference "SnapKit" */,
 				00C2A5122CE333E500EFF471 /* XCRemoteSwiftPackageReference "RxDataSources" */,
+				0025D4472CEC6E3400E3BBD9 /* XCRemoteSwiftPackageReference "RxAppState" */,
 			);
 			productRefGroup = F69B80042B996846002675CE /* Products */;
 			projectDirPath = "";
@@ -1151,6 +1195,8 @@
 				630323632BB5590000B16E7C /* ForumPostViewCell.swift in Sources */,
 				F66959652C3F4E2600644DE9 /* WebViewAssistantViewController.swift in Sources */,
 				F61B51622BECF5B400812C8D /* YouthPolicyViewModel.swift in Sources */,
+				0025D4402CEC64BE00E3BBD9 /* PolicyDTO.swift in Sources */,
+				0025D4522CEC7C8500E3BBD9 /* PostUsecase.swift in Sources */,
 				63C52F9D2BA9B83F0072DE18 /* PostViewModel.swift in Sources */,
 				F68C9D242BA2DEDB008CB7E4 /* SocialLoginViewController.swift in Sources */,
 				F6394B9D2C301F9E0092FFB5 /* TermsViewController.swift in Sources */,
@@ -1175,6 +1221,7 @@
 				63C52F992BA97FB40072DE18 /* CategorySelectViewController.swift in Sources */,
 				F65040A92C20816900B14D84 /* PostType.swift in Sources */,
 				006E63872CE8818300CF2F45 /* HomeSection.swift in Sources */,
+				0025D4422CEC663100E3BBD9 /* PolicyRouter.swift in Sources */,
 				F65FFA932C05CEC3009A6FB3 /* YouthDetailCell.swift in Sources */,
 				F6A9660E2C2479B90079B89E /* BlankPageViewController.swift in Sources */,
 				F65040AB2C20818C00B14D84 /* ReportMessage.swift in Sources */,
@@ -1223,12 +1270,15 @@
 				00DE3F482CDCD73200CAC3D8 /* ProfileUsecase.swift in Sources */,
 				00839A212CD7C8420024337F /* LoginRouter.swift in Sources */,
 				633F8E222B9AC37500B92ADC /* KeychainManager.swift in Sources */,
+				0025D4462CEC682300E3BBD9 /* PolicyUsecase.swift in Sources */,
 				F67A64C22C60DD12009572CE /* ExampleViewModel.swift in Sources */,
+				0025D44C2CEC7AAC00E3BBD9 /* CleanPostDTO.swift in Sources */,
 				F68719B62BA8707D0049B182 /* CustomAlbumCell.swift in Sources */,
 				63C52F9B2BA9B80D0072DE18 /* PostModel.swift in Sources */,
 				009D0E8A2CDBAFAB007D70C2 /* DTOType.swift in Sources */,
 				00DE3F4A2CDCD91F00CAC3D8 /* AppViewModel.swift in Sources */,
 				00C2A5212CE3607300EFF471 /* UICollectionViewCell+Ext.swift in Sources */,
+				0025D4502CEC7BCC00E3BBD9 /* PostRepository.swift in Sources */,
 				F66C98222BA1F5AD001E121C /* MainTabBarController.swift in Sources */,
 				00C2A52A2CE3973800EFF471 /* PolicyRecommendationHeader.swift in Sources */,
 				00C2A51F2CE3601200EFF471 /* MyKeywordsCollectionViewCell.swift in Sources */,
@@ -1251,10 +1301,12 @@
 				630EA20F2BA0277800F04ED3 /* SignRepository.swift in Sources */,
 				00DE3F4C2CDCDA2A00CAC3D8 /* ViewModelType.swift in Sources */,
 				F65040A42C20759A00B14D84 /* SearchDataDTO.swift in Sources */,
+				0025D44E2CEC7B6D00E3BBD9 /* PostRouter.swift in Sources */,
 				00C2A5232CE360EF00EFF471 /* PolicyRecommendationCollectionViewCell.swift in Sources */,
 				00B683932CE1F640005110D2 /* HomeViewController.swift in Sources */,
 				F69011DD2BB4685C009A8087 /* CustomAlertSheetViewController.swift in Sources */,
 				F65FFA972C074914009A6FB3 /* YouthDetailTableViewController.swift in Sources */,
+				0025D4442CEC672400E3BBD9 /* PolicyRepository.swift in Sources */,
 				F65FFA992C075F1B009A6FB3 /* YouthDetailViewControllerWithTableView.swift in Sources */,
 				63C52F972BA962590072DE18 /* PostPhotoView.swift in Sources */,
 				6303235D2BAC636700B16E7C /* PostManager.swift in Sources */,
@@ -1620,6 +1672,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		0025D4472CEC6E3400E3BBD9 /* XCRemoteSwiftPackageReference "RxAppState" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/pixeldock/RxAppState.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.8.1;
+			};
+		};
 		00839A1D2CD7C82F0024337F /* XCRemoteSwiftPackageReference "Moya" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/Moya/Moya.git";
@@ -1679,6 +1739,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		0025D4482CEC6E3400E3BBD9 /* RxAppState */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 0025D4472CEC6E3400E3BBD9 /* XCRemoteSwiftPackageReference "RxAppState" */;
+			productName = RxAppState;
+		};
 		00839A1E2CD7C82F0024337F /* RxMoya */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 00839A1D2CD7C82F0024337F /* XCRemoteSwiftPackageReference "Moya" */;

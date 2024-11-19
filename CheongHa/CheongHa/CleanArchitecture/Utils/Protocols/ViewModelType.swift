@@ -16,9 +16,3 @@ protocol ViewModelType {
     
     func transform(input: Input) -> Output
 }
-
-extension ViewModelType {
-    var disposeBag: DisposeBag {
-        DisposeBag()
-    }
-}

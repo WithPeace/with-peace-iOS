@@ -20,6 +20,6 @@ final class PolicyRecommendationCollectionViewCell: UICollectionViewCell {
     }
     
     func setData(_ data: HomeSectionItemDataCollection.PolicyRecommendationData) {
-        print("PolicyRecommendationData", data)
+//        print("PolicyRecommendationData", data)
     }
 }

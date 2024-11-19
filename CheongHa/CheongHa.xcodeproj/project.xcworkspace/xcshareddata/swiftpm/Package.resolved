@@ -1,5 +1,5 @@
 {
-  "originHash" : "a4801d81916e0cb2b500ee8a16231ee439bdac79dd266cad411046c5c3a417b5",
+  "originHash" : "ad8a2eb6642fd476a6570d8c25b6fb2e9d8f4eb079bfbe54cb984002c18277bf",
   "pins" : [
     {
       "identity" : "alamofire",
@@ -80,6 +80,15 @@
       "state" : {
         "revision" : "c43bae3dac73fdd3cb906bd5a1914686ca71ed3c",
         "version" : "6.7.0"
+      }
+    },
+    {
+      "identity" : "rxappstate",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/pixeldock/RxAppState.git",
+      "state" : {
+        "revision" : "1c3f32433b4ffa431671b21e46b98af0d875081e",
+        "version" : "1.8.1"
       }
     },
     {

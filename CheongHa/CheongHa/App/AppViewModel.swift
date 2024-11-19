@@ -13,6 +13,8 @@ final class AppViewModel: ViewModelType {
     
     private let profileUsecase: ProfileUsecaseProtocol
     
+    var disposeBag = DisposeBag()
+    
     init(profileUsecase: ProfileUsecaseProtocol) {
         self.profileUsecase = profileUsecase
     }

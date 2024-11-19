@@ -20,6 +20,6 @@ final class CommunityCollectionViewCell: UICollectionViewCell {
     }
     
     func setData(_ data: HomeSectionItemDataCollection.CommunityData) {
-        print("CommunityData", data)
+//        print("CommunityData", data)
     }
 }

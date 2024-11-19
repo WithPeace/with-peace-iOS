@@ -9,6 +9,7 @@ import UIKit
 import SnapKit
 import RxSwift
 import RxCocoa
+import RxAppState
 
 final class HomeViewController: UIViewController {
     
@@ -17,6 +18,17 @@ final class HomeViewController: UIViewController {
     private var snapshot = NSDiffableDataSourceSnapshot<HomeSection, HomeSectionItem>()
     
     private let disposeBag = DisposeBag()
+    
+    private let viewModel: HomeViewModel
+    
+    init(viewModel: HomeViewModel) {
+        self.viewModel = viewModel
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -36,6 +48,7 @@ final class HomeViewController: UIViewController {
         
         snapshot.appendSections(HomeSection.allCases)
         update(section: .myKeywords, items: [
+            .myKeywords(data: .init(myKeywordsData: "menu")),
             .myKeywords(data: .init(myKeywordsData: "#DeclarativeUI")),
             .myKeywords(data: .init(myKeywordsData: "UIKit")),
             .myKeywords(data: .init(myKeywordsData: "#ModernConcurrency")),
@@ -46,7 +59,7 @@ final class HomeViewController: UIViewController {
             .myKeywords(data: .init(myKeywordsData: "#Combine")),
             .myKeywords(data: .init(myKeywordsData: "#Combine")),
             .myKeywords(data: .init(myKeywordsData: "#Combine")),
-            .myKeywords(data: .init(myKeywordsData: "#Combine")),
+            .myKeywords(data: .init(myKeywordsData: "#ModernConcurrency")),
         ])
         update(section: .hotPolicy, items: [
             .hotPolicy(data: .init(hotPolicyData: .init(thumnail: "1", description: "@"))),
@@ -282,6 +295,9 @@ final class HomeViewController: UIViewController {
     
     private func bind() {
         
+        let input = HomeViewModel.Input(viewWillAppearTrigger: rx.viewWillAppear)
+        
+        let output = viewModel.transform(input: input)
     }
     
     private func update(section: HomeSection, items: [HomeSectionItem]) {

@@ -41,7 +41,7 @@ final class MyKeywordsCollectionViewCell: UICollectionViewCell {
     }
 
     func setData(_ data: String) {
-        print("MyKeywordsData", data)
+//        print("MyKeywordsData", data)
         tagLabel.text = data
     }
 }
