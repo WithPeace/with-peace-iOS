@@ -44,6 +44,7 @@ final class CommunityCollectionViewCell: BaseCollectionViewCell {
     }
     
     func setData(_ data: HomeSectionItemDataCollection.CommunityData) {
-//        print("CommunityData", data)
+        boardLabel.text = data.title
+        postTitleLabel.text = data.recentPostTitle
     }
 }

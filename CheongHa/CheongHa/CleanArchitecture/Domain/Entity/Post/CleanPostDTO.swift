@@ -13,7 +13,15 @@ struct CleanPostDTO: DTOType {
 }
 
 struct PostData: Codable {
-    let type: String
+    let type: PostType
     let postId: Int
     let title: String
+    
+    init(from decoder: any Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        let type = try container.decode(String.self, forKey: .type)
+        self.type = PostType(rawValue: type) ?? PostType.freedom
+        self.postId = try container.decode(Int.self, forKey: .postId)
+        self.title = try container.decode(String.self, forKey: .title)
+    }
 }

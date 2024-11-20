@@ -63,11 +63,11 @@ struct HomeSectionItemDataCollection: Hashable {
     
     struct HotPolicyData: Identifiable, Hashable {
         let id = UUID()
-        var thumnail: String
+        var thumnail: ImageResource
         var description: String
         
         init(
-            thumnail: String = "",
+            thumnail: ImageResource = .eduThumbnail,
             description: String = ""
         ) {
             self.thumnail = thumnail
@@ -77,11 +77,11 @@ struct HomeSectionItemDataCollection: Hashable {
     
     struct PolicyRecommendationData: Identifiable, Hashable {
         let id = UUID()
-        var thumnail: String
+        var thumnail: ImageResource
         var description: String
         
         init(
-            thumnail: String = "",
+            thumnail: ImageResource = .eduThumbnail,
             description: String = ""
         ) {
             self.thumnail = thumnail

@@ -9,13 +9,15 @@ import Foundation
 import RxSwift
 import RxCocoa
 
+typealias HomeDatasType = (hotPolicies: [HomeSectionItem]?, recommendedPolicies: [HomeSectionItem]?, recentPosts: [HomeSectionItem]?)
+
 final class HomeViewModel: ViewModelType {
     struct Input {
         let viewWillAppearTrigger: Observable<Bool>
     }
     
     struct Output {
-
+        let homeDatas: Driver<HomeDatasType>
     }
     
     private let policyUsecase: PolicyUsecaseProtocol
@@ -41,7 +43,9 @@ final class HomeViewModel: ViewModelType {
             }
             .map {
                 print("hotPolicies 통과")
-                return $0.data
+                return $0.data?.compactMap({
+                    HomeSectionItem.hotPolicy(data: .init(hotPolicyData: .init(thumnail: $0.classification.policyImage, description: $0.introduce)))
+                })
             }
         
         let recommendedPolicies = input
@@ -52,7 +56,10 @@ final class HomeViewModel: ViewModelType {
             }
             .map {
                 print("recommendedPolicies 통과")
-                return $0.data
+                return $0.data?.compactMap({
+                    HomeSectionItem.policyRecommendation(data: .init(policyRecommendationData: .init(thumnail: $0.classification.policyImage, description: $0.introduce)))
+                    
+                })
             }
         
         let recentPosts = input
@@ -63,25 +70,18 @@ final class HomeViewModel: ViewModelType {
             }
             .map {
                 print("recentPosts 통과")
-                return $0.data
+                return $0.data?.compactMap {
+                    HomeSectionItem.community(data: .init(communityData: .init(title: $0.type.postTitle, recentPostTitle: $0.title)))
+                }
             }
         
-//        Observable.zip(hotPolicies, recommendedPolicies, recentPosts)
-//            .subscribe { hotPolicies, recommendedPolicies, recentPosts in
-//                print("완료")
-//                print(">>>>>>>>>>>>>> hotPolicies")
-//                print(hotPolicies)
-//                
-//                print("-------------------------------")
-//                print(">>>>>>>>>>>>>>>>>>> recommendedPolicies")
-//                print(recommendedPolicies)
-//                
-//                print("-------------------------------")
-//                print(">>>>>>>>>>>>>>>>>>> recentPosts")
-//                print(recentPosts)
-//            }
-//            .disposed(by: disposeBag)
+        let homeDatas = Observable.zip(hotPolicies, recommendedPolicies, recentPosts, resultSelector: { hotPolicies, recommendedPolicies, recentPosts -> HomeDatasType in
+            print("완료")
+            return (hotPolicies, recommendedPolicies, recentPosts)
+        })
         
-        return Output()
+        return Output(
+            homeDatas: homeDatas.asDriver(onErrorJustReturn: (nil, nil, nil))
+        )
     }
 }

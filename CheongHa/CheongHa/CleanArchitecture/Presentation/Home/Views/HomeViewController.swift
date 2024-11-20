@@ -56,26 +56,17 @@ final class HomeViewController: UIViewController {
             .myKeywords(data: .init(myKeywordsData: "#Combine")),
             .myKeywords(data: .init(myKeywordsData: "#ModernConcurrency")),
         ])
-        update(section: .hotPolicy, items: [
-            .hotPolicy(data: .init(hotPolicyData: .init(thumnail: "1", description: "@"))),
-            .hotPolicy(data: .init(hotPolicyData: .init(thumnail: "2", description: "3"))),
-            .hotPolicy(data: .init(hotPolicyData: .init(thumnail: "123", description: "124"))),
-        ])
-        update(section: .policyRecommendation, items: [
-            .policyRecommendation(data: .init(hotPolicyData: .init(thumnail: "123", description: "444"))),
-            .policyRecommendation(data: .init(hotPolicyData: .init(thumnail: "122", description: "441234"))),
-            .policyRecommendation(data: .init(hotPolicyData: .init(thumnail: "1243", description: "443214")))
-        ])
-        update(section: .community, items: [
-            .community(data: .init(communityData: .init(title: "sdf", recentPostTitle: "SDsdf"))),
-            .community(data: .init(communityData: .init(title: "a32", recentPostTitle: "SDsdf"))),
-            .community(data: .init(communityData: .init(title: "23", recentPostTitle: "SDsdf"))),
-            .community(data: .init(communityData: .init(title: "s2434df", recentPostTitle: "SDsdf"))),
-            .community(data: .init(communityData: .init(title: "sdf", recentPostTitle: "SDs234df"))),
-            .community(data: .init(communityData: .init(title: "sdf", recentPostTitle: "SDs234df"))),
-            .community(data: .init(communityData: .init(title: "sdf", recentPostTitle: "SDs234df"))),
-            .community(data: .init(communityData: .init(title: "sdf", recentPostTitle: "SDs234df"))),
-        ])
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        let imageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 20, height: 20))
+        let image = UIImage(named: Const.Logo.MainLogo.cheonghaTextLogo)
+        imageView.contentMode = .scaleAspectFit
+        imageView.image = image
+        
+        navigationItem.titleView = imageView
     }
     
     private func configureCollectionViewLayout() -> UICollectionViewCompositionalLayout {
@@ -296,9 +287,21 @@ final class HomeViewController: UIViewController {
     
     private func bind() {
         
-        let input = HomeViewModel.Input(viewWillAppearTrigger: rx.viewWillAppear)
+        let input = HomeViewModel.Input(viewWillAppearTrigger: rx.viewWillAppear.take(1))
         
         let output = viewModel.transform(input: input)
+        
+        output.homeDatas
+            .drive(with: self, onNext: { owner, homeDatas in
+                guard let hotPolicies = homeDatas.hotPolicies,
+                      let recommendedPolicies = homeDatas.recommendedPolicies,
+                      let recentPosts = homeDatas.recentPosts
+                else { return }
+                owner.update(section: .hotPolicy, items: hotPolicies)
+                owner.update(section: .policyRecommendation, items: recommendedPolicies)
+                owner.update(section: .community, items: recentPosts)
+            })
+            .disposed(by: disposeBag)
     }
     
     private func update(section: HomeSection, items: [HomeSectionItem]) {

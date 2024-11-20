@@ -34,6 +34,8 @@ final class HotPolicyCollectionViewCell: BaseCollectionViewCell {
                 .width(100%)
                 .aspectRatio(1)
             
+            $0.addItem(UIView()).height(8)
+            
             $0.addItem(policyDescriptionLabel)
                 .width(100%)
         }
@@ -44,6 +46,7 @@ final class HotPolicyCollectionViewCell: BaseCollectionViewCell {
     }
     
     func setData(_ data: HomeSectionItemDataCollection.HotPolicyData) {
-//        print("HotPolicyData", data)
+        policyImageView.image = UIImage(resource: data.thumnail)
+        policyDescriptionLabel.text = data.description
     }
 }
