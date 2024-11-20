@@ -6,26 +6,21 @@
 //
 
 import UIKit
-import SnapKit
 
-final class CommunityHeader: UICollectionReusableView {
-    static let identifier = String(describing: CommunityHeader.self)
-    
-    let label = UILabel()
-    
+final class CommunityHeader: BaseHomeCollectionViewHeader {
+        
     override init(frame: CGRect) {
         super.init(frame: frame)
         
-        label.text = "안녕하세요."
-        
-        addSubview(label)
-        
-        label.snp.makeConstraints {
-            $0.centerY.equalToSuperview()
-        }
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    override func configureLabel() {
+        super.configureLabel()
+        
+        label.text = "커뮤니티"
     }
 }

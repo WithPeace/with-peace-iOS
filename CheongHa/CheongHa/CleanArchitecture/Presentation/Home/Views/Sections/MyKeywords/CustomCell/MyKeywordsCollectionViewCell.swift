@@ -14,9 +14,9 @@ final class MyKeywordsCollectionViewCell: UICollectionViewCell {
     
     let tagLabel: UILabel = {
         let label = UILabel()
-        label.font = .systemFont(ofSize: 14)
-        label.textColor = .gray
-        label.backgroundColor = .blue
+        label.font = .systemFont(ofSize: 10, weight: .regular)
+        label.textColor = .mainPurple
+        label.backgroundColor = .subPurple
         return label
     }()
         
@@ -24,7 +24,8 @@ final class MyKeywordsCollectionViewCell: UICollectionViewCell {
         super.init(frame: frame)
         
         contentView.addSubview(tagLabel)
-        contentView.backgroundColor = .gray
+        contentView.backgroundColor = .subPurple
+        contentView.layer.cornerRadius = 7
         
         setConstraint()
     }

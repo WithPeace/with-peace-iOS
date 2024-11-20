@@ -9,7 +9,7 @@ import UIKit
 
 final class YouthListCell: UICollectionViewCell {
     
-    static let identifier = "YouthListCell"
+//    static let identifier = "YouthListCell"
     
     private let labelContentsView: UIView = {
         let view = UIView()

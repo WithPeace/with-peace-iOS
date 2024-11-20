@@ -33,21 +33,54 @@ final class HomeViewModel: ViewModelType {
     
     func transform(input: Input) -> Output {
         
-        input
+        let hotPolicies = input
             .viewWillAppearTrigger
             .withUnretained(self)
             .flatMap { owner, _ in
-//                owner.policyUsecase.fetchRecommendedPolicies()
+                owner.policyUsecase.fetchHotPolicies()
+            }
+            .map {
+                print("hotPolicies 통과")
+                return $0.data
+            }
+        
+        let recommendedPolicies = input
+            .viewWillAppearTrigger
+            .withUnretained(self)
+            .flatMap { owner, _ in
+                owner.policyUsecase.fetchRecommendedPolicies()
+            }
+            .map {
+                print("recommendedPolicies 통과")
+                return $0.data
+            }
+        
+        let recentPosts = input
+            .viewWillAppearTrigger
+            .withUnretained(self)
+            .flatMap { owner, _ in
                 owner.postUsecase.fetchRecentPosts()
             }
             .map {
-                print(">>>>>>>>>>>>", $0)
+                print("recentPosts 통과")
                 return $0.data
             }
-            .subscribe { _ in
-                
-            }
-            .disposed(by: disposeBag)
+        
+//        Observable.zip(hotPolicies, recommendedPolicies, recentPosts)
+//            .subscribe { hotPolicies, recommendedPolicies, recentPosts in
+//                print("완료")
+//                print(">>>>>>>>>>>>>> hotPolicies")
+//                print(hotPolicies)
+//                
+//                print("-------------------------------")
+//                print(">>>>>>>>>>>>>>>>>>> recommendedPolicies")
+//                print(recommendedPolicies)
+//                
+//                print("-------------------------------")
+//                print(">>>>>>>>>>>>>>>>>>> recentPosts")
+//                print(recentPosts)
+//            }
+//            .disposed(by: disposeBag)
         
         return Output()
     }

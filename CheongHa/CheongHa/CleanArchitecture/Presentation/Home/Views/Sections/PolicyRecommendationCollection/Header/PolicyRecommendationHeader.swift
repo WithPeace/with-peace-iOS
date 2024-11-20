@@ -6,26 +6,21 @@
 //
 
 import UIKit
-import SnapKit
 
-final class PolicyRecommendationHeader: UICollectionReusableView {
-    static let identifier = String(describing: PolicyRecommendationHeader.self)
-    
-    let label = UILabel()
-    
+final class PolicyRecommendationHeader: BaseHomeCollectionViewHeader {
+        
     override init(frame: CGRect) {
         super.init(frame: frame)
         
-        label.text = "안녕하세요."
-        
-        addSubview(label)
-        
-        label.snp.makeConstraints {
-            $0.centerY.equalToSuperview()
-        }
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    override func configureLabel() {
+        super.configureLabel()
+        
+        label.text = "{ID}님을 위한 맞춤 정책을 추천해드릴게요!"
     }
 }

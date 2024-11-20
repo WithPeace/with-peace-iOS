@@ -35,15 +35,13 @@ final class HomeViewController: UIViewController {
         
         view.addSubview(collectionView)
         
-        view.backgroundColor = .green
-        
+        view.backgroundColor = .white
+                
         collectionView.snp.makeConstraints {
             $0.edges.equalTo(view.safeAreaLayoutGuide)
         }
         
-        collectionView.backgroundColor = .brown
         bind()
-        
         cellRegistration()
         
         snapshot.appendSections(HomeSection.allCases)
@@ -54,9 +52,6 @@ final class HomeViewController: UIViewController {
             .myKeywords(data: .init(myKeywordsData: "#ModernConcurrency")),
             .myKeywords(data: .init(myKeywordsData: "#SwiftUI")),
             .myKeywords(data: .init(myKeywordsData: "#CoreData")),
-            .myKeywords(data: .init(myKeywordsData: "#Combine")),
-            .myKeywords(data: .init(myKeywordsData: "#Combine")),
-            .myKeywords(data: .init(myKeywordsData: "#Combine")),
             .myKeywords(data: .init(myKeywordsData: "#Combine")),
             .myKeywords(data: .init(myKeywordsData: "#Combine")),
             .myKeywords(data: .init(myKeywordsData: "#ModernConcurrency")),
@@ -100,13 +95,13 @@ final class HomeViewController: UIViewController {
                 group.interItemSpacing = .fixed(8)
                 
                 let section = NSCollectionLayoutSection(group: group)
-                section.contentInsets = .init(top: 0, leading: 24, bottom: 0, trailing: 24)
+                section.contentInsets = .init(top: 8, leading: 24, bottom: 12, trailing: 24)
                 section.interGroupSpacing = 8
                 
                 // Header 레이아웃 생성
                 let headerSize = NSCollectionLayoutSize(
                     widthDimension: .fractionalWidth(1),
-                    heightDimension: .absolute(50)
+                    heightDimension: .estimated(29)
                 )
                 let header = NSCollectionLayoutBoundarySupplementaryItem(
                     layoutSize: headerSize,
@@ -114,6 +109,10 @@ final class HomeViewController: UIViewController {
                     alignment: .top
                 )
                 section.boundarySupplementaryItems = [header]
+                
+                // Background
+                let sectionBackgroundDecoration = NSCollectionLayoutDecorationItem.background(elementKind: MyKeywordsBackgroundView.identifier)
+                section.decorationItems = [sectionBackgroundDecoration]
                 
                 return section
             } else if sectionNumber == 1 {
@@ -212,6 +211,8 @@ final class HomeViewController: UIViewController {
             }
         }
         
+        layout.register(MyKeywordsBackgroundView.self, forDecorationViewOfKind: MyKeywordsBackgroundView.identifier)
+        
         return layout
     }
     
@@ -252,7 +253,7 @@ final class HomeViewController: UIViewController {
         })
         
         // 헤더 등록
-        let myKeywordsHeaderRegistration = UICollectionView.SupplementaryRegistration<HotPolicyHeader>(elementKind: MyKeywordsHeader.identifier) { supplementaryView, elementKind, indexPath in
+        let myKeywordsHeaderRegistration = UICollectionView.SupplementaryRegistration<MyKeywordsHeader>(elementKind: MyKeywordsHeader.identifier) { supplementaryView, elementKind, indexPath in
             
         }
         
