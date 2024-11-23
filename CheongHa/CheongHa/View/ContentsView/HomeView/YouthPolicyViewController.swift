@@ -1,5 +1,5 @@
 //
-//  HomeViewController.swift
+//  YouthPolicyViewController.swift
 //  WithPeace
 //
 //  Created by Dylan_Y on 3/14/24.
@@ -8,9 +8,9 @@
 import UIKit
 import RxSwift
 
-final class HomeViewController: UIViewController {
+final class YouthPolicyViewController: UIViewController {
     
-    private let viewModel = HomeViewModel()
+    private let viewModel = YouthPolicyViewModel()
     private let disposeBag = DisposeBag()
     private var youthDataSource = [YouthPolicy]()
     
@@ -117,7 +117,7 @@ final class HomeViewController: UIViewController {
 }
 
 //MARK: objc Method
-extension HomeViewController {
+extension YouthPolicyViewController {
     @objc func refreshAction() {
         viewModel.refreshAction.onNext(())
     }
@@ -129,7 +129,7 @@ extension HomeViewController {
 }
 
 //MARK: Configure View
-extension HomeViewController {
+extension YouthPolicyViewController {
     
     private func configureCollectionView() {
         collectionView.dataSource = self
@@ -146,7 +146,7 @@ extension HomeViewController {
     }
 }
 
-extension HomeViewController {
+extension YouthPolicyViewController {
     
     private func configureLayout() {
         self.view.addSubview(collectionView)
@@ -170,7 +170,7 @@ extension HomeViewController {
     }
 }
 
-extension HomeViewController: UICollectionViewDelegateFlowLayout {
+extension YouthPolicyViewController: UICollectionViewDelegateFlowLayout {
     func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
         if scrollView.contentOffset.y >= (scrollView.contentSize.height - scrollView.frame.size.height) {
             viewModel.fetchAdditional.onNext(())
@@ -178,7 +178,7 @@ extension HomeViewController: UICollectionViewDelegateFlowLayout {
     }
 }
 
-extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSource {
+extension YouthPolicyViewController: UICollectionViewDelegate, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         youthDataSource.count
     }
@@ -228,7 +228,7 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
     }
 }
 
-extension HomeViewController: YouthFilterDelegate {
+extension YouthPolicyViewController: YouthFilterDelegate {
     func didUpdateFilter(_ filter: YouthFilterData) {
         viewModel.changeFilter.onNext(filter)
     }
