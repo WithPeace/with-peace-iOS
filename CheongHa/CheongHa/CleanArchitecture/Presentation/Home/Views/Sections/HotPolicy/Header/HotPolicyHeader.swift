@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class HotPolicyHeader: BaseHomeCollectionViewHeader {
+final class HotPolicyHeader: BaseHomeFilterCollectionViewHeader {
     
     override init(frame: CGRect) {
         super.init(frame: frame)

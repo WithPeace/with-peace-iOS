@@ -14,7 +14,7 @@ class BaseCollectionViewCell: UICollectionViewCell {
     let flexContainerView = UIView()
         
     override init(frame: CGRect) {
-        super.init(frame: .zero)
+        super.init(frame: frame)
                 
         contentView.addSubview(flexContainerView)
     }

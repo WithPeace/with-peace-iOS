@@ -52,15 +52,6 @@ struct HomeSectionItemDataCollection: Hashable {
         self.communityData = communityData
     }
     
-//    struct MyKeywordsData: Identifiable, Hashable {
-//        let id = UUID()
-//        var keyword: String
-//        
-//        init(keyword: String = "") {
-//            self.keyword = keyword
-//        }
-//    }
-    
     struct HotPolicyData: Identifiable, Hashable {
         let id = UUID()
         var thumnail: ImageResource

@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class PolicyRecommendationHeader: BaseHomeCollectionViewHeader {
+final class PolicyRecommendationHeader: BaseHomeFilterCollectionViewHeader {
         
     override init(frame: CGRect) {
         super.init(frame: frame)

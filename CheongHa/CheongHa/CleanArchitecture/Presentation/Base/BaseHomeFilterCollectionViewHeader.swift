@@ -1,5 +1,5 @@
 //
-//  BaseHomeCollectionViewHeader.swift
+//  BaseHomeFilterCollectionViewHeader.swift
 //  CheongHa
 //
 //  Created by SUCHAN CHANG on 11/20/24.
@@ -8,7 +8,7 @@
 import UIKit
 import SnapKit
 
-class BaseHomeCollectionViewHeader: UICollectionReusableView {
+class BaseHomeFilterCollectionViewHeader: UICollectionReusableView {
     let label = UILabel()
     
     override init(frame: CGRect) {
@@ -28,6 +28,6 @@ class BaseHomeCollectionViewHeader: UICollectionReusableView {
     }
     
     func configureLabel() {
-        label.font = .systemFont(ofSize: 18, weight: .init(700))
+        label.font = .systemFont(ofSize: 18, weight: .bold)
     }
 }

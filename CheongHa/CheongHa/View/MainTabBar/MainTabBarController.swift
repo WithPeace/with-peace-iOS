@@ -30,7 +30,7 @@ final class MainTabbarController: UITabBarController {
         )
     )
 //    private let youthPolicyViewController = UINavigationController(rootViewController: YouthPolicyViewController())
-    private let forumViewController = BlankPageViewController()
+    private let youthPolicyViewController = BlankPageViewController()
     private let registBlankViewController = BlankPageViewController()
     private let myPageViewController = UINavigationController(rootViewController: MyPageViewController())
     
@@ -46,12 +46,12 @@ final class MainTabbarController: UITabBarController {
     
     private func configureTabbarContents() {
         setViewControllers([homeViewController,
-                            forumViewController,
+                            youthPolicyViewController,
                             registBlankViewController,
                             myPageViewController], animated: true)
         
         homeViewController.tabBarItem.image = UIImage(named: tabBarConstant.icHome)
-        forumViewController.tabBarItem.image = UIImage(named: tabBarConstant.icBoard)
+        youthPolicyViewController.tabBarItem.image = UIImage(named: tabBarConstant.icBoard)
         registBlankViewController.tabBarItem.image = UIImage(named: tabBarConstant.icRegist)
         myPageViewController.tabBarItem.image = UIImage(named: tabBarConstant.icMypage)
         
@@ -60,12 +60,12 @@ final class MainTabbarController: UITabBarController {
         myPageViewController.tabBarItem.selectedImage = UIImage(named: tabBarConstant.icMypageSelect)
         
         homeViewController.tabBarItem.title = "홈"
-        forumViewController.tabBarItem.title = "게시판"
+        youthPolicyViewController.tabBarItem.title = "청년정책"
         registBlankViewController.tabBarItem.title = "등록"
         myPageViewController.tabBarItem.title = "마이페이지"
         
         homeViewController.tabBarItem.tag = 0
-        forumViewController.tabBarItem.tag = 1
+        youthPolicyViewController.tabBarItem.tag = 1
         registBlankViewController.tabBarItem.tag = 2
         myPageViewController.tabBarItem.tag = 3
         

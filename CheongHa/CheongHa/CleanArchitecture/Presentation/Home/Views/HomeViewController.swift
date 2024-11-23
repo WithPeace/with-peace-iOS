@@ -46,7 +46,7 @@ final class HomeViewController: UIViewController {
         
         snapshot.appendSections(HomeSection.allCases)
         update(section: .myKeywords, items: [
-            .myKeywords(data: .init(myKeywordsData: "menu")),
+            .myKeywords(data: .init(myKeywordsData: "filter")),
             .myKeywords(data: .init(myKeywordsData: "#DeclarativeUI")),
             .myKeywords(data: .init(myKeywordsData: "UIKit")),
             .myKeywords(data: .init(myKeywordsData: "#ModernConcurrency")),
@@ -210,6 +210,13 @@ final class HomeViewController: UIViewController {
     private func cellRegistration() {
         let myKeywordSectionRegistration = UICollectionView.CellRegistration<MyKeywordsCollectionViewCell, HomeSectionItem> { cell, indexPath, itemIdentifier in
             cell.setData(itemIdentifier.data.myKeywordsData)
+            
+            cell.filterButton.rx.tap.bind(with: self) { owner, _ in
+                let filterVC = FilterViewController()
+                filterVC.modalPresentationStyle = .overFullScreen
+                owner.present(filterVC, animated: false)
+            }
+            .disposed(by: cell.disposeBag)
         }
         
         let hotPolicySectionRegistration = UICollectionView.CellRegistration<HotPolicyCollectionViewCell, HomeSectionItem> { cell, indexPath, itemIdentifier in

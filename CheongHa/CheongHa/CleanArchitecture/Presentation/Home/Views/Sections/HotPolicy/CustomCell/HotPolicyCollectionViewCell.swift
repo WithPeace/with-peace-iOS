@@ -28,7 +28,6 @@ final class HotPolicyCollectionViewCell: BaseCollectionViewCell {
     override init(frame: CGRect) {
         super.init(frame: .zero)
                 
-        contentView.addSubview(flexContainerView)
         flexContainerView.flex.define {
             $0.addItem(policyImageView)
                 .width(100%)

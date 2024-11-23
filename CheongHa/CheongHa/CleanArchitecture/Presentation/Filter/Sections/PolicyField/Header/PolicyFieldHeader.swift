@@ -1,14 +1,14 @@
 //
-//  CommunityHeader.swift
+//  PolicyFieldHeader.swift
 //  CheongHa
 //
-//  Created by SUCHAN CHANG on 11/12/24.
+//  Created by SUCHAN CHANG on 11/21/24.
 //
 
 import UIKit
 
-final class CommunityHeader: BaseHomeFilterCollectionViewHeader {
-        
+final class PolicyFieldHeader: BaseHomeFilterCollectionViewHeader {
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         
@@ -21,6 +21,6 @@ final class CommunityHeader: BaseHomeFilterCollectionViewHeader {
     override func configureLabel() {
         super.configureLabel()
         
-        label.text = "커뮤니티"
+        label.text = "정책분야"
     }
 }
