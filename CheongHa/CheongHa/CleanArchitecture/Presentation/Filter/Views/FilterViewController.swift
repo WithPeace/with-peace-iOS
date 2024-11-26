@@ -11,7 +11,7 @@ import FlexLayout
 import SnapKit
 import RxSwift
 import RxCocoa
-
+import RxAppState
 
 final class FilterViewController: UIViewController {
     
@@ -55,7 +55,6 @@ final class FilterViewController: UIViewController {
         return collectionView
     }()
     private var dataSource: UICollectionViewDiffableDataSource<FilterSection, FilterTagItem>!
-    private var snapshot = NSDiffableDataSourceSnapshot<FilterSection, FilterTagItem>()
     
     private let bottomContainerView = UIView()
     private let cancelAllButton: UIButton = {
@@ -76,38 +75,20 @@ final class FilterViewController: UIViewController {
         return button
     }()
     
-    private let intialPolicyFieldSectionDatas: [FilterTagItem] = [
-        .init(title: "일자리"),
-        .init(title: "주거"),
-        .init(title: "교육"),
-        .init(title: "복지,문화"),
-        .init(title: "참여,권리")
-    ]
+    private let viewModel: FilterViewModel
+        
+    // MARK: - User Event Observables
+    private let addPolicyTagRelay = PublishRelay<String>()
+    private let addRegionTagRelay = PublishRelay<String>()
     
-    private lazy var currentPolicyFieldSectionDatas: [FilterTagItem] = intialPolicyFieldSectionDatas
+    init(viewModel: FilterViewModel) {
+        self.viewModel = viewModel
+        super.init(nibName: nil, bundle: nil)
+    }
     
-    private let initialRegionSectionDatas: [FilterTagItem] = [
-        .init(title: "중앙부처"),
-        .init(title: "서울"),
-        .init(title: "부산"),
-        .init(title: "대구"),
-        .init(title: "인천"),
-        .init(title: "광주"),
-        .init(title: "대전"),
-        .init(title: "울산"),
-        .init(title: "경기"),
-        .init(title: "강원"),
-        .init(title: "충북"),
-        .init(title: "충남"),
-        .init(title: "전북"),
-        .init(title: "전남"),
-        .init(title: "경북"),
-        .init(title: "경남"),
-        .init(title: "제주"),
-        .init(title: "세종")
-    ]
-    
-    private lazy var currentRegionSectionDatas: [FilterTagItem] = initialRegionSectionDatas
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -138,14 +119,8 @@ final class FilterViewController: UIViewController {
             .justifyContent(.spaceBetween)
             .margin(16, 24)
         }
-                
-        // MARK: - collectionView 구성
-        cellRegistration()
-        snapshot.appendSections(FilterSection.allCases)
-        update(section: .policyField, items: intialPolicyFieldSectionDatas)
-        update(section: .separator, items: [.init()])
-        update(section: .region, items: initialRegionSectionDatas)
         
+        cellRegistration()
         bind()
     }
     
@@ -156,12 +131,6 @@ final class FilterViewController: UIViewController {
         bottomSheetView.pin.left().right().bottom()
         containerView.pin.all()
         containerView.flex.layout()
-    }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        
-        showBottomSheet()
     }
     
     private func showBottomSheet() {
@@ -286,16 +255,8 @@ final class FilterViewController: UIViewController {
             cell.setData(itemIdentifier)
             cell.tapGesture.rx.event
                 .bind(with: self) { owner, tapGesture in
-                    let updatedPolicyFieldSectionDatas = owner.currentPolicyFieldSectionDatas.map {
-                        var mutablePolicyFieldSectionData = $0
-                        if mutablePolicyFieldSectionData.title == cell.tagLabel.text {
-                            mutablePolicyFieldSectionData.isSelected.toggle()
-                        }
-                        return mutablePolicyFieldSectionData
-                    }
-                    owner.snapshot.deleteItems(owner.currentPolicyFieldSectionDatas)
-                    owner.currentPolicyFieldSectionDatas = updatedPolicyFieldSectionDatas
-                    owner.update(section: .policyField, items: owner.currentPolicyFieldSectionDatas)
+                    guard let selectedPolicyTag = cell.tagLabel.text else { return }
+                    owner.addPolicyTagRelay.accept(selectedPolicyTag)
                 }
                 .disposed(by: cell.disposeBag)
         }
@@ -307,16 +268,8 @@ final class FilterViewController: UIViewController {
             cell.setData(itemIdentifier)
             cell.tapGesture.rx.event
                 .bind(with: self) { owner, tapGesture in
-                    let updatedRegionSectionDatas = owner.currentRegionSectionDatas.map {
-                        var mutableRegionSectionData = $0
-                        if mutableRegionSectionData.title == cell.tagLabel.text {
-                            mutableRegionSectionData.isSelected.toggle()
-                        }
-                        return mutableRegionSectionData
-                    }
-                    owner.snapshot.deleteItems(owner.currentRegionSectionDatas)
-                    owner.currentRegionSectionDatas = updatedRegionSectionDatas
-                    owner.update(section: .region, items: owner.currentRegionSectionDatas)
+                    guard let selectedRegionTag = cell.tagLabel.text else { return }
+                    owner.addRegionTagRelay.accept(selectedRegionTag)
                 }
                 .disposed(by: cell.disposeBag)
         }
@@ -360,28 +313,49 @@ final class FilterViewController: UIViewController {
             }
         }
     }
-    
-    private func update(section: FilterSection, items: [FilterTagItem]) {
-        snapshot.appendItems(items, toSection: section)
+
+    private func apply(with sections: [FilterSection: [FilterTagItem]]) {
+        var snapshot = NSDiffableDataSourceSnapshot<FilterSection, FilterTagItem>()
+        snapshot.appendSections(FilterSection.allCases)
+        sections.forEach {
+            snapshot.appendItems($0.value, toSection: $0.key)
+        }
         dataSource.apply(snapshot, animatingDifferences: false)
     }
     
     private func bind() {
+
+        let input = FilterViewModel.Input(
+            viewWillApear: rx.viewWillAppear,
+            addPolicyTag: addPolicyTagRelay.asObservable(),
+            addRegionTag: addRegionTagRelay.asObservable(),
+            cancelAllButtonTap: cancelAllButton.rx.tap.asObservable(),
+            searchButtonTap: searchButton.rx.tap.asObservable()
+        )
+        
+        let output = viewModel.transform(input: input)
+        
+        output.sections
+            .drive(with: self) { owner, sections in
+                owner.apply(with: sections)
+            }
+            .disposed(by: disposeBag)
+        
         closeButton.rx.tap
             .bind(with: self) { owner, _ in
                 owner.hideBottomSheet()
             }
             .disposed(by: disposeBag)
         
-        cancelAllButton.rx.tap
+        rx.viewDidAppear
             .bind(with: self) { owner, _ in
-                owner.snapshot.deleteAllItems()
-                owner.snapshot.appendSections(FilterSection.allCases)
-                owner.update(section: .policyField, items: owner.intialPolicyFieldSectionDatas)
-                owner.update(section: .separator, items: [.init()])
-                owner.update(section: .region, items: owner.initialRegionSectionDatas)
-                owner.currentPolicyFieldSectionDatas = owner.intialPolicyFieldSectionDatas
-                owner.currentRegionSectionDatas = owner.initialRegionSectionDatas
+                owner.showBottomSheet()
+            }
+            .disposed(by: disposeBag)
+        
+        input.searchButtonTap
+            .bind(with: self) { owner, _ in
+                owner.hideBottomSheet()
             }
             .disposed(by: disposeBag)
     }

@@ -46,6 +46,7 @@
 		00B683992CE1F6E9005110D2 /* FlexLayout in Frameworks */ = {isa = PBXBuildFile; productRef = 00B683982CE1F6E9005110D2 /* FlexLayout */; };
 		00B6839C2CE1F771005110D2 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 00B6839B2CE1F771005110D2 /* SnapKit */; };
 		00B683A62CE1F90B005110D2 /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00B683A52CE1F90B005110D2 /* HomeViewModel.swift */; };
+		00B7AF5E2CF4B20E00AC8A04 /* FilterViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00B7AF5D2CF4B20E00AC8A04 /* FilterViewModel.swift */; };
 		00C2A5142CE333E500EFF471 /* Differentiator in Frameworks */ = {isa = PBXBuildFile; productRef = 00C2A5132CE333E500EFF471 /* Differentiator */; };
 		00C2A5162CE333E500EFF471 /* RxDataSources in Frameworks */ = {isa = PBXBuildFile; productRef = 00C2A5152CE333E500EFF471 /* RxDataSources */; };
 		00C2A51A2CE3389200EFF471 /* HotPolicyCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00C2A5192CE3389200EFF471 /* HotPolicyCollectionViewCell.swift */; };
@@ -56,6 +57,8 @@
 		00C2A5282CE396B400EFF471 /* HotPolicyHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00C2A5272CE396B400EFF471 /* HotPolicyHeader.swift */; };
 		00C2A52A2CE3973800EFF471 /* PolicyRecommendationHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00C2A5292CE3973800EFF471 /* PolicyRecommendationHeader.swift */; };
 		00C2A52C2CE3974D00EFF471 /* CommunityHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00C2A52B2CE3974D00EFF471 /* CommunityHeader.swift */; };
+		00C8B7CC2CF5B72D00953377 /* InMemoryRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00C8B7CB2CF5B72D00953377 /* InMemoryRepository.swift */; };
+		00C8B7CE2CF5B87C00953377 /* DataExchangeUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00C8B7CD2CF5B87C00953377 /* DataExchangeUseCase.swift */; };
 		00DB008D2CDB52170012B2B1 /* ProfileRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00DB008C2CDB52170012B2B1 /* ProfileRouter.swift */; };
 		00DB008F2CDB5A0B0012B2B1 /* BaseTargetType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00DB008E2CDB5A0B0012B2B1 /* BaseTargetType.swift */; };
 		00DE3F442CDCD1E000CAC3D8 /* ProfileDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00DE3F432CDCD1E000CAC3D8 /* ProfileDTO.swift */; };
@@ -216,6 +219,7 @@
 		00A918102CF156AD0072F96D /* SeparatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeparatorView.swift; sourceTree = "<group>"; };
 		00B683922CE1F640005110D2 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		00B683A52CE1F90B005110D2 /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
+		00B7AF5D2CF4B20E00AC8A04 /* FilterViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterViewModel.swift; sourceTree = "<group>"; };
 		00C2A5192CE3389200EFF471 /* HotPolicyCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HotPolicyCollectionViewCell.swift; sourceTree = "<group>"; };
 		00C2A51E2CE3601200EFF471 /* MyKeywordsCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyKeywordsCollectionViewCell.swift; sourceTree = "<group>"; };
 		00C2A5202CE3607300EFF471 /* UICollectionViewCell+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UICollectionViewCell+Ext.swift"; sourceTree = "<group>"; };
@@ -224,6 +228,8 @@
 		00C2A5272CE396B400EFF471 /* HotPolicyHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HotPolicyHeader.swift; sourceTree = "<group>"; };
 		00C2A5292CE3973800EFF471 /* PolicyRecommendationHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PolicyRecommendationHeader.swift; sourceTree = "<group>"; };
 		00C2A52B2CE3974D00EFF471 /* CommunityHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommunityHeader.swift; sourceTree = "<group>"; };
+		00C8B7CB2CF5B72D00953377 /* InMemoryRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InMemoryRepository.swift; sourceTree = "<group>"; };
+		00C8B7CD2CF5B87C00953377 /* DataExchangeUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataExchangeUseCase.swift; sourceTree = "<group>"; };
 		00DB008C2CDB52170012B2B1 /* ProfileRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileRouter.swift; sourceTree = "<group>"; };
 		00DB008E2CDB5A0B0012B2B1 /* BaseTargetType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseTargetType.swift; sourceTree = "<group>"; };
 		00DE3F432CDCD1E000CAC3D8 /* ProfileDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileDTO.swift; sourceTree = "<group>"; };
@@ -605,6 +611,7 @@
 				00DE3F452CDCD38100CAC3D8 /* ProfileRepository.swift */,
 				0025D4432CEC672400E3BBD9 /* PolicyRepository.swift */,
 				0025D44F2CEC7BCC00E3BBD9 /* PostRepository.swift */,
+				00C8B7CB2CF5B72D00953377 /* InMemoryRepository.swift */,
 			);
 			path = Repository;
 			sourceTree = "<group>";
@@ -625,6 +632,7 @@
 				00DE3F472CDCD73200CAC3D8 /* ProfileUsecase.swift */,
 				0025D4452CEC682300E3BBD9 /* PolicyUsecase.swift */,
 				0025D4512CEC7C8500E3BBD9 /* PostUsecase.swift */,
+				00C8B7CD2CF5B87C00953377 /* DataExchangeUseCase.swift */,
 			);
 			path = Usecase;
 			sourceTree = "<group>";
@@ -656,10 +664,8 @@
 		008497C72CEF047F004E6FA7 /* Filter */ = {
 			isa = PBXGroup;
 			children = (
-				00A918102CF156AD0072F96D /* SeparatorView.swift */,
-				008497C82CEF048A004E6FA7 /* FilterViewController.swift */,
-				008497DF2CEF3827004E6FA7 /* FilterSection.swift */,
-				008497D42CEF3777004E6FA7 /* Sections */,
+				00B7AF5F2CF4B47100AC8A04 /* Views */,
+				00B7AF602CF4B47900AC8A04 /* ViewModels */,
 			);
 			path = Filter;
 			sourceTree = "<group>";
@@ -747,6 +753,25 @@
 				006E63852CE87FFC00CF2F45 /* ViewModels */,
 			);
 			path = Home;
+			sourceTree = "<group>";
+		};
+		00B7AF5F2CF4B47100AC8A04 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				008497C82CEF048A004E6FA7 /* FilterViewController.swift */,
+				00A918102CF156AD0072F96D /* SeparatorView.swift */,
+				008497DF2CEF3827004E6FA7 /* FilterSection.swift */,
+				008497D42CEF3777004E6FA7 /* Sections */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		00B7AF602CF4B47900AC8A04 /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				00B7AF5D2CF4B20E00AC8A04 /* FilterViewModel.swift */,
+			);
+			path = ViewModels;
 			sourceTree = "<group>";
 		};
 		00C2A5262CE395B100EFF471 /* Header */ = {
@@ -1419,6 +1444,7 @@
 				F671A9C82BA0173E002808DA /* HTTPMethod.swift in Sources */,
 				F69011DF2BB5A9B2009A8087 /* CustomAlertSheetView.swift in Sources */,
 				F667FD882BAC2287005AAAB7 /* CustomPhotoAlbumDetailViewController.swift in Sources */,
+				00C8B7CC2CF5B72D00953377 /* InMemoryRepository.swift in Sources */,
 				F65040AE2C208EAC00B14D84 /* ProfileEditViewModel.swift in Sources */,
 				F65FFA9B2C075FAA009A6FB3 /* YouthDetailContentView.swift in Sources */,
 				00839A162CD7C6640024337F /* SocialLoginRouter.swift in Sources */,
@@ -1437,11 +1463,13 @@
 				008497D32CEF3059004E6FA7 /* SeparatorCell.swift in Sources */,
 				0025D44E2CEC7B6D00E3BBD9 /* PostRouter.swift in Sources */,
 				00C2A5232CE360EF00EFF471 /* PolicyRecommendationCollectionViewCell.swift in Sources */,
+				00C8B7CE2CF5B87C00953377 /* DataExchangeUseCase.swift in Sources */,
 				008497CD2CEF1807004E6FA7 /* RegionCollectionViewCell.swift in Sources */,
 				00B683932CE1F640005110D2 /* HomeViewController.swift in Sources */,
 				F69011DD2BB4685C009A8087 /* CustomAlertSheetViewController.swift in Sources */,
 				F65FFA972C074914009A6FB3 /* YouthDetailTableViewController.swift in Sources */,
 				0025D4442CEC672400E3BBD9 /* PolicyRepository.swift in Sources */,
+				00B7AF5E2CF4B20E00AC8A04 /* FilterViewModel.swift in Sources */,
 				002A52BA2CEDD716007E9FD6 /* BaseCollectionViewCell.swift in Sources */,
 				F65FFA992C075F1B009A6FB3 /* YouthDetailViewControllerWithTableView.swift in Sources */,
 				63C52F972BA962590072DE18 /* PostPhotoView.swift in Sources */,

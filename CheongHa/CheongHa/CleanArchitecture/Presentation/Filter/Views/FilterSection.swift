@@ -14,7 +14,7 @@ enum FilterSection: Int, CaseIterable {
 }
 
 struct FilterTagItem: Hashable {
-    var title: String
+    let title: String
     var isSelected: Bool
     
     init(

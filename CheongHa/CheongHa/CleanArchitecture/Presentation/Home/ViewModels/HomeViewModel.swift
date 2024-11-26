@@ -14,21 +14,26 @@ typealias HomeDatasType = (hotPolicies: [HomeSectionItem]?, recommendedPolicies:
 final class HomeViewModel: ViewModelType {
     struct Input {
         let viewWillAppearTrigger: Observable<Bool>
+        let sendCurrentFilterKeywordsTap: Observable<Void>
     }
     
     struct Output {
         let homeDatas: Driver<HomeDatasType>
+        let selectedFilterKeywords: Driver<[HomeSectionItem]>
     }
     
     private let policyUsecase: PolicyUsecaseProtocol
     private let postUsecase: PostUsecaseProtocol
+    let dataExchangeUsecase: DataExchangeUseCaseProtocol
     
     init(
         policyUsecase: PolicyUsecaseProtocol,
-        postUsecase: PostUsecaseProtocol
+        postUsecase: PostUsecaseProtocol,
+        dataExchangeUsecase: DataExchangeUseCaseProtocol
     ) {
         self.policyUsecase = policyUsecase
         self.postUsecase = postUsecase
+        self.dataExchangeUsecase = dataExchangeUsecase
     }
     
     var disposeBag = DisposeBag()
@@ -80,8 +85,16 @@ final class HomeViewModel: ViewModelType {
             return (hotPolicies, recommendedPolicies, recentPosts)
         })
         
+        let selectedFilterKeywords = dataExchangeUsecase.observeData()
+            .map { storedSelectedTags in
+                let filterTag = [HomeSectionItem.myKeywords(data: .init(myKeywordsData: "filter"))]
+                let convertedTags = storedSelectedTags.map { HomeSectionItem.myKeywords(data: .init(myKeywordsData: $0)) }
+                return filterTag + convertedTags
+            }
+        
         return Output(
-            homeDatas: homeDatas.asDriver(onErrorJustReturn: (nil, nil, nil))
+            homeDatas: homeDatas.asDriver(onErrorJustReturn: (nil, nil, nil)),
+            selectedFilterKeywords: selectedFilterKeywords.asDriver(onErrorJustReturn: [])
         )
     }
 }

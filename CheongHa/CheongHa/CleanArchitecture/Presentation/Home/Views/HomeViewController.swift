@@ -21,6 +21,9 @@ final class HomeViewController: UIViewController {
     
     private let viewModel: HomeViewModel
     
+    // MARK: - User Event Observables
+    private let sendCurrentFilterKeywordsTap = PublishRelay<Void>()
+    
     init(viewModel: HomeViewModel) {
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
@@ -47,14 +50,6 @@ final class HomeViewController: UIViewController {
         snapshot.appendSections(HomeSection.allCases)
         update(section: .myKeywords, items: [
             .myKeywords(data: .init(myKeywordsData: "filter")),
-            .myKeywords(data: .init(myKeywordsData: "#DeclarativeUI")),
-            .myKeywords(data: .init(myKeywordsData: "UIKit")),
-            .myKeywords(data: .init(myKeywordsData: "#ModernConcurrency")),
-            .myKeywords(data: .init(myKeywordsData: "#SwiftUI")),
-            .myKeywords(data: .init(myKeywordsData: "#CoreData")),
-            .myKeywords(data: .init(myKeywordsData: "#Combine")),
-            .myKeywords(data: .init(myKeywordsData: "#Combine")),
-            .myKeywords(data: .init(myKeywordsData: "#ModernConcurrency")),
         ])
     }
     
@@ -212,7 +207,7 @@ final class HomeViewController: UIViewController {
             cell.setData(itemIdentifier.data.myKeywordsData)
             
             cell.filterButton.rx.tap.bind(with: self) { owner, _ in
-                let filterVC = FilterViewController()
+                let filterVC = FilterViewController(viewModel: FilterViewModel(dataExchangeUsecas: owner.viewModel.dataExchangeUsecase))
                 filterVC.modalPresentationStyle = .overFullScreen
                 owner.present(filterVC, animated: false)
             }
@@ -294,7 +289,10 @@ final class HomeViewController: UIViewController {
     
     private func bind() {
         
-        let input = HomeViewModel.Input(viewWillAppearTrigger: rx.viewWillAppear.take(1))
+        let input = HomeViewModel.Input(
+            viewWillAppearTrigger: rx.viewWillAppear.take(1),
+            sendCurrentFilterKeywordsTap: sendCurrentFilterKeywordsTap.asObservable()
+        )
         
         let output = viewModel.transform(input: input)
         
@@ -308,6 +306,15 @@ final class HomeViewController: UIViewController {
                 owner.update(section: .policyRecommendation, items: recommendedPolicies)
                 owner.update(section: .community, items: recentPosts)
             })
+            .disposed(by: disposeBag)
+
+        output.selectedFilterKeywords
+            .drive(with: self) { owner, selectedFilterKeywords in
+                owner.snapshot.deleteSections([.myKeywords])
+                owner.snapshot.appendSections([.myKeywords])
+                owner.snapshot.moveSection(.myKeywords, beforeSection: .hotPolicy)
+                owner.update(section: .myKeywords, items: selectedFilterKeywords)
+            }
             .disposed(by: disposeBag)
     }
     

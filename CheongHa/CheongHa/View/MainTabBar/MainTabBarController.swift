@@ -25,6 +25,9 @@ final class MainTabbarController: UITabBarController {
                     postRepository: PostRepository(
                         keychain: keychain,
                         network: network)
+                ),
+                dataExchangeUsecase: DataExchangeUsecase(
+                    repository: InMemoryRepository()
                 )
             )
         )

@@ -61,7 +61,7 @@ final class MyKeywordsCollectionViewCell: UICollectionViewCell {
             filterButton.removeFromSuperview()
             filterButton.snp.removeConstraints()
             contentView.addSubview(tagLabel)
-            tagLabel.text = data
+            tagLabel.text = "#\(data)"
             tagLabel.snp.makeConstraints {
                 $0.top.bottom.equalToSuperview().inset(6)
                 $0.leading.trailing.equalToSuperview().inset(8)
