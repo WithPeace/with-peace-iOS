@@ -32,8 +32,19 @@ final class MainTabbarController: UITabBarController {
             )
         )
     )
-//    private let youthPolicyViewController = UINavigationController(rootViewController: YouthPolicyViewController())
-    private let youthPolicyViewController = BlankPageViewController()
+    private lazy var youthPolicyViewController = UINavigationController(
+        rootViewController: YouthPolicyViewController(
+            viewModel: YouthPolicyViewModel(
+                policyUsecase: PolicyUsecase(
+                    policyRepository: PolicyRepository(
+                        keychain: keychain,
+                        network: network
+                    )
+                )
+            )
+        )
+    )
+    //    private let youthPolicyViewController = BlankPageViewController()
     private let registBlankViewController = BlankPageViewController()
     private let myPageViewController = UINavigationController(rootViewController: MyPageViewController())
     
@@ -59,7 +70,7 @@ final class MainTabbarController: UITabBarController {
         myPageViewController.tabBarItem.image = UIImage(named: tabBarConstant.icMypage)
         
         homeViewController.tabBarItem.selectedImage = UIImage(named: tabBarConstant.icHomeSelect)
-//        forumViewController.tabBarItem.selectedImage = UIImage(named: tabBarConstant.icBoardSelect)
+        //        forumViewController.tabBarItem.selectedImage = UIImage(named: tabBarConstant.icBoardSelect)
         myPageViewController.tabBarItem.selectedImage = UIImage(named: tabBarConstant.icMypageSelect)
         
         homeViewController.tabBarItem.title = "홈"
@@ -88,22 +99,22 @@ final class MainTabbarController: UITabBarController {
 
 extension MainTabbarController: UITabBarControllerDelegate {
     // TODO: 3번째 Tab 클릭 시 present 로직
-//    func tabBarController(_ tabBarController: UITabBarController, didSelect viewController: UIViewController) {
-//        if viewController.tabBarItem.tag == 2 {
-//            let postVC = PostViewController()
-//            postVC.viewModel.postCreated
-//                .subscribe(onNext: { [weak self] newPost in
-//                    self?.forumViewController.addNewPost(newPost)
-//                })
-//                .disposed(by: postVC.disposeBag)
-//            
-//            postVC.hidesBottomBarWhenPushed = true
-//            postVC.modalPresentationStyle = .fullScreen
-//            self.present(postVC, animated: true, completion: nil)
-//            
-//            self.selectedIndex = beforeSelectedTag
-//        } else {
-//            beforeSelectedTag = viewController.tabBarItem.tag
-//        }
-//    }
+    //    func tabBarController(_ tabBarController: UITabBarController, didSelect viewController: UIViewController) {
+    //        if viewController.tabBarItem.tag == 2 {
+    //            let postVC = PostViewController()
+    //            postVC.viewModel.postCreated
+    //                .subscribe(onNext: { [weak self] newPost in
+    //                    self?.forumViewController.addNewPost(newPost)
+    //                })
+    //                .disposed(by: postVC.disposeBag)
+    //
+    //            postVC.hidesBottomBarWhenPushed = true
+    //            postVC.modalPresentationStyle = .fullScreen
+    //            self.present(postVC, animated: true, completion: nil)
+    //
+    //            self.selectedIndex = beforeSelectedTag
+    //        } else {
+    //            beforeSelectedTag = viewController.tabBarItem.tag
+    //        }
+    //    }
 }

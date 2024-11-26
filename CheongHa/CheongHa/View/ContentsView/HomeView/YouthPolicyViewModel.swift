@@ -30,7 +30,18 @@ final class YouthPolicyViewModel {
     let refreshControll = PublishSubject<Void>()
     let popModal = PublishSubject<YouthFilterData>()
     
-    init() {
+    private let policyUsecase: PolicyUsecaseProtocol
+    
+    init(policyUsecase: PolicyUsecaseProtocol) {
+        self.policyUsecase = policyUsecase
+        
+        let query = FetchPoliciesQuery(pageIndex: 1, display: 10)
+        policyUsecase.fetchPolicies(api: .fetchPolicies(query: query)).asObservable()
+            .subscribe { policyDTO in
+                print("policyDTO>>>>>>>>>>", policyDTO)
+            }
+            .disposed(by: disposeBag)
+        
         let requesting = PublishSubject<Void>()
         let refreshing = PublishSubject<Void>()
         

@@ -59,6 +59,7 @@
 		00C2A52C2CE3974D00EFF471 /* CommunityHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00C2A52B2CE3974D00EFF471 /* CommunityHeader.swift */; };
 		00C8B7CC2CF5B72D00953377 /* InMemoryRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00C8B7CB2CF5B72D00953377 /* InMemoryRepository.swift */; };
 		00C8B7CE2CF5B87C00953377 /* DataExchangeUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00C8B7CD2CF5B87C00953377 /* DataExchangeUseCase.swift */; };
+		00C8B7D12CF6161400953377 /* FetchPoliciesQuery.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00C8B7D02CF6161400953377 /* FetchPoliciesQuery.swift */; };
 		00DB008D2CDB52170012B2B1 /* ProfileRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00DB008C2CDB52170012B2B1 /* ProfileRouter.swift */; };
 		00DB008F2CDB5A0B0012B2B1 /* BaseTargetType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00DB008E2CDB5A0B0012B2B1 /* BaseTargetType.swift */; };
 		00DE3F442CDCD1E000CAC3D8 /* ProfileDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00DE3F432CDCD1E000CAC3D8 /* ProfileDTO.swift */; };
@@ -230,6 +231,7 @@
 		00C2A52B2CE3974D00EFF471 /* CommunityHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommunityHeader.swift; sourceTree = "<group>"; };
 		00C8B7CB2CF5B72D00953377 /* InMemoryRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InMemoryRepository.swift; sourceTree = "<group>"; };
 		00C8B7CD2CF5B87C00953377 /* DataExchangeUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataExchangeUseCase.swift; sourceTree = "<group>"; };
+		00C8B7D02CF6161400953377 /* FetchPoliciesQuery.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchPoliciesQuery.swift; sourceTree = "<group>"; };
 		00DB008C2CDB52170012B2B1 /* ProfileRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileRouter.swift; sourceTree = "<group>"; };
 		00DB008E2CDB5A0B0012B2B1 /* BaseTargetType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseTargetType.swift; sourceTree = "<group>"; };
 		00DE3F432CDCD1E000CAC3D8 /* ProfileDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileDTO.swift; sourceTree = "<group>"; };
@@ -655,7 +657,7 @@
 				00DB008E2CDB5A0B0012B2B1 /* BaseTargetType.swift */,
 				00839A202CD7C8420024337F /* LoginRouter.swift */,
 				00DB008C2CDB52170012B2B1 /* ProfileRouter.swift */,
-				0025D4412CEC663100E3BBD9 /* PolicyRouter.swift */,
+				00C8B7D22CF6164F00953377 /* Policy */,
 				0025D44D2CEC7B6D00E3BBD9 /* PostRouter.swift */,
 			);
 			path = Routers;
@@ -781,6 +783,23 @@
 				009E02932CEB76E30093EFBF /* MyKeywordsHeader.swift */,
 			);
 			path = Header;
+			sourceTree = "<group>";
+		};
+		00C8B7CF2CF615F100953377 /* Queries */ = {
+			isa = PBXGroup;
+			children = (
+				00C8B7D02CF6161400953377 /* FetchPoliciesQuery.swift */,
+			);
+			path = Queries;
+			sourceTree = "<group>";
+		};
+		00C8B7D22CF6164F00953377 /* Policy */ = {
+			isa = PBXGroup;
+			children = (
+				0025D4412CEC663100E3BBD9 /* PolicyRouter.swift */,
+				00C8B7CF2CF615F100953377 /* Queries */,
+			);
+			path = Policy;
 			sourceTree = "<group>";
 		};
 		00DB008A2CDB51A00012B2B1 /* Auth */ = {
@@ -1341,6 +1360,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				00C8B7D12CF6161400953377 /* FetchPoliciesQuery.swift in Sources */,
 				630323632BB5590000B16E7C /* ForumPostViewCell.swift in Sources */,
 				F66959652C3F4E2600644DE9 /* WebViewAssistantViewController.swift in Sources */,
 				F61B51622BECF5B400812C8D /* YouthPolicyViewModel.swift in Sources */,

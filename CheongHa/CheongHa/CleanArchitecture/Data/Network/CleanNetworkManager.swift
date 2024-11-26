@@ -26,7 +26,6 @@ final class CleanNetworkManager: NetworkManagerProtocol {
             .filter(statusCodes: 200...500)
             .map(decodingType.self)
             .catchExpiredToken(keychain)
-            
     }
     
     private func performReqeust<T: TargetType>(_ target: T) -> Single<Response> {

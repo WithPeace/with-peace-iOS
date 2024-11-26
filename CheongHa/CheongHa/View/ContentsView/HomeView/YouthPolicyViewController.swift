@@ -10,7 +10,7 @@ import RxSwift
 
 final class YouthPolicyViewController: UIViewController {
     
-    private let viewModel = YouthPolicyViewModel()
+    private let viewModel: YouthPolicyViewModel
     private let disposeBag = DisposeBag()
     private var youthDataSource = [YouthPolicy]()
     
@@ -42,7 +42,16 @@ final class YouthPolicyViewController: UIViewController {
         
         return view
     }()
-        
+    
+    init(viewModel: YouthPolicyViewModel) {
+        self.viewModel = viewModel
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
