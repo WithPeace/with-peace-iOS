@@ -44,6 +44,7 @@ final class YouthPolicyViewModel {
         fetchAdditional = requesting.asObserver()
         refreshAction = refreshing.asObserver()
         
+        //최초 진입 시 데이터 fetch
         let query = FetchPoliciesQuery(pageIndex: nowPageIndex, display: fetchDisplayDataCount)
         policyUsecase.fetchPolicies(api: .fetchPolicies(query: query)).asObservable()
             .subscribe(with: self) { owner, policyDTO in
@@ -72,6 +73,27 @@ final class YouthPolicyViewModel {
 //            }
 //        }
         
+        // 필터 상태에 따른 fetch (데이터 추가)
+        fetchAdditional
+            .debounce(.seconds(1), scheduler: MainScheduler.instance)
+            .withUnretained(self)
+            .flatMap { owner, filterData in
+                let query = FetchPoliciesQuery(
+//                    region: "",
+//                    classification: "",
+                    pageIndex: owner.nowPageIndex,
+                    display: owner.fetchDisplayDataCount
+                )
+                return policyUsecase.fetchPolicies(api: .fetchPolicies(query: query))
+            }
+            .subscribe(with: self) { owner, policyDTO in
+                owner.nowPageIndex += 1
+                
+                guard let data = policyDTO.data else { return }
+                owner.youthPolicies.accept(owner.youthPolicies.value + data)
+            }
+            .disposed(by: disposeBag)
+        
 //        // 필터 상태에 따른 fetch (데이터 추가)
 //        fetchAdditional.withLatestFrom(changeFilter)
 //            .debounce(.seconds(1), scheduler: MainScheduler.instance)
@@ -97,7 +119,25 @@ final class YouthPolicyViewModel {
 //                    }
 //                }
 //            }).disposed(by: disposeBag)
-//        
+
+        refreshAction
+            .withUnretained(self)
+            .flatMap { owner, _ in
+                let query = FetchPoliciesQuery(
+//                    region: "",
+//                    classification: "",
+                    pageIndex: 1,
+                    display: owner.fetchDisplayDataCount
+                )
+                return policyUsecase.fetchPolicies(api: .fetchPolicies(query: query))
+            }
+            .subscribe(with: self) { owner, policyDTO in
+                guard let data = policyDTO.data else { return }
+                owner.youthPolicies.accept(data)
+                owner.refreshControll.onNext(())
+            }
+            .disposed(by: disposeBag)
+        
 //        // refresh Aciton
 //        
 //        refreshAction.withLatestFrom(changeFilter)

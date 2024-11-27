@@ -122,15 +122,15 @@ final class YouthPolicyViewController: UIViewController {
             }
         }.disposed(by: disposeBag)
         
-        viewModel.popModal.bind { [weak self] youthFilterData in
-                DispatchQueue.main.async {
-                    let viewController = YouthFilterViewController(filterData: youthFilterData)
-                    viewController.delegate = self
-                    
-                    self?.present(viewController, animated: true)
-                }
-            }
-            .disposed(by: disposeBag)
+//        viewModel.popModal.bind { [weak self] youthFilterData in
+//                DispatchQueue.main.async {
+//                    let viewController = YouthFilterViewController(filterData: youthFilterData)
+//                    viewController.delegate = self
+//                    
+//                    self?.present(viewController, animated: true)
+//                }
+//            }
+//            .disposed(by: disposeBag)
     }
 }
 
