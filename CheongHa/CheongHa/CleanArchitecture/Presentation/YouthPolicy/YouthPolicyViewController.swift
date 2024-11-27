@@ -131,6 +131,14 @@ final class YouthPolicyViewController: UIViewController {
 //                }
 //            }
 //            .disposed(by: disposeBag)
+        
+        viewModel.presentPolicyDetailVC.asDriver(onErrorJustReturn: nil)
+            .drive(with: self) { owner, policyDetailData in
+                guard let policyDetailData else { return }
+                let youthDetailViewController = YouthDetailViewController(policyDetail: policyDetailData)
+                owner.navigationController?.pushViewController(youthDetailViewController, animated: true)
+            }
+            .disposed(by: disposeBag)
     }
 }
 
@@ -253,8 +261,9 @@ extension YouthPolicyViewController: UICollectionViewDelegate, UICollectionViewD
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
 //        let youthDetailViewController = YouthDetailViewController(youthPolicy: youthDataSource[indexPath.row])
 //        self.navigationController?.pushViewController(youthDetailViewController, animated: true)
-        let youthDetailViewController = YouthDetailViewController(youthPolicy: youthPolicies[indexPath.row])
-        self.navigationController?.pushViewController(youthDetailViewController, animated: true)
+        viewModel.itemTapped.onNext(youthPolicies[indexPath.row].id)
+//        let youthDetailViewController = YouthDetailViewController(youthPolicy: youthPolicies[indexPath.row])
+//        self.navigationController?.pushViewController(youthDetailViewController, animated: true)
     }
 }
 

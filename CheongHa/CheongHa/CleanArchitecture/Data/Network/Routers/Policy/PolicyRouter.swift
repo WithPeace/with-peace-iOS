@@ -12,6 +12,7 @@ enum PolicyRouter {
     case fetchHotPolicies
     case fetchRecommendedPolicies
     case fetchPolicies(query: FetchPoliciesQuery)
+    case fetchPolicy(params: FetchPolicyParams)
 }
 
 extension PolicyRouter: BaseTargetType {
@@ -24,12 +25,14 @@ extension PolicyRouter: BaseTargetType {
             return "/policies/recommendations"
         case .fetchPolicies:
             return "/policies"
+        case .fetchPolicy(let params):
+            return "/policies/\(params.policyId)"
         }
     }
     
     var method: Moya.Method {
         switch self {
-        case .fetchHotPolicies, .fetchRecommendedPolicies, .fetchPolicies:
+        case .fetchHotPolicies, .fetchRecommendedPolicies, .fetchPolicies, .fetchPolicy:
             return .get
         }
     }
@@ -44,7 +47,7 @@ extension PolicyRouter: BaseTargetType {
                 "display": query.display
             ]
             return .requestParameters(parameters: parameters, encoding: URLEncoding.queryString)
-        case .fetchHotPolicies, .fetchRecommendedPolicies:
+        case .fetchHotPolicies, .fetchRecommendedPolicies, .fetchPolicy:
             return .requestPlain
         }
     }

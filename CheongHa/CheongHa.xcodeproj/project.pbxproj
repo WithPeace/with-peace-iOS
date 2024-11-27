@@ -36,6 +36,8 @@
 		008497D12CEF2D0D004E6FA7 /* RegionHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 008497D02CEF2D0D004E6FA7 /* RegionHeader.swift */; };
 		008497D32CEF3059004E6FA7 /* SeparatorCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 008497D22CEF3059004E6FA7 /* SeparatorCell.swift */; };
 		008497E02CEF3827004E6FA7 /* FilterSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 008497DF2CEF3827004E6FA7 /* FilterSection.swift */; };
+		0084B2B92CF7067300A43C51 /* PolicyDetailDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0084B2B82CF7067300A43C51 /* PolicyDetailDTO.swift */; };
+		0084B2BC2CF7086300A43C51 /* FetchPolicyParams.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0084B2BB2CF7086300A43C51 /* FetchPolicyParams.swift */; };
 		009D0E8A2CDBAFAB007D70C2 /* DTOType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 009D0E892CDBAFAB007D70C2 /* DTOType.swift */; };
 		009D0E8C2CDBB049007D70C2 /* SocialLoginDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 009D0E8B2CDBB049007D70C2 /* SocialLoginDTO.swift */; };
 		009D0E902CDBC2BD007D70C2 /* RefreshedTokenDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 009D0E8F2CDBC2BD007D70C2 /* RefreshedTokenDTO.swift */; };
@@ -213,6 +215,8 @@
 		008497D02CEF2D0D004E6FA7 /* RegionHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegionHeader.swift; sourceTree = "<group>"; };
 		008497D22CEF3059004E6FA7 /* SeparatorCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeparatorCell.swift; sourceTree = "<group>"; };
 		008497DF2CEF3827004E6FA7 /* FilterSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterSection.swift; sourceTree = "<group>"; };
+		0084B2B82CF7067300A43C51 /* PolicyDetailDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PolicyDetailDTO.swift; sourceTree = "<group>"; };
+		0084B2BB2CF7086300A43C51 /* FetchPolicyParams.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchPolicyParams.swift; sourceTree = "<group>"; };
 		009D0E892CDBAFAB007D70C2 /* DTOType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DTOType.swift; sourceTree = "<group>"; };
 		009D0E8B2CDBB049007D70C2 /* SocialLoginDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocialLoginDTO.swift; sourceTree = "<group>"; };
 		009D0E8F2CDBC2BD007D70C2 /* RefreshedTokenDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RefreshedTokenDTO.swift; sourceTree = "<group>"; };
@@ -381,6 +385,7 @@
 			children = (
 				002A52BF2CEE22F7007E9FD6 /* PolicyClassification.swift */,
 				0025D43F2CEC64BE00E3BBD9 /* PolicyDTO.swift */,
+				0084B2B82CF7067300A43C51 /* PolicyDetailDTO.swift */,
 			);
 			path = Policy;
 			sourceTree = "<group>";
@@ -574,6 +579,8 @@
 				002A52B82CEDD701007E9FD6 /* Base */,
 				008497C72CEF047F004E6FA7 /* Filter */,
 				00B683912CE1F62C005110D2 /* Home */,
+				0084B2C12CF7122800A43C51 /* YouthPolicy */,
+				F65A3E212C0AE6260035314B /* YouthDetailView */,
 				00839A142CD7C6510024337F /* Login */,
 			);
 			path = Presentation;
@@ -748,6 +755,50 @@
 			path = CustomCell;
 			sourceTree = "<group>";
 		};
+		0084B2BA2CF7085D00A43C51 /* Params */ = {
+			isa = PBXGroup;
+			children = (
+				0084B2BB2CF7086300A43C51 /* FetchPolicyParams.swift */,
+			);
+			path = Params;
+			sourceTree = "<group>";
+		};
+		0084B2C12CF7122800A43C51 /* YouthPolicy */ = {
+			isa = PBXGroup;
+			children = (
+				F68C9D1B2BA2DE87008CB7E4 /* YouthPolicyViewController.swift */,
+				0084B2C32CF7127F00A43C51 /* SubViews */,
+				0084B2C22CF7125E00A43C51 /* ViewModels */,
+			);
+			path = YouthPolicy;
+			sourceTree = "<group>";
+		};
+		0084B2C22CF7125E00A43C51 /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				F61B51612BECF5B400812C8D /* YouthPolicyViewModel.swift */,
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		0084B2C32CF7127F00A43C51 /* SubViews */ = {
+			isa = PBXGroup;
+			children = (
+				F61B515F2BEB799000812C8D /* YouthListCell.swift */,
+			);
+			path = SubViews;
+			sourceTree = "<group>";
+		};
+		0084B2C42CF712D600A43C51 /* SubViews */ = {
+			isa = PBXGroup;
+			children = (
+				F6F0548D2C0863C000CC7FAF /* YouthDetailTopView.swift */,
+				F65FFA9A2C075FAA009A6FB3 /* YouthDetailContentView.swift */,
+				F6F0548B2C0863A800CC7FAF /* YouthDetailSubTitleView.swift */,
+			);
+			path = SubViews;
+			sourceTree = "<group>";
+		};
 		00B683912CE1F62C005110D2 /* Home */ = {
 			isa = PBXGroup;
 			children = (
@@ -797,6 +848,7 @@
 			isa = PBXGroup;
 			children = (
 				0025D4412CEC663100E3BBD9 /* PolicyRouter.swift */,
+				0084B2BA2CF7085D00A43C51 /* Params */,
 				00C8B7CF2CF615F100953377 /* Queries */,
 			);
 			path = Policy;
@@ -879,9 +931,7 @@
 			isa = PBXGroup;
 			children = (
 				F65FFA8E2C04C3D3009A6FB3 /* YouthDetailViewController.swift */,
-				F6F0548D2C0863C000CC7FAF /* YouthDetailTopView.swift */,
-				F65FFA9A2C075FAA009A6FB3 /* YouthDetailContentView.swift */,
-				F6F0548B2C0863A800CC7FAF /* YouthDetailSubTitleView.swift */,
+				0084B2C42CF712D600A43C51 /* SubViews */,
 			);
 			name = YouthDetailView;
 			sourceTree = "<group>";
@@ -1057,12 +1107,8 @@
 		F68C9D172BA2DD3D008CB7E4 /* HomeView */ = {
 			isa = PBXGroup;
 			children = (
-				F68C9D1B2BA2DE87008CB7E4 /* YouthPolicyViewController.swift */,
-				F61B51612BECF5B400812C8D /* YouthPolicyViewModel.swift */,
 				F6833FF82C00ACB10099F1DA /* YouthFilterData.swift */,
-				F61B515F2BEB799000812C8D /* YouthListCell.swift */,
 				F65A3E222C0AE64D0035314B /* YouthFilterView */,
-				F65A3E212C0AE6260035314B /* YouthDetailView */,
 				F65A3E202C0AE6090035314B /* YouthTableViewController(deprecated) */,
 			);
 			path = HomeView;
@@ -1462,6 +1508,7 @@
 				008497E02CEF3827004E6FA7 /* FilterSection.swift in Sources */,
 				00DB008F2CDB5A0B0012B2B1 /* BaseTargetType.swift in Sources */,
 				F671A9C82BA0173E002808DA /* HTTPMethod.swift in Sources */,
+				0084B2B92CF7067300A43C51 /* PolicyDetailDTO.swift in Sources */,
 				F69011DF2BB5A9B2009A8087 /* CustomAlertSheetView.swift in Sources */,
 				F667FD882BAC2287005AAAB7 /* CustomPhotoAlbumDetailViewController.swift in Sources */,
 				00C8B7CC2CF5B72D00953377 /* InMemoryRepository.swift in Sources */,
@@ -1470,6 +1517,7 @@
 				00839A162CD7C6640024337F /* SocialLoginRouter.swift in Sources */,
 				635BCBB02BA80C7300F0DCBC /* PostNavigationBarView.swift in Sources */,
 				009D0E902CDBC2BD007D70C2 /* RefreshedTokenDTO.swift in Sources */,
+				0084B2BC2CF7086300A43C51 /* FetchPolicyParams.swift in Sources */,
 				F6F0548C2C0863A800CC7FAF /* YouthDetailSubTitleView.swift in Sources */,
 				635BCBB52BA952C600F0DCBC /* TitleCell.swift in Sources */,
 				F68C9D222BA2DEAD008CB7E4 /* MyPageViewController.swift in Sources */,

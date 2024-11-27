@@ -13,6 +13,7 @@ protocol PolicyRepositoryProtocol {
     func fetchHotPolicies(api: PolicyRouter) -> Single<PolicyDTO>
     func fetchRecommendedPolicies(api: PolicyRouter) -> Single<PolicyDTO>
     func fetchPolicies(api: PolicyRouter) -> Single<PolicyDTO>
+    func fetchPolicy(api: PolicyRouter) -> Single<PolicyDetailDTO>
 }
 
 final class PolicyRepository: PolicyRepositoryProtocol {
@@ -38,5 +39,10 @@ final class PolicyRepository: PolicyRepositoryProtocol {
     func fetchPolicies(api: PolicyRouter) -> Single<PolicyDTO> {
         network
             .request(api, decodingType: PolicyDTO.self)
+    }
+    
+    func fetchPolicy(api: PolicyRouter) -> Single<PolicyDetailDTO> {
+        network
+            .request(api, decodingType: PolicyDetailDTO.self)
     }
 }

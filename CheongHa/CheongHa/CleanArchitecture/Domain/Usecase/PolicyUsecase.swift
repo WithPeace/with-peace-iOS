@@ -12,6 +12,7 @@ protocol PolicyUsecaseProtocol {
     func fetchHotPolicies() -> Single<PolicyDTO>
     func fetchRecommendedPolicies() -> Single<PolicyDTO>
     func fetchPolicies(api: PolicyRouter) -> Single<PolicyDTO>
+    func fetchPolicy(api: PolicyRouter) -> Single<PolicyDetailDTO>
 }
 
 final class PolicyUsecase: PolicyUsecaseProtocol {
@@ -32,5 +33,9 @@ final class PolicyUsecase: PolicyUsecaseProtocol {
     
     func fetchPolicies(api: PolicyRouter) -> Single<PolicyDTO> {
         return policyRepository.fetchPolicies(api: api)
+    }
+    
+    func fetchPolicy(api: PolicyRouter) -> Single<PolicyDetailDTO> {
+        return policyRepository.fetchPolicy(api: api)
     }
 }

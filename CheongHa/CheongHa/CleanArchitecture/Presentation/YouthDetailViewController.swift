@@ -76,7 +76,8 @@ final class YouthDetailViewController: UIViewController {
     
     init(
 //        youthPolicy: YouthPolicy,
-        youthPolicy: PolicyData
+//        youthPolicy: PolicyData,
+        policyDetail: PolicyDetailData
     ) {
 //        var polyRlmCdToString = ""
         
@@ -100,15 +101,15 @@ final class YouthDetailViewController: UIViewController {
 //            topView.setImage(UIImage(named: Const.Logo.MainLogo.cheonghaMainLogo))
 //        }
         
-        topView.setImage(UIImage(resource: youthPolicy.classification.policyImage))
+        topView.setImage(UIImage(resource: policyDetail.classification.policyImage))
         
 //        topView.setTitle(youthPolicy.polyBizSjnm)
 //        topView.setBody(youthPolicy.polyItcnCn)
 //        navigationTitle = youthPolicy.polyBizSjnm
         
-        topView.setTitle(youthPolicy.title)
-        topView.setBody(youthPolicy.introduce)
-        navigationTitle = youthPolicy.title
+        topView.setTitle(policyDetail.title)
+        topView.setBody(policyDetail.introduce)
+        navigationTitle = policyDetail.title
         
 //        self.firstView = .init(contents: [("정책번호", youthPolicy.bizId),
 //                                          ("정책분야", polyRlmCdToString),
@@ -125,20 +126,20 @@ final class YouthDetailViewController: UIViewController {
 //                                          ("신청 사이트", youthPolicy.rqutUrla),
 //                                          ("제출 서류", youthPolicy.pstnPaprCn)])
         
-        self.firstView = .init(contents: [("정책번호", youthPolicy.title),
-                                          ("정책분야", youthPolicy.title),
-                                          ("지원내용", youthPolicy.title)])
-        self.secondView = .init(contents: [("연령", youthPolicy.title),
-                                           ("거주지 및 소득", youthPolicy.title),
-                                           ("학력", youthPolicy.title),
-                                           ("특화분야", youthPolicy.title),
-                                           ("추가 단서 사항", youthPolicy.title),
-                                           ("참여 제한 대상", youthPolicy.title)
+        self.firstView = .init(contents: [("정책번호", policyDetail.id),
+                                          ("정책분야", policyDetail.classification.rawValue),
+                                          ("지원내용", policyDetail.applicationDetails)])
+        self.secondView = .init(contents: [("연령", policyDetail.ageInfo),
+                                           ("거주지 및 소득", policyDetail.residenceAndIncome),
+                                           ("학력", policyDetail.education),
+                                           ("특화분야", policyDetail.specialization),
+                                           ("추가 단서 사항", policyDetail.additionalNotes),
+                                           ("참여 제한 대상", policyDetail.participationRestrictions)
                                           ])
-        self.thridView = .init(contents: [("신청절차", youthPolicy.title),
-                                          ("심사 및 발표", youthPolicy.title),
-                                          ("신청 사이트", youthPolicy.title),
-                                          ("제출 서류", youthPolicy.title)])
+        self.thridView = .init(contents: [("신청절차", policyDetail.applicationProcess),
+                                          ("심사 및 발표", policyDetail.screeningAndAnnouncement),
+                                          ("신청 사이트", policyDetail.applicationSite),
+                                          ("제출 서류", policyDetail.submissionDocuments)])
         
         
         super.init(nibName: nil, bundle: nil)

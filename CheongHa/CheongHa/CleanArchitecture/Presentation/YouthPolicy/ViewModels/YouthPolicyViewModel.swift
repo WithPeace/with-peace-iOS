@@ -24,6 +24,7 @@ final class YouthPolicyViewModel {
     let refreshAction: PublishSubject<Void>
     let tapFilterButton = PublishSubject<Void>()
     let changeFilter = BehaviorSubject<YouthFilterData>(value: YouthFilterData())
+    let itemTapped = PublishSubject<String>()
     
     // OUTPUT
     let youthData = BehaviorSubject(value: [YouthPolicy]())
@@ -31,6 +32,7 @@ final class YouthPolicyViewModel {
     let indicatorViewControll = PublishSubject<Void>()
     let refreshControll = PublishSubject<Void>()
     let popModal = PublishSubject<YouthFilterData>()
+    let presentPolicyDetailVC = PublishRelay<PolicyDetailData?>()
     
     private let policyUsecase: PolicyUsecaseProtocol
     
@@ -184,5 +186,17 @@ final class YouthPolicyViewModel {
 //        tapFilterButton.withLatestFrom(changeFilter)
 //            .bind(to: popModal)
 //            .disposed(by: disposeBag)
+        
+        itemTapped
+            .withUnretained(self)
+            .flatMap { owner, selectedPolicyId in
+                let fetchPolicyParams = FetchPolicyParams(policyId: selectedPolicyId)
+                return owner.policyUsecase.fetchPolicy(api: .fetchPolicy(params: fetchPolicyParams))
+            }
+            .subscribe(with: self) { owner, policyDetailDTO in
+                guard let data = policyDetailDTO.data else { return }
+                owner.presentPolicyDetailVC.accept(data)
+            }
+            .disposed(by: disposeBag)
     }
 }
