@@ -13,6 +13,7 @@ final class YouthPolicyViewController: UIViewController {
     private let viewModel: YouthPolicyViewModel
     private let disposeBag = DisposeBag()
     private var youthDataSource = [YouthPolicy]()
+    private var youthPolicies: [PolicyData] = []
     
     private let collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
@@ -87,25 +88,33 @@ final class YouthPolicyViewController: UIViewController {
     }
     
     private func bind() {
+        
+//        viewModel.youthData.bind { [weak self] youthPolicy in
+//            self?.youthDataSource = youthPolicy
+//            DispatchQueue.main.async {
+//                self?.collectionView.reloadData()
+//            }
+//        }.disposed(by: disposeBag)
+//        
+//        viewModel.youthData.bind { [weak self] youthPolicy in
+//            self?.youthDataSource = youthPolicy
+//            DispatchQueue.main.async {
+//                self?.collectionView.reloadData()
+//            }
+//        }.disposed(by: disposeBag)
+        
         viewModel.indicatorViewControll.bind { [weak self] in
             DispatchQueue.main.async {
                 self?.indicatorView.stopAnimating()
             }
         }.disposed(by: disposeBag)
         
-        viewModel.youthData.bind { [weak self] youthPolicy in
-            self?.youthDataSource = youthPolicy
-            DispatchQueue.main.async {
-                self?.collectionView.reloadData()
+        viewModel.youthPolicies.asDriver()
+            .drive(with: self) { owner, youthPolicies in
+                owner.youthPolicies = youthPolicies
+                owner.collectionView.reloadData()
             }
-        }.disposed(by: disposeBag)
-        
-        viewModel.youthData.bind { [weak self] youthPolicy in
-            self?.youthDataSource = youthPolicy
-            DispatchQueue.main.async {
-                self?.collectionView.reloadData()
-            }
-        }.disposed(by: disposeBag)
+            .disposed(by: disposeBag)
         
         viewModel.refreshControll.bind { [weak self] in
             DispatchQueue.main.async {
@@ -159,7 +168,7 @@ extension YouthPolicyViewController {
     
     private func configureLayout() {
         self.view.addSubview(collectionView)
-        self.view.addSubview(indicatorView)
+//        self.view.addSubview(indicatorView)
         
         let safe = self.view.safeAreaLayoutGuide
         
@@ -170,12 +179,12 @@ extension YouthPolicyViewController {
             collectionView.bottomAnchor.constraint(equalTo: safe.bottomAnchor),
         ])
         
-        NSLayoutConstraint.activate([
-            indicatorView.topAnchor.constraint(equalTo: safe.topAnchor),
-            indicatorView.leadingAnchor.constraint(equalTo: safe.leadingAnchor),
-            indicatorView.trailingAnchor.constraint(equalTo: safe.trailingAnchor),
-            indicatorView.bottomAnchor.constraint(equalTo: safe.bottomAnchor),
-        ])
+//        NSLayoutConstraint.activate([
+//            indicatorView.topAnchor.constraint(equalTo: safe.topAnchor),
+//            indicatorView.leadingAnchor.constraint(equalTo: safe.leadingAnchor),
+//            indicatorView.trailingAnchor.constraint(equalTo: safe.trailingAnchor),
+//            indicatorView.bottomAnchor.constraint(equalTo: safe.bottomAnchor),
+//        ])
     }
 }
 
@@ -189,7 +198,8 @@ extension YouthPolicyViewController: UICollectionViewDelegateFlowLayout {
 
 extension YouthPolicyViewController: UICollectionViewDelegate, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        youthDataSource.count
+//        youthDataSource.count
+        youthPolicies.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -199,40 +209,51 @@ extension YouthPolicyViewController: UICollectionViewDelegate, UICollectionViewD
             return UICollectionViewCell()
         }
         
-        let cellData = youthDataSource[indexPath.row]
+//        let cellData = youthDataSource[indexPath.row]
         
-        cell.setTitleLabel(cellData.polyBizSjnm)
-        cell.setBodyLabel(cellData.polyItcnCn)
-        cell.setRegionLabel(cellData.region())
+//        cell.setTitleLabel(cellData.polyBizSjnm)
+//        cell.setBodyLabel(cellData.polyItcnCn)
+//        cell.setRegionLabel(cellData.region())
+//        cell.setAgeLagel(cellData.ageInfo)
+        
+        let cellData = youthPolicies[indexPath.row]
+        
+        cell.setTitleLabel(cellData.title)
+        cell.setBodyLabel(cellData.introduce)
+        cell.setRegionLabel(cellData.region)
         cell.setAgeLagel(cellData.ageInfo)
         
         //TODO: Hard coding 수정
-        var image: UIImage? = UIImage()
+//        var image: UIImage? = UIImage()
+//
+//        switch cellData.polyRlmCd {
+//        case "023010":
+//            image = UIImage(named: Const.Image.MainLogo.jobThumbnail)
+//        case "023020":
+//            image = UIImage(named: Const.Image.MainLogo.livingThumbnail)
+//        case "023030":
+//            image = UIImage(named: Const.Image.MainLogo.eduThumbnail)
+//        case "023040":
+//            image = UIImage(named: Const.Image.MainLogo.cultureThumbnail)
+//        case "023050":
+//            image = UIImage(named: Const.Image.MainLogo.participationThumbnail)
+//        default:
+//            image = UIImage(named: Const.Logo.MainLogo.cheonghaMainLogo)
+//        }
         
-        switch cellData.polyRlmCd {
-        case "023010":
-            image = UIImage(named: Const.Image.MainLogo.jobThumbnail)
-        case "023020":
-            image = UIImage(named: Const.Image.MainLogo.livingThumbnail)
-        case "023030":
-            image = UIImage(named: Const.Image.MainLogo.eduThumbnail)
-        case "023040":
-            image = UIImage(named: Const.Image.MainLogo.cultureThumbnail)
-        case "023050":
-            image = UIImage(named: Const.Image.MainLogo.participationThumbnail)
-        default:
-            image = UIImage(named: Const.Logo.MainLogo.cheonghaMainLogo)
-        }
-        
-        if let image = image {
-            cell.setImageView(image: image)
-        }
+//        if let image = image {
+//            cell.setImageView(image: image)
+//        }
+        let image = UIImage(resource: cellData.classification.policyImage)
+        cell.setImageView(image: image)
         
         return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let youthDetailViewController = YouthDetailViewController(youthPolicy: youthDataSource[indexPath.row])
+//        let youthDetailViewController = YouthDetailViewController(youthPolicy: youthDataSource[indexPath.row])
+//        self.navigationController?.pushViewController(youthDetailViewController, animated: true)
+        let youthDetailViewController = YouthDetailViewController(youthPolicy: youthPolicies[indexPath.row])
         self.navigationController?.pushViewController(youthDetailViewController, animated: true)
     }
 }

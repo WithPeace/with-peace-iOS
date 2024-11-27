@@ -74,47 +74,71 @@ final class YouthDetailViewController: UIViewController {
         self.navigationItem.leftBarButtonItem = customBackButtonItem
     }
     
-    init(youthPolicy: YouthPolicy) {
-        var polyRlmCdToString = ""
+    init(
+//        youthPolicy: YouthPolicy,
+        youthPolicy: PolicyData
+    ) {
+//        var polyRlmCdToString = ""
         
-        switch youthPolicy.polyRlmCd {
-        case "023010":
-            topView.setImage(UIImage(named: Const.Image.MainLogo.jobThumbnail))
-            polyRlmCdToString = "일자리"
-        case "023020":
-            topView.setImage(UIImage(named: Const.Image.MainLogo.livingThumbnail))
-            polyRlmCdToString = "주거"
-        case "023030":
-            topView.setImage(UIImage(named: Const.Image.MainLogo.eduThumbnail))
-            polyRlmCdToString = "교육"
-        case "023040":
-            topView.setImage(UIImage(named: Const.Image.MainLogo.cultureThumbnail))
-            polyRlmCdToString = "복지.문화"
-        case "023050":
-            topView.setImage(UIImage(named: Const.Image.MainLogo.participationThumbnail))
-            polyRlmCdToString = "참여.권리"
-        default:
-            topView.setImage(UIImage(named: Const.Logo.MainLogo.cheonghaMainLogo))
-        }
+//        switch youthPolicy.polyRlmCd {
+//        case "023010":
+//            topView.setImage(UIImage(named: Const.Image.MainLogo.jobThumbnail))
+//            polyRlmCdToString = "일자리"
+//        case "023020":
+//            topView.setImage(UIImage(named: Const.Image.MainLogo.livingThumbnail))
+//            polyRlmCdToString = "주거"
+//        case "023030":
+//            topView.setImage(UIImage(named: Const.Image.MainLogo.eduThumbnail))
+//            polyRlmCdToString = "교육"
+//        case "023040":
+//            topView.setImage(UIImage(named: Const.Image.MainLogo.cultureThumbnail))
+//            polyRlmCdToString = "복지.문화"
+//        case "023050":
+//            topView.setImage(UIImage(named: Const.Image.MainLogo.participationThumbnail))
+//            polyRlmCdToString = "참여.권리"
+//        default:
+//            topView.setImage(UIImage(named: Const.Logo.MainLogo.cheonghaMainLogo))
+//        }
         
-        topView.setTitle(youthPolicy.polyBizSjnm)
-        topView.setBody(youthPolicy.polyItcnCn)
-        navigationTitle = youthPolicy.polyBizSjnm
+        topView.setImage(UIImage(resource: youthPolicy.classification.policyImage))
         
-        self.firstView = .init(contents: [("정책번호", youthPolicy.bizId),
-                                          ("정책분야", polyRlmCdToString),
-                                          ("지원내용", youthPolicy.sporCn)])
-        self.secondView = .init(contents: [("연령", youthPolicy.ageInfo),
-                                           ("거주지 및 소득", youthPolicy.prcpCn),
-                                           ("학력", youthPolicy.accrRqisCn),
-                                           ("특화분야", youthPolicy.splzRlmRqisCn),
-                                           ("추가 단서 사항", youthPolicy.aditRscn),
-                                           ("참여 제한 대상", youthPolicy.prcpLmttTrgtCn)
+//        topView.setTitle(youthPolicy.polyBizSjnm)
+//        topView.setBody(youthPolicy.polyItcnCn)
+//        navigationTitle = youthPolicy.polyBizSjnm
+        
+        topView.setTitle(youthPolicy.title)
+        topView.setBody(youthPolicy.introduce)
+        navigationTitle = youthPolicy.title
+        
+//        self.firstView = .init(contents: [("정책번호", youthPolicy.bizId),
+//                                          ("정책분야", polyRlmCdToString),
+//                                          ("지원내용", youthPolicy.sporCn)])
+//        self.secondView = .init(contents: [("연령", youthPolicy.ageInfo),
+//                                           ("거주지 및 소득", youthPolicy.prcpCn),
+//                                           ("학력", youthPolicy.accrRqisCn),
+//                                           ("특화분야", youthPolicy.splzRlmRqisCn),
+//                                           ("추가 단서 사항", youthPolicy.aditRscn),
+//                                           ("참여 제한 대상", youthPolicy.prcpLmttTrgtCn)
+//                                          ])
+//        self.thridView = .init(contents: [("신청절차", youthPolicy.rqutProcCn),
+//                                          ("심사 및 발표", youthPolicy.jdgnPresCn),
+//                                          ("신청 사이트", youthPolicy.rqutUrla),
+//                                          ("제출 서류", youthPolicy.pstnPaprCn)])
+        
+        self.firstView = .init(contents: [("정책번호", youthPolicy.title),
+                                          ("정책분야", youthPolicy.title),
+                                          ("지원내용", youthPolicy.title)])
+        self.secondView = .init(contents: [("연령", youthPolicy.title),
+                                           ("거주지 및 소득", youthPolicy.title),
+                                           ("학력", youthPolicy.title),
+                                           ("특화분야", youthPolicy.title),
+                                           ("추가 단서 사항", youthPolicy.title),
+                                           ("참여 제한 대상", youthPolicy.title)
                                           ])
-        self.thridView = .init(contents: [("신청절차", youthPolicy.rqutProcCn),
-                                          ("심사 및 발표", youthPolicy.jdgnPresCn),
-                                          ("신청 사이트", youthPolicy.rqutUrla),
-                                          ("제출 서류", youthPolicy.pstnPaprCn)])
+        self.thridView = .init(contents: [("신청절차", youthPolicy.title),
+                                          ("심사 및 발표", youthPolicy.title),
+                                          ("신청 사이트", youthPolicy.title),
+                                          ("제출 서류", youthPolicy.title)])
         
         
         super.init(nibName: nil, bundle: nil)

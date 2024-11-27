@@ -7,6 +7,7 @@
 
 import Foundation
 import RxSwift
+import RxCocoa
 
 //TODO: Page Index 관리에 대한 고민
 final class YouthPolicyViewModel {
@@ -26,6 +27,7 @@ final class YouthPolicyViewModel {
     
     // OUTPUT
     let youthData = BehaviorSubject(value: [YouthPolicy]())
+    let youthPolicies = BehaviorRelay<[PolicyData]>(value: [])
     let indicatorViewControll = PublishSubject<Void>()
     let refreshControll = PublishSubject<Void>()
     let popModal = PublishSubject<YouthFilterData>()
@@ -35,13 +37,6 @@ final class YouthPolicyViewModel {
     init(policyUsecase: PolicyUsecaseProtocol) {
         self.policyUsecase = policyUsecase
         
-        let query = FetchPoliciesQuery(pageIndex: 1, display: 10)
-        policyUsecase.fetchPolicies(api: .fetchPolicies(query: query)).asObservable()
-            .subscribe { policyDTO in
-                print("policyDTO>>>>>>>>>>", policyDTO)
-            }
-            .disposed(by: disposeBag)
-        
         let requesting = PublishSubject<Void>()
         let refreshing = PublishSubject<Void>()
         
@@ -49,95 +44,105 @@ final class YouthPolicyViewModel {
         fetchAdditional = requesting.asObserver()
         refreshAction = refreshing.asObserver()
         
-        //최초 진입 시 데이터 fetch
-        self.youthCenterRepository.perform(display: fetchDisplayDataCount, // 10
-                                           pageIndex: nowPageIndex, // 1
-                                           srchPolicyId: nil,
-                                           query: nil,
-                                           bizTycdSel: nil,
-                                           srchPolyBizSecd: nil,
-                                           keyword: nil) { result in
-            switch result {
-            case .success(let data):
-                self.youthData.onNext(data.youthPolicy)
-                self.indicatorViewControll.onNext(())
-                self.nowPageIndex += 1
-            case .failure(let error):
-                print(error)
+        let query = FetchPoliciesQuery(pageIndex: nowPageIndex, display: fetchDisplayDataCount)
+        policyUsecase.fetchPolicies(api: .fetchPolicies(query: query)).asObservable()
+            .subscribe(with: self) { owner, policyDTO in
+                guard let data = policyDTO.data else { return }
+                owner.youthPolicies.accept(data)
+                owner.indicatorViewControll.onNext(())
+                owner.nowPageIndex += 1
             }
-        }
-        
-        // 필터 상태에 따른 fetch (데이터 추가)
-        fetchAdditional.withLatestFrom(changeFilter)
-            .debounce(.seconds(1), scheduler: MainScheduler.instance)
-            .subscribe(onNext: { filterData in
-                //TODO: pageIndex관리
-                self.nowPageIndex += 1
-                self.youthCenterRepository.perform(display: self.fetchDisplayDataCount,
-                                                   pageIndex: self.nowPageIndex,
-                                                   srchPolicyId: filterData.srchPolicyId,
-                                                   query: filterData.query,
-                                                   bizTycdSel: filterData.bizTycdSel,
-                                                   srchPolyBizSecd: filterData.srchPolyBizSecd,
-                                                   keyword: filterData.keyword) { result in
-                    switch result {
-                    case .success(let data):
-                        if let currentData = try? self.youthData.value() {
-                            self.youthData.onNext(currentData + data.youthPolicy)
-                        } else {
-                            self.youthData.onNext(data.youthPolicy)
-                        }
-                    case .failure(let error):
-                        print(error)
-                    }
-                }
-            }).disposed(by: disposeBag)
-        
-        // refresh Aciton
-        
-        refreshAction.withLatestFrom(changeFilter)
-            .subscribe(onNext: { filterData in
-                //TODO: pageIndex관리
-                self.nowPageIndex = 1
-                self.youthCenterRepository.perform(display: self.fetchDisplayDataCount,
-                                                   pageIndex: 1,
-                                                   srchPolicyId: filterData.srchPolicyId,
-                                                   query: filterData.query,
-                                                   bizTycdSel: filterData.bizTycdSel,
-                                                   srchPolyBizSecd: filterData.srchPolyBizSecd,
-                                                   keyword: filterData.keyword) { result in
-                    switch result {
-                    case .success(let data):
-                        self.youthData.onNext(data.youthPolicy)
-                        self.refreshControll.onNext(())
-                    case .failure(let error):
-                        print(error)
-                  
-                    }
-                }
-            }).disposed(by: disposeBag)
-        
-        changeFilter.subscribe(onNext: { filteredData in
-            //TODO: pageIndex관리
-            self.nowPageIndex = 1
-            self.youthCenterRepository.perform(display: self.fetchDisplayDataCount,
-                                               pageIndex: 1,
-                                               srchPolicyId: filteredData.srchPolicyId,
-                                               query: filteredData.query,
-                                               bizTycdSel: filteredData.bizTycdSel,
-                                               srchPolyBizSecd: filteredData.srchPolyBizSecd,
-                                               keyword: filteredData.keyword) { result in
-                switch result {
-                case .success(let data):
-                    self.youthData.onNext(data.youthPolicy)
-                case .failure(let error):
-                    print(error)
-                }
-            }
-        }).disposed(by: disposeBag)
-        
-        tapFilterButton.withLatestFrom(changeFilter)
-            .bind(to: popModal)
             .disposed(by: disposeBag)
+        
+        //최초 진입 시 데이터 fetch
+//        self.youthCenterRepository.perform(display: fetchDisplayDataCount, // 10
+//                                           pageIndex: nowPageIndex, // 1
+//                                           srchPolicyId: nil,
+//                                           query: nil,
+//                                           bizTycdSel: nil,
+//                                           srchPolyBizSecd: nil,
+//                                           keyword: nil) { result in
+//            switch result {
+//            case .success(let data):
+//                self.youthData.onNext(data.youthPolicy)
+//                self.indicatorViewControll.onNext(())
+//                self.nowPageIndex += 1
+//            case .failure(let error):
+//                print(error)
+//            }
+//        }
+        
+//        // 필터 상태에 따른 fetch (데이터 추가)
+//        fetchAdditional.withLatestFrom(changeFilter)
+//            .debounce(.seconds(1), scheduler: MainScheduler.instance)
+//            .subscribe(onNext: { filterData in
+//                //TODO: pageIndex관리
+//                self.nowPageIndex += 1
+//                self.youthCenterRepository.perform(display: self.fetchDisplayDataCount,
+//                                                   pageIndex: self.nowPageIndex,
+//                                                   srchPolicyId: filterData.srchPolicyId,
+//                                                   query: filterData.query,
+//                                                   bizTycdSel: filterData.bizTycdSel,
+//                                                   srchPolyBizSecd: filterData.srchPolyBizSecd,
+//                                                   keyword: filterData.keyword) { result in
+//                    switch result {
+//                    case .success(let data):
+//                        if let currentData = try? self.youthData.value() {
+//                            self.youthData.onNext(currentData + data.youthPolicy)
+//                        } else {
+//                            self.youthData.onNext(data.youthPolicy)
+//                        }
+//                    case .failure(let error):
+//                        print(error)
+//                    }
+//                }
+//            }).disposed(by: disposeBag)
+//        
+//        // refresh Aciton
+//        
+//        refreshAction.withLatestFrom(changeFilter)
+//            .subscribe(onNext: { filterData in
+//                //TODO: pageIndex관리
+//                self.nowPageIndex = 1
+//                self.youthCenterRepository.perform(display: self.fetchDisplayDataCount,
+//                                                   pageIndex: 1,
+//                                                   srchPolicyId: filterData.srchPolicyId,
+//                                                   query: filterData.query,
+//                                                   bizTycdSel: filterData.bizTycdSel,
+//                                                   srchPolyBizSecd: filterData.srchPolyBizSecd,
+//                                                   keyword: filterData.keyword) { result in
+//                    switch result {
+//                    case .success(let data):
+//                        self.youthData.onNext(data.youthPolicy)
+//                        self.refreshControll.onNext(())
+//                    case .failure(let error):
+//                        print(error)
+//                  
+//                    }
+//                }
+//            }).disposed(by: disposeBag)
+//        
+//        changeFilter.subscribe(onNext: { filteredData in
+//            //TODO: pageIndex관리
+//            self.nowPageIndex = 1
+//            self.youthCenterRepository.perform(display: self.fetchDisplayDataCount,
+//                                               pageIndex: 1,
+//                                               srchPolicyId: filteredData.srchPolicyId,
+//                                               query: filteredData.query,
+//                                               bizTycdSel: filteredData.bizTycdSel,
+//                                               srchPolyBizSecd: filteredData.srchPolyBizSecd,
+//                                               keyword: filteredData.keyword) { result in
+//                switch result {
+//                case .success(let data):
+//                    self.youthData.onNext(data.youthPolicy)
+//                case .failure(let error):
+//                    print(error)
+//                }
+//            }
+//        }).disposed(by: disposeBag)
+//        
+//        tapFilterButton.withLatestFrom(changeFilter)
+//            .bind(to: popModal)
+//            .disposed(by: disposeBag)
     }
 }
