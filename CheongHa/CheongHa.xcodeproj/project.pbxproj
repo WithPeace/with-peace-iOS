@@ -46,6 +46,8 @@
 		00A82ECC2CF85DF10004B789 /* FilterRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00A82ECB2CF85DF10004B789 /* FilterRepository.swift */; };
 		00A82ED02CF85E870004B789 /* CurrentPolicyFiltering.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00A82ECF2CF85E870004B789 /* CurrentPolicyFiltering.swift */; };
 		00A82ED22CF85F060004B789 /* FilterUsecase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00A82ED12CF85F060004B789 /* FilterUsecase.swift */; };
+		00A82ED62CF861D00004B789 /* ChangePolicyFileringQuery.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00A82ED52CF861D00004B789 /* ChangePolicyFileringQuery.swift */; };
+		00A82ED82CF864450004B789 /* CheckFilteringChangeSuccess.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00A82ED72CF864450004B789 /* CheckFilteringChangeSuccess.swift */; };
 		00A918112CF156AD0072F96D /* SeparatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00A918102CF156AD0072F96D /* SeparatorView.swift */; };
 		00B683932CE1F640005110D2 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00B683922CE1F640005110D2 /* HomeViewController.swift */; };
 		00B683962CE1F6B9005110D2 /* PinLayout in Frameworks */ = {isa = PBXBuildFile; productRef = 00B683952CE1F6B9005110D2 /* PinLayout */; };
@@ -229,6 +231,8 @@
 		00A82ECB2CF85DF10004B789 /* FilterRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterRepository.swift; sourceTree = "<group>"; };
 		00A82ECF2CF85E870004B789 /* CurrentPolicyFiltering.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentPolicyFiltering.swift; sourceTree = "<group>"; };
 		00A82ED12CF85F060004B789 /* FilterUsecase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterUsecase.swift; sourceTree = "<group>"; };
+		00A82ED52CF861D00004B789 /* ChangePolicyFileringQuery.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangePolicyFileringQuery.swift; sourceTree = "<group>"; };
+		00A82ED72CF864450004B789 /* CheckFilteringChangeSuccess.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckFilteringChangeSuccess.swift; sourceTree = "<group>"; };
 		00A918102CF156AD0072F96D /* SeparatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeparatorView.swift; sourceTree = "<group>"; };
 		00B683922CE1F640005110D2 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		00B683A52CE1F90B005110D2 /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
@@ -677,7 +681,7 @@
 				00DB008C2CDB52170012B2B1 /* ProfileRouter.swift */,
 				0025D44D2CEC7B6D00E3BBD9 /* PostRouter.swift */,
 				00C8B7D22CF6164F00953377 /* Policy */,
-				00A82EC92CF85D330004B789 /* FilterRouter.swift */,
+				00A82ED32CF861C10004B789 /* Filter */,
 			);
 			path = Routers;
 			sourceTree = "<group>";
@@ -815,8 +819,26 @@
 			isa = PBXGroup;
 			children = (
 				00A82ECF2CF85E870004B789 /* CurrentPolicyFiltering.swift */,
+				00A82ED72CF864450004B789 /* CheckFilteringChangeSuccess.swift */,
 			);
 			path = FIlter;
+			sourceTree = "<group>";
+		};
+		00A82ED32CF861C10004B789 /* Filter */ = {
+			isa = PBXGroup;
+			children = (
+				00A82EC92CF85D330004B789 /* FilterRouter.swift */,
+				00A82ED42CF861C90004B789 /* Queries */,
+			);
+			path = Filter;
+			sourceTree = "<group>";
+		};
+		00A82ED42CF861C90004B789 /* Queries */ = {
+			isa = PBXGroup;
+			children = (
+				00A82ED52CF861D00004B789 /* ChangePolicyFileringQuery.swift */,
+			);
+			path = Queries;
 			sourceTree = "<group>";
 		};
 		00B683912CE1F62C005110D2 /* Home */ = {
@@ -868,8 +890,8 @@
 			isa = PBXGroup;
 			children = (
 				0025D4412CEC663100E3BBD9 /* PolicyRouter.swift */,
-				0084B2BA2CF7085D00A43C51 /* Params */,
 				00C8B7CF2CF615F100953377 /* Queries */,
+				0084B2BA2CF7085D00A43C51 /* Params */,
 			);
 			path = Policy;
 			sourceTree = "<group>";
@@ -1480,6 +1502,7 @@
 				002A52BE2CEE13B7007E9FD6 /* MyKeywordsBackgroundView.swift in Sources */,
 				F671A9C62BA00FD7002808DA /* EndPoint.swift in Sources */,
 				F69B80072B996846002675CE /* AppDelegate.swift in Sources */,
+				00A82ED62CF861D00004B789 /* ChangePolicyFileringQuery.swift in Sources */,
 				F671A9CD2BA059DB002808DA /* Const.swift in Sources */,
 				F65040A22C20750C00B14D84 /* PostDTO.swift in Sources */,
 				00C2A5282CE396B400EFF471 /* HotPolicyHeader.swift in Sources */,
@@ -1549,6 +1572,7 @@
 				F671A9CA2BA0174E002808DA /* NetworkError.swift in Sources */,
 				630EA20F2BA0277800F04ED3 /* SignRepository.swift in Sources */,
 				00DE3F4C2CDCDA2A00CAC3D8 /* ViewModelType.swift in Sources */,
+				00A82ED82CF864450004B789 /* CheckFilteringChangeSuccess.swift in Sources */,
 				F65040A42C20759A00B14D84 /* SearchDataDTO.swift in Sources */,
 				00A82ECC2CF85DF10004B789 /* FilterRepository.swift in Sources */,
 				008497D32CEF3059004E6FA7 /* SeparatorCell.swift in Sources */,

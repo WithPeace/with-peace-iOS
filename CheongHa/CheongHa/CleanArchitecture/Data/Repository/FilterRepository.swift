@@ -11,6 +11,7 @@ import RxSwift
 
 protocol FilterRepositoryProtocol {
     func fetchPolicyFilering(api: FilterRouter) -> Single<CurrentPolicyFiltering>
+    func changePolicyFilering(api: FilterRouter) -> Single<CheckFilteringChangeSuccess>
 }
 
 final class FilterRepository: FilterRepositoryProtocol {
@@ -26,5 +27,10 @@ final class FilterRepository: FilterRepositoryProtocol {
     func fetchPolicyFilering(api: FilterRouter) -> Single<CurrentPolicyFiltering> {
         network
             .request(api, decodingType: CurrentPolicyFiltering.self)
+    }
+    
+    func changePolicyFilering(api: FilterRouter) -> Single<CheckFilteringChangeSuccess> {
+        network
+            .request(api, decodingType: CheckFilteringChangeSuccess.self)
     }
 }
