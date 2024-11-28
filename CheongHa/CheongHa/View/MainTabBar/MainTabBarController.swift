@@ -40,6 +40,12 @@ final class MainTabbarController: UITabBarController {
                         keychain: keychain,
                         network: network
                     )
+                ),
+                filterUsecase: FilterUsecase(
+                    filterRepository: FilterRepository(
+                        keychain: keychain,
+                        network: network
+                    )
                 )
             )
         )

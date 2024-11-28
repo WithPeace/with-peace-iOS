@@ -35,9 +35,14 @@ final class YouthPolicyViewModel {
     let presentPolicyDetailVC = PublishRelay<PolicyDetailData?>()
     
     private let policyUsecase: PolicyUsecaseProtocol
+    private let filterUsecase: FilterUsecaseProtocol
     
-    init(policyUsecase: PolicyUsecaseProtocol) {
+    init(
+        policyUsecase: PolicyUsecaseProtocol,
+        filterUsecase: FilterUsecaseProtocol
+    ) {
         self.policyUsecase = policyUsecase
+        self.filterUsecase = filterUsecase
         
         let requesting = PublishSubject<Void>()
         let refreshing = PublishSubject<Void>()
