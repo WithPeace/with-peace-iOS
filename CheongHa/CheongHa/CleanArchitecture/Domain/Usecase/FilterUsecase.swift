@@ -10,7 +10,7 @@ import RxSwift
 
 protocol FilterUsecaseProtocol {
     func fetchPolicyFilering() -> Single<CurrentPolicyFiltering>
-    func changePolicyFilering(api: FilterRouter) -> Single<CheckFilteringChangeSuccess>
+    func changePolicyFilering(with query: ChangePolicyFileringQuery) -> Single<CheckFilteringChangeSuccess>
 }
 
 final class FilterUsecase: FilterUsecaseProtocol {
@@ -25,7 +25,7 @@ final class FilterUsecase: FilterUsecaseProtocol {
         return filterRepository.fetchPolicyFilering(api: .fetchPolicyFilering)
     }
     
-    func changePolicyFilering(api: FilterRouter) -> Single<CheckFilteringChangeSuccess> {
-        return filterRepository.changePolicyFilering(api: api)
+    func changePolicyFilering(with query: ChangePolicyFileringQuery) -> Single<CheckFilteringChangeSuccess> {
+        return filterRepository.changePolicyFilering(api: .changePolicyFilering(query: query))
     }
 }

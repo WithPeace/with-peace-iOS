@@ -53,7 +53,7 @@ final class YouthPolicyViewModel {
         
         //최초 진입 시 데이터 fetch
         let query = FetchPoliciesQuery(pageIndex: nowPageIndex, display: fetchDisplayDataCount)
-        policyUsecase.fetchPolicies(api: .fetchPolicies(query: query)).asObservable()
+        policyUsecase.fetchPolicies(with: query).asObservable()
             .subscribe(with: self) { owner, policyDTO in
                 guard let data = policyDTO.data else { return }
                 owner.youthPolicies.accept(data)
@@ -91,7 +91,7 @@ final class YouthPolicyViewModel {
                     pageIndex: owner.nowPageIndex,
                     display: owner.fetchDisplayDataCount
                 )
-                return policyUsecase.fetchPolicies(api: .fetchPolicies(query: query))
+                return policyUsecase.fetchPolicies(with: query)
             }
             .subscribe(with: self) { owner, policyDTO in
                 owner.nowPageIndex += 1
@@ -136,7 +136,7 @@ final class YouthPolicyViewModel {
                     pageIndex: 1,
                     display: owner.fetchDisplayDataCount
                 )
-                return policyUsecase.fetchPolicies(api: .fetchPolicies(query: query))
+                return policyUsecase.fetchPolicies(with: query)
             }
             .subscribe(with: self) { owner, policyDTO in
                 guard let data = policyDTO.data else { return }
@@ -196,7 +196,7 @@ final class YouthPolicyViewModel {
             .withUnretained(self)
             .flatMap { owner, selectedPolicyId in
                 let fetchPolicyParams = FetchPolicyParams(policyId: selectedPolicyId)
-                return owner.policyUsecase.fetchPolicy(api: .fetchPolicy(params: fetchPolicyParams))
+                return owner.policyUsecase.fetchPolicy(with: fetchPolicyParams)
             }
             .subscribe(with: self) { owner, policyDetailDTO in
                 guard let data = policyDetailDTO.data else { return }

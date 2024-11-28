@@ -11,8 +11,8 @@ import RxSwift
 protocol PolicyUsecaseProtocol {
     func fetchHotPolicies() -> Single<PolicyDTO>
     func fetchRecommendedPolicies() -> Single<PolicyDTO>
-    func fetchPolicies(api: PolicyRouter) -> Single<PolicyDTO>
-    func fetchPolicy(api: PolicyRouter) -> Single<PolicyDetailDTO>
+    func fetchPolicies(with query: FetchPoliciesQuery) -> Single<PolicyDTO>
+    func fetchPolicy(with params: FetchPolicyParams) -> Single<PolicyDetailDTO>
 }
 
 final class PolicyUsecase: PolicyUsecaseProtocol {
@@ -31,11 +31,11 @@ final class PolicyUsecase: PolicyUsecaseProtocol {
         return policyRepository.fetchRecommendedPolicies(api: .fetchRecommendedPolicies)
     }
     
-    func fetchPolicies(api: PolicyRouter) -> Single<PolicyDTO> {
-        return policyRepository.fetchPolicies(api: api)
+    func fetchPolicies(with query: FetchPoliciesQuery) -> Single<PolicyDTO> {
+        return policyRepository.fetchPolicies(api: .fetchPolicies(query: query))
     }
     
-    func fetchPolicy(api: PolicyRouter) -> Single<PolicyDetailDTO> {
-        return policyRepository.fetchPolicy(api: api)
+    func fetchPolicy(with params: FetchPolicyParams) -> Single<PolicyDetailDTO> {
+        return policyRepository.fetchPolicy(api: .fetchPolicy(params: params))
     }
 }
