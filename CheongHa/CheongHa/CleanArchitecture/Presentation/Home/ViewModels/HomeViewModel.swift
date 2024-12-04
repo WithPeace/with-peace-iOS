@@ -9,9 +9,12 @@ import Foundation
 import RxSwift
 import RxCocoa
 
-typealias HomeDatasType = (hotPolicies: [HomeSectionItem]?, recommendedPolicies: [HomeSectionItem]?, recentPosts: [HomeSectionItem]?)
+typealias HomeDatasType = [HomeSection: [HomeSectionItem]]
 
 final class HomeViewModel: ViewModelType {
+    
+    private let sections = BehaviorRelay<HomeDatasType>(value: [:])
+    
     struct Input {
         let viewWillAppearTrigger: Observable<Bool>
         let sendCurrentFilterKeywordsTap: Observable<Void>
@@ -20,7 +23,6 @@ final class HomeViewModel: ViewModelType {
     
     struct Output {
         let homeDatas: Driver<HomeDatasType>
-        let selectedFilterKeywords: Driver<[HomeSectionItem]>
     }
     
     private let policyUsecase: PolicyUsecaseProtocol
@@ -41,7 +43,10 @@ final class HomeViewModel: ViewModelType {
     
     func transform(input: Input) -> Output {
         
-        let selectedFilterKeywords = PublishRelay<[HomeSectionItem]>()
+        let selectedFilterKeywordsSubject = PublishSubject<[HomeSectionItem]>()
+        let hotPoliciesSubject = PublishSubject<[HomeSectionItem]>()
+        let recommendedPoliciesSubject = PublishSubject<[HomeSectionItem]>()
+        let recentPostsSubject = PublishSubject<[HomeSectionItem]>()
         
         let viewWillAppearTrigger = input.viewWillAppearTrigger
             .map { _ in () }
@@ -49,47 +54,50 @@ final class HomeViewModel: ViewModelType {
         
         let updateHome = Observable.merge(viewWillAppearTrigger, input.filterVCDismissedSignal)
         
-        let hotPolicies = updateHome
+        viewWillAppearTrigger
             .withUnretained(self)
             .flatMap { owner, _ in
                 owner.policyUsecase.fetchHotPolicies()
             }
-            .map {
+            .bind {
                 print("hotPolicies 통과")
-                return $0.data?.compactMap({
-                    HomeSectionItem.hotPolicy(data: .init(hotPolicyData: .init(thumnail: $0.classification.policyImage, description: $0.introduce)))
-                })
+                guard let data = $0.data else { return }
+                let hotPolicies = data.map {
+                    HomeSectionItem.hotPolicy(data: .init(hotPolicyData: .init(thumnail: $0.classification.policyImage, title: $0.title)))
+                }
+                hotPoliciesSubject.onNext(hotPolicies)
             }
+            .disposed(by: disposeBag)
         
-        let recommendedPolicies = updateHome
+        updateHome
             .withUnretained(self)
             .flatMap { owner, _ in
                 owner.policyUsecase.fetchRecommendedPolicies()
             }
-            .map {
+            .bind {
                 print("recommendedPolicies 통과")
-                return $0.data?.compactMap({
-                    HomeSectionItem.policyRecommendation(data: .init(policyRecommendationData: .init(thumnail: $0.classification.policyImage, description: $0.introduce)))
-                    
-                })
+                guard let data = $0.data else { return }
+                let recommendedPolicies = data.map {
+                    HomeSectionItem.policyRecommendation(data: .init(policyRecommendationData: .init(thumnail: $0.classification.policyImage, title: $0.title)))
+                }
+                recommendedPoliciesSubject.onNext(recommendedPolicies)
             }
+            .disposed(by: disposeBag)
         
-        let recentPosts = updateHome
+        viewWillAppearTrigger
             .withUnretained(self)
             .flatMap { owner, _ in
                 owner.postUsecase.fetchRecentPosts()
             }
-            .map {
+            .bind {
                 print("recentPosts 통과")
-                return $0.data?.compactMap {
+                guard let data = $0.data else { return }
+                let recentPosts = data.compactMap {
                     HomeSectionItem.community(data: .init(communityData: .init(title: $0.type.postTitle, recentPostTitle: $0.title)))
                 }
+                recentPostsSubject.onNext(recentPosts)
             }
-        
-        let homeDatas = Observable.zip(hotPolicies, recommendedPolicies, recentPosts, resultSelector: { hotPolicies, recommendedPolicies, recentPosts -> HomeDatasType in
-            print("완료")
-            return (hotPolicies, recommendedPolicies, recentPosts)
-        })
+            .disposed(by: disposeBag)
         
         updateHome
             .withUnretained(self)
@@ -101,13 +109,27 @@ final class HomeViewModel: ViewModelType {
                 let filterTag = [HomeSectionItem.myKeywords(data: .init(myKeywordsData: "filter"))]
                 let savedPolicyTags = data.classification.map { HomeSectionItem.myKeywords(data: .init(myKeywordsData: $0.policyName)) }
                 let savedRegionTags = data.region.map { HomeSectionItem.myKeywords(data: .init(myKeywordsData: $0)) }
-                selectedFilterKeywords.accept(filterTag + savedPolicyTags + savedRegionTags)
+                selectedFilterKeywordsSubject.onNext(filterTag + savedPolicyTags + savedRegionTags)
             }
             .disposed(by: disposeBag)
         
+        let homeDatas = Observable.combineLatest(selectedFilterKeywordsSubject, hotPoliciesSubject, recommendedPoliciesSubject, recentPostsSubject) {
+            (selectedFilterKeywords: $0, hotPolicies: $1, recommendedPolicies: $2, recentPosts: $3)
+        }
+            .withUnretained(self)
+            .map { owner, updatedHomeDatas in
+                let updatedSections: HomeDatasType = [
+                    .myKeywords: updatedHomeDatas.selectedFilterKeywords,
+                    .hotPolicy: updatedHomeDatas.hotPolicies,
+                    .policyRecommendation: updatedHomeDatas.recommendedPolicies,
+                    .community: updatedHomeDatas.recentPosts,
+                    
+                ]
+                return updatedSections
+            }
+        
         return Output(
-            homeDatas: homeDatas.asDriver(onErrorJustReturn: (nil, nil, nil)),
-            selectedFilterKeywords: selectedFilterKeywords.asDriver(onErrorJustReturn: [])
+            homeDatas: homeDatas.asDriver(onErrorJustReturn: [:])
         )
     }
 }

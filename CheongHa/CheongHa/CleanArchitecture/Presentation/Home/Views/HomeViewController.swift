@@ -15,7 +15,6 @@ final class HomeViewController: UIViewController {
     
     private lazy var collectionView = UICollectionView(frame: .zero, collectionViewLayout: configureCollectionViewLayout())
     private var dataSource: UICollectionViewDiffableDataSource<HomeSection, HomeSectionItem>!
-    private var snapshot = NSDiffableDataSourceSnapshot<HomeSection, HomeSectionItem>()
     
     private let disposeBag = DisposeBag()
     
@@ -45,13 +44,8 @@ final class HomeViewController: UIViewController {
             $0.edges.equalTo(view.safeAreaLayoutGuide)
         }
         
-        bind()
         cellRegistration()
-        
-        snapshot.appendSections(HomeSection.allCases)
-        update(section: .myKeywords, items: [
-            .myKeywords(data: .init(myKeywordsData: "filter")),
-        ])
+        bind()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -305,6 +299,15 @@ final class HomeViewController: UIViewController {
         }
     }
     
+    private func apply(with sections: [HomeSection: [HomeSectionItem]]) {
+        var snapshot = NSDiffableDataSourceSnapshot<HomeSection, HomeSectionItem>()
+        snapshot.appendSections(HomeSection.allCases)
+        sections.forEach {
+            snapshot.appendItems($0.value, toSection: $0.key)
+        }
+        dataSource.apply(snapshot, animatingDifferences: false)
+    }
+    
     private func bind() {
         
         let input = HomeViewModel.Input(
@@ -316,29 +319,9 @@ final class HomeViewController: UIViewController {
         let output = viewModel.transform(input: input)
         
         output.homeDatas
-            .drive(with: self, onNext: { owner, homeDatas in
-                guard let hotPolicies = homeDatas.hotPolicies,
-                      let recommendedPolicies = homeDatas.recommendedPolicies,
-                      let recentPosts = homeDatas.recentPosts
-                else { return }
-                owner.update(section: .hotPolicy, items: hotPolicies)
-                owner.update(section: .policyRecommendation, items: recommendedPolicies)
-                owner.update(section: .community, items: recentPosts)
-            })
-            .disposed(by: disposeBag)
-
-        output.selectedFilterKeywords
-            .drive(with: self) { owner, selectedFilterKeywords in
-                owner.snapshot.deleteSections([.myKeywords])
-                owner.snapshot.appendSections([.myKeywords])
-                owner.snapshot.moveSection(.myKeywords, beforeSection: .hotPolicy)
-                owner.update(section: .myKeywords, items: selectedFilterKeywords)
+            .drive(with: self) { owner, homeDatas in
+                owner.apply(with: homeDatas)
             }
             .disposed(by: disposeBag)
-    }
-    
-    private func update(section: HomeSection, items: [HomeSectionItem]) {
-        snapshot.appendItems(items, toSection: section)
-        dataSource.apply(snapshot, animatingDifferences: false)
     }
 }

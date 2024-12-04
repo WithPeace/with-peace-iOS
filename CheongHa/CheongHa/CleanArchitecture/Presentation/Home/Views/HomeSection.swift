@@ -59,10 +59,10 @@ struct HomeSectionItemDataCollection: Hashable {
         
         init(
             thumnail: ImageResource = .eduThumbnail,
-            description: String = ""
+            title: String = ""
         ) {
             self.thumnail = thumnail
-            self.description = description
+            self.description = title
         }
     }
     
@@ -73,10 +73,10 @@ struct HomeSectionItemDataCollection: Hashable {
         
         init(
             thumnail: ImageResource = .eduThumbnail,
-            description: String = ""
+            title: String = ""
         ) {
             self.thumnail = thumnail
-            self.description = description
+            self.description = title
         }
     }
     
