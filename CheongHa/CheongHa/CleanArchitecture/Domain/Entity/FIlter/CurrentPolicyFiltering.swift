@@ -14,5 +14,12 @@ struct CurrentPolicyFiltering: DTOType {
 
 struct CurrentPolicyFilteringData: Codable {
     let region: [String]
-    let classification: [String]
+    let classification: [PolicyClassification]
+    
+    init(from decoder: any Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        self.region = try container.decode([String].self, forKey: .region)
+        let classification = try container.decode([String].self, forKey: .classification)
+        self.classification = classification.map { PolicyClassification(rawValue: $0) ?? PolicyClassification.etc }
+    }
 }

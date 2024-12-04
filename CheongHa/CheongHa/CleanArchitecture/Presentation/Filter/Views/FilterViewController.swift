@@ -80,6 +80,7 @@ final class FilterViewController: UIViewController {
     // MARK: - User Event Observables
     private let addPolicyTagRelay = PublishRelay<String>()
     private let addRegionTagRelay = PublishRelay<String>()
+    let filterVCDismissSignalRelay = PublishRelay<Void>() // TODO: - 외부 VC와의 의존성 없애기, 예상: Coordinator 패턴으로 해결 예정
     
     init(viewModel: FilterViewModel) {
         self.viewModel = viewModel
@@ -353,9 +354,10 @@ final class FilterViewController: UIViewController {
             }
             .disposed(by: disposeBag)
         
-        input.searchButtonTap
-            .bind(with: self) { owner, _ in
+        output.dismissSingal
+            .drive(with: self) { owner, _ in
                 owner.hideBottomSheet()
+                owner.filterVCDismissSignalRelay.accept(())
             }
             .disposed(by: disposeBag)
     }

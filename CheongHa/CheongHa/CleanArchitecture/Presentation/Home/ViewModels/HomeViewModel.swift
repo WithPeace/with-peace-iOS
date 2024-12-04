@@ -15,6 +15,7 @@ final class HomeViewModel: ViewModelType {
     struct Input {
         let viewWillAppearTrigger: Observable<Bool>
         let sendCurrentFilterKeywordsTap: Observable<Void>
+        let filterVCDismissedSignal: Observable<Void>
     }
     
     struct Output {
@@ -24,24 +25,31 @@ final class HomeViewModel: ViewModelType {
     
     private let policyUsecase: PolicyUsecaseProtocol
     private let postUsecase: PostUsecaseProtocol
-    let dataExchangeUsecase: DataExchangeUseCaseProtocol
+    private let filterUsecase: FilterUsecaseProtocol
     
     init(
         policyUsecase: PolicyUsecaseProtocol,
         postUsecase: PostUsecaseProtocol,
-        dataExchangeUsecase: DataExchangeUseCaseProtocol
+        filterUsecase: FilterUsecaseProtocol
     ) {
         self.policyUsecase = policyUsecase
         self.postUsecase = postUsecase
-        self.dataExchangeUsecase = dataExchangeUsecase
+        self.filterUsecase = filterUsecase
     }
     
     var disposeBag = DisposeBag()
     
     func transform(input: Input) -> Output {
         
-        let hotPolicies = input
-            .viewWillAppearTrigger
+        let selectedFilterKeywords = PublishRelay<[HomeSectionItem]>()
+        
+        let viewWillAppearTrigger = input.viewWillAppearTrigger
+            .map { _ in () }
+            .asObservable()
+        
+        let updateHome = Observable.merge(viewWillAppearTrigger, input.filterVCDismissedSignal)
+        
+        let hotPolicies = updateHome
             .withUnretained(self)
             .flatMap { owner, _ in
                 owner.policyUsecase.fetchHotPolicies()
@@ -53,8 +61,7 @@ final class HomeViewModel: ViewModelType {
                 })
             }
         
-        let recommendedPolicies = input
-            .viewWillAppearTrigger
+        let recommendedPolicies = updateHome
             .withUnretained(self)
             .flatMap { owner, _ in
                 owner.policyUsecase.fetchRecommendedPolicies()
@@ -67,8 +74,7 @@ final class HomeViewModel: ViewModelType {
                 })
             }
         
-        let recentPosts = input
-            .viewWillAppearTrigger
+        let recentPosts = updateHome
             .withUnretained(self)
             .flatMap { owner, _ in
                 owner.postUsecase.fetchRecentPosts()
@@ -85,12 +91,19 @@ final class HomeViewModel: ViewModelType {
             return (hotPolicies, recommendedPolicies, recentPosts)
         })
         
-        let selectedFilterKeywords = dataExchangeUsecase.observeData()
-            .map { storedSelectedTags in
-                let filterTag = [HomeSectionItem.myKeywords(data: .init(myKeywordsData: "filter"))]
-                let convertedTags = storedSelectedTags.map { HomeSectionItem.myKeywords(data: .init(myKeywordsData: $0)) }
-                return filterTag + convertedTags
+        updateHome
+            .withUnretained(self)
+            .flatMap { owner, _ in
+                owner.filterUsecase.fetchPolicyFilering()
             }
+            .bind { currentPolicyFiltering in
+                guard let data = currentPolicyFiltering.data else { return }
+                let filterTag = [HomeSectionItem.myKeywords(data: .init(myKeywordsData: "filter"))]
+                let savedPolicyTags = data.classification.map { HomeSectionItem.myKeywords(data: .init(myKeywordsData: $0.policyName)) }
+                let savedRegionTags = data.region.map { HomeSectionItem.myKeywords(data: .init(myKeywordsData: $0)) }
+                selectedFilterKeywords.accept(filterTag + savedPolicyTags + savedRegionTags)
+            }
+            .disposed(by: disposeBag)
         
         return Output(
             homeDatas: homeDatas.asDriver(onErrorJustReturn: (nil, nil, nil)),

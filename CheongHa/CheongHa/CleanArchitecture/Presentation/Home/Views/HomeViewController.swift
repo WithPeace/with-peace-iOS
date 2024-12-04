@@ -23,6 +23,7 @@ final class HomeViewController: UIViewController {
     
     // MARK: - User Event Observables
     private let sendCurrentFilterKeywordsTap = PublishRelay<Void>()
+    private let filterVCDismissedSignalRelay = PublishRelay<Void>() // FilterVC가 Dismiss 되었단 완료 이벤트
     
     init(viewModel: HomeViewModel) {
         self.viewModel = viewModel
@@ -207,9 +208,26 @@ final class HomeViewController: UIViewController {
             cell.setData(itemIdentifier.data.myKeywordsData)
             
             cell.filterButton.rx.tap.bind(with: self) { owner, _ in
-                let filterVC = FilterViewController(viewModel: FilterViewModel(dataExchangeUsecas: owner.viewModel.dataExchangeUsecase))
+                let filterVC = FilterViewController(
+                    viewModel: FilterViewModel(
+                        filterUsecase: FilterUsecase(
+                            filterRepository: FilterRepository(
+                                keychain: KeychainManager(),
+                                network: CleanNetworkManager()
+                            )
+                        )
+                    )
+                )
+                
                 filterVC.modalPresentationStyle = .overFullScreen
                 owner.present(filterVC, animated: false)
+                
+                // TODO: - HomeVC에 대한 의존성 문제 해결하기, Coordinator 패턴으로 해결하기
+                filterVC.filterVCDismissSignalRelay.asDriver(onErrorJustReturn: ())
+                    .drive(with: self) { onwer, _ in
+                        owner.filterVCDismissedSignalRelay.accept(())
+                    }
+                    .disposed(by: cell.disposeBag)
             }
             .disposed(by: cell.disposeBag)
         }
@@ -291,7 +309,8 @@ final class HomeViewController: UIViewController {
         
         let input = HomeViewModel.Input(
             viewWillAppearTrigger: rx.viewWillAppear.take(1),
-            sendCurrentFilterKeywordsTap: sendCurrentFilterKeywordsTap.asObservable()
+            sendCurrentFilterKeywordsTap: sendCurrentFilterKeywordsTap.asObservable(),
+            filterVCDismissedSignal: filterVCDismissedSignalRelay.asObservable()
         )
         
         let output = viewModel.transform(input: input)

@@ -31,4 +31,21 @@ enum PolicyClassification: String, Codable {
             return .eduThumbnail
         }
     }
+
+    var policyName: String {
+        switch self {
+        case .job:
+            return "일자리"
+        case .resident:
+            return "주거"
+        case .education:
+            return "교육"
+        case .welfareAndCulture:
+            return "복지,문화"
+        case .participationAndRight:
+            return "참여,권리"
+        case .etc:
+            return ""
+        }
+    }
 }

@@ -26,8 +26,11 @@ final class MainTabbarController: UITabBarController {
                         keychain: keychain,
                         network: network)
                 ),
-                dataExchangeUsecase: DataExchangeUsecase(
-                    repository: InMemoryRepository()
+                filterUsecase: FilterUsecase(
+                    filterRepository: FilterRepository(
+                        keychain: keychain,
+                        network: network
+                    )
                 )
             )
         )

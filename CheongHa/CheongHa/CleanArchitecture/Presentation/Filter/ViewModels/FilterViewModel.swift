@@ -59,22 +59,29 @@ final class FilterViewModel: ViewModelType {
     
     struct Output {
         let sections: Driver<FilterSectionType>
+        let dismissSingal: Driver<Void>
     }
     
     var disposeBag = DisposeBag()
     
-    private let dataExchangeUsecas: DataExchangeUseCaseProtocol
+    private let filterUsecase: FilterUsecaseProtocol
     
-    init(dataExchangeUsecas: DataExchangeUseCaseProtocol) {
-        self.dataExchangeUsecas = dataExchangeUsecas
+    init(
+        filterUsecase: FilterUsecaseProtocol
+    ) {
+        self.filterUsecase = filterUsecase
     }
     
     func transform(input: Input) -> Output {
         
         input.viewWillApear
-            .withLatestFrom(sections)
-            .bind(with: self) { owner, sections in
-                let selectedTags = owner.dataExchangeUsecas.fetchData(key: .selectedFilterTags)
+            .withUnretained(self)
+            .flatMap { owner, _ in
+                owner.filterUsecase.fetchPolicyFilering()
+            }
+            .map { $0.data }
+            .withLatestFrom(sections) { filteringData, sections in
+                let selectedTags = (filteringData?.region ?? []) + (filteringData?.classification.map { $0.policyName } ?? [])
                 let updatedSections = sections.mapValues { items in
                     return items.map { item in
                         var item = item
@@ -86,7 +93,10 @@ final class FilterViewModel: ViewModelType {
                         }
                     }
                 }
-                owner.sections.accept(updatedSections)
+                return updatedSections
+            }
+            .bind(with: self) { owner, sections in
+                owner.sections.accept(sections)
             }
             .disposed(by: disposeBag)
         
@@ -134,20 +144,28 @@ final class FilterViewModel: ViewModelType {
             }
             .disposed(by: disposeBag)
         
-        input.searchButtonTap
+        let dismissSingal = input.searchButtonTap
             .withLatestFrom(sections)
             .map { sections in
-                let selectPolicyFieldTags = (sections[.policyField] ?? []).filter { $0.isSelected }.map { $0.title }
-                let selectRegionTags = (sections[.region] ?? []).filter { $0.isSelected }.map { $0.title }
-                return selectPolicyFieldTags + selectRegionTags
+                let selectPolicyFieldTags = (sections[.policyField] ?? []).filter { $0.isSelected }.map { APIKeys.getPolicyCode(with: $0.title) }
+                let selectRegionTags = (sections[.region] ?? []).filter { $0.isSelected }.map { APIKeys.getRegionCode(with: $0.title) }
+                
+                return ChangePolicyFileringQuery(regions: selectRegionTags, classifications: selectPolicyFieldTags)
             }
-            .bind(with: self) { owner, selectedTags in
-                owner.dataExchangeUsecas.saveData(key: .selectedFilterTags, value: selectedTags)
-                owner.dataExchangeUsecas.sendData(key: .selectedFilterTags)
+            .withUnretained(self)
+            .flatMap { owner, query in
+                owner.filterUsecase.changePolicyFilering(with: query)
             }
-            .disposed(by: disposeBag)
+            .map { isChangeSucceed in
+                guard let isChangeSucceed = isChangeSucceed.data else { return }
+                if isChangeSucceed {
+                    print("정책 필터링 성공")
+                }
+            }
     
         return Output(
-            sections: sections.asDriver(onErrorJustReturn: [:]))
+            sections: sections.asDriver(onErrorJustReturn: [:]),
+            dismissSingal: dismissSingal.asDriver(onErrorJustReturn: ())
+        )
     }
 }
