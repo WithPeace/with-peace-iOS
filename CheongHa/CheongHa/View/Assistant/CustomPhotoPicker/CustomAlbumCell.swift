@@ -9,7 +9,7 @@ import UIKit
 
 final class CustomAlbumCell: UICollectionViewCell {
     
-    static let identifier = "CustomPhotoAlbumView"
+//    static let identifier = "CustomPhotoAlbumView"
     
     private let albumImageView: UIImageView = {
         let imageView = UIImageView()

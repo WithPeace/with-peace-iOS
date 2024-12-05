@@ -9,7 +9,7 @@ import UIKit
 
 final class AlbumDetailCell: UICollectionViewCell {
     
-    static let identifier = "AlbumDetailCell"
+//    static let identifier = "AlbumDetailCell"
     
     private var isSelectedCell = false
     
