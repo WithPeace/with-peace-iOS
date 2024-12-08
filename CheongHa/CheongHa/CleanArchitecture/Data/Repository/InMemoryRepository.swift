@@ -6,25 +6,24 @@
 //
 
 import Foundation
-
-enum InMemonryStorageKey {
-    case selectedFilterTags
-}
+import RxSwift
 
 protocol InMemoryRepositoryProtocol {
-    func save(key: InMemonryStorageKey, value: [String])
-    func fetch(key: InMemonryStorageKey) -> [String]?
+    func save(key: InMemonryStorageKey, value: SelectedFilterTagsDTO)
+    func fetch(key: InMemonryStorageKey) -> Observable<SelectedFilterTagsDTO?>
 }
 
 final class InMemoryRepository: InMemoryRepositoryProtocol {
-
-    private var inMemoryStorageForTags: [InMemonryStorageKey: [String]] = [:]
     
-    func save(key: InMemonryStorageKey, value: [String]) {
-        inMemoryStorageForTags[key] = value
+    private let inMemoryManager: InMemoryManager
+
+    init() { self.inMemoryManager = .shared }
+    
+    func save(key: InMemonryStorageKey, value: SelectedFilterTagsDTO) {
+        inMemoryManager.save(key: key, value: value)
     }
     
-    func fetch(key: InMemonryStorageKey) -> [String]? {
-        return inMemoryStorageForTags[key]
+    func fetch(key: InMemonryStorageKey) -> Observable<SelectedFilterTagsDTO?> {
+        return Observable.just(inMemoryManager.fetch(key: key))
     }
 }

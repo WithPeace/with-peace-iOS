@@ -81,7 +81,7 @@ final class FilterViewController: UIViewController {
     private let addPolicyTagRelay = PublishRelay<String>()
     private let addRegionTagRelay = PublishRelay<String>()
     let filterVCDismissSignalRelay = PublishRelay<Void>() // TODO: - 외부 VC와의 의존성 없애기, 예상: Coordinator 패턴으로 해결 예정
-    
+
     init(viewModel: FilterViewModel) {
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
@@ -325,7 +325,7 @@ final class FilterViewController: UIViewController {
     }
     
     private func bind() {
-
+                
         let input = FilterViewModel.Input(
             viewWillApear: rx.viewWillAppear,
             addPolicyTag: addPolicyTagRelay.asObservable(),

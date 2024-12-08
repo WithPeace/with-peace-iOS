@@ -22,7 +22,7 @@ final class HomeViewController: UIViewController {
     
     // MARK: - User Event Observables
     private let sendCurrentFilterKeywordsTap = PublishRelay<Void>()
-    private let filterVCDismissedSignalRelay = PublishRelay<Void>() // FilterVC가 Dismiss 되었단 완료 이벤트
+    private let filterVCDismissedSignal = PublishRelay<Void>() // FilterVC가 Dismiss 되었단 완료 이벤트
     
     init(viewModel: HomeViewModel) {
         self.viewModel = viewModel
@@ -209,6 +209,9 @@ final class HomeViewController: UIViewController {
                                 keychain: KeychainManager(),
                                 network: CleanNetworkManager()
                             )
+                        ),
+                        inMemoryUsecase: InMemoryUsecase(
+                            inMemoryRepository: InMemoryRepository()
                         )
                     )
                 )
@@ -219,7 +222,7 @@ final class HomeViewController: UIViewController {
                 // TODO: - HomeVC에 대한 의존성 문제 해결하기, Coordinator 패턴으로 해결하기
                 filterVC.filterVCDismissSignalRelay.asDriver(onErrorJustReturn: ())
                     .drive(with: self) { onwer, _ in
-                        owner.filterVCDismissedSignalRelay.accept(())
+                        owner.filterVCDismissedSignal.accept(())
                     }
                     .disposed(by: cell.disposeBag)
             }
@@ -311,9 +314,9 @@ final class HomeViewController: UIViewController {
     private func bind() {
         
         let input = HomeViewModel.Input(
-            viewWillAppearTrigger: rx.viewWillAppear.take(1),
+            viewWillAppearTrigger: rx.viewWillAppear,
             sendCurrentFilterKeywordsTap: sendCurrentFilterKeywordsTap.asObservable(),
-            filterVCDismissedSignal: filterVCDismissedSignalRelay.asObservable()
+            filterVCDismissedSignal: filterVCDismissedSignal.asObservable()
         )
         
         let output = viewModel.transform(input: input)

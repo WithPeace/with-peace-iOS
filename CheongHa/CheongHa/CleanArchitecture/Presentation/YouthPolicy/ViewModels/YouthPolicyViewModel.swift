@@ -9,15 +9,18 @@ import Foundation
 import RxSwift
 import RxCocoa
 
-//TODO: Page Index 관리에 대한 고민
+// TODO: - Page Index 관리에 대한 고민
+// TODO: - ViewModelType 프로토콜을 준수하도록 수정
 final class YouthPolicyViewModel {
     private let youthCenterRepository = YouthCenterRepository()
     
     private let disposeBag = DisposeBag()
     
     private let fetchDisplayDataCount = 10
-    private var nowPageIndex = 1
-    private let pageIndex = BehaviorSubject<Int>(value: 1)
+    
+    private let intialPageIndex = 1
+    private lazy var nowPageIndex = intialPageIndex
+    private lazy var pageIndex = BehaviorSubject<Int>(value: intialPageIndex)
     
     // INPUT
     let fetchAdditional: PublishSubject<Void>
@@ -25,6 +28,7 @@ final class YouthPolicyViewModel {
     let tapFilterButton = PublishSubject<Void>()
     let changeFilter = BehaviorSubject<YouthFilterData>(value: YouthFilterData())
     let itemTapped = PublishSubject<String>()
+    let filterVCDismissedSignal = PublishRelay<Void>()
     
     // OUTPUT
     let youthData = BehaviorSubject(value: [YouthPolicy]())
@@ -36,13 +40,16 @@ final class YouthPolicyViewModel {
     
     private let policyUsecase: PolicyUsecaseProtocol
     private let filterUsecase: FilterUsecaseProtocol
+    private let inMemoryUsecase: InMemoryUsecaseProtocol
     
     init(
         policyUsecase: PolicyUsecaseProtocol,
-        filterUsecase: FilterUsecaseProtocol
+        filterUsecase: FilterUsecaseProtocol,
+        inMemoryUsecase: InMemoryUsecaseProtocol
     ) {
         self.policyUsecase = policyUsecase
         self.filterUsecase = filterUsecase
+        self.inMemoryUsecase = inMemoryUsecase
         
         let requesting = PublishSubject<Void>()
         let refreshing = PublishSubject<Void>()
@@ -56,6 +63,32 @@ final class YouthPolicyViewModel {
         policyUsecase.fetchPolicies(with: query).asObservable()
             .subscribe(with: self) { owner, policyDTO in
                 guard let data = policyDTO.data else { return }
+                owner.youthPolicies.accept(data)
+                owner.indicatorViewControll.onNext(())
+                owner.nowPageIndex += 1
+            }
+            .disposed(by: disposeBag)
+        
+        // 필터 화면 내려갈 시 이벤트 수신
+        filterVCDismissedSignal
+            .withUnretained(self)
+            .flatMap { owner, _ in
+                return owner.inMemoryUsecase.fetch(key: .selectedFilterTags)
+            }
+            .withUnretained(self)
+            .flatMap { owner, selectedFilterTags in
+                let query = FetchPoliciesQuery(
+                    region: selectedFilterTags.region.map { APIKeys.getRegionCode(with: $0) } .joined(separator: ","),
+                    classification: selectedFilterTags.classification.map { APIKeys.getPolicyCode(with: $0) }.joined(separator: ","),
+                    pageIndex: owner.intialPageIndex,
+                    display: owner.fetchDisplayDataCount
+                )
+                print("query",query)
+                return policyUsecase.fetchPolicies(with: query)
+            }
+            .subscribe(with: self) { owner, policyDTO in
+                guard let data = policyDTO.data else { return }
+                print("data", data)
                 owner.youthPolicies.accept(data)
                 owner.indicatorViewControll.onNext(())
                 owner.nowPageIndex += 1
@@ -84,10 +117,14 @@ final class YouthPolicyViewModel {
         fetchAdditional
             .debounce(.seconds(1), scheduler: MainScheduler.instance)
             .withUnretained(self)
+            .flatMap { owner, _ in
+                owner.inMemoryUsecase.fetch(key: .selectedFilterTags)
+            }
+            .withUnretained(self)
             .flatMap { owner, filterData in
                 let query = FetchPoliciesQuery(
-//                    region: "",
-//                    classification: "",
+                    region: filterData.region.map { APIKeys.getRegionCode(with: $0) }.joined(separator: ","),
+                    classification: filterData.classification.map { APIKeys.getPolicyCode(with: $0) }.joined(separator: ","),
                     pageIndex: owner.nowPageIndex,
                     display: owner.fetchDisplayDataCount
                 )

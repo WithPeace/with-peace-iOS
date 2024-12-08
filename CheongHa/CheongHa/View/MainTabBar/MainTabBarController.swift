@@ -49,6 +49,9 @@ final class MainTabbarController: UITabBarController {
                         keychain: keychain,
                         network: network
                     )
+                ),
+                inMemoryUsecase: InMemoryUsecase(
+                    inMemoryRepository: InMemoryRepository()
                 )
             )
         )

@@ -7,6 +7,7 @@
 
 import UIKit
 import RxSwift
+import RxCocoa
 
 final class YouthPolicyViewController: UIViewController {
     
@@ -43,6 +44,9 @@ final class YouthPolicyViewController: UIViewController {
         
         return view
     }()
+    
+    // MARK: - User Event Observables
+    private let filterVCDismissedSignal = PublishRelay<Void>() // FilterVC가 Dismiss 되었단 완료 이벤트
     
     init(viewModel: YouthPolicyViewModel) {
         self.viewModel = viewModel
@@ -103,6 +107,12 @@ final class YouthPolicyViewController: UIViewController {
 //            }
 //        }.disposed(by: disposeBag)
         
+        filterVCDismissedSignal.asDriver(onErrorJustReturn: ())
+            .drive(with: self) { owner, _ in
+                owner.viewModel.filterVCDismissedSignal.accept(())
+            }
+            .disposed(by: disposeBag)
+        
         viewModel.indicatorViewControll.bind { [weak self] in
             DispatchQueue.main.async {
                 self?.indicatorView.stopAnimating()
@@ -137,6 +147,35 @@ final class YouthPolicyViewController: UIViewController {
                 guard let policyDetailData else { return }
                 let youthDetailViewController = YouthDetailViewController(policyDetail: policyDetailData)
                 owner.navigationController?.pushViewController(youthDetailViewController, animated: true)
+            }
+            .disposed(by: disposeBag)
+        
+        guard let rightBarButtonItem = navigationItem.rightBarButtonItem else { return }
+        rightBarButtonItem.rx.tap
+            .bind(with: self) { owner, _ in
+                let filterVC = FilterViewController(
+                    viewModel: FilterViewModel(
+                        filterUsecase: FilterUsecase(
+                            filterRepository: FilterRepository(
+                                keychain: KeychainManager(), network:
+                                    CleanNetworkManager()
+                            )
+                        ),
+                        inMemoryUsecase: InMemoryUsecase(
+                            inMemoryRepository: InMemoryRepository()
+                        ),
+                        isFromYouthPolicyScreen: true
+                    )
+                )
+                filterVC.modalPresentationStyle = .overFullScreen
+                owner.present(filterVC, animated: false)
+                
+                // TODO: - HomeVC에 대한 의존성 문제 해결하기, Coordinator 패턴으로 해결하기
+                filterVC.filterVCDismissSignalRelay.asDriver(onErrorJustReturn: ())
+                    .drive(with: self) { onwer, _ in
+                        owner.filterVCDismissedSignal.accept(())
+                    }
+                    .disposed(by: owner.disposeBag)
             }
             .disposed(by: disposeBag)
     }
