@@ -1,5 +1,5 @@
 //
-//  ProfileDTO.swift
+//  SearchDataDTO.swift
 //  WithPeace
 //
 //  Created by Dylan_Y on 6/17/24.
