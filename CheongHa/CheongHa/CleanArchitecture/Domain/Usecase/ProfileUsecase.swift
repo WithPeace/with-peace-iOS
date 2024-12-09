@@ -10,6 +10,7 @@ import RxSwift
 
 protocol ProfileUsecaseProtocol {
     func fetchProfile() -> Single<CleanProfileDTO>
+    func updateProfile(body: UpdateProfileBody) -> Single<CleanProfileDTO>
 }
 
 final class ProfileUsecase: ProfileUsecaseProtocol {
@@ -22,5 +23,9 @@ final class ProfileUsecase: ProfileUsecaseProtocol {
     
     func fetchProfile() -> Single<CleanProfileDTO> {
         return profileRepository.fetchProfile(api: .fetchProfile)
+    }
+    
+    func updateProfile(body: UpdateProfileBody) -> Single<CleanProfileDTO> {
+        return profileRepository.updateProfile(api: .updateProfile(body: body))
     }
 }
