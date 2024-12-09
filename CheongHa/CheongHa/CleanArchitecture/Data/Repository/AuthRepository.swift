@@ -25,5 +25,17 @@ final class AuthRepository: AuthRepositoryProtocol {
     func logout(api: AuthRouter) -> Single<LogoutDTO> {
         network
             .request(api, decodingType: LogoutDTO.self)
+            .deleteTokens(keychain)
+    }
+}
+
+extension PrimitiveSequence where Trait == SingleTrait, Element == LogoutDTO {
+    
+    func deleteTokens(_ keychain: KeychainManagerProtocol) -> Single<Element> {
+        return map {
+            keychain.delete(account: "accessToken")
+            keychain.delete(account: "refreshToken")
+            return $0
+        }
     }
 }
