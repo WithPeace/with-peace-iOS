@@ -62,6 +62,7 @@ final class MyPageViewModel {
         })
         .disposed(by: disposeBag)
         
+        // 로그아웃 구현
         tapLogoutButton.subscribe(onNext: {
             self.signRepository.performLogout { result in
                 switch result {

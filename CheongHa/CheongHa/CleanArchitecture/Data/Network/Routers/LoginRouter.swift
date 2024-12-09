@@ -49,7 +49,13 @@ extension LoginRouter: BaseTargetType {
         case .appleSocialLogin(let idToken):
             return ["Authorization" : "Bearer \(idToken)"]
         case .refreshToken:
-            return nil
+            let keyChainManager = KeychainManager()
+            guard let keyChainAccessToken = keyChainManager.get(account: "refreshToken"),
+                  let refreshToken = String(data: keyChainAccessToken, encoding: .utf8)
+            else { return nil }
+
+            print("refreshToken: \(refreshToken)")
+            return ["Authorization": "Bearer \(refreshToken)"]
         }
     }
 }

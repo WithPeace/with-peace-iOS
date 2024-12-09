@@ -6,10 +6,8 @@
 //
 
 import Foundation
-import RxMoya
 import RxSwift
 
-// TODO: 명칭 변경 Login -> Auth
 protocol ProfileRepositoryProtocol {
     func fetchProfile(api: ProfileRouter) -> Single<CleanProfileDTO>
 }
