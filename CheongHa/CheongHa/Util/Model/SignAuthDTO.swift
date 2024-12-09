@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct SignAuthDTO: Codable {
+struct SignAuthDTO: DTOType {
     let data: DataClass
     let error: Errors?
 }
@@ -19,16 +19,6 @@ struct DataClass: Codable {
 }
 
 struct JwtTokenDto: Codable {
-    let accessToken, refreshToken: String
-}
-
-//TODO: RoleDetail "" ????
-enum Role: String, Codable {
-    case guest = "GUEST"
-    case user = "USER"
-}
-
-struct Errors: Codable {
-    var code: Int?
-    var message: String?
+    let accessToken: String
+    let refreshToken: String
 }

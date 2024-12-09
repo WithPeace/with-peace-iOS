@@ -117,7 +117,16 @@ final class SocialLoginViewController: UIViewController {
         return view
     }()
     
-    private var viewModel = SocialLoginViewModel(googleSigninManager: SignRepository())
+    private var viewModel = SocialLoginViewModel(
+        googleSigninManager: SignRepository(),
+        socialLoginRouter: SocialLoginRouter(),
+        loginUsecase: LoginUsecase(
+            loginRepository: LoginRepository(
+                keychain: KeychainManager(),
+                network: CleanNetworkManager()
+            )
+        )
+    )
     private let disposeBag = DisposeBag()
     
     init() {
@@ -198,13 +207,14 @@ extension SocialLoginViewController {
     private func bindViewModel() {
         googleLoginButton.rx.tap
             .subscribe(onNext: { [weak self] _ in
-                self?.viewModel.performGoogleLogin()
+                self?.viewModel.routeToGoogleLoginView()
             })
             .disposed(by: disposeBag)
         
         appleLoginButton.rx.tap
             .subscribe { [weak self] _ in
-                self?.handleAuthorizationAppleIDButtonPress()
+//                self?.handleAuthorizationAppleIDButtonPress()
+                self?.viewModel.handleAuthorizationAppleIDButtonPress()
             }.disposed(by: disposeBag)
         
         viewModel.signInSuccess
@@ -236,54 +246,8 @@ extension SocialLoginViewController {
     }
 }
 
-extension SocialLoginViewController: ASAuthorizationControllerDelegate, ASAuthorizationControllerPresentationContextProviding {
-    
-    func presentationAnchor(for controller: ASAuthorizationController) -> ASPresentationAnchor {
-        print("presentationAnchor 호출")
-        return self.view.window!
-    }
-    
-    // 로그인 띄워주는 func
-    func handleAuthorizationAppleIDButtonPress() {
-        print("handleAuthorizationAppleIDButtonPress 호출")
-        let appleIDProvider = ASAuthorizationAppleIDProvider()
-        let request = appleIDProvider.createRequest()
-        request.requestedScopes = [.fullName, .email]
-        request.requestedScopes = []
-        
-        let authorizationController = ASAuthorizationController(authorizationRequests: [request])
-        authorizationController.delegate = self
-        authorizationController.presentationContextProvider = self
-        authorizationController.performRequests()
-    }
-    
-    // 인증 성공시 호출
-    func authorizationController(controller: ASAuthorizationController, 
-                                 didCompleteWithAuthorization authorization: ASAuthorization) {
-        
-        switch authorization.credential {
-        case let appleIDCredential as ASAuthorizationAppleIDCredential:
-            guard let id = String(data: appleIDCredential.identityToken!, encoding: .utf8) else {
-                return
-            }
-            
-            self.viewModel.appleLoginSuccess.onNext(id)
-            
-        case let passwordCredential as ASPasswordCredential:
-            print("passwordCredential: ", passwordCredential)
-            print(passwordCredential.user)
-            print(passwordCredential.password)
-        default:
-            self.viewModel.signInFailure.onNext("로그인에 실패했습니다.")
-            break
-        }
-    }
-    
-    func authorizationController(controller: ASAuthorizationController, didCompleteWithError error: Error) {
-        print("인증 실패, ERROR authorizationController 호출")
-        self.viewModel.signInFailure.onNext("로그인에 실패했습니다.")
-    }
-    
+// MARK: 둘러보기 버튼
+extension SocialLoginViewController {
     private func takeTourButtonTargeting() {
         takeTourButton.addTarget(self, action: #selector(tapTourButton), for: .touchUpInside)
     }
