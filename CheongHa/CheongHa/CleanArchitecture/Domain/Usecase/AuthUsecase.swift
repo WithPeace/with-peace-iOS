@@ -10,10 +10,11 @@ import RxSwift
 
 protocol AuthUsecaseProtocol {
     func logout() -> Single<LogoutDTO>
+    func withdrawal() -> Single<WithdrawalDTO>
 }
 
 final class AuthUsecase: AuthUsecaseProtocol {
-    
+   
     private let authRepository: AuthRepositoryProtocol
     
     init(authRepository: AuthRepositoryProtocol ) {
@@ -22,5 +23,9 @@ final class AuthUsecase: AuthUsecaseProtocol {
     
     func logout() -> Single<LogoutDTO> {
         return authRepository.logout(api: .logout)
+    }
+    
+    func withdrawal() -> Single<WithdrawalDTO> {
+        return authRepository.withdrawal(api: .withdrawal)
     }
 }

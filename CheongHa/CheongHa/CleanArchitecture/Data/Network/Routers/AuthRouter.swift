@@ -10,6 +10,7 @@ import Moya
 
 enum AuthRouter {
     case logout
+    case withdrawal
 }
 
 extension AuthRouter: BaseTargetType {
@@ -18,6 +19,8 @@ extension AuthRouter: BaseTargetType {
         switch self {
         case .logout:
             return "/auth/logout"
+        case .withdrawal:
+            return "/users"
         }
     }
     
@@ -25,12 +28,14 @@ extension AuthRouter: BaseTargetType {
         switch self {
         case .logout:
             return .post
+        case .withdrawal:
+            return .delete
         }
     }
     
     var task: Moya.Task {
         switch self {
-        case .logout:
+        case .logout, .withdrawal:
             return .requestPlain
         }
     }

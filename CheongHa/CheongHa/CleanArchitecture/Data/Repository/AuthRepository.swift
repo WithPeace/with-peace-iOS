@@ -10,6 +10,7 @@ import RxSwift
 
 protocol AuthRepositoryProtocol {
     func logout(api: AuthRouter) -> Single<LogoutDTO>
+    func withdrawal(api: AuthRouter) -> Single<WithdrawalDTO>
 }
 
 final class AuthRepository: AuthRepositoryProtocol {
@@ -27,9 +28,26 @@ final class AuthRepository: AuthRepositoryProtocol {
             .request(api, decodingType: LogoutDTO.self)
             .deleteTokens(keychain)
     }
+    
+    func withdrawal(api: AuthRouter) -> Single<WithdrawalDTO> {
+        network
+            .request(api, decodingType: WithdrawalDTO.self)
+            .deleteTokens(keychain)
+    }
 }
 
 extension PrimitiveSequence where Trait == SingleTrait, Element == LogoutDTO {
+    
+    func deleteTokens(_ keychain: KeychainManagerProtocol) -> Single<Element> {
+        return map {
+            keychain.delete(account: "accessToken")
+            keychain.delete(account: "refreshToken")
+            return $0
+        }
+    }
+}
+
+extension PrimitiveSequence where Trait == SingleTrait, Element == WithdrawalDTO {
     
     func deleteTokens(_ keychain: KeychainManagerProtocol) -> Single<Element> {
         return map {

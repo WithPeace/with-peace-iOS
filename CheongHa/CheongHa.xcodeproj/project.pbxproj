@@ -13,6 +13,7 @@
 		0025AD272D06DBF70034AAC1 /* AuthRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0025AD262D06DBF70034AAC1 /* AuthRepository.swift */; };
 		0025AD2A2D06DD050034AAC1 /* LogoutDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0025AD292D06DD050034AAC1 /* LogoutDTO.swift */; };
 		0025AD2C2D06DD910034AAC1 /* AuthUsecase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0025AD2B2D06DD910034AAC1 /* AuthUsecase.swift */; };
+		0025AD2E2D06E21D0034AAC1 /* WithdrawalDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0025AD2D2D06E21D0034AAC1 /* WithdrawalDTO.swift */; };
 		0025D4402CEC64BE00E3BBD9 /* PolicyDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0025D43F2CEC64BE00E3BBD9 /* PolicyDTO.swift */; };
 		0025D4422CEC663100E3BBD9 /* PolicyRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0025D4412CEC663100E3BBD9 /* PolicyRouter.swift */; };
 		0025D4442CEC672400E3BBD9 /* PolicyRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0025D4432CEC672400E3BBD9 /* PolicyRepository.swift */; };
@@ -206,6 +207,7 @@
 		0025AD262D06DBF70034AAC1 /* AuthRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthRepository.swift; sourceTree = "<group>"; };
 		0025AD292D06DD050034AAC1 /* LogoutDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogoutDTO.swift; sourceTree = "<group>"; };
 		0025AD2B2D06DD910034AAC1 /* AuthUsecase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthUsecase.swift; sourceTree = "<group>"; };
+		0025AD2D2D06E21D0034AAC1 /* WithdrawalDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WithdrawalDTO.swift; sourceTree = "<group>"; };
 		0025D43F2CEC64BE00E3BBD9 /* PolicyDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PolicyDTO.swift; sourceTree = "<group>"; };
 		0025D4412CEC663100E3BBD9 /* PolicyRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PolicyRouter.swift; sourceTree = "<group>"; };
 		0025D4432CEC672400E3BBD9 /* PolicyRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PolicyRepository.swift; sourceTree = "<group>"; };
@@ -421,6 +423,7 @@
 			isa = PBXGroup;
 			children = (
 				0025AD292D06DD050034AAC1 /* LogoutDTO.swift */,
+				0025AD2D2D06E21D0034AAC1 /* WithdrawalDTO.swift */,
 			);
 			path = Auth;
 			sourceTree = "<group>";
@@ -1630,6 +1633,7 @@
 				008497CD2CEF1807004E6FA7 /* RegionCollectionViewCell.swift in Sources */,
 				00B683932CE1F640005110D2 /* HomeViewController.swift in Sources */,
 				F69011DD2BB4685C009A8087 /* CustomAlertSheetViewController.swift in Sources */,
+				0025AD2E2D06E21D0034AAC1 /* WithdrawalDTO.swift in Sources */,
 				F65FFA972C074914009A6FB3 /* YouthDetailTableViewController.swift in Sources */,
 				0025D4442CEC672400E3BBD9 /* PolicyRepository.swift in Sources */,
 				00B7AF5E2CF4B20E00AC8A04 /* FilterViewModel.swift in Sources */,
