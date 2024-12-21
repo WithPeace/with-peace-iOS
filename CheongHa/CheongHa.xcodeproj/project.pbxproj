@@ -48,6 +48,8 @@
 		008497E02CEF3827004E6FA7 /* FilterSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 008497DF2CEF3827004E6FA7 /* FilterSection.swift */; };
 		0084B2B92CF7067300A43C51 /* PolicyDetailDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0084B2B82CF7067300A43C51 /* PolicyDetailDTO.swift */; };
 		0084B2BC2CF7086300A43C51 /* FetchPolicyParams.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0084B2BB2CF7086300A43C51 /* FetchPolicyParams.swift */; };
+		0084CF732D16A2E700ED4D84 /* CommunityCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0084CF722D16A2E700ED4D84 /* CommunityCategory.swift */; };
+		0084CF752D16A30C00ED4D84 /* CommunityTabButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0084CF742D16A30C00ED4D84 /* CommunityTabButton.swift */; };
 		009D0E8A2CDBAFAB007D70C2 /* DTOType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 009D0E892CDBAFAB007D70C2 /* DTOType.swift */; };
 		009D0E8C2CDBB049007D70C2 /* SocialLoginDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 009D0E8B2CDBB049007D70C2 /* SocialLoginDTO.swift */; };
 		009D0E902CDBC2BD007D70C2 /* RefreshedTokenDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 009D0E8F2CDBC2BD007D70C2 /* RefreshedTokenDTO.swift */; };
@@ -243,6 +245,8 @@
 		008497DF2CEF3827004E6FA7 /* FilterSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterSection.swift; sourceTree = "<group>"; };
 		0084B2B82CF7067300A43C51 /* PolicyDetailDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PolicyDetailDTO.swift; sourceTree = "<group>"; };
 		0084B2BB2CF7086300A43C51 /* FetchPolicyParams.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchPolicyParams.swift; sourceTree = "<group>"; };
+		0084CF722D16A2E700ED4D84 /* CommunityCategory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommunityCategory.swift; sourceTree = "<group>"; };
+		0084CF742D16A30C00ED4D84 /* CommunityTabButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommunityTabButton.swift; sourceTree = "<group>"; };
 		009D0E892CDBAFAB007D70C2 /* DTOType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DTOType.swift; sourceTree = "<group>"; };
 		009D0E8B2CDBB049007D70C2 /* SocialLoginDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocialLoginDTO.swift; sourceTree = "<group>"; };
 		009D0E8F2CDBC2BD007D70C2 /* RefreshedTokenDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RefreshedTokenDTO.swift; sourceTree = "<group>"; };
@@ -465,6 +469,8 @@
 		0035BC902D155B2C0008691B /* Community */ = {
 			isa = PBXGroup;
 			children = (
+				0084CF722D16A2E700ED4D84 /* CommunityCategory.swift */,
+				0084CF742D16A30C00ED4D84 /* CommunityTabButton.swift */,
 				0035BC912D155B470008691B /* CommunityViewController.swift */,
 				0035BC932D156FD10008691B /* CommunityPostCollectionViewCell.swift */,
 			);
@@ -1543,6 +1549,7 @@
 				F674DDDF2BADB17A00536AA7 /* String+.swift in Sources */,
 				008497CF2CEF2CDD004E6FA7 /* PolicyFieldHeader.swift in Sources */,
 				00B683A62CE1F90B005110D2 /* HomeViewModel.swift in Sources */,
+				0084CF732D16A2E700ED4D84 /* CommunityCategory.swift in Sources */,
 				F68657442BB415DC00821281 /* CustomActionSheetTransitioningDelegate.swift in Sources */,
 				F65FFA8F2C04C3D3009A6FB3 /* YouthDetailViewController.swift in Sources */,
 				F6833FF92C00ACB10099F1DA /* YouthFilterData.swift in Sources */,
@@ -1580,6 +1587,7 @@
 				F68C9D1C2BA2DE87008CB7E4 /* YouthPolicyViewController.swift in Sources */,
 				635BCBB32BA94F6600F0DCBC /* CategoryViewCell.swift in Sources */,
 				F6833FAD2BFC708D0099F1DA /* YouthFilterViewModel.swift in Sources */,
+				0084CF752D16A30C00ED4D84 /* CommunityTabButton.swift in Sources */,
 				635BCBB72BA952F000F0DCBC /* DescriptionCell.swift in Sources */,
 				F68719B32BA867FE0049B182 /* UICollectionViewLayout+.swift in Sources */,
 				00D629E62D05D419002F9046 /* InMemoryManager.swift in Sources */,
