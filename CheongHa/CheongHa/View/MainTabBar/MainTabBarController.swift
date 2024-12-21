@@ -56,8 +56,8 @@ final class MainTabbarController: UITabBarController {
             )
         )
     )
-    //    private let youthPolicyViewController = BlankPageViewController()
-    private let registBlankViewController = BlankPageViewController()
+//    private let registBlankViewController = BlankPageViewController()
+    private let communityViewController = UINavigationController(rootViewController: CommunityViewController())
     private let myPageViewController = UINavigationController(rootViewController: MyPageViewController())
     
     private let registViewController = BlankPageViewController()
@@ -73,26 +73,28 @@ final class MainTabbarController: UITabBarController {
     private func configureTabbarContents() {
         setViewControllers([homeViewController,
                             youthPolicyViewController,
-                            registBlankViewController,
+                            communityViewController,
                             myPageViewController], animated: true)
         
         homeViewController.tabBarItem.image = UIImage(named: tabBarConstant.icHome)
-        youthPolicyViewController.tabBarItem.image = UIImage(named: tabBarConstant.icBoard)
-        registBlankViewController.tabBarItem.image = UIImage(named: tabBarConstant.icRegist)
+        youthPolicyViewController.tabBarItem.image = UIImage(named: tabBarConstant.icYouthPolicy)
+        communityViewController.tabBarItem.image = UIImage(named: tabBarConstant.icCommunity)
         myPageViewController.tabBarItem.image = UIImage(named: tabBarConstant.icMypage)
         
         homeViewController.tabBarItem.selectedImage = UIImage(named: tabBarConstant.icHomeSelect)
+        youthPolicyViewController.tabBarItem.selectedImage = UIImage(named: tabBarConstant.icHomeSelect)
+        communityViewController.tabBarItem.selectedImage = UIImage(named: tabBarConstant.icCommunitySelect)
         //        forumViewController.tabBarItem.selectedImage = UIImage(named: tabBarConstant.icBoardSelect)
         myPageViewController.tabBarItem.selectedImage = UIImage(named: tabBarConstant.icMypageSelect)
         
         homeViewController.tabBarItem.title = "홈"
         youthPolicyViewController.tabBarItem.title = "청년정책"
-        registBlankViewController.tabBarItem.title = "등록"
+        communityViewController.tabBarItem.title = "커뮤니티"
         myPageViewController.tabBarItem.title = "마이페이지"
         
         homeViewController.tabBarItem.tag = 0
         youthPolicyViewController.tabBarItem.tag = 1
-        registBlankViewController.tabBarItem.tag = 2
+        communityViewController.tabBarItem.tag = 2
         myPageViewController.tabBarItem.tag = 3
         
         tabBar.backgroundColor = .label

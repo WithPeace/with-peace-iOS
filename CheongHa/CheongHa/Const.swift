@@ -127,13 +127,14 @@ extension Const {
         struct ICNavigationTabbar {
             private init() {}
             
-            static let icBoardSelect = "ic-board-select"
-            static let icBoard = "ic-board"
+            static let icYouthPolicySelect = "ic-youthPolicy-select"
+            static let icYouthPolicy = "ic-youthPolicy"
             static let icHomeSelect = "ic-home-select"
             static let icHome = "ic-home"
+            static let icCommunitySelect = "ic-community-select"
+            static let icCommunity = "ic-community"
             static let icMypageSelect = "ic-mypage-select"
             static let icMypage = "ic-mypage"
-            static let icRegist = "ic-regist"
         }
         
         struct ICProfile {

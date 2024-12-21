@@ -19,6 +19,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         self.window = UIWindow(windowScene: windowScene)
 
+//        window?.rootViewController = CommunityViewController()
+//        window?.makeKeyAndVisible()
         let keychain = KeychainManager()
         let network = CleanNetworkManager()
         let profileRepository = CleanProfileRepository(keychain: keychain, network: network)
