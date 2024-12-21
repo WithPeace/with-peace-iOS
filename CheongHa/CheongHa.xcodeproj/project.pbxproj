@@ -27,6 +27,8 @@
 		002A52BC2CEDE933007E9FD6 /* BaseHomeFilterCollectionViewHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 002A52BB2CEDE933007E9FD6 /* BaseHomeFilterCollectionViewHeader.swift */; };
 		002A52BE2CEE13B7007E9FD6 /* MyKeywordsBackgroundView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 002A52BD2CEE13B7007E9FD6 /* MyKeywordsBackgroundView.swift */; };
 		002A52C02CEE22F7007E9FD6 /* PolicyClassification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 002A52BF2CEE22F7007E9FD6 /* PolicyClassification.swift */; };
+		0035BC922D155B470008691B /* CommunityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0035BC912D155B470008691B /* CommunityViewController.swift */; };
+		0035BC942D156FD10008691B /* CommunityPostCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0035BC932D156FD10008691B /* CommunityPostCollectionViewCell.swift */; };
 		00623D842D06EBCF002E139D /* UpdateProfileBody.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00623D832D06EBCF002E139D /* UpdateProfileBody.swift */; };
 		006E63872CE8818300CF2F45 /* HomeSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 006E63862CE8818300CF2F45 /* HomeSection.swift */; };
 		00839A0D2CD7C3850024337F /* Secrets.plist in Resources */ = {isa = PBXBuildFile; fileRef = 00839A0C2CD7C3850024337F /* Secrets.plist */; };
@@ -221,6 +223,8 @@
 		002A52BB2CEDE933007E9FD6 /* BaseHomeFilterCollectionViewHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseHomeFilterCollectionViewHeader.swift; sourceTree = "<group>"; };
 		002A52BD2CEE13B7007E9FD6 /* MyKeywordsBackgroundView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyKeywordsBackgroundView.swift; sourceTree = "<group>"; };
 		002A52BF2CEE22F7007E9FD6 /* PolicyClassification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PolicyClassification.swift; sourceTree = "<group>"; };
+		0035BC912D155B470008691B /* CommunityViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommunityViewController.swift; sourceTree = "<group>"; };
+		0035BC932D156FD10008691B /* CommunityPostCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommunityPostCollectionViewCell.swift; sourceTree = "<group>"; };
 		00623D832D06EBCF002E139D /* UpdateProfileBody.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateProfileBody.swift; sourceTree = "<group>"; };
 		006E63862CE8818300CF2F45 /* HomeSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeSection.swift; sourceTree = "<group>"; };
 		00839A0C2CD7C3850024337F /* Secrets.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Secrets.plist; sourceTree = "<group>"; };
@@ -458,6 +462,15 @@
 			path = Base;
 			sourceTree = "<group>";
 		};
+		0035BC902D155B2C0008691B /* Community */ = {
+			isa = PBXGroup;
+			children = (
+				0035BC912D155B470008691B /* CommunityViewController.swift */,
+				0035BC932D156FD10008691B /* CommunityPostCollectionViewCell.swift */,
+			);
+			path = Community;
+			sourceTree = "<group>";
+		};
 		005E85A52CD8B36800029F7C /* Keychain */ = {
 			isa = PBXGroup;
 			children = (
@@ -650,6 +663,7 @@
 				F65A3E212C0AE6260035314B /* YouthDetailView */,
 				00839A142CD7C6510024337F /* Login */,
 				0025AD182D06D2FC0034AAC1 /* MyPage */,
+				0035BC902D155B2C0008691B /* Community */,
 			);
 			path = Presentation;
 			sourceTree = "<group>";
@@ -1550,6 +1564,7 @@
 				0025D4422CEC663100E3BBD9 /* PolicyRouter.swift in Sources */,
 				0025AD242D06DB880034AAC1 /* AuthRouter.swift in Sources */,
 				F65FFA932C05CEC3009A6FB3 /* YouthDetailCell.swift in Sources */,
+				0035BC922D155B470008691B /* CommunityViewController.swift in Sources */,
 				F6A9660E2C2479B90079B89E /* BlankPageViewController.swift in Sources */,
 				F65040AB2C20818C00B14D84 /* ReportMessage.swift in Sources */,
 				008497CB2CEF17BE004E6FA7 /* PolicyFieldCollectionViewCell.swift in Sources */,
@@ -1654,6 +1669,7 @@
 				00B683932CE1F640005110D2 /* HomeViewController.swift in Sources */,
 				F69011DD2BB4685C009A8087 /* CustomAlertSheetViewController.swift in Sources */,
 				0025AD2E2D06E21D0034AAC1 /* WithdrawalDTO.swift in Sources */,
+				0035BC942D156FD10008691B /* CommunityPostCollectionViewCell.swift in Sources */,
 				F65FFA972C074914009A6FB3 /* YouthDetailTableViewController.swift in Sources */,
 				0025D4442CEC672400E3BBD9 /* PolicyRepository.swift in Sources */,
 				00B7AF5E2CF4B20E00AC8A04 /* FilterViewModel.swift in Sources */,
