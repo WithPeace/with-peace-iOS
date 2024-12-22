@@ -82,7 +82,7 @@ final class MainTabbarController: UITabBarController {
         myPageViewController.tabBarItem.image = UIImage(named: tabBarConstant.icMypage)
         
         homeViewController.tabBarItem.selectedImage = UIImage(named: tabBarConstant.icHomeSelect)
-        youthPolicyViewController.tabBarItem.selectedImage = UIImage(named: tabBarConstant.icHomeSelect)
+        youthPolicyViewController.tabBarItem.selectedImage = UIImage(named: tabBarConstant.icYouthPolicySelect)
         communityViewController.tabBarItem.selectedImage = UIImage(named: tabBarConstant.icCommunitySelect)
         //        forumViewController.tabBarItem.selectedImage = UIImage(named: tabBarConstant.icBoardSelect)
         myPageViewController.tabBarItem.selectedImage = UIImage(named: tabBarConstant.icMypageSelect)
