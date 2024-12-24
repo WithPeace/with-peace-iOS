@@ -33,7 +33,47 @@ final class CommunityDetailViewController: UIViewController {
         return collectionView
     }()
     private var dataSource: UICollectionViewDiffableDataSource<CommunityDetailSection, CommentItem>!
-            
+    
+    private let separatorView = SeparatorView()
+    
+    private lazy var inputTextView: UITextView = {
+        let textView = UITextView()
+        textView.text = inputTextViewPlaceholderText
+        textView.textColor = inputTextViewPlaceholderColor
+        textView.font = .systemFont(ofSize: 14, weight: .regular)
+        textView.backgroundColor = .clear
+        textView.showsVerticalScrollIndicator = false
+        return textView
+    }()
+    private let inputTextViewPlaceholderText = "댓글을 입력해주세요"
+    private let inputTextViewPlaceholderColor: UIColor = .gray2
+    private let inputTextColor: UIColor = .gray1
+    
+    private let sendCommentButton: UIButton = {
+        let button = UIButton()
+        let image = UIImage(resource: .icSend)
+        button.setImage(image, for: .normal)
+        return button
+    }()
+    
+    private let inputCommentContainerView: UIView = {
+        let view = UIView()
+        view.backgroundColor = .gray3
+        view.layer.cornerRadius = 21
+        view.clipsToBounds = true
+        return view
+    }()
+
+    private let baseContainerView = UIView()
+    
+    private let bottomContainerView = UIView()
+    
+    private lazy var tapGesture: UITapGestureRecognizer = {
+        let tap = UITapGestureRecognizer()
+        baseContainerView.addGestureRecognizer(tap)
+        return tap
+    }()
+    
     private let disposeBag = DisposeBag()
     
     override func viewDidLoad() {
@@ -41,7 +81,9 @@ final class CommunityDetailViewController: UIViewController {
         
         view.backgroundColor = .white
         
-        view.addSubview(collectionView)
+        view.addSubview(baseContainerView)
+        
+        updateLayout()
         
         cellRegistration()
         apply([
@@ -51,13 +93,58 @@ final class CommunityDetailViewController: UIViewController {
             CommentItem(id: 4, userId: 2, profileImageURL: "sdfsdf", nickname: "sdfsdfse", content: "esfsese", createDate: "sdfsdfsdf"),
             CommentItem(id: 5, userId: 2, profileImageURL: "sdfsdf", nickname: "sdfsdfse", content: "esfsese", createDate: "sdfsdfsdf"),
         ])
+        
         bind()
     }
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         
-        collectionView.pin.all()
+        baseContainerView.pin.all(view.pin.safeArea)
+        baseContainerView.flex.layout()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
+        
+        navigationController?.navigationBar.isHidden = false
+        navigationController?.navigationBar.tintColor = .black
+
+        let leftBarButtonItemImage = UIImage(resource: .icSignBack)
+        navigationItem.leftBarButtonItem = UIBarButtonItem(image: leftBarButtonItemImage, style: .plain, target: self, action: #selector(leftBarButtonItemTapped))
+        let rightBarButtonItemImage = UIImage(resource: .icMoreButton)
+        navigationItem.rightBarButtonItem = UIBarButtonItem(image: rightBarButtonItemImage, style: .plain, target: self, action: nil)
+        navigationItem.rightBarButtonItem?.tintColor = .black
+        
+        tabBarController?.tabBar.isHidden = true
+    }
+    
+    @objc private func leftBarButtonItemTapped() {
+        navigationController?.popViewController(animated: true)
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        
+        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillHideNotification, object: nil)
+    }
+    
+    private func adjustInputTextViewHeight() {
+        guard let inputTextViewFont = inputTextView.font else { return }
+        
+        let maxLines = 4
+        
+        let maxHeight = inputTextViewFont.lineHeight * CGFloat(maxLines) // 최대 높이 계산
+        let fittingSize = inputTextView.sizeThatFits(CGSize(width: inputTextView.bounds.width, height: CGFloat.greatestFiniteMagnitude))
+        let newHeight = min(fittingSize.height, maxHeight) // 현재 높이와 최대 높이 비교
+        inputTextView.flex.height(newHeight) // 높이 설정
+        
+        // 레이아웃 업데이트
+        baseContainerView.flex.layout()
     }
     
     private func configureCollectionViewLayout() -> UICollectionViewCompositionalLayout {
@@ -93,7 +180,7 @@ final class CommunityDetailViewController: UIViewController {
     }
     
     private func cellRegistration() {
-
+        
         let postAndCommentSectionRegistration = UICollectionView.CellRegistration<CommentCell, CommentItem> { cell, indexPath, itemIdentifier in
         }
         
@@ -133,6 +220,82 @@ final class CommunityDetailViewController: UIViewController {
     }
     
     private func bind() {
-       
+        inputTextView.rx.text
+            .bind(with: self) { owner, text in
+                owner.adjustInputTextViewHeight()
+            }
+            .disposed(by: disposeBag)
+        
+        inputTextView.rx.didBeginEditing
+            .bind(with: self) { owner, _ in
+                if owner.inputTextView.text == owner.inputTextViewPlaceholderText
+                    && owner.inputTextView.textColor == owner.inputTextViewPlaceholderColor {
+                    owner.inputTextView.text = nil
+                    let inputTextColor: UIColor = .gray1
+                    owner.inputTextView.textColor = inputTextColor
+                }
+            }
+            .disposed(by: disposeBag)
+        
+        inputTextView.rx.didEndEditing
+            .bind(with: self) { owner, _ in
+                if owner.inputTextView.text.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
+                    owner.inputTextView.text = owner.inputTextViewPlaceholderText
+                    owner.inputTextView.textColor = owner.inputTextViewPlaceholderColor
+                }
+            }
+            .disposed(by: disposeBag)
+        
+        tapGesture.rx.event
+            .bind(with: self) { owner, tapGestureRecognizer in
+                owner.view.endEditing(true)
+            }
+            .disposed(by: disposeBag)
+    }
+    
+    @objc private func keyboardWillShow(notification: NSNotification) {
+        guard let keyboardFrame = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? CGRect,
+              let animationDuration = notification.userInfo?[UIResponder.keyboardAnimationDurationUserInfoKey] as? Double else {
+            return
+        }
+        
+        let bottomInset = UIApplication.shared.connectedScenes
+            .compactMap { $0 as? UIWindowScene }
+            .flatMap { $0.windows }
+            .first(where: { $0.isKeyWindow })?.safeAreaInsets.bottom ?? 0
+        let updatedMarginBottom = view.frame.height - keyboardFrame.origin.y - bottomInset + 8 // 8pt 여백
+        
+        UIView.animate(withDuration: animationDuration) { [weak self] in
+            guard let self else { return }
+            updateLayout(updatedMarginBottom)
+        }
+    }
+    
+    @objc private func keyboardWillHide(notification: NSNotification) {
+        guard let animationDuration = notification.userInfo?[UIResponder.keyboardAnimationDurationUserInfoKey] as? Double else {
+            return
+        }
+        
+        UIView.animate(withDuration: animationDuration) { [weak self] in
+            guard let self else { return }
+            updateLayout()
+        }
+    }
+    
+    private func updateLayout(_ marginBottom: CGFloat = 0) {
+        baseContainerView.flex.define { flex in
+            flex.addItem(collectionView).grow(1)
+            flex.addItem(bottomContainerView).define { flex in
+                flex.addItem(separatorView).height(1).marginBottom(8)
+                flex.addItem(inputCommentContainerView).direction(.row).define { flex in
+                    flex.addItem(inputTextView).width(0).grow(1).marginRight(16)
+                    flex.addItem(sendCommentButton).size(24)
+                }.alignItems(.center).padding(8, 16).marginHorizontal(24)
+            }.marginBottom(marginBottom)
+        }
+
+        baseContainerView.flex.layout()
+        
+        baseContainerView.pin.all(view.pin.safeArea)
     }
 }

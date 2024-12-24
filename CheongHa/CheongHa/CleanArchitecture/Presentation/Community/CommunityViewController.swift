@@ -61,8 +61,13 @@ final class CommunityViewController: UIViewController {
         }
         
         view.addSubview(indicatorBar)
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         
         navigationController?.navigationBar.isHidden = true
+        tabBarController?.tabBar.isHidden = false
     }
     
     override func viewDidLayoutSubviews() {
@@ -127,6 +132,14 @@ final class CommunityViewController: UIViewController {
             .bind(to: collectionView.rx.items(cellIdentifier: CommunityPostCollectionViewCell.identifier, cellType: CommunityPostCollectionViewCell.self)) { index, item, cell in
             }
             .disposed(by: disposeBag)
+        
+        collectionView.rx.modelSelected(Int.self)
+            .bind(with: self) { owner, selectedItem in
+                let communityDetailVC = CommunityDetailViewController()
+                owner.navigationController?.pushViewController(communityDetailVC, animated: true)
+            }
+            .disposed(by: disposeBag)
+        
     }
     
     @objc private func tabTapped(_ sender: UITapGestureRecognizer) {
