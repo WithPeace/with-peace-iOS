@@ -10,6 +10,7 @@ import Moya
 
 enum PostRouter {
     case fetchPosts(query: FetchPostsQuery)
+    case fetchPostDetail(params: FetchPostDetailParams)
     case fetchRecentPosts
 }
 
@@ -19,6 +20,8 @@ extension PostRouter: BaseTargetType {
         switch self {
         case .fetchPosts:
             return "/posts"
+        case .fetchPostDetail(let params):
+            return "/posts/\(params.postId)"
         case .fetchRecentPosts:
             return "/posts/recents"
         }
@@ -26,7 +29,7 @@ extension PostRouter: BaseTargetType {
     
     var method: Moya.Method {
         switch self {
-        case .fetchPosts, .fetchRecentPosts:
+        case .fetchPosts, .fetchPostDetail, .fetchRecentPosts:
             return .get
         }
     }
@@ -40,7 +43,7 @@ extension PostRouter: BaseTargetType {
                 "pageSize": query.pageSize
             ]
             return .requestParameters(parameters: parameters, encoding: URLEncoding.queryString)
-        case .fetchRecentPosts:
+        case .fetchPostDetail, .fetchRecentPosts:
             return .requestPlain
         }
     }

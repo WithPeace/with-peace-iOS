@@ -35,6 +35,8 @@
 		002A52BC2CEDE933007E9FD6 /* BaseHomeFilterCollectionViewHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 002A52BB2CEDE933007E9FD6 /* BaseHomeFilterCollectionViewHeader.swift */; };
 		002A52BE2CEE13B7007E9FD6 /* MyKeywordsBackgroundView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 002A52BD2CEE13B7007E9FD6 /* MyKeywordsBackgroundView.swift */; };
 		002A52C02CEE22F7007E9FD6 /* PolicyClassification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 002A52BF2CEE22F7007E9FD6 /* PolicyClassification.swift */; };
+		002E0E622D1C0940001BDB2A /* FetchPostDetailParams.swift in Sources */ = {isa = PBXBuildFile; fileRef = 002E0E612D1C0940001BDB2A /* FetchPostDetailParams.swift */; };
+		002E0E642D1C09C9001BDB2A /* PostDetailDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 002E0E632D1C09C9001BDB2A /* PostDetailDTO.swift */; };
 		0035BC922D155B470008691B /* CommunityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0035BC912D155B470008691B /* CommunityViewController.swift */; };
 		0035BC942D156FD10008691B /* CommunityPostCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0035BC932D156FD10008691B /* CommunityPostCollectionViewCell.swift */; };
 		00623D842D06EBCF002E139D /* UpdateProfileBody.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00623D832D06EBCF002E139D /* UpdateProfileBody.swift */; };
@@ -241,6 +243,8 @@
 		002A52BD2CEE13B7007E9FD6 /* MyKeywordsBackgroundView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyKeywordsBackgroundView.swift; sourceTree = "<group>"; };
 		002A52BF2CEE22F7007E9FD6 /* PolicyClassification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PolicyClassification.swift; sourceTree = "<group>"; };
 		002E0E5E2D1C07C9001BDB2A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		002E0E612D1C0940001BDB2A /* FetchPostDetailParams.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchPostDetailParams.swift; sourceTree = "<group>"; };
+		002E0E632D1C09C9001BDB2A /* PostDetailDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostDetailDTO.swift; sourceTree = "<group>"; };
 		0035BC912D155B470008691B /* CommunityViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommunityViewController.swift; sourceTree = "<group>"; };
 		0035BC932D156FD10008691B /* CommunityPostCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommunityPostCollectionViewCell.swift; sourceTree = "<group>"; };
 		00623D832D06EBCF002E139D /* UpdateProfileBody.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateProfileBody.swift; sourceTree = "<group>"; };
@@ -437,6 +441,7 @@
 			children = (
 				0025D44D2CEC7B6D00E3BBD9 /* PostRouter.swift */,
 				0016C2B52D1BEC40007D0B7F /* Queries */,
+				002E0E602D1C0939001BDB2A /* Params */,
 			);
 			path = Post;
 			sourceTree = "<group>";
@@ -486,6 +491,7 @@
 			children = (
 				F65040A82C20816900B14D84 /* PostType.swift */,
 				0016C2BA2D1BFEE4007D0B7F /* PostDTO.swift */,
+				002E0E632D1C09C9001BDB2A /* PostDetailDTO.swift */,
 				0025D44B2CEC7AAC00E3BBD9 /* RecentPostDTO.swift */,
 			);
 			path = Post;
@@ -526,6 +532,14 @@
 				002A52B92CEDD716007E9FD6 /* BaseCollectionViewCell.swift */,
 			);
 			path = Base;
+			sourceTree = "<group>";
+		};
+		002E0E602D1C0939001BDB2A /* Params */ = {
+			isa = PBXGroup;
+			children = (
+				002E0E612D1C0940001BDB2A /* FetchPostDetailParams.swift */,
+			);
+			path = Params;
 			sourceTree = "<group>";
 		};
 		0035BC902D155B2C0008691B /* Community */ = {
@@ -1647,6 +1661,7 @@
 				F65040A72C2075E000B14D84 /* ServerAPIError.swift in Sources */,
 				F6B94ABF2BAEFC95005FDEE6 /* ProfileRepositoryTemp.swift in Sources */,
 				F6833FF32BFDC3B30099F1DA /* YouthFilterCustomCell.swift in Sources */,
+				002E0E622D1C0940001BDB2A /* FetchPostDetailParams.swift in Sources */,
 				00A82ECA2CF85D330004B789 /* FilterRouter.swift in Sources */,
 				F69B800B2B996846002675CE /* ViewController.swift in Sources */,
 				00839A242CD7C94A0024337F /* LoginRepository.swift in Sources */,
@@ -1746,6 +1761,7 @@
 				00A82ED02CF85E870004B789 /* CurrentPolicyFiltering.swift in Sources */,
 				008497CD2CEF1807004E6FA7 /* RegionCollectionViewCell.swift in Sources */,
 				00B683932CE1F640005110D2 /* HomeViewController.swift in Sources */,
+				002E0E642D1C09C9001BDB2A /* PostDetailDTO.swift in Sources */,
 				F69011DD2BB4685C009A8087 /* CustomAlertSheetViewController.swift in Sources */,
 				0025AD2E2D06E21D0034AAC1 /* WithdrawalDTO.swift in Sources */,
 				0035BC942D156FD10008691B /* CommunityPostCollectionViewCell.swift in Sources */,
