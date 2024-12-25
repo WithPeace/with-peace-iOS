@@ -56,12 +56,10 @@ final class MainTabbarController: UITabBarController {
             )
         )
     )
-//    private let registBlankViewController = BlankPageViewController()
     private let communityViewController = UINavigationController(rootViewController: CommunityViewController())
     private let myPageViewController = UINavigationController(rootViewController: MyPageViewController())
-    
-    private let registViewController = BlankPageViewController()
-    
+    //    private let registBlankViewController = BlankPageViewController()
+
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -82,9 +80,8 @@ final class MainTabbarController: UITabBarController {
         myPageViewController.tabBarItem.image = UIImage(named: tabBarConstant.icMypage)
         
         homeViewController.tabBarItem.selectedImage = UIImage(named: tabBarConstant.icHomeSelect)
-        youthPolicyViewController.tabBarItem.selectedImage = UIImage(named: tabBarConstant.icHomeSelect)
+        youthPolicyViewController.tabBarItem.selectedImage = UIImage(named: tabBarConstant.icYouthPolicySelect)
         communityViewController.tabBarItem.selectedImage = UIImage(named: tabBarConstant.icCommunitySelect)
-        //        forumViewController.tabBarItem.selectedImage = UIImage(named: tabBarConstant.icBoardSelect)
         myPageViewController.tabBarItem.selectedImage = UIImage(named: tabBarConstant.icMypageSelect)
         
         homeViewController.tabBarItem.title = "홈"
