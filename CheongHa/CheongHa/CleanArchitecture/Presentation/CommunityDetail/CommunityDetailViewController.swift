@@ -12,19 +12,6 @@ import Kingfisher
 import RxSwift
 import RxCocoa
 
-enum CommunityDetailSection: Int, CaseIterable {
-    case postAndComment = 0
-}
-
-struct CommentItem: Identifiable, Hashable {
-    let id: Int
-    let userId: Int
-    let profileImageURL: String
-    let nickname: String
-    let content: String
-    let createDate: String
-}
-
 final class CommunityDetailViewController: UIViewController {
     
     private lazy var collectionView: UICollectionView = {
@@ -107,44 +94,16 @@ final class CommunityDetailViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
+        addNotificationCenterObservers()
         
-        navigationController?.navigationBar.isHidden = false
-        navigationController?.navigationBar.tintColor = .black
-
-        let leftBarButtonItemImage = UIImage(resource: .icSignBack)
-        navigationItem.leftBarButtonItem = UIBarButtonItem(image: leftBarButtonItemImage, style: .plain, target: self, action: #selector(leftBarButtonItemTapped))
-        let rightBarButtonItemImage = UIImage(resource: .icMoreButton)
-        navigationItem.rightBarButtonItem = UIBarButtonItem(image: rightBarButtonItemImage, style: .plain, target: self, action: nil)
-        navigationItem.rightBarButtonItem?.tintColor = .black
-        
-        tabBarController?.tabBar.isHidden = true
-    }
-    
-    @objc private func leftBarButtonItemTapped() {
-        navigationController?.popViewController(animated: true)
+        configureNavigationBar()
+        configureTabBar()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         
-        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillShowNotification, object: nil)
-        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillHideNotification, object: nil)
-    }
-    
-    private func adjustInputTextViewHeight() {
-        guard let inputTextViewFont = inputTextView.font else { return }
-        
-        let maxLines = 4
-        
-        let maxHeight = inputTextViewFont.lineHeight * CGFloat(maxLines) // 최대 높이 계산
-        let fittingSize = inputTextView.sizeThatFits(CGSize(width: inputTextView.bounds.width, height: CGFloat.greatestFiniteMagnitude))
-        let newHeight = min(fittingSize.height, maxHeight) // 현재 높이와 최대 높이 비교
-        inputTextView.flex.height(newHeight) // 높이 설정
-        
-        // 레이아웃 업데이트
-        baseContainerView.flex.layout()
+        removeNotificationCenterObservers()
     }
     
     private func configureCollectionViewLayout() -> UICollectionViewCompositionalLayout {
@@ -252,8 +211,80 @@ final class CommunityDetailViewController: UIViewController {
             }
             .disposed(by: disposeBag)
     }
+}
+
+// MARK: - Layout-Related Methods
+private extension CommunityDetailViewController {
+    func adjustInputTextViewHeight() {
+        guard let inputTextViewFont = inputTextView.font else { return }
+        
+        let maxLines = 4
+        
+        let maxHeight = inputTextViewFont.lineHeight * CGFloat(maxLines) // 최대 높이 계산
+        let fittingSize = inputTextView.sizeThatFits(CGSize(width: inputTextView.bounds.width, height: CGFloat.greatestFiniteMagnitude))
+        let newHeight = min(fittingSize.height, maxHeight) // 현재 높이와 최대 높이 비교
+        inputTextView.flex.height(newHeight) // 높이 설정
+        
+        // 레이아웃 업데이트
+        baseContainerView.flex.layout()
+    }
     
-    @objc private func keyboardWillShow(notification: NSNotification) {
+    func updateLayout(_ marginBottom: CGFloat = 0) {
+        baseContainerView.flex.define { flex in
+            flex.addItem(collectionView).grow(1)
+            flex.addItem(bottomContainerView).define { flex in
+                flex.addItem(separatorView).height(1).marginBottom(8)
+                flex.addItem(inputCommentContainerView).direction(.row).define { flex in
+                    flex.addItem(inputTextView).width(0).grow(1).marginRight(16)
+                    flex.addItem(sendCommentButton).size(24)
+                }.alignItems(.center).padding(8, 16).marginHorizontal(24)
+            }.marginBottom(marginBottom)
+        }
+
+        baseContainerView.flex.layout()
+        
+        baseContainerView.pin.all(view.pin.safeArea)
+    }
+}
+
+// MARK: - ViewWillAppear Configuration Methods
+private extension CommunityDetailViewController {
+    func addNotificationCenterObservers() {
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
+    }
+    
+    func configureNavigationBar() {
+        navigationController?.navigationBar.isHidden = false
+        navigationController?.navigationBar.tintColor = .black
+
+        let leftBarButtonItemImage = UIImage(resource: .icSignBack)
+        navigationItem.leftBarButtonItem = UIBarButtonItem(image: leftBarButtonItemImage, style: .plain, target: self, action: #selector(leftBarButtonItemTapped))
+        let rightBarButtonItemImage = UIImage(resource: .icMoreButton)
+        navigationItem.rightBarButtonItem = UIBarButtonItem(image: rightBarButtonItemImage, style: .plain, target: self, action: nil)
+        navigationItem.rightBarButtonItem?.tintColor = .black
+    }
+    
+    func configureTabBar() {
+        tabBarController?.tabBar.isHidden = true
+    }
+}
+
+// MARK: - ViewWillDisappear Configuration Methods
+private extension CommunityDetailViewController {
+    func removeNotificationCenterObservers() {
+        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillHideNotification, object: nil)
+    }
+}
+
+// MARK: - User Interaction Methods
+private extension CommunityDetailViewController {
+    @objc func leftBarButtonItemTapped() {
+        navigationController?.popViewController(animated: true)
+    }
+    
+    @objc func keyboardWillShow(notification: NSNotification) {
         guard let keyboardFrame = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? CGRect,
               let animationDuration = notification.userInfo?[UIResponder.keyboardAnimationDurationUserInfoKey] as? Double else {
             return
@@ -271,7 +302,7 @@ final class CommunityDetailViewController: UIViewController {
         }
     }
     
-    @objc private func keyboardWillHide(notification: NSNotification) {
+    @objc func keyboardWillHide(notification: NSNotification) {
         guard let animationDuration = notification.userInfo?[UIResponder.keyboardAnimationDurationUserInfoKey] as? Double else {
             return
         }
@@ -280,22 +311,5 @@ final class CommunityDetailViewController: UIViewController {
             guard let self else { return }
             updateLayout()
         }
-    }
-    
-    private func updateLayout(_ marginBottom: CGFloat = 0) {
-        baseContainerView.flex.define { flex in
-            flex.addItem(collectionView).grow(1)
-            flex.addItem(bottomContainerView).define { flex in
-                flex.addItem(separatorView).height(1).marginBottom(8)
-                flex.addItem(inputCommentContainerView).direction(.row).define { flex in
-                    flex.addItem(inputTextView).width(0).grow(1).marginRight(16)
-                    flex.addItem(sendCommentButton).size(24)
-                }.alignItems(.center).padding(8, 16).marginHorizontal(24)
-            }.marginBottom(marginBottom)
-        }
-
-        baseContainerView.flex.layout()
-        
-        baseContainerView.pin.all(view.pin.safeArea)
     }
 }

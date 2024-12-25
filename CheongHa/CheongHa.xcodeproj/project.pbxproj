@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0016C2B12D1BDF4C007D0B7F /* CommunityDetailSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0016C2B02D1BDF4C007D0B7F /* CommunityDetailSection.swift */; };
 		0025AD1B2D06D5050034AAC1 /* ProfileEditViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0025AD1A2D06D5050034AAC1 /* ProfileEditViewModel.swift */; };
 		0025AD1C2D06D5050034AAC1 /* ProfileEditViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0025AD192D06D5050034AAC1 /* ProfileEditViewController.swift */; };
 		0025AD242D06DB880034AAC1 /* AuthRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0025AD232D06DB880034AAC1 /* AuthRouter.swift */; };
@@ -211,6 +212,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0016C2B02D1BDF4C007D0B7F /* CommunityDetailSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommunityDetailSection.swift; sourceTree = "<group>"; };
 		0025AD192D06D5050034AAC1 /* ProfileEditViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileEditViewController.swift; sourceTree = "<group>"; };
 		0025AD1A2D06D5050034AAC1 /* ProfileEditViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileEditViewModel.swift; sourceTree = "<group>"; };
 		0025AD232D06DB880034AAC1 /* AuthRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthRouter.swift; sourceTree = "<group>"; };
@@ -470,6 +472,7 @@
 		00281A232D17F95300AD76C9 /* CommunityDetail */ = {
 			isa = PBXGroup;
 			children = (
+				0016C2B02D1BDF4C007D0B7F /* CommunityDetailSection.swift */,
 				00281A242D17F9F400AD76C9 /* CommunityDetailViewController.swift */,
 				00281A2F2D1819B800AD76C9 /* Header */,
 				00281A302D1819BF00AD76C9 /* Cell */,
@@ -1704,6 +1707,7 @@
 				635BCBB52BA952C600F0DCBC /* TitleCell.swift in Sources */,
 				F68C9D222BA2DEAD008CB7E4 /* MyPageViewController.swift in Sources */,
 				F6833FF72BFE24130099F1DA /* YouthFilterHeaderView.swift in Sources */,
+				0016C2B12D1BDF4C007D0B7F /* CommunityDetailSection.swift in Sources */,
 				F6B5B4082BBBFDA2000C8494 /* ProfileETCView.swift in Sources */,
 				F65FFA912C04C71C009A6FB3 /* YouthDetailHeaderView.swift in Sources */,
 				F671A9CA2BA0174E002808DA /* NetworkError.swift in Sources */,
