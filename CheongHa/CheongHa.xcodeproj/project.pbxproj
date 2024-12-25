@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		0016C2B12D1BDF4C007D0B7F /* CommunityDetailSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0016C2B02D1BDF4C007D0B7F /* CommunityDetailSection.swift */; };
+		0016C2B72D1BEC45007D0B7F /* FetchPostsQuery.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0016C2B62D1BEC45007D0B7F /* FetchPostsQuery.swift */; };
+		0016C2BB2D1BFEE4007D0B7F /* PostDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0016C2BA2D1BFEE4007D0B7F /* PostDTO.swift */; };
 		0025AD1B2D06D5050034AAC1 /* ProfileEditViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0025AD1A2D06D5050034AAC1 /* ProfileEditViewModel.swift */; };
 		0025AD1C2D06D5050034AAC1 /* ProfileEditViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0025AD192D06D5050034AAC1 /* ProfileEditViewController.swift */; };
 		0025AD242D06DB880034AAC1 /* AuthRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0025AD232D06DB880034AAC1 /* AuthRouter.swift */; };
@@ -20,7 +22,7 @@
 		0025D4442CEC672400E3BBD9 /* PolicyRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0025D4432CEC672400E3BBD9 /* PolicyRepository.swift */; };
 		0025D4462CEC682300E3BBD9 /* PolicyUsecase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0025D4452CEC682300E3BBD9 /* PolicyUsecase.swift */; };
 		0025D4492CEC6E3400E3BBD9 /* RxAppState in Frameworks */ = {isa = PBXBuildFile; productRef = 0025D4482CEC6E3400E3BBD9 /* RxAppState */; };
-		0025D44C2CEC7AAC00E3BBD9 /* CleanPostDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0025D44B2CEC7AAC00E3BBD9 /* CleanPostDTO.swift */; };
+		0025D44C2CEC7AAC00E3BBD9 /* RecentPostDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0025D44B2CEC7AAC00E3BBD9 /* RecentPostDTO.swift */; };
 		0025D44E2CEC7B6D00E3BBD9 /* PostRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0025D44D2CEC7B6D00E3BBD9 /* PostRouter.swift */; };
 		0025D4502CEC7BCC00E3BBD9 /* PostRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0025D44F2CEC7BCC00E3BBD9 /* PostRepository.swift */; };
 		0025D4522CEC7C8500E3BBD9 /* PostUsecase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0025D4512CEC7C8500E3BBD9 /* PostUsecase.swift */; };
@@ -119,7 +121,7 @@
 		F61B51602BEB799000812C8D /* YouthListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F61B515F2BEB799000812C8D /* YouthListCell.swift */; };
 		F61B51622BECF5B400812C8D /* YouthPolicyViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F61B51612BECF5B400812C8D /* YouthPolicyViewModel.swift */; };
 		F6394B9D2C301F9E0092FFB5 /* TermsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6394B9C2C301F9E0092FFB5 /* TermsViewController.swift */; };
-		F65040A22C20750C00B14D84 /* PostDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = F65040A12C20750C00B14D84 /* PostDTO.swift */; };
+		F65040A22C20750C00B14D84 /* PostDTOpostID.swift in Sources */ = {isa = PBXBuildFile; fileRef = F65040A12C20750C00B14D84 /* PostDTOpostID.swift */; };
 		F65040A42C20759A00B14D84 /* SearchDataDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = F65040A32C20759A00B14D84 /* SearchDataDTO.swift */; };
 		F65040A72C2075E000B14D84 /* ServerAPIError.swift in Sources */ = {isa = PBXBuildFile; fileRef = F65040A62C2075E000B14D84 /* ServerAPIError.swift */; };
 		F65040A92C20816900B14D84 /* PostType.swift in Sources */ = {isa = PBXBuildFile; fileRef = F65040A82C20816900B14D84 /* PostType.swift */; };
@@ -213,6 +215,8 @@
 
 /* Begin PBXFileReference section */
 		0016C2B02D1BDF4C007D0B7F /* CommunityDetailSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommunityDetailSection.swift; sourceTree = "<group>"; };
+		0016C2B62D1BEC45007D0B7F /* FetchPostsQuery.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchPostsQuery.swift; sourceTree = "<group>"; };
+		0016C2BA2D1BFEE4007D0B7F /* PostDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostDTO.swift; sourceTree = "<group>"; };
 		0025AD192D06D5050034AAC1 /* ProfileEditViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileEditViewController.swift; sourceTree = "<group>"; };
 		0025AD1A2D06D5050034AAC1 /* ProfileEditViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileEditViewModel.swift; sourceTree = "<group>"; };
 		0025AD232D06DB880034AAC1 /* AuthRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthRouter.swift; sourceTree = "<group>"; };
@@ -224,7 +228,7 @@
 		0025D4412CEC663100E3BBD9 /* PolicyRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PolicyRouter.swift; sourceTree = "<group>"; };
 		0025D4432CEC672400E3BBD9 /* PolicyRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PolicyRepository.swift; sourceTree = "<group>"; };
 		0025D4452CEC682300E3BBD9 /* PolicyUsecase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PolicyUsecase.swift; sourceTree = "<group>"; };
-		0025D44B2CEC7AAC00E3BBD9 /* CleanPostDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CleanPostDTO.swift; sourceTree = "<group>"; };
+		0025D44B2CEC7AAC00E3BBD9 /* RecentPostDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentPostDTO.swift; sourceTree = "<group>"; };
 		0025D44D2CEC7B6D00E3BBD9 /* PostRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostRouter.swift; sourceTree = "<group>"; };
 		0025D44F2CEC7BCC00E3BBD9 /* PostRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostRepository.swift; sourceTree = "<group>"; };
 		0025D4512CEC7C8500E3BBD9 /* PostUsecase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostUsecase.swift; sourceTree = "<group>"; };
@@ -236,6 +240,7 @@
 		002A52BB2CEDE933007E9FD6 /* BaseHomeFilterCollectionViewHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseHomeFilterCollectionViewHeader.swift; sourceTree = "<group>"; };
 		002A52BD2CEE13B7007E9FD6 /* MyKeywordsBackgroundView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyKeywordsBackgroundView.swift; sourceTree = "<group>"; };
 		002A52BF2CEE22F7007E9FD6 /* PolicyClassification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PolicyClassification.swift; sourceTree = "<group>"; };
+		002E0E5E2D1C07C9001BDB2A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		0035BC912D155B470008691B /* CommunityViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommunityViewController.swift; sourceTree = "<group>"; };
 		0035BC932D156FD10008691B /* CommunityPostCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommunityPostCollectionViewCell.swift; sourceTree = "<group>"; };
 		00623D832D06EBCF002E139D /* UpdateProfileBody.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateProfileBody.swift; sourceTree = "<group>"; };
@@ -316,7 +321,7 @@
 		F61B515F2BEB799000812C8D /* YouthListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YouthListCell.swift; sourceTree = "<group>"; };
 		F61B51612BECF5B400812C8D /* YouthPolicyViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YouthPolicyViewModel.swift; sourceTree = "<group>"; };
 		F6394B9C2C301F9E0092FFB5 /* TermsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TermsViewController.swift; sourceTree = "<group>"; };
-		F65040A12C20750C00B14D84 /* PostDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostDTO.swift; sourceTree = "<group>"; };
+		F65040A12C20750C00B14D84 /* PostDTOpostID.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostDTOpostID.swift; sourceTree = "<group>"; };
 		F65040A32C20759A00B14D84 /* SearchDataDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchDataDTO.swift; sourceTree = "<group>"; };
 		F65040A62C2075E000B14D84 /* ServerAPIError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServerAPIError.swift; sourceTree = "<group>"; };
 		F65040A82C20816900B14D84 /* PostType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostType.swift; sourceTree = "<group>"; };
@@ -372,7 +377,6 @@
 		F69B800A2B996846002675CE /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		F69B800F2B996847002675CE /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		F69B80122B996847002675CE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
-		F69B80142B996847002675CE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F69B80192B996847002675CE /* CheongHaTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CheongHaTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		F69B80232B996847002675CE /* CheongHaUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CheongHaUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		F69B80462B9A0D1B002675CE /* GoogleSignInManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleSignInManager.swift; sourceTree = "<group>"; };
@@ -428,6 +432,23 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0016C2B22D1BEB19007D0B7F /* Post */ = {
+			isa = PBXGroup;
+			children = (
+				0025D44D2CEC7B6D00E3BBD9 /* PostRouter.swift */,
+				0016C2B52D1BEC40007D0B7F /* Queries */,
+			);
+			path = Post;
+			sourceTree = "<group>";
+		};
+		0016C2B52D1BEC40007D0B7F /* Queries */ = {
+			isa = PBXGroup;
+			children = (
+				0016C2B62D1BEC45007D0B7F /* FetchPostsQuery.swift */,
+			);
+			path = Queries;
+			sourceTree = "<group>";
+		};
 		0025AD182D06D2FC0034AAC1 /* MyPage */ = {
 			isa = PBXGroup;
 			children = (
@@ -464,7 +485,8 @@
 			isa = PBXGroup;
 			children = (
 				F65040A82C20816900B14D84 /* PostType.swift */,
-				0025D44B2CEC7AAC00E3BBD9 /* CleanPostDTO.swift */,
+				0016C2BA2D1BFEE4007D0B7F /* PostDTO.swift */,
+				0025D44B2CEC7AAC00E3BBD9 /* RecentPostDTO.swift */,
 			);
 			path = Post;
 			sourceTree = "<group>";
@@ -802,9 +824,9 @@
 				0025AD232D06DB880034AAC1 /* AuthRouter.swift */,
 				00839A202CD7C8420024337F /* LoginRouter.swift */,
 				00623D812D06EB97002E139D /* Profile */,
-				0025D44D2CEC7B6D00E3BBD9 /* PostRouter.swift */,
 				00C8B7D22CF6164F00953377 /* Policy */,
 				00A82ED32CF861C10004B789 /* Filter */,
+				0016C2B22D1BEB19007D0B7F /* Post */,
 			);
 			path = Routers;
 			sourceTree = "<group>";
@@ -1091,7 +1113,7 @@
 			isa = PBXGroup;
 			children = (
 				F6BEDA8F2C1DD7AA00BD770A /* ServerNetworkDTO.swift */,
-				F65040A12C20750C00B14D84 /* PostDTO.swift */,
+				F65040A12C20750C00B14D84 /* PostDTOpostID.swift */,
 			);
 			path = DTO;
 			sourceTree = "<group>";
@@ -1371,6 +1393,7 @@
 		F69B80052B996846002675CE /* CheongHa */ = {
 			isa = PBXGroup;
 			children = (
+				002E0E5E2D1C07C9001BDB2A /* Info.plist */,
 				00839A102CD7C6220024337F /* CleanArchitecture */,
 				F671A9CC2BA059DB002808DA /* Const.swift */,
 				F69B80362B996972002675CE /* App */,
@@ -1378,7 +1401,6 @@
 				F671A9BE2BA00D9F002808DA /* Manager */,
 				F671A9BD2BA00D81002808DA /* Util */,
 				F69B80372B996981002675CE /* Resource */,
-				F69B80142B996847002675CE /* Info.plist */,
 			);
 			path = CheongHa;
 			sourceTree = "<group>";
@@ -1608,6 +1630,7 @@
 				630323672BBAD26200B16E7C /* ForumCategoryView.swift in Sources */,
 				F6A35EBB2BE5087300313B7D /* ServerAuthManager.swift in Sources */,
 				F68C9D1E2BA2DE93008CB7E4 /* ForumViewController.swift in Sources */,
+				0016C2BB2D1BFEE4007D0B7F /* PostDTO.swift in Sources */,
 				F65E1ECF2BAC086D00326EF7 /* LoginNickNameViewController.swift in Sources */,
 				008497D12CEF2D0D004E6FA7 /* RegionHeader.swift in Sources */,
 				F667FD892BAC2287005AAAB7 /* AlbumDetailCell.swift in Sources */,
@@ -1642,8 +1665,9 @@
 				F69B80072B996846002675CE /* AppDelegate.swift in Sources */,
 				00A82ED62CF861D00004B789 /* ChangePolicyFileringQuery.swift in Sources */,
 				F671A9CD2BA059DB002808DA /* Const.swift in Sources */,
-				F65040A22C20750C00B14D84 /* PostDTO.swift in Sources */,
+				F65040A22C20750C00B14D84 /* PostDTOpostID.swift in Sources */,
 				00C2A5282CE396B400EFF471 /* HotPolicyHeader.swift in Sources */,
+				0016C2B72D1BEC45007D0B7F /* FetchPostsQuery.swift in Sources */,
 				F6F0548E2C0863C000CC7FAF /* YouthDetailTopView.swift in Sources */,
 				00DB008D2CDB52170012B2B1 /* ProfileRouter.swift in Sources */,
 				F6833FF52BFDC4150099F1DA /* YouthFilterFooterView.swift in Sources */,
@@ -1676,7 +1700,7 @@
 				633F8E222B9AC37500B92ADC /* KeychainManager.swift in Sources */,
 				0025D4462CEC682300E3BBD9 /* PolicyUsecase.swift in Sources */,
 				F67A64C22C60DD12009572CE /* ExampleViewModel.swift in Sources */,
-				0025D44C2CEC7AAC00E3BBD9 /* CleanPostDTO.swift in Sources */,
+				0025D44C2CEC7AAC00E3BBD9 /* RecentPostDTO.swift in Sources */,
 				F68719B62BA8707D0049B182 /* CustomAlbumCell.swift in Sources */,
 				002A52BC2CEDE933007E9FD6 /* BaseHomeFilterCollectionViewHeader.swift in Sources */,
 				63C52F9B2BA9B80D0072DE18 /* PostModel.swift in Sources */,

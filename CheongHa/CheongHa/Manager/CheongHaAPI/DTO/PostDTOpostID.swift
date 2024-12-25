@@ -1,5 +1,5 @@
 //
-//  PostDTO.swift
+//  PostDTOpostID.swift
 //  WithPeace
 //
 //  Created by Dylan_Y on 6/17/24.
