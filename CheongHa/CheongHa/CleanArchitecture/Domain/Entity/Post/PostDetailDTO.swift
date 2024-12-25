@@ -8,7 +8,7 @@
 import Foundation
 
 struct PostDetailDTO: DTOType {
-    var data: [PostDetailData]?
+    var data: PostDetailData?
     var error: Errors?
 }
 

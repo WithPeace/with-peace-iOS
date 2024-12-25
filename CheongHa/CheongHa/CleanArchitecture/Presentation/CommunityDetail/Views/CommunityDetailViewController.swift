@@ -11,6 +11,7 @@ import FlexLayout
 import Kingfisher
 import RxSwift
 import RxCocoa
+import RxAppState
 
 final class CommunityDetailViewController: UIViewController {
     
@@ -62,6 +63,18 @@ final class CommunityDetailViewController: UIViewController {
     }()
     
     private let disposeBag = DisposeBag()
+    
+    private let viewModel: CommunityDetailViewModel
+    
+    init(viewModel: CommunityDetailViewModel) {
+        self.viewModel = viewModel
+        
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -143,7 +156,7 @@ final class CommunityDetailViewController: UIViewController {
         let postAndCommentSectionRegistration = UICollectionView.CellRegistration<CommentCell, CommentItem> { cell, indexPath, itemIdentifier in
         }
         
-        dataSource = UICollectionViewDiffableDataSource(collectionView: collectionView, cellProvider: { collectionView, indexPath, itemIdentifier in
+        dataSource = UICollectionViewDiffableDataSource(collectionView: collectionView) { collectionView, indexPath, itemIdentifier in
             guard let section = CommunityDetailSection(rawValue: indexPath.section) else { return nil }
             
             switch section {
@@ -151,7 +164,7 @@ final class CommunityDetailViewController: UIViewController {
                 let cell = collectionView.dequeueConfiguredReusableCell(using: postAndCommentSectionRegistration, for: indexPath, item: itemIdentifier)
                 return cell
             }
-        })
+        }
         
         // 헤더 등록
         let communityDetailCollectionViewHeaderRegistration = UICollectionView.SupplementaryRegistration<CommunityDetailCollectionViewHeader>(elementKind: CommunityDetailCollectionViewHeader.kind) { supplementaryView, elementKind, indexPath in
@@ -179,6 +192,20 @@ final class CommunityDetailViewController: UIViewController {
     }
     
     private func bind() {
+        
+        let input = CommunityDetailViewModel.Input(
+            viewWillAppear: rx.viewWillAppear
+        )
+        let output = viewModel.transform(input: input)
+        
+        output.postDetail
+            .drive(with: self) { owner, postDetail in
+                guard let postDetail else { return }
+                
+                print("postDetail", postDetail)
+            }
+            .disposed(by: disposeBag)
+        
         inputTextView.rx.text
             .bind(with: self) { owner, text in
                 owner.adjustInputTextViewHeight()

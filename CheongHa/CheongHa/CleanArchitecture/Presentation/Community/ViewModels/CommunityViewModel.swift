@@ -22,9 +22,9 @@ final class CommunityViewModel: ViewModelType {
     
     var disposeBag = DisposeBag()
     
-    private let postUsecase: PostUsecase
+    private let postUsecase: PostUsecaseProtocol
     
-    init(postUsecase: PostUsecase) {
+    init(postUsecase: PostUsecaseProtocol) {
         self.postUsecase = postUsecase
     }
     

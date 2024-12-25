@@ -38,6 +38,7 @@
 		002E0E622D1C0940001BDB2A /* FetchPostDetailParams.swift in Sources */ = {isa = PBXBuildFile; fileRef = 002E0E612D1C0940001BDB2A /* FetchPostDetailParams.swift */; };
 		002E0E642D1C09C9001BDB2A /* PostDetailDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 002E0E632D1C09C9001BDB2A /* PostDetailDTO.swift */; };
 		002E0E682D1C2808001BDB2A /* CommunityViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 002E0E672D1C2808001BDB2A /* CommunityViewModel.swift */; };
+		002E0E6C2D1C6503001BDB2A /* CommunityDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 002E0E6B2D1C6503001BDB2A /* CommunityDetailViewModel.swift */; };
 		0035BC922D155B470008691B /* CommunityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0035BC912D155B470008691B /* CommunityViewController.swift */; };
 		0035BC942D156FD10008691B /* CommunityPostCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0035BC932D156FD10008691B /* CommunityPostCollectionViewCell.swift */; };
 		00623D842D06EBCF002E139D /* UpdateProfileBody.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00623D832D06EBCF002E139D /* UpdateProfileBody.swift */; };
@@ -247,6 +248,7 @@
 		002E0E612D1C0940001BDB2A /* FetchPostDetailParams.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchPostDetailParams.swift; sourceTree = "<group>"; };
 		002E0E632D1C09C9001BDB2A /* PostDetailDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostDetailDTO.swift; sourceTree = "<group>"; };
 		002E0E672D1C2808001BDB2A /* CommunityViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommunityViewModel.swift; sourceTree = "<group>"; };
+		002E0E6B2D1C6503001BDB2A /* CommunityDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommunityDetailViewModel.swift; sourceTree = "<group>"; };
 		0035BC912D155B470008691B /* CommunityViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommunityViewController.swift; sourceTree = "<group>"; };
 		0035BC932D156FD10008691B /* CommunityPostCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommunityPostCollectionViewCell.swift; sourceTree = "<group>"; };
 		00623D832D06EBCF002E139D /* UpdateProfileBody.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateProfileBody.swift; sourceTree = "<group>"; };
@@ -502,10 +504,8 @@
 		00281A232D17F95300AD76C9 /* CommunityDetail */ = {
 			isa = PBXGroup;
 			children = (
-				0016C2B02D1BDF4C007D0B7F /* CommunityDetailSection.swift */,
-				00281A242D17F9F400AD76C9 /* CommunityDetailViewController.swift */,
-				00281A2F2D1819B800AD76C9 /* Header */,
-				00281A302D1819BF00AD76C9 /* Cell */,
+				002E0E692D1C64F0001BDB2A /* Views */,
+				002E0E6A2D1C64F5001BDB2A /* ViewModels */,
 			);
 			path = CommunityDetail;
 			sourceTree = "<group>";
@@ -559,6 +559,25 @@
 			isa = PBXGroup;
 			children = (
 				002E0E672D1C2808001BDB2A /* CommunityViewModel.swift */,
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		002E0E692D1C64F0001BDB2A /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				0016C2B02D1BDF4C007D0B7F /* CommunityDetailSection.swift */,
+				00281A242D17F9F400AD76C9 /* CommunityDetailViewController.swift */,
+				00281A2F2D1819B800AD76C9 /* Header */,
+				00281A302D1819BF00AD76C9 /* Cell */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		002E0E6A2D1C64F5001BDB2A /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				002E0E6B2D1C6503001BDB2A /* CommunityDetailViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -1659,6 +1678,7 @@
 				F671A9BB2BA00D4A002808DA /* Bundle+.swift in Sources */,
 				00281A2E2D18198400AD76C9 /* CommentCell.swift in Sources */,
 				00C2A52C2CE3974D00EFF471 /* CommunityHeader.swift in Sources */,
+				002E0E6C2D1C6503001BDB2A /* CommunityDetailViewModel.swift in Sources */,
 				630323732BC7D68200B16E7C /* ImageDetailCollectionViewCell.swift in Sources */,
 				0025AD2A2D06DD050034AAC1 /* LogoutDTO.swift in Sources */,
 				630323672BBAD26200B16E7C /* ForumCategoryView.swift in Sources */,

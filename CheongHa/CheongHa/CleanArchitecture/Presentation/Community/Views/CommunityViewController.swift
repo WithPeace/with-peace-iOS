@@ -154,7 +154,17 @@ final class CommunityViewController: UIViewController {
         
         collectionView.rx.modelSelected(PostData.self)
             .bind(with: self) { owner, selectedItem in
-                let communityDetailVC = CommunityDetailViewController()
+                let communityDetailVC = CommunityDetailViewController(
+                    viewModel: CommunityDetailViewModel(
+                        postUsecase: PostUsecase(
+                            postRepository: PostRepository(
+                                keychain: KeychainManager(),
+                                network: CleanNetworkManager()
+                            )
+                        ),
+                        selectedPostId: selectedItem.postId
+                    )
+                )
                 owner.navigationController?.pushViewController(communityDetailVC, animated: true)
             }
             .disposed(by: disposeBag)
