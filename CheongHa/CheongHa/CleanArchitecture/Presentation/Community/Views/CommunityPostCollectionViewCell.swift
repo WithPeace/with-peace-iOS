@@ -8,6 +8,7 @@
 import UIKit
 import PinLayout
 import FlexLayout
+import Kingfisher
 
 final class CommunityPostCollectionViewCell: BaseCollectionViewCell {
     
@@ -30,6 +31,7 @@ final class CommunityPostCollectionViewCell: BaseCollectionViewCell {
     private let commentIconImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.image = UIImage(resource: .icComment).withRenderingMode(.alwaysOriginal)
+        imageView.contentMode = .scaleToFill
         return imageView
     }()
     
@@ -84,10 +86,10 @@ final class CommunityPostCollectionViewCell: BaseCollectionViewCell {
                         flex.addItem(separatorLabel)
                         flex.addItem(timeLabel)
                     }.alignItems(.center)
-                }.justifyContent(.spaceBetween).maxWidth(72%)
+                }.justifyContent(.spaceBetween).width(0).grow(1)
                 flex.addItem().direction(.column).define { flex in
-                    flex.addItem(thumnailImageView).width(72).aspectRatio(1)
-                }.justifyContent(.center).height(100%)
+                    flex.addItem(thumnailImageView).size(72)
+                }.justifyContent(.center).height(100%).marginLeft(8)
             }
             .justifyContent(.spaceBetween).height(100%).padding(16)
         }
@@ -95,5 +97,24 @@ final class CommunityPostCollectionViewCell: BaseCollectionViewCell {
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    func setData(with data: PostData) {
+        titleLabel.text = data.title
+        contentsLabel.text = data.content
+        commentCountLabel.text = data.commentCount.description
+        
+        contentsLabel.flex.markDirty()
+
+        guard let imageURLString = data.postImageUrl else { return }
+        
+        if !imageURLString.isEmpty {
+            let imageURL = URL(string: imageURLString)
+            thumnailImageView.kf.setImage(with: imageURL)
+            thumnailImageView.flex.display(.flex)
+        } else {
+            thumnailImageView.image = nil
+            thumnailImageView.flex.display(.none)
+        }
     }
 }

@@ -11,7 +11,7 @@ enum CommunityCategory: Int, CaseIterable {
     case free = 0
     case info
     case question
-    case life
+    case living
     case hobby
     case economy
     
@@ -23,7 +23,7 @@ enum CommunityCategory: Int, CaseIterable {
             return .icInfoTagNotSelected
         case .question:
             return .icQuestionTagNotSelected
-        case .life:
+        case .living:
             return .icLifeTagNotSelected
         case .hobby:
             return .icHobbyTagNotSelected
@@ -40,7 +40,7 @@ enum CommunityCategory: Int, CaseIterable {
             return .icInfoTagSelected
         case .question:
             return .icQuestionTagSelected
-        case .life:
+        case .living:
             return .icLifeTagSelected
         case .hobby:
             return .icHobbyTagSelected
@@ -57,12 +57,29 @@ enum CommunityCategory: Int, CaseIterable {
             return "정보"
         case .question:
             return "질문"
-        case .life:
+        case .living:
             return "생활"
         case .hobby:
             return "취미"
         case .economy:
             return "경제"
+        }
+    }
+    
+    var convertToPostType: PostType {
+        switch self {
+        case .free:
+            return .freedom
+        case .info:
+            return .information
+        case .question:
+            return .question
+        case .living:
+            return .living
+        case .hobby:
+            return .hobby
+        case .economy:
+            return .economy
         }
     }
 }

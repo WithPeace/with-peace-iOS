@@ -9,7 +9,7 @@
 /* Begin PBXBuildFile section */
 		0016C2B12D1BDF4C007D0B7F /* CommunityDetailSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0016C2B02D1BDF4C007D0B7F /* CommunityDetailSection.swift */; };
 		0016C2B72D1BEC45007D0B7F /* FetchPostsQuery.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0016C2B62D1BEC45007D0B7F /* FetchPostsQuery.swift */; };
-		0016C2BB2D1BFEE4007D0B7F /* PostDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0016C2BA2D1BFEE4007D0B7F /* PostDTO.swift */; };
+		0016C2BB2D1BFEE4007D0B7F /* PostsDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0016C2BA2D1BFEE4007D0B7F /* PostsDTO.swift */; };
 		0025AD1B2D06D5050034AAC1 /* ProfileEditViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0025AD1A2D06D5050034AAC1 /* ProfileEditViewModel.swift */; };
 		0025AD1C2D06D5050034AAC1 /* ProfileEditViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0025AD192D06D5050034AAC1 /* ProfileEditViewController.swift */; };
 		0025AD242D06DB880034AAC1 /* AuthRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0025AD232D06DB880034AAC1 /* AuthRouter.swift */; };
@@ -37,6 +37,7 @@
 		002A52C02CEE22F7007E9FD6 /* PolicyClassification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 002A52BF2CEE22F7007E9FD6 /* PolicyClassification.swift */; };
 		002E0E622D1C0940001BDB2A /* FetchPostDetailParams.swift in Sources */ = {isa = PBXBuildFile; fileRef = 002E0E612D1C0940001BDB2A /* FetchPostDetailParams.swift */; };
 		002E0E642D1C09C9001BDB2A /* PostDetailDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 002E0E632D1C09C9001BDB2A /* PostDetailDTO.swift */; };
+		002E0E682D1C2808001BDB2A /* CommunityViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 002E0E672D1C2808001BDB2A /* CommunityViewModel.swift */; };
 		0035BC922D155B470008691B /* CommunityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0035BC912D155B470008691B /* CommunityViewController.swift */; };
 		0035BC942D156FD10008691B /* CommunityPostCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0035BC932D156FD10008691B /* CommunityPostCollectionViewCell.swift */; };
 		00623D842D06EBCF002E139D /* UpdateProfileBody.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00623D832D06EBCF002E139D /* UpdateProfileBody.swift */; };
@@ -218,7 +219,7 @@
 /* Begin PBXFileReference section */
 		0016C2B02D1BDF4C007D0B7F /* CommunityDetailSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommunityDetailSection.swift; sourceTree = "<group>"; };
 		0016C2B62D1BEC45007D0B7F /* FetchPostsQuery.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchPostsQuery.swift; sourceTree = "<group>"; };
-		0016C2BA2D1BFEE4007D0B7F /* PostDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostDTO.swift; sourceTree = "<group>"; };
+		0016C2BA2D1BFEE4007D0B7F /* PostsDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostsDTO.swift; sourceTree = "<group>"; };
 		0025AD192D06D5050034AAC1 /* ProfileEditViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileEditViewController.swift; sourceTree = "<group>"; };
 		0025AD1A2D06D5050034AAC1 /* ProfileEditViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileEditViewModel.swift; sourceTree = "<group>"; };
 		0025AD232D06DB880034AAC1 /* AuthRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthRouter.swift; sourceTree = "<group>"; };
@@ -245,6 +246,7 @@
 		002E0E5E2D1C07C9001BDB2A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		002E0E612D1C0940001BDB2A /* FetchPostDetailParams.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchPostDetailParams.swift; sourceTree = "<group>"; };
 		002E0E632D1C09C9001BDB2A /* PostDetailDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostDetailDTO.swift; sourceTree = "<group>"; };
+		002E0E672D1C2808001BDB2A /* CommunityViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommunityViewModel.swift; sourceTree = "<group>"; };
 		0035BC912D155B470008691B /* CommunityViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommunityViewController.swift; sourceTree = "<group>"; };
 		0035BC932D156FD10008691B /* CommunityPostCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommunityPostCollectionViewCell.swift; sourceTree = "<group>"; };
 		00623D832D06EBCF002E139D /* UpdateProfileBody.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateProfileBody.swift; sourceTree = "<group>"; };
@@ -490,7 +492,7 @@
 			isa = PBXGroup;
 			children = (
 				F65040A82C20816900B14D84 /* PostType.swift */,
-				0016C2BA2D1BFEE4007D0B7F /* PostDTO.swift */,
+				0016C2BA2D1BFEE4007D0B7F /* PostsDTO.swift */,
 				002E0E632D1C09C9001BDB2A /* PostDetailDTO.swift */,
 				0025D44B2CEC7AAC00E3BBD9 /* RecentPostDTO.swift */,
 			);
@@ -542,13 +544,30 @@
 			path = Params;
 			sourceTree = "<group>";
 		};
-		0035BC902D155B2C0008691B /* Community */ = {
+		002E0E652D1C27E5001BDB2A /* Views */ = {
 			isa = PBXGroup;
 			children = (
 				0084CF722D16A2E700ED4D84 /* CommunityCategory.swift */,
 				0084CF742D16A30C00ED4D84 /* CommunityTabButton.swift */,
 				0035BC912D155B470008691B /* CommunityViewController.swift */,
 				0035BC932D156FD10008691B /* CommunityPostCollectionViewCell.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		002E0E662D1C27EC001BDB2A /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				002E0E672D1C2808001BDB2A /* CommunityViewModel.swift */,
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		0035BC902D155B2C0008691B /* Community */ = {
+			isa = PBXGroup;
+			children = (
+				002E0E652D1C27E5001BDB2A /* Views */,
+				002E0E662D1C27EC001BDB2A /* ViewModels */,
 			);
 			path = Community;
 			sourceTree = "<group>";
@@ -1629,6 +1648,7 @@
 				00281A2A2D18081300AD76C9 /* PostImageCollectionViewCell.swift in Sources */,
 				F674DDDF2BADB17A00536AA7 /* String+.swift in Sources */,
 				008497CF2CEF2CDD004E6FA7 /* PolicyFieldHeader.swift in Sources */,
+				002E0E682D1C2808001BDB2A /* CommunityViewModel.swift in Sources */,
 				00B683A62CE1F90B005110D2 /* HomeViewModel.swift in Sources */,
 				0084CF732D16A2E700ED4D84 /* CommunityCategory.swift in Sources */,
 				F68657442BB415DC00821281 /* CustomActionSheetTransitioningDelegate.swift in Sources */,
@@ -1644,7 +1664,7 @@
 				630323672BBAD26200B16E7C /* ForumCategoryView.swift in Sources */,
 				F6A35EBB2BE5087300313B7D /* ServerAuthManager.swift in Sources */,
 				F68C9D1E2BA2DE93008CB7E4 /* ForumViewController.swift in Sources */,
-				0016C2BB2D1BFEE4007D0B7F /* PostDTO.swift in Sources */,
+				0016C2BB2D1BFEE4007D0B7F /* PostsDTO.swift in Sources */,
 				F65E1ECF2BAC086D00326EF7 /* LoginNickNameViewController.swift in Sources */,
 				008497D12CEF2D0D004E6FA7 /* RegionHeader.swift in Sources */,
 				F667FD892BAC2287005AAAB7 /* AlbumDetailCell.swift in Sources */,

@@ -1,5 +1,5 @@
 //
-//  PostDTO.swift
+//  PostsDTO.swift
 //  CheongHa
 //
 //  Created by SUCHAN CHANG on 12/25/24.
@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct PostDTO: DTOType {
+struct PostsDTO: DTOType {
     var data: [PostData]?
     var error: Errors?
 }
@@ -19,7 +19,7 @@ struct PostData: Codable {
     let type: PostType
     let commentCount: Int
     let createDate: String
-    let postImageUrl: String
+    let postImageUrl: String?
     
     init(from decoder: any Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
@@ -30,6 +30,6 @@ struct PostData: Codable {
         self.type = PostType(rawValue: type) ?? .freedom
         self.commentCount = try container.decode(Int.self, forKey: .commentCount)
         self.createDate = try container.decode(String.self, forKey: .createDate)
-        self.postImageUrl = try container.decode(String.self, forKey: .postImageUrl)
+        self.postImageUrl = try container.decodeIfPresent(String.self, forKey: .postImageUrl) ?? ""
     }
 }
