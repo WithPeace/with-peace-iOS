@@ -1,5 +1,5 @@
 //
-//  CommentCell.swift
+//  CommentSectionCell.swift
 //  CheongHa
 //
 //  Created by SUCHAN CHANG on 12/22/24.
@@ -73,7 +73,7 @@ final class CommentUserProfileView: UIView {
     }
 }
 
-final class CommentCell: UICollectionViewCell {
+final class CommentSectionCell: UICollectionViewCell {
     
     private let profileView = CommentUserProfileView()
     
