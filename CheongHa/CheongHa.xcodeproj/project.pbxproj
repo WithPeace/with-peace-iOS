@@ -47,6 +47,8 @@
 		006591F52D1D30D200738CBA /* PostContentContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 006591F42D1D30D200738CBA /* PostContentContainerView.swift */; };
 		006591F72D1D30EE00738CBA /* CommentNumberContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 006591F62D1D30EE00738CBA /* CommentNumberContainerView.swift */; };
 		006591FE2D1D317800738CBA /* CommentUserProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 006591FD2D1D317800738CBA /* CommentUserProfileView.swift */; };
+		006592002D1D350500738CBA /* Date+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 006591FF2D1D350500738CBA /* Date+Ext.swift */; };
+		006592022D1D378200738CBA /* String+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 006592012D1D378200738CBA /* String+Ext.swift */; };
 		006E63872CE8818300CF2F45 /* HomeSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 006E63862CE8818300CF2F45 /* HomeSection.swift */; };
 		00839A0D2CD7C3850024337F /* Secrets.plist in Resources */ = {isa = PBXBuildFile; fileRef = 00839A0C2CD7C3850024337F /* Secrets.plist */; };
 		00839A0F2CD7C3B10024337F /* APIKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00839A0E2CD7C3B10024337F /* APIKeys.swift */; };
@@ -262,6 +264,8 @@
 		006591F42D1D30D200738CBA /* PostContentContainerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostContentContainerView.swift; sourceTree = "<group>"; };
 		006591F62D1D30EE00738CBA /* CommentNumberContainerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentNumberContainerView.swift; sourceTree = "<group>"; };
 		006591FD2D1D317800738CBA /* CommentUserProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentUserProfileView.swift; sourceTree = "<group>"; };
+		006591FF2D1D350500738CBA /* Date+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Ext.swift"; sourceTree = "<group>"; };
+		006592012D1D378200738CBA /* String+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Ext.swift"; sourceTree = "<group>"; };
 		006E63862CE8818300CF2F45 /* HomeSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeSection.swift; sourceTree = "<group>"; };
 		00839A0C2CD7C3850024337F /* Secrets.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Secrets.plist; sourceTree = "<group>"; };
 		00839A0E2CD7C3B10024337F /* APIKeys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIKeys.swift; sourceTree = "<group>"; };
@@ -631,8 +635,8 @@
 		006591EE2D1D109800738CBA /* CommentSectionCell */ = {
 			isa = PBXGroup;
 			children = (
-				006591F92D1D316A00738CBA /* SubViews */,
 				00281A2D2D18198400AD76C9 /* CommentSectionCell.swift */,
+				006591F92D1D316A00738CBA /* SubViews */,
 			);
 			path = CommentSectionCell;
 			sourceTree = "<group>";
@@ -696,6 +700,8 @@
 			isa = PBXGroup;
 			children = (
 				00C2A5202CE3607300EFF471 /* UICollectionViewCell+Ext.swift */,
+				006591FF2D1D350500738CBA /* Date+Ext.swift */,
+				006592012D1D378200738CBA /* String+Ext.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -1841,10 +1847,12 @@
 				0016C2B12D1BDF4C007D0B7F /* CommunityDetailSection.swift in Sources */,
 				F6B5B4082BBBFDA2000C8494 /* ProfileETCView.swift in Sources */,
 				F65FFA912C04C71C009A6FB3 /* YouthDetailHeaderView.swift in Sources */,
+				006592002D1D350500738CBA /* Date+Ext.swift in Sources */,
 				F671A9CA2BA0174E002808DA /* NetworkError.swift in Sources */,
 				630EA20F2BA0277800F04ED3 /* SignRepository.swift in Sources */,
 				00DE3F4C2CDCDA2A00CAC3D8 /* ViewModelType.swift in Sources */,
 				00A82ED82CF864450004B789 /* CheckFilteringChangeSuccess.swift in Sources */,
+				006592022D1D378200738CBA /* String+Ext.swift in Sources */,
 				F65040A42C20759A00B14D84 /* SearchDataDTO.swift in Sources */,
 				00A82ECC2CF85DF10004B789 /* FilterRepository.swift in Sources */,
 				008497D32CEF3059004E6FA7 /* SeparatorCell.swift in Sources */,

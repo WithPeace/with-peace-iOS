@@ -103,6 +103,7 @@ final class CommunityPostCollectionViewCell: BaseCollectionViewCell {
         titleLabel.text = data.title
         contentsLabel.text = data.content
         commentCountLabel.text = data.commentCount.description
+        timeLabel.text = data.createDate.convertToTimeAgoDate.timeAgoToDisplay
         
         contentsLabel.flex.markDirty()
 

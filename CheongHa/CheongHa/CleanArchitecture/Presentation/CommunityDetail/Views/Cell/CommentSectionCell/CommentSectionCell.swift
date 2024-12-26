@@ -85,6 +85,7 @@ final class CommentSectionCell: UICollectionViewCell {
     func setData(_ data: CommunityDetailSectionDataCollection.CommentItemData) {
         let imageURL = URL(string: data.profileImageUrl)
         profileView.userProfileImageView.kf.setImage(with: imageURL)
+        profileView.timeLabel.text = data.createDate.convertToTimeAgoDate.timeAgoToDisplay
         profileView.userNameLabel.text = data.nickname
         
         contentLabel.text = data.content

@@ -152,6 +152,7 @@ final class PostSectionCell: UICollectionViewCell {
         let imageURL = URL(string: data.profileImageUrl)
         postUserProfileView.userProfileImageView.kf.setImage(with: imageURL)
         postUserProfileView.userNameLabel.text = data.nickname
+        postUserProfileView.postUploadTimeLabel.text = data.createDate.convertToTimeAgoDate.timeAgoToDisplay
         
         postContentContainerView.postTitleLabel.text = data.title
         postContentContainerView.postContentLabel.text = data.content
