@@ -86,24 +86,6 @@ final class CommunityDetailViewController: UIViewController {
         updateLayout()
         
         cellRegistration()
-//        apply([
-//            CommentItem(id: 1, userId: 2, profileImageURL: "sdfsdf", nickname: "sdfsdfse", content: "esfsese", createDate: "sdfsdfsdf"),
-//            CommentItem(id: 2, userId: 2, profileImageURL: "sdfsdf", nickname: "sdfsdfse", content: "esfsese", createDate: "sdfsdfsdf"),
-//            CommentItem(id: 3, userId: 2, profileImageURL: "sdfsdf", nickname: "sdfsdfse", content: "esfsese", createDate: "sdfsdfsdf"),
-//            CommentItem(id: 4, userId: 2, profileImageURL: "sdfsdf", nickname: "sdfsdfse", content: "esfsese", createDate: "sdfsdfsdf"),
-//            CommentItem(id: 5, userId: 2, profileImageURL: "sdfsdf", nickname: "sdfsdfse", content: "esfsese", createDate: "sdfsdfsdf"),
-//        ])
-        
-//        let items: [CommunityDetailSection : [CommunityDetailSectionItem]] = [
-//            .post: [.post(data: .init(postDetailData: .init(postId: 0, userId: 0, nickname: "2343", profileImageUrl: "13123", title: "1231", content: "@34", type: .freedom, createDate: "sdfsdf", postImageUrls: [])))],
-//            .comment: [
-//                .comment(data: .init(commentData: .init(commentId: 0, userId: 0, nickname: "3123", postImageUrls: "4234", content: "23424", createDate: "@#4234"))),
-//                .comment(data: .init(commentData: .init(commentId: 1, userId: 0, nickname: "3123", postImageUrls: "4234", content: "23424", createDate: "@#4234"))),
-//                .comment(data: .init(commentData: .init(commentId: 2, userId: 0, nickname: "3123", postImageUrls: "4234", content: "23424", createDate: "@#4234"))),
-//                .comment(data: .init(commentData: .init(commentId: 3, userId: 0, nickname: "3123", postImageUrls: "4234", content: "23424", createDate: "@#4234"))),
-//            ]
-//        ]
-//        apply(with: items)
         
         bind()
     }

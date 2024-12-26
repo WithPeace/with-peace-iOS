@@ -49,7 +49,6 @@ final class CommunityViewModel: ViewModelType {
             .map { $0.data }
             .compactMap { $0 }
             .subscribe { posts in
-                print("posts", posts)
                 postsRelay.accept(posts)
             }
             .disposed(by: disposeBag)

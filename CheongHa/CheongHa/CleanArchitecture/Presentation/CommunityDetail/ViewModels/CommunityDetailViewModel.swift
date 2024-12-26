@@ -65,7 +65,6 @@ final class CommunityDetailViewModel: ViewModelType {
                     .comment: commenItemsData
                 ]
                 
-                print("postDetailData", postDetailData)
                 owner.sectionsRelay.accept(postDetailData)
             }
             .disposed(by: disposeBag)
