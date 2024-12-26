@@ -83,8 +83,14 @@ final class CommentSectionCell: UICollectionViewCell {
     }
     
     func setData(_ data: CommunityDetailSectionDataCollection.CommentItemData) {
-        let imageURL = URL(string: data.profileImageUrl)
-        profileView.userProfileImageView.kf.setImage(with: imageURL)
+        let defaultProfileImage = UIImage(resource: .defaultProfile)
+        if data.profileImageUrl.isEmpty {
+            profileView.userProfileImageView.image = defaultProfileImage
+        } else {
+            let imageURL = URL(string: data.profileImageUrl)
+            profileView.userProfileImageView.kf.setImage(with: imageURL, placeholder: defaultProfileImage)
+        }
+
         profileView.timeLabel.text = data.createDate.convertToTimeAgoDate.timeAgoToDisplay
         profileView.userNameLabel.text = data.nickname
         

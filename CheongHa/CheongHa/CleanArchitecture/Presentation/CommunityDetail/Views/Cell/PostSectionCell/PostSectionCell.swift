@@ -149,8 +149,14 @@ final class PostSectionCell: UICollectionViewCell {
     
     func setData(_ data: CommunityDetailSectionDataCollection.PostDetailItemData) {
         categoryTagImageView.image = UIImage(resource: data.type.communityDetailCategory)
-        let imageURL = URL(string: data.profileImageUrl)
-        postUserProfileView.userProfileImageView.kf.setImage(with: imageURL)
+        
+        let defaultProfileImage = UIImage(resource: .defaultProfile)
+        if data.profileImageUrl.isEmpty {
+            postUserProfileView.userProfileImageView.image = defaultProfileImage
+        } else {
+            let imageURL = URL(string: data.profileImageUrl)
+            postUserProfileView.userProfileImageView.kf.setImage(with: imageURL, placeholder: defaultProfileImage)
+        }
         postUserProfileView.userNameLabel.text = data.nickname
         postUserProfileView.postUploadTimeLabel.text = data.createDate.convertToTimeAgoDate.timeAgoToDisplay
         
