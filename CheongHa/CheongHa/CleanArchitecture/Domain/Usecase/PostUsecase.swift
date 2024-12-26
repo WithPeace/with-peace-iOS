@@ -9,7 +9,9 @@ import Foundation
 import RxSwift
 
 protocol PostUsecaseProtocol {
-    func fetchRecentPosts() -> Single<CleanPostDTO>
+    func fetchPosts(with query: FetchPostsQuery) -> Single<PostsDTO>
+    func fetchAPostDetail(params: FetchPostDetailParams) -> Single<PostDetailDTO>
+    func fetchRecentPosts() -> Single<RecentPostDTO>
 }
 
 final class PostUsecase: PostUsecaseProtocol {
@@ -20,7 +22,15 @@ final class PostUsecase: PostUsecaseProtocol {
         self.postRepository = postRepository
     }
     
-    func fetchRecentPosts() -> Single<CleanPostDTO> {
+    func fetchPosts(with query: FetchPostsQuery) -> Single<PostsDTO> {
+        postRepository.fetchPosts(api: .fetchPosts(query: query))
+    }
+    
+    func fetchAPostDetail(params: FetchPostDetailParams) -> Single<PostDetailDTO> {
+        postRepository.fetchAPostDetail(api: .fetchPostDetail(params: params))
+    }
+    
+    func fetchRecentPosts() -> Single<RecentPostDTO> {
         return postRepository.fetchRecentPosts(api: .fetchRecentPosts)
     }
 }

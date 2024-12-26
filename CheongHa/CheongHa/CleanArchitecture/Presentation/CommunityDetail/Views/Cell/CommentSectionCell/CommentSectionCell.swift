@@ -1,79 +1,15 @@
 //
-//  CommentCell.swift
+//  CommentSectionCell.swift
 //  CheongHa
 //
 //  Created by SUCHAN CHANG on 12/22/24.
 //
 
 import UIKit
-import FlexLayout
 import Kingfisher
 import SnapKit
 
-final class CommentUserProfileView: UIView {
-    
-    private let userProfileImageView: UIImageView = {
-        let imageView = UIImageView()
-        let imageURL = URL(string: "https://i.namu.wiki/i/d1A_wD4kuLHmOOFqJdVlOXVt1TWA9NfNt_HA0CS0Y_N0zayUAX8olMuv7odG2FiDLDQZIRBqbPQwBSArXfEJlQ.webp")
-        imageView.kf.setImage(with: imageURL)
-        
-        imageView.layer.cornerRadius = 20
-        imageView.clipsToBounds = true
-        return imageView
-    }()
-    
-    private let userNameLabel: UILabel = {
-        let label = UILabel()
-        label.text = "댓글닉네임"
-        label.font = .systemFont(ofSize: 16, weight: .regular)
-        return label
-    }()
-    
-    private let timeLabel: UILabel = {
-        let label = UILabel()
-        label.text = "3일전"
-        label.textColor = .gray2
-        label.font = .systemFont(ofSize: 12, weight: .regular)
-        return label
-    }()
-    
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        
-        configureConstraints()
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
-    private func configureConstraints() {
-        [
-            userProfileImageView,
-            userNameLabel,
-            timeLabel
-        ].forEach { addSubview($0) }
-        
-        userProfileImageView.snp.makeConstraints {
-            $0.size.equalTo(40)
-            $0.leading.top.bottom.equalToSuperview()
-        }
-        
-        userNameLabel.snp.makeConstraints {
-            $0.top.equalTo(userProfileImageView)
-            $0.leading.equalTo(userProfileImageView.snp.trailing).offset(8)
-            $0.trailing.equalToSuperview()
-        }
-        
-        timeLabel.snp.makeConstraints {
-            $0.bottom.equalTo(userProfileImageView)
-            $0.leading.equalTo(userProfileImageView.snp.trailing).offset(8)
-            $0.trailing.equalToSuperview()
-        }
-    }
-}
-
-final class CommentCell: UICollectionViewCell {
+final class CommentSectionCell: UICollectionViewCell {
     
     private let profileView = CommentUserProfileView()
     
@@ -144,5 +80,20 @@ final class CommentCell: UICollectionViewCell {
             $0.top.equalTo(contentLabel.snp.bottom).offset(8)
             $0.horizontalEdges.bottom.equalToSuperview()
         }
+    }
+    
+    func setData(_ data: CommunityDetailSectionDataCollection.CommentItemData) {
+        let defaultProfileImage = UIImage(resource: .defaultProfile)
+        if data.profileImageUrl.isEmpty {
+            profileView.userProfileImageView.image = defaultProfileImage
+        } else {
+            let imageURL = URL(string: data.profileImageUrl)
+            profileView.userProfileImageView.kf.setImage(with: imageURL, placeholder: defaultProfileImage)
+        }
+
+        profileView.timeLabel.text = data.createDate.convertToTimeAgoDate.timeAgoToDisplay
+        profileView.userNameLabel.text = data.nickname
+        
+        contentLabel.text = data.content
     }
 }

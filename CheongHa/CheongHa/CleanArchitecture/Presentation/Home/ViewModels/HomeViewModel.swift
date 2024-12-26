@@ -89,11 +89,11 @@ final class HomeViewModel: ViewModelType {
             .flatMap { owner, _ in
                 owner.postUsecase.fetchRecentPosts()
             }
-            .bind {
+            .bind(with: self) { owner, result in
                 print("recentPosts 통과")
-                guard let data = $0.data else { return }
+                guard let data = result.data else { return }
                 let recentPosts = data.compactMap {
-                    HomeSectionItem.community(data: .init(communityData: .init(title: $0.type.postTitle, recentPostTitle: $0.title)))
+                    HomeSectionItem.community(data: .init(communityData: .init(title: owner.convertToPostTitle($0.type), recentPostTitle: $0.title)))
                 }
                 recentPostsSubject.onNext(recentPosts)
             }
@@ -131,5 +131,24 @@ final class HomeViewModel: ViewModelType {
         return Output(
             homeDatas: homeDatas.asDriver(onErrorJustReturn: [:])
         )
+    }
+}
+
+extension HomeViewModel {
+    private func convertToPostTitle(_ postType: PostType) -> String {
+        switch postType {
+        case .freedom:
+            return "자유게시판"
+        case .information:
+            return "정보게시판"
+        case .question:
+            return "질문게시판"
+        case .living:
+            return "생활게시판"
+        case .hobby:
+            return "취미게시판"
+        case .economy:
+            return "경제게시판"
+        }
     }
 }

@@ -56,7 +56,18 @@ final class MainTabbarController: UITabBarController {
             )
         )
     )
-    private let communityViewController = UINavigationController(rootViewController: CommunityViewController())
+    private lazy var communityViewController = UINavigationController(
+        rootViewController: CommunityViewController(
+            viewModel: CommunityViewModel(
+                postUsecase: PostUsecase(
+                    postRepository: PostRepository(
+                        keychain: keychain,
+                        network: network
+                    )
+                )
+            )
+        )
+    )
     private let myPageViewController = UINavigationController(rootViewController: MyPageViewController())
     //    private let registBlankViewController = BlankPageViewController()
 

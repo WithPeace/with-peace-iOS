@@ -10,13 +10,13 @@ import PinLayout
 import FlexLayout
 import RxSwift
 import RxCocoa
+import RxAppState
 
 final class CommunityViewController: UIViewController {
     
     private let baseContainer = UIView()
     private let tabBarContainer = UIView()
     private var communityTabButtons: [CommunityTabButton] = []
-    private var selectedCategoryIndex: Int = 0
     private let gap: CGFloat = 20
     
     private let indicatorBar: UIView = {
@@ -37,6 +37,18 @@ final class CommunityViewController: UIViewController {
     
     private let disposeBag = DisposeBag()
     
+    private let viewModel: CommunityViewModel
+    
+    init(viewModel: CommunityViewModel) {
+        self.viewModel = viewModel
+        
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -44,6 +56,7 @@ final class CommunityViewController: UIViewController {
         
         view.backgroundColor = .white
         view.addSubview(baseContainer)
+        view.addSubview(indicatorBar)
 
         baseContainer.flex.define { flex in
             flex.addItem(tabBarContainer).direction(.column).define { flex in
@@ -59,8 +72,6 @@ final class CommunityViewController: UIViewController {
             
             flex.addItem(collectionView).grow(1).margin(16, 24)
         }
-        
-        view.addSubview(indicatorBar)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -81,6 +92,7 @@ final class CommunityViewController: UIViewController {
     }
 
     private func layoutIndicatorBar() {
+        let selectedCategoryIndex = viewModel.selectedCategoryIndexRelay.value
         let tabWidth = communityTabButtons[selectedCategoryIndex].frame.width
         indicatorBar.pin
             .above(of: indicatorBarRoad)
@@ -113,6 +125,11 @@ final class CommunityViewController: UIViewController {
     
     private func bind() {
         
+        let input = CommunityViewModel.Input(
+            viewDidLoad: Observable.just(())
+        )
+        let output = viewModel.transform(input: input)
+        
         Observable.just(CommunityCategory.allCases)
             .bind(with: self) { owner, communityCategories in
                 owner.communityTabButtons = communityCategories.map {
@@ -128,26 +145,36 @@ final class CommunityViewController: UIViewController {
             }
             .disposed(by: disposeBag)
         
-        Observable.just([1,2,3,4,5,6,7,8,9,0,124,2,34,23,4])
-            .bind(to: collectionView.rx.items(cellIdentifier: CommunityPostCollectionViewCell.identifier, cellType: CommunityPostCollectionViewCell.self)) { index, item, cell in
+        output.posts
+            .drive(collectionView.rx.items(cellIdentifier: CommunityPostCollectionViewCell.identifier, cellType: CommunityPostCollectionViewCell.self)) { index, item, cell in
+                cell.setData(with: item)
             }
             .disposed(by: disposeBag)
         
-        collectionView.rx.modelSelected(Int.self)
+        collectionView.rx.modelSelected(PostData.self)
             .bind(with: self) { owner, selectedItem in
-                let communityDetailVC = CommunityDetailViewController()
+                let communityDetailVC = CommunityDetailViewController(
+                    viewModel: CommunityDetailViewModel(
+                        postUsecase: PostUsecase(
+                            postRepository: PostRepository(
+                                keychain: KeychainManager(),
+                                network: CleanNetworkManager()
+                            )
+                        ),
+                        selectedPostId: selectedItem.postId
+                    )
+                )
                 owner.navigationController?.pushViewController(communityDetailVC, animated: true)
             }
             .disposed(by: disposeBag)
-        
     }
     
     @objc private func tabTapped(_ sender: UITapGestureRecognizer) {
         guard let tappedCategory = sender.view else { return }
         let newIndex = tappedCategory.tag
         
-        selectedCategoryIndex = newIndex
-        print(selectedCategoryIndex)
+        viewModel.selectedCategoryIndexRelay.accept(newIndex)
+        print(viewModel.selectedCategoryIndexRelay.value)
         
         // UI 업데이트
         updateCommunityTabsUI()
@@ -159,8 +186,9 @@ final class CommunityViewController: UIViewController {
     
     private func updateCommunityTabsUI() {
         self.communityTabButtons = self.communityTabButtons.map {
-            if $0.tag == selectedCategoryIndex, let selecteCategory = CommunityCategory(rawValue: selectedCategoryIndex) {
-                $0.categoryIconView.image = UIImage(resource: selecteCategory.iconSelectedImage)
+            let selectedCategoryIndex = viewModel.selectedCategoryIndexRelay.value
+            if $0.tag == selectedCategoryIndex, let selectedCategory = CommunityCategory(rawValue: selectedCategoryIndex) {
+                $0.categoryIconView.image = UIImage(resource: selectedCategory.iconSelectedImage)
                 $0.categoryLabel.textColor = .mainPurple
             } else if $0.tag != selectedCategoryIndex, let selecteCategory = CommunityCategory(rawValue: $0.tag) {
                 $0.categoryIconView.image = UIImage(resource: selecteCategory.iconNotSelectedImage)

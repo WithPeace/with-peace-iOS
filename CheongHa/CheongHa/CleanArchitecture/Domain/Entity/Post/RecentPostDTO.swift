@@ -1,5 +1,5 @@
 //
-//  CleanPostDTO.swift
+//  RecentPostDTO.swift
 //  CheongHa
 //
 //  Created by SUCHAN CHANG on 11/19/24.
@@ -7,12 +7,12 @@
 
 import Foundation
 
-struct CleanPostDTO: DTOType {
-    var data: [PostData]?
+struct RecentPostDTO: DTOType {
+    var data: [RecentPostData]?
     var error: Errors?
 }
 
-struct PostData: Codable {
+struct RecentPostData: Codable {
     let type: PostType
     let postId: Int
     let title: String

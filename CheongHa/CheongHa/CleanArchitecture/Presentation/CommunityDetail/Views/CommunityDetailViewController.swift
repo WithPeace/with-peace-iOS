@@ -11,6 +11,7 @@ import FlexLayout
 import Kingfisher
 import RxSwift
 import RxCocoa
+import RxAppState
 
 final class CommunityDetailViewController: UIViewController {
     
@@ -19,7 +20,7 @@ final class CommunityDetailViewController: UIViewController {
         collectionView.showsVerticalScrollIndicator = false
         return collectionView
     }()
-    private var dataSource: UICollectionViewDiffableDataSource<CommunityDetailSection, CommentItem>!
+    private var dataSource: UICollectionViewDiffableDataSource<CommunityDetailSection, CommunityDetailSectionItem>!
     
     private let separatorView = SeparatorView()
     
@@ -63,6 +64,18 @@ final class CommunityDetailViewController: UIViewController {
     
     private let disposeBag = DisposeBag()
     
+    private let viewModel: CommunityDetailViewModel
+    
+    init(viewModel: CommunityDetailViewModel) {
+        self.viewModel = viewModel
+        
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -73,13 +86,6 @@ final class CommunityDetailViewController: UIViewController {
         updateLayout()
         
         cellRegistration()
-        apply([
-            CommentItem(id: 1, userId: 2, profileImageURL: "sdfsdf", nickname: "sdfsdfse", content: "esfsese", createDate: "sdfsdfsdf"),
-            CommentItem(id: 2, userId: 2, profileImageURL: "sdfsdf", nickname: "sdfsdfse", content: "esfsese", createDate: "sdfsdfsdf"),
-            CommentItem(id: 3, userId: 2, profileImageURL: "sdfsdf", nickname: "sdfsdfse", content: "esfsese", createDate: "sdfsdfsdf"),
-            CommentItem(id: 4, userId: 2, profileImageURL: "sdfsdf", nickname: "sdfsdfse", content: "esfsese", createDate: "sdfsdfsdf"),
-            CommentItem(id: 5, userId: 2, profileImageURL: "sdfsdf", nickname: "sdfsdfse", content: "esfsese", createDate: "sdfsdfsdf"),
-        ])
         
         bind()
     }
@@ -107,78 +113,100 @@ final class CommunityDetailViewController: UIViewController {
     }
     
     private func configureCollectionViewLayout() -> UICollectionViewCompositionalLayout {
-        let itemSize = NSCollectionLayoutSize(
-            widthDimension: .fractionalWidth(1.0),
-            heightDimension: .estimated(70)
-        )
-        let item = NSCollectionLayoutItem(layoutSize: itemSize)
         
-        let groupSize = NSCollectionLayoutSize(
-            widthDimension: .fractionalWidth(1.0),
-            heightDimension: .estimated(70)
-        )
-        let group = NSCollectionLayoutGroup.vertical(
-            layoutSize: groupSize,
-            subitems: [item]
-        )
-        
-        let section = NSCollectionLayoutSection(group: group)
-        
-        let headerFooterSize = NSCollectionLayoutSize(
-            widthDimension: .fractionalWidth(1.0),
-            heightDimension: .estimated(524)
-        )
-        let header = NSCollectionLayoutBoundarySupplementaryItem(
-            layoutSize: headerFooterSize,
-            elementKind: CommunityDetailCollectionViewHeader.kind,
-            alignment: .top
-        )
-        section.boundarySupplementaryItems = [header]
-        
-        return UICollectionViewCompositionalLayout(section: section)
+        let layout = UICollectionViewCompositionalLayout { (sectionNumber, env) -> NSCollectionLayoutSection? in
+            if sectionNumber == 0 {
+                let itemSize = NSCollectionLayoutSize(
+                    widthDimension: .fractionalWidth(1.0),
+                    heightDimension: .estimated(524)
+                )
+                let item = NSCollectionLayoutItem(layoutSize: itemSize)
+                
+                let groupSize = NSCollectionLayoutSize(
+                    widthDimension: .fractionalWidth(1),
+                    heightDimension: .estimated(524)
+                )
+                let group = NSCollectionLayoutGroup.horizontal(
+                    layoutSize: groupSize,
+                    subitems: [item]
+                )
+                
+                let section = NSCollectionLayoutSection(group: group)
+                
+                return section
+            } else if sectionNumber == 1 {
+                let itemSize = NSCollectionLayoutSize(
+                    widthDimension: .fractionalWidth(1.0),
+                    heightDimension: .estimated(70)
+                )
+                let item = NSCollectionLayoutItem(layoutSize: itemSize)
+                
+                let groupSize = NSCollectionLayoutSize(
+                    widthDimension: .fractionalWidth(1.0),
+                    heightDimension: .estimated(70)
+                )
+                let group = NSCollectionLayoutGroup.vertical(
+                    layoutSize: groupSize,
+                    subitems: [item]
+                )
+                
+                let section = NSCollectionLayoutSection(group: group)
+                
+                return section
+            } else {
+                return nil
+            }
+        }
+                
+        return layout
     }
     
     private func cellRegistration() {
         
-        let postAndCommentSectionRegistration = UICollectionView.CellRegistration<CommentCell, CommentItem> { cell, indexPath, itemIdentifier in
+        let postSectionRegistration = UICollectionView.CellRegistration<PostSectionCell, CommunityDetailSectionItem> { cell, indexPath, itemIdentifier in
+            cell.setData(itemIdentifier.data.postDetailData)
         }
         
-        dataSource = UICollectionViewDiffableDataSource(collectionView: collectionView, cellProvider: { collectionView, indexPath, itemIdentifier in
+        let commentSectionRegistration = UICollectionView.CellRegistration<CommentSectionCell, CommunityDetailSectionItem> { cell, indexPath, itemIdentifier in
+            cell.setData(itemIdentifier.data.commentData)
+        }
+        
+        dataSource = UICollectionViewDiffableDataSource(collectionView: collectionView) { collectionView, indexPath, itemIdentifier in
             guard let section = CommunityDetailSection(rawValue: indexPath.section) else { return nil }
             
             switch section {
-            case .postAndComment:
-                let cell = collectionView.dequeueConfiguredReusableCell(using: postAndCommentSectionRegistration, for: indexPath, item: itemIdentifier)
+            case .post:
+                let cell = collectionView.dequeueConfiguredReusableCell(using: postSectionRegistration, for: indexPath, item: itemIdentifier)
                 return cell
-            }
-        })
-        
-        // 헤더 등록
-        let communityDetailCollectionViewHeaderRegistration = UICollectionView.SupplementaryRegistration<CommunityDetailCollectionViewHeader>(elementKind: CommunityDetailCollectionViewHeader.kind) { supplementaryView, elementKind, indexPath in
-            
-        }
-        
-        dataSource.supplementaryViewProvider = { [weak self] view, kind, indexPath in
-            guard let self else { return nil }
-            
-            switch kind {
-            case CommunityDetailCollectionViewHeader.kind:
-                return collectionView.dequeueConfiguredReusableSupplementary(
-                    using: communityDetailCollectionViewHeaderRegistration,
-                    for: indexPath)
-            default: return nil
+            case .comment:
+                let cell = collectionView.dequeueConfiguredReusableCell(using: commentSectionRegistration, for: indexPath, item: itemIdentifier)
+                return cell
             }
         }
     }
     
-    private func apply(_ items: [CommentItem]) {
-        var snapshot = NSDiffableDataSourceSnapshot<CommunityDetailSection, CommentItem>()
+    private func apply(with sections: [CommunityDetailSection: [CommunityDetailSectionItem]]) {
+        var snapshot = NSDiffableDataSourceSnapshot<CommunityDetailSection, CommunityDetailSectionItem>()
         snapshot.appendSections(CommunityDetailSection.allCases)
-        snapshot.appendItems(items)
-        dataSource.apply(snapshot) // reloadData
+        sections.forEach {
+            snapshot.appendItems($0.value, toSection: $0.key)
+        }
+        dataSource.apply(snapshot, animatingDifferences: false)
     }
     
     private func bind() {
+        
+        let input = CommunityDetailViewModel.Input(
+            viewWillAppear: rx.viewWillAppear
+        )
+        let output = viewModel.transform(input: input)
+        
+        output.sections
+            .drive(with: self) { owner, sections in
+                owner.apply(with: sections)
+            }
+            .disposed(by: disposeBag)
+        
         inputTextView.rx.text
             .bind(with: self) { owner, text in
                 owner.adjustInputTextViewHeight()

@@ -10,7 +10,9 @@ import RxMoya
 import RxSwift
 
 protocol PostRepositoryProtocol {
-    func fetchRecentPosts(api: PostRouter) -> Single<CleanPostDTO>
+    func fetchPosts(api: PostRouter) -> Single<PostsDTO>
+    func fetchAPostDetail(api: PostRouter) -> Single<PostDetailDTO>
+    func fetchRecentPosts(api: PostRouter) -> Single<RecentPostDTO>
 }
 
 final class PostRepository: PostRepositoryProtocol {
@@ -23,8 +25,18 @@ final class PostRepository: PostRepositoryProtocol {
         self.network = network
     }
     
-    func fetchRecentPosts(api: PostRouter) -> Single<CleanPostDTO> {
+    func fetchPosts(api: PostRouter) -> Single<PostsDTO> {
         network
-            .request(api, decodingType: CleanPostDTO.self)
+            .request(api, decodingType: PostsDTO.self)
+    }
+    
+    func fetchAPostDetail(api: PostRouter) -> Single<PostDetailDTO> {
+        network
+            .request(api, decodingType: PostDetailDTO.self)
+    }
+    
+    func fetchRecentPosts(api: PostRouter) -> Single<RecentPostDTO> {
+        network
+            .request(api, decodingType: RecentPostDTO.self)
     }
 }
