@@ -147,4 +147,16 @@ final class PostSectionCell: UICollectionViewCell {
             .disposed(by: disposeBag)
     }
     
+    func setData(_ data: CommunityDetailSectionDataCollection.PostDetailItemData) {
+        categoryTagImageView.image = UIImage(resource: data.type.communityDetailCategory)
+        let imageURL = URL(string: data.profileImageUrl)
+        postUserProfileView.userProfileImageView.kf.setImage(with: imageURL)
+        postUserProfileView.userNameLabel.text = data.nickname
+        
+        postContentContainerView.postTitleLabel.text = data.title
+        postContentContainerView.postContentLabel.text = data.content
+        
+        commentNumberContainerView.commentNumberLabel.text = data.commentCount.description
+    }
+    
 }

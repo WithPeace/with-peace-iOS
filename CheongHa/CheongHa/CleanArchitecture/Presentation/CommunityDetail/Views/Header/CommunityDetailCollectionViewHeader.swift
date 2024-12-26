@@ -6,19 +6,16 @@
 //
 
 import UIKit
-import PinLayout
-import FlexLayout
-import Kingfisher
 import RxSwift
 import RxCocoa
 import SnapKit
 
 final class PostUserProfileView: UIView {
     
-    private let userProfileImageView: UIImageView = {
+    let userProfileImageView: UIImageView = {
         let imageView = UIImageView()
-        let url = URL(string: "https://flexible.img.hani.co.kr/flexible/normal/970/777/imgdb/resize/2019/0926/00501881_20190926.JPG")
-        imageView.kf.setImage(with: url)
+//        let url = URL(string: "https://flexible.img.hani.co.kr/flexible/normal/970/777/imgdb/resize/2019/0926/00501881_20190926.JPG")
+//        imageView.kf.setImage(with: url)
         
         imageView.layer.cornerRadius = 28
         imageView.clipsToBounds = true
@@ -27,14 +24,14 @@ final class PostUserProfileView: UIView {
     
     private let infoContainerView = UIView()
     
-    private let userNameLabel: UILabel = {
+    let userNameLabel: UILabel = {
         let label = UILabel()
         label.text = "닉네임닉네임"
         label.font = .systemFont(ofSize: 16, weight: .bold)
         return label
     }()
     
-    private let postUploadTimeLabel: UILabel = {
+    let postUploadTimeLabel: UILabel = {
         let label = UILabel()
         label.text = "3일전"
         label.font = .systemFont(ofSize: 14, weight: .regular)

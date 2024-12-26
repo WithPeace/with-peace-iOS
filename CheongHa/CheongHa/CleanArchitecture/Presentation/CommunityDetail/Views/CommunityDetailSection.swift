@@ -48,6 +48,7 @@ struct  CommunityDetailSectionDataCollection: Hashable {
         let type: PostType
         let createDate: String
         let postImageUrls: [String]
+        let commentCount: Int
         
         init(
             postId: Int = 0,
@@ -58,7 +59,8 @@ struct  CommunityDetailSectionDataCollection: Hashable {
             content: String = "",
             type: PostType = .freedom,
             createDate: String = "",
-            postImageUrls: [String] = []
+            postImageUrls: [String] = [],
+            commentCount: Int = 0
         ) {
             self.postId = postId
             self.userId = userId
@@ -69,6 +71,7 @@ struct  CommunityDetailSectionDataCollection: Hashable {
             self.type = type
             self.createDate = createDate
             self.postImageUrls = postImageUrls
+            self.commentCount = commentCount
         }
     }
     
@@ -76,7 +79,7 @@ struct  CommunityDetailSectionDataCollection: Hashable {
         let commentId: Int
         let userId: Int
         let nickname: String
-        let postImageUrls: String
+        let profileImageUrl: String
         let content: String
         let createDate: String
         
@@ -84,14 +87,14 @@ struct  CommunityDetailSectionDataCollection: Hashable {
             commentId: Int = 0,
             userId: Int = 0,
             nickname: String = "",
-            postImageUrls: String = "",
+            profileImageUrl: String = "",
             content: String = "",
             createDate: String = ""
         ) {
             self.commentId = commentId
             self.userId = userId
             self.nickname = nickname
-            self.postImageUrls = postImageUrls
+            self.profileImageUrl = profileImageUrl
             self.content = content
             self.createDate = createDate
         }

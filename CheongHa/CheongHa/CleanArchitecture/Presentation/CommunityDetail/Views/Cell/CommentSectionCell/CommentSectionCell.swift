@@ -12,24 +12,24 @@ import SnapKit
 
 final class CommentUserProfileView: UIView {
     
-    private let userProfileImageView: UIImageView = {
+    let userProfileImageView: UIImageView = {
         let imageView = UIImageView()
-        let imageURL = URL(string: "https://i.namu.wiki/i/d1A_wD4kuLHmOOFqJdVlOXVt1TWA9NfNt_HA0CS0Y_N0zayUAX8olMuv7odG2FiDLDQZIRBqbPQwBSArXfEJlQ.webp")
-        imageView.kf.setImage(with: imageURL)
+//        let imageURL = URL(string: "https://i.namu.wiki/i/d1A_wD4kuLHmOOFqJdVlOXVt1TWA9NfNt_HA0CS0Y_N0zayUAX8olMuv7odG2FiDLDQZIRBqbPQwBSArXfEJlQ.webp")
+//        imageView.kf.setImage(with: imageURL)
         
         imageView.layer.cornerRadius = 20
         imageView.clipsToBounds = true
         return imageView
     }()
     
-    private let userNameLabel: UILabel = {
+    let userNameLabel: UILabel = {
         let label = UILabel()
         label.text = "댓글닉네임"
         label.font = .systemFont(ofSize: 16, weight: .regular)
         return label
     }()
     
-    private let timeLabel: UILabel = {
+    let timeLabel: UILabel = {
         let label = UILabel()
         label.text = "3일전"
         label.textColor = .gray2
@@ -144,5 +144,14 @@ final class CommentSectionCell: UICollectionViewCell {
             $0.top.equalTo(contentLabel.snp.bottom).offset(8)
             $0.horizontalEdges.bottom.equalToSuperview()
         }
+    }
+    
+    func setData(_ data: CommunityDetailSectionDataCollection.CommentItemData) {
+        let imageURL = URL(string: data.profileImageUrl)
+        profileView.userProfileImageView.kf.setImage(with: imageURL)
+        profileView.userNameLabel.text = data.nickname
+//        profileView.timeLabel.text =
+        
+        contentLabel.text = data.content
     }
 }

@@ -17,7 +17,6 @@ final class CommunityViewController: UIViewController {
     private let baseContainer = UIView()
     private let tabBarContainer = UIView()
     private var communityTabButtons: [CommunityTabButton] = []
-//    private var selectedCategoryIndex: Int = 0
     private let gap: CGFloat = 20
     
     private let indicatorBar: UIView = {

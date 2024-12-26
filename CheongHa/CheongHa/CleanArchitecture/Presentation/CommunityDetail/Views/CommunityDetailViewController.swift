@@ -136,7 +136,7 @@ final class CommunityDetailViewController: UIViewController {
             if sectionNumber == 0 {
                 let itemSize = NSCollectionLayoutSize(
                     widthDimension: .fractionalWidth(1.0),
-                    heightDimension: .fractionalHeight(1.0)
+                    heightDimension: .estimated(524)
                 )
                 let item = NSCollectionLayoutItem(layoutSize: itemSize)
                 
@@ -182,11 +182,11 @@ final class CommunityDetailViewController: UIViewController {
     private func cellRegistration() {
         
         let postSectionRegistration = UICollectionView.CellRegistration<PostSectionCell, CommunityDetailSectionItem> { cell, indexPath, itemIdentifier in
-            // itemIdentifier.data.postDetailData
+            cell.setData(itemIdentifier.data.postDetailData)
         }
         
         let commentSectionRegistration = UICollectionView.CellRegistration<CommentSectionCell, CommunityDetailSectionItem> { cell, indexPath, itemIdentifier in
-            // itemIdentifier.data.commentData
+            cell.setData(itemIdentifier.data.commentData)
         }
         
         dataSource = UICollectionViewDiffableDataSource(collectionView: collectionView) { collectionView, indexPath, itemIdentifier in
@@ -219,11 +219,9 @@ final class CommunityDetailViewController: UIViewController {
         )
         let output = viewModel.transform(input: input)
         
-        output.postDetail
-            .drive(with: self) { owner, postDetail in
-                guard let postDetail else { return }
-                
-                print("postDetail", postDetail)
+        output.sections
+            .drive(with: self) { owner, sections in
+                owner.apply(with: sections)
             }
             .disposed(by: disposeBag)
         
