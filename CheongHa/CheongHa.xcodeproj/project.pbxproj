@@ -27,6 +27,7 @@
 		0025D4502CEC7BCC00E3BBD9 /* PostRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0025D44F2CEC7BCC00E3BBD9 /* PostRepository.swift */; };
 		0025D4522CEC7C8500E3BBD9 /* PostUsecase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0025D4512CEC7C8500E3BBD9 /* PostUsecase.swift */; };
 		0026FA482D2276F100278019 /* CommunityRegistrationBottomContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0026FA472D2276F100278019 /* CommunityRegistrationBottomContainerView.swift */; };
+		0026FA4A2D228E4400278019 /* BaseBottomSheetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0026FA492D228E4400278019 /* BaseBottomSheetViewController.swift */; };
 		00281A252D17F9F400AD76C9 /* CommunityDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00281A242D17F9F400AD76C9 /* CommunityDetailViewController.swift */; };
 		00281A282D1801B500AD76C9 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 00281A272D1801B500AD76C9 /* Kingfisher */; };
 		00281A2A2D18081300AD76C9 /* PostImageCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00281A292D18081300AD76C9 /* PostImageCollectionViewCell.swift */; };
@@ -254,6 +255,7 @@
 		0025D44F2CEC7BCC00E3BBD9 /* PostRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostRepository.swift; sourceTree = "<group>"; };
 		0025D4512CEC7C8500E3BBD9 /* PostUsecase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostUsecase.swift; sourceTree = "<group>"; };
 		0026FA472D2276F100278019 /* CommunityRegistrationBottomContainerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommunityRegistrationBottomContainerView.swift; sourceTree = "<group>"; };
+		0026FA492D228E4400278019 /* BaseBottomSheetViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseBottomSheetViewController.swift; sourceTree = "<group>"; };
 		00281A242D17F9F400AD76C9 /* CommunityDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommunityDetailViewController.swift; sourceTree = "<group>"; };
 		00281A292D18081300AD76C9 /* PostImageCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostImageCollectionViewCell.swift; sourceTree = "<group>"; };
 		00281A2D2D18198400AD76C9 /* CommentSectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentSectionCell.swift; sourceTree = "<group>"; };
@@ -567,6 +569,7 @@
 				002A52BB2CEDE933007E9FD6 /* BaseHomeFilterCollectionViewHeader.swift */,
 				002A52B92CEDD716007E9FD6 /* BaseCollectionViewCell.swift */,
 				00FC88E92D1EF8E200941F61 /* BaseTableViewCell.swift */,
+				0026FA492D228E4400278019 /* BaseBottomSheetViewController.swift */,
 			);
 			path = Base;
 			sourceTree = "<group>";
@@ -1860,6 +1863,7 @@
 				0026FA482D2276F100278019 /* CommunityRegistrationBottomContainerView.swift in Sources */,
 				F68C9D6E2BA5E291008CB7E4 /* ToastMessageView.swift in Sources */,
 				00FC88EF2D1EF9DC00941F61 /* PostContentCell.swift in Sources */,
+				0026FA4A2D228E4400278019 /* BaseBottomSheetViewController.swift in Sources */,
 				F671A9C42BA00FBA002808DA /* NetworkManager.swift in Sources */,
 				00623D842D06EBCF002E139D /* UpdateProfileBody.swift in Sources */,
 				008497C92CEF048A004E6FA7 /* FilterViewController.swift in Sources */,
