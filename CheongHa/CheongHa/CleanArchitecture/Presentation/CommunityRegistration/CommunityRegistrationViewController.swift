@@ -57,6 +57,8 @@ final class CommunityRegistrationViewController: UIViewController {
         apply(with: sections)
         
         bind()
+        
+        configureNavigationBar()
     }
     
     override func viewDidLayoutSubviews() {
@@ -64,6 +66,22 @@ final class CommunityRegistrationViewController: UIViewController {
         
         rootContainerView.pin.all(view.pin.safeArea).marginHorizontal(24)
         rootContainerView.flex.layout()
+    }
+    
+    private func configureNavigationBar() {
+        let buttonImage = UIImage(resource: .icSignBack)
+        let backButton = UIBarButtonItem(image: buttonImage, style: .plain, target: self, action: #selector(backButtonTapped))
+        backButton.tintColor = .black
+        let titleLabel = UILabel()
+        titleLabel.text = "글 쓰기"
+        titleLabel.font = .systemFont(ofSize: 20, weight: .bold)
+        let navigationTitleLabel = UIBarButtonItem(customView: titleLabel)
+        navigationTitleLabel.tintColor = .black
+        navigationItem.leftBarButtonItems = [backButton, navigationTitleLabel]
+        
+        let completeButtonImage = UIImage(resource: .btnPostcreateDoneSelect).withRenderingMode(.alwaysOriginal)
+        let completeButton = UIBarButtonItem(image: completeButtonImage, style: .plain, target: self, action: #selector(completeButtonTapped))
+        navigationItem.rightBarButtonItem = completeButton
     }
     
     private func cellRegistration() {
@@ -111,5 +129,14 @@ final class CommunityRegistrationViewController: UIViewController {
     
     private func bind() {
         
+    }
+    
+    @objc private func backButtonTapped(_ leftBarButtonItem: UIBarButtonItem) {
+        dismiss(animated: true)
+    }
+    
+    @objc private func completeButtonTapped(_ rightBarButtonItem: UIBarButtonItem) {
+        print("완료 버튼 눌림")
+        dismiss(animated: true)
     }
 }
