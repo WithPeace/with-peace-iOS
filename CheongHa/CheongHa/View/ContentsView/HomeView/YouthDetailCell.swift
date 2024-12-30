@@ -7,9 +7,7 @@
 
 import UIKit
 
-final class YouthDetailCell: UITableViewCell {
-    
-    static let identifier = "YouthDetailCell"
+final class YouthDetailCell: UITableViewCell {    
     
     private let titleLabel: UILabel = {
         let label = UILabel()
