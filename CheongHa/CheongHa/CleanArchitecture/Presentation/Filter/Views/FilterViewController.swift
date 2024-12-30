@@ -100,14 +100,6 @@ final class FilterViewController: BaseBottomSheetViewController {
         bind()
     }
     
-    private func showBottomSheet() {
-        UIView.animate(withDuration: 0.35, delay: 0, options: .curveEaseInOut, animations: { [weak self] in
-            guard let self else { return }
-            dimmedBackView.backgroundColor = .black.withAlphaComponent(0.5)
-            bottomSheetView.pin.left().right().bottom().top(20%)
-        })
-    }
-    
     private func configureCollectionViewLayout() -> UICollectionViewCompositionalLayout {
         let layout = UICollectionViewCompositionalLayout { (sectionNumber, env) -> NSCollectionLayoutSection? in
             if sectionNumber == 0 {
@@ -298,7 +290,7 @@ final class FilterViewController: BaseBottomSheetViewController {
         
         rx.viewDidAppear
             .bind(with: self) { owner, _ in
-                owner.showBottomSheet()
+                owner.showBottomSheet(fromTop: 20%)
             }
             .disposed(by: disposeBag)
         

@@ -49,6 +49,15 @@ class BaseBottomSheetViewController: UIViewController {
         containerView.flex.layout()
     }
     
+    /// 바텀 시트 올리기
+    func showBottomSheet(fromTop: Percent) {
+        UIView.animate(withDuration: 0.35, delay: 0, options: .curveEaseInOut, animations: { [weak self] in
+            guard let self else { return }
+            dimmedBackView.backgroundColor = .black.withAlphaComponent(0.5)
+            bottomSheetView.pin.left().right().bottom().top(fromTop)
+        })
+    }
+    
     /// 바텀 시트 내리기
     func hideBottomSheet() {
         containerView.removeFromSuperview()
