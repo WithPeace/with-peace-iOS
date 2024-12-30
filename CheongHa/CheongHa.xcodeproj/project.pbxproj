@@ -28,6 +28,8 @@
 		0025D4522CEC7C8500E3BBD9 /* PostUsecase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0025D4512CEC7C8500E3BBD9 /* PostUsecase.swift */; };
 		0026FA482D2276F100278019 /* CommunityRegistrationBottomContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0026FA472D2276F100278019 /* CommunityRegistrationBottomContainerView.swift */; };
 		0026FA4A2D228E4400278019 /* BaseBottomSheetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0026FA492D228E4400278019 /* BaseBottomSheetViewController.swift */; };
+		0026FA4C2D22945F00278019 /* SelectPostTopicViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0026FA4B2D22945F00278019 /* SelectPostTopicViewController.swift */; };
+		0026FA4E2D229EC300278019 /* SelectPostTopicCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0026FA4D2D229EC300278019 /* SelectPostTopicCollectionViewCell.swift */; };
 		00281A252D17F9F400AD76C9 /* CommunityDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00281A242D17F9F400AD76C9 /* CommunityDetailViewController.swift */; };
 		00281A282D1801B500AD76C9 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 00281A272D1801B500AD76C9 /* Kingfisher */; };
 		00281A2A2D18081300AD76C9 /* PostImageCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00281A292D18081300AD76C9 /* PostImageCollectionViewCell.swift */; };
@@ -256,6 +258,8 @@
 		0025D4512CEC7C8500E3BBD9 /* PostUsecase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostUsecase.swift; sourceTree = "<group>"; };
 		0026FA472D2276F100278019 /* CommunityRegistrationBottomContainerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommunityRegistrationBottomContainerView.swift; sourceTree = "<group>"; };
 		0026FA492D228E4400278019 /* BaseBottomSheetViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseBottomSheetViewController.swift; sourceTree = "<group>"; };
+		0026FA4B2D22945F00278019 /* SelectPostTopicViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectPostTopicViewController.swift; sourceTree = "<group>"; };
+		0026FA4D2D229EC300278019 /* SelectPostTopicCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectPostTopicCollectionViewCell.swift; sourceTree = "<group>"; };
 		00281A242D17F9F400AD76C9 /* CommunityDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommunityDetailViewController.swift; sourceTree = "<group>"; };
 		00281A292D18081300AD76C9 /* PostImageCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostImageCollectionViewCell.swift; sourceTree = "<group>"; };
 		00281A2D2D18198400AD76C9 /* CommentSectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentSectionCell.swift; sourceTree = "<group>"; };
@@ -540,7 +544,9 @@
 		0026FA462D2276E900278019 /* SubViews */ = {
 			isa = PBXGroup;
 			children = (
+				0026FA4B2D22945F00278019 /* SelectPostTopicViewController.swift */,
 				0026FA472D2276F100278019 /* CommunityRegistrationBottomContainerView.swift */,
+				0026FA4D2D229EC300278019 /* SelectPostTopicCollectionViewCell.swift */,
 			);
 			path = SubViews;
 			sourceTree = "<group>";
@@ -1873,6 +1879,7 @@
 				F6ACBCE52BEB47D3006386DE /* ProfileAPIRepository.swift in Sources */,
 				6303236F2BC7D61100B16E7C /* ForumDetailViewController.swift in Sources */,
 				F6B5B40C2BBBFDDA000C8494 /* ProfileView.swift in Sources */,
+				0026FA4C2D22945F00278019 /* SelectPostTopicViewController.swift in Sources */,
 				630EA20D2BA0243800F04ED3 /* SignAuthDTO.swift in Sources */,
 				00C2A5252CE3610400EFF471 /* CommunityCollectionViewCell.swift in Sources */,
 				F69011E12BB6D352009A8087 /* MultipartFormData.swift in Sources */,
@@ -1923,6 +1930,7 @@
 				F6B5B4082BBBFDA2000C8494 /* ProfileETCView.swift in Sources */,
 				F65FFA912C04C71C009A6FB3 /* YouthDetailHeaderView.swift in Sources */,
 				006592002D1D350500738CBA /* Date+Ext.swift in Sources */,
+				0026FA4E2D229EC300278019 /* SelectPostTopicCollectionViewCell.swift in Sources */,
 				F671A9CA2BA0174E002808DA /* NetworkError.swift in Sources */,
 				630EA20F2BA0277800F04ED3 /* SignRepository.swift in Sources */,
 				00DE3F4C2CDCDA2A00CAC3D8 /* ViewModelType.swift in Sources */,

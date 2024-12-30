@@ -45,7 +45,7 @@ class BaseBottomSheetViewController: UIViewController {
         
         dimmedBackView.pin.all()
         bottomSheetView.pin.left().right().bottom()
-        containerView.pin.all()
+        containerView.pin.top().left().right().bottom(view.pin.safeArea)
         containerView.flex.layout()
     }
     

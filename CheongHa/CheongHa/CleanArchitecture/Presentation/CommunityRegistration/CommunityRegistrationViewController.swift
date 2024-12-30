@@ -128,7 +128,18 @@ final class CommunityRegistrationViewController: UIViewController {
     }
     
     private func bind() {
-        
+        tableView.rx.itemSelected
+            .bind(with: self) { owner, indexPath in
+                guard let sections = CommunityRegistrationSection(rawValue: indexPath.section) else { return }
+                switch sections {
+                case .topic:
+                    let selectPostTopicVC = SelectPostTopicViewController()
+                    selectPostTopicVC.modalPresentationStyle = .overFullScreen
+                    owner.present(selectPostTopicVC, animated: true)
+                default: return
+                }
+            }
+            .disposed(by: disposeBag)
     }
     
     @objc private func backButtonTapped(_ leftBarButtonItem: UIBarButtonItem) {
