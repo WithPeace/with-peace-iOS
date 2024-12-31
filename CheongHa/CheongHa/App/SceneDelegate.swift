@@ -18,8 +18,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         guard let windowScene = (scene as? UIWindowScene) else { return }
         
         self.window = UIWindow(windowScene: windowScene)
-//
-//        window?.rootViewController = CommunityDetailViewController()
+
+//        window?.rootViewController = CommunityRegistrationViewController()
 //        window?.makeKeyAndVisible()
         let keychain = KeychainManager()
         let network = CleanNetworkManager()

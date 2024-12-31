@@ -35,6 +35,16 @@ final class CommunityViewController: UIViewController {
         return collectionView
     }()
     
+    private lazy var floatingButton: UIButton = {
+        let button = UIButton()
+        let buttonImage = UIImage(systemName: "plus")?.withTintColor(.white, renderingMode: .alwaysOriginal)
+        button.setImage(buttonImage, for: .normal)
+        let configuration = UIImage.SymbolConfiguration(pointSize: 32)
+        button.setPreferredSymbolConfiguration(configuration, forImageIn: .normal)
+        button.backgroundColor = .mainPurple
+        return button
+    }()
+    
     private let disposeBag = DisposeBag()
     
     private let viewModel: CommunityViewModel
@@ -57,6 +67,7 @@ final class CommunityViewController: UIViewController {
         view.backgroundColor = .white
         view.addSubview(baseContainer)
         view.addSubview(indicatorBar)
+        view.addSubview(floatingButton)
 
         baseContainer.flex.define { flex in
             flex.addItem(tabBarContainer).direction(.column).define { flex in
@@ -89,6 +100,11 @@ final class CommunityViewController: UIViewController {
         tabBarContainer.flex.layout()
         
         layoutIndicatorBar()
+        
+        floatingButton.pin.size(64).bottomEnd(to: baseContainer.anchor.bottomEnd).marginBottom(40).marginEnd(24)
+        
+        floatingButton.layer.cornerRadius = floatingButton.frame.width / 2
+        floatingButton.clipsToBounds = true
     }
 
     private func layoutIndicatorBar() {
@@ -124,7 +140,6 @@ final class CommunityViewController: UIViewController {
     }
     
     private func bind() {
-        
         let input = CommunityViewModel.Input(
             viewDidLoad: Observable.just(())
         )
@@ -165,6 +180,15 @@ final class CommunityViewController: UIViewController {
                     )
                 )
                 owner.navigationController?.pushViewController(communityDetailVC, animated: true)
+            }
+            .disposed(by: disposeBag)
+        
+        floatingButton.rx.tap
+            .bind(with: self) { owner, _ in
+                let communityRegistrationVC = CommunityRegistrationViewController()
+                let communityRegistrationNav = UINavigationController(rootViewController: communityRegistrationVC)
+                communityRegistrationNav.modalPresentationStyle = .overFullScreen
+                owner.present(communityRegistrationNav, animated: true)
             }
             .disposed(by: disposeBag)
     }

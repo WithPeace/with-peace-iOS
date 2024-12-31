@@ -13,25 +13,9 @@ import RxSwift
 import RxCocoa
 import RxAppState
 
-final class FilterViewController: UIViewController {
+final class FilterViewController: BaseBottomSheetViewController {
     
     private let disposeBag = DisposeBag()
-    
-    private let dimmedBackView = UIView()
-    private let bottomSheetView: UIView = {
-        let view = UIView()
-        view.layer.cornerRadius = 20
-        view.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
-        view.layer.masksToBounds = true
-        return view
-    }()
-    
-    lazy var dimmedTap: UITapGestureRecognizer = {
-        let tap = UITapGestureRecognizer(target: self, action: #selector(hideBottomSheetAction))
-        return tap
-    }()
-    
-    private let containerView = UIView()
         
     private let topContainerView = UIView()
     private let closeButton: UIButton = {
@@ -94,15 +78,6 @@ final class FilterViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        [dimmedBackView, bottomSheetView].forEach { view.addSubview($0) }
-        bottomSheetView.addSubview(containerView)
-        
-        dimmedBackView.backgroundColor = .clear
-        bottomSheetView.backgroundColor = .white
-        
-        dimmedBackView.addGestureRecognizer(dimmedTap)
-        dimmedBackView.isUserInteractionEnabled = true
-        
         containerView.flex.define {
             $0.addItem(topContainerView).define {
                 $0.addItem(closeButton).width(24).height(24).marginRight(8)
@@ -123,41 +98,6 @@ final class FilterViewController: UIViewController {
         
         cellRegistration()
         bind()
-    }
-    
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
-        
-        dimmedBackView.pin.all()
-        bottomSheetView.pin.left().right().bottom()
-        containerView.pin.all()
-        containerView.flex.layout()
-    }
-    
-    private func showBottomSheet() {
-        UIView.animate(withDuration: 0.35, delay: 0, options: .curveEaseInOut, animations: { [weak self] in
-            guard let self else { return }
-            dimmedBackView.backgroundColor = .black.withAlphaComponent(0.5)
-            bottomSheetView.pin.left().right().bottom().top(20%)
-        })
-    }
-    
-    /// 바텀 시트 내리기
-    private func hideBottomSheet() {
-        containerView.removeFromSuperview()
-        UIView.animate(withDuration: 0.35, delay: 0, options: .curveEaseInOut, animations: { [weak self] in
-            guard let self else { return }
-            dimmedBackView.backgroundColor = .clear
-            bottomSheetView.pin.left().right().bottom().top(100%)
-        }, completion: { [weak self] _ in
-            guard let self else { return }
-            print("끝남")
-            dismiss(animated: false)
-        })
-    }
-    
-    @objc func hideBottomSheetAction() {
-        hideBottomSheet()
     }
     
     private func configureCollectionViewLayout() -> UICollectionViewCompositionalLayout {
@@ -350,7 +290,7 @@ final class FilterViewController: UIViewController {
         
         rx.viewDidAppear
             .bind(with: self) { owner, _ in
-                owner.showBottomSheet()
+                owner.showBottomSheet(fromTop: 20%)
             }
             .disposed(by: disposeBag)
         
