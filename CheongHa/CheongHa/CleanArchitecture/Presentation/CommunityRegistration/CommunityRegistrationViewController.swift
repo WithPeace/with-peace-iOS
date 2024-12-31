@@ -135,7 +135,7 @@ final class CommunityRegistrationViewController: UIViewController {
                 case .topic:
                     let selectPostTopicVC = SelectPostTopicViewController()
                     selectPostTopicVC.modalPresentationStyle = .overFullScreen
-                    owner.present(selectPostTopicVC, animated: true)
+                    owner.present(selectPostTopicVC, animated: false)
                 default: return
                 }
             }

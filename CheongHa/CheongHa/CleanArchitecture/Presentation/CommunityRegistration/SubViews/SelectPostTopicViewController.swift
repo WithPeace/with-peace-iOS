@@ -84,7 +84,7 @@ final class SelectPostTopicViewController: BaseBottomSheetViewController {
         collectionView.rx.modelSelected(CommunityCategory.self)
             .bind(with: self) { owner, communityCategory in
                 print("communityCategory", communityCategory.categoryName)
-                owner.dismiss(animated: true)
+                owner.hideBottomSheet()
             }
             .disposed(by: disposBag)
     }
